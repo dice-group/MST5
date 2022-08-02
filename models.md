@@ -16,9 +16,15 @@
 
 https://huggingface.co/docs/transformers/model_doc/t5
 
+- Encoder-Decoder architecture
+- Casual with prefix mask
+- Unsupervised objectives
+- pre-trained on C4
+
 ### mT5: multilingual pre-trained text-to-text transformer
 
 https://huggingface.co/docs/transformers/model_doc/mt5
+
 
 pre-trained on mC4, covering 101 languages
 
