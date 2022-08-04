@@ -64,6 +64,7 @@ A: not 100% reliable
 
 - trained with a combination of span masking and sentence shuffling objectives
 - 25 languages (subset of XLM-R)
+- denoising full texts in multiple languages
 
 ## MARGE
 
