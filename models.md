@@ -4,10 +4,15 @@
 
 [Installation](https://huggingface.co/docs/transformers/installation)
 
+## Transformer
+
 ## BERT
 
 - Bidirectional Encoder Representations from Transformers
-- encoder based (?)
+- encoder based
+- training:
+  - mask words
+  - next sentence prediction
 
 ### mBert
 
