@@ -9,14 +9,15 @@
 ## BERT
 
 - Bidirectional Encoder Representations from Transformers
-- encoder based
+- Transformer encoder: bidirectional transformer
+- Bidirectioal: each word can see itself indirectly based on left and right context
 - training:
   - mask words
   - next sentence prediction
 
 ### mBert
 
-- encoder only (?)
+- encoder only
 - 104 languages
 - Zero shot
 
