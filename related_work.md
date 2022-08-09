@@ -11,6 +11,16 @@ Learning applicable representations of words
 - neural
   - Distributed Representations of Words and Phrases and Their Compositionality
 
+## Unsupervised pre-training
+
+- casual language modeling objective
+  - Semi-supervised sequence learning.
+  - Deep contextualized word representations
+  - Improving language understanding by generative pre-training
+  - Universal language model fine-tuning for text classification
+- denoising objectives (masked language modeling)
+  - BERT
+
 ## Unsupervised Fine-tunning Approaches
 
 few parameters need to be learned from scratch
