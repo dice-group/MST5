@@ -17,9 +17,19 @@
 
 ### mBert
 
+- Multilingual sequence-to-sequence denoising auto-encoder
 - encoder only
+- training:
+  - mask words
+  - next sentence prediction
 - 104 languages
 - Zero shot
+  - massively multi-lingual MT (Johnson et al.,2017; Gu et al., 2019)
+  - distillation through pivoting (Chen et al., 2017)
+- Unsupervised Machine Translation
+  - Back-Translation
+  - Language Transfer
+  - Combined
 
 ## T5: Text-To-Text Transfer Transformer
 
