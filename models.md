@@ -35,11 +35,35 @@
 
 [huggingface t5](https://huggingface.co/docs/transformers/model_doc/t5)
 
-- Encoder-Decoder architecture
-- Casual with prefix mask
+- Architecture -> Encoder-Decoder
+  - Encoder-Decoder ✅
+    - Encoder: fully-visible attention mask
+    - Decoder: causal masking pattern
+  - Language model (decoder-only)
+  - Prefix LM (decoder-only)
 - Unsupervised objectives
+  - High-level approaches
+    - BERT-style ✅
+    - Language modeling
+    - Deshuffling
+  - Corruption strategies
+    - Replace spans ✅
+    - Mask
+    - Drop
+  - Corruption rate
+    - 10%
+    - 15% ✅
+    - 25%
+    - 50%
+  - Corrupted span length
+    - i.i.d ✅
+    - 2
+    - 3
+    - 5
+    - 10
 - pre-trained on C4
 - allows the use of exactly the same training objective (teacher-forced maximum- likelihood) for every task
+- computational effort
 
 ### mT5: multilingual pre-trained text-to-text transformer
 
