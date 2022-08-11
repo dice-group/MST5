@@ -31,6 +31,16 @@
   - Language Transfer
   - Combined
 
+## GPT-2
+
+A language model with sufficient capacity will begin to learn to infer and perform the tasks demostrated in natural language sequences in order to better predict them, regardless of their method of procurement.
+
+- WebText
+- Transformer based
+- OpenAI GPT with a few modifications
+- unsupervised
+- multitask
+
 ## T5: Text-To-Text Transfer Transformer
 
 [huggingface t5](https://huggingface.co/docs/transformers/model_doc/t5)
@@ -112,6 +122,6 @@ A: not 100% reliable
 - reconstruct a document in one language by retrieving documents in other languages
 - 26 languages
 
-# Evaluation
+## Evaluation
 
-## XTREME: A Massively Multilingual Multi-task Benchmark for Evaluating Cross-lingual Generalization
+### XTREME: A Massively Multilingual Multi-task Benchmark for Evaluating Cross-lingual Generalization
