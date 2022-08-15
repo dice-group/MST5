@@ -11,6 +11,7 @@
 - Bidirectional Encoder Representations from Transformers
 - Transformer encoder: bidirectional transformer
 - Bidirectioal: each word can see itself indirectly based on left and right context
+- self-attention without mask
 - training:
   - mask words
   - next sentence prediction
@@ -40,6 +41,11 @@ A language model with sufficient capacity will begin to learn to infer and perfo
 - OpenAI GPT with a few modifications
 - unsupervised
 - multitask
+- masked self-attention
+
+## Language modeling
+
+predict the next token based on previous tokens
 
 ## T5: Text-To-Text Transfer Transformer
 
