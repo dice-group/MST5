@@ -1,46 +1,188 @@
 % Encoding: UTF-8
 
+% Language model
+
+% Transformers
+
+@inproceedings{Transformers,
+  title	= {Attention is All You Need},
+
+  author	= {Ashish Vaswani and Noam Shazeer and Niki Parmar and Jakob Uszkoreit and Llion Jones and Aidan N. Gomez and Lukasz Kaiser and Illia Polosukhin},
+
+  year	= {2017},
+
+  URL	= {https://arxiv.org/pdf/1706.03762.pdf}
+}
+
+@misc{BERT,
+  doi = {10.48550/ARXIV.1810.04805},
+  
+  url = {https://arxiv.org/abs/1810.04805},
+  
+  author = {Devlin, Jacob and Chang, Ming-Wei and Lee, Kenton and Toutanova, Kristina},
+  
+  keywords = {Computation and Language (cs.CL), FOS: Computer and information sciences, FOS: Computer and information sciences},
+  
+  title = {BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding},
+  
+  publisher = {arXiv},
+  
+  year = {2018},
+  
+  copyright = {arXiv.org perpetual, non-exclusive license}
+}
+
+@misc{mBERT,
+  author = {Jacob Devlin},
+
+  title = {Multilingual BERT},
+
+  year = {2018},
+
+  url = {https://github.com/ google-research/bert/blob/master/ multilingual.md.}
+}
+
 @InProceedings{Winery,
   author    = {Oliver Kopp and others},
+  
   booktitle = {Proceedings of 11\textsuperscript{th} International Conference on Service-Oriented Computing (ICSOC'13)},
+
   title     = {{Winery -- A Modeling Tool for {TOSCA}-based Cloud Applications}},
+
   year      = {2013},
+
   pages     = {700--704},
+
   publisher = {Springer Berlin Heidelberg},
+
   series    = {LNCS},
+
   volume    = {8274},
+
   doi       = {10.1007/978-3-642-45005-1_64},
+
   keywords  = {Cloud Applications; Modeling; TOSCA; Management; Portability},
+
 }
 
-@Article{Binz2009,
-  author    = {Tobias Binz and Gerd Breiter and Frank Leymann and Thomas Spatzier},
-  journal   = {IEEE Internet Computing},
-  title     = {{Portable Cloud Services Using TOSCA}},
-  year      = {2012},
-  issn      = {1089-7801},
-  month     = may,
-  number    = {03},
-  pages     = {80--85},
-  volume    = {16},
-  doi       = {10.1109/mic.2012.43},
-  publisher = {IEEE Computer Society},
+@misc{T5,
+  doi = {10.48550/ARXIV.1910.10683},
+  
+  url = {https://arxiv.org/abs/1910.10683},
+  
+  author = {Raffel, Colin and Shazeer, Noam and Roberts, Adam and Lee, Katherine and Narang, Sharan and Matena, Michael and Zhou, Yanqi and Li, Wei and Liu, Peter J.},
+  
+  keywords = {Machine Learning (cs.LG), Computation and Language (cs.CL), Machine Learning (stat.ML), FOS: Computer and information sciences, FOS: Computer and information sciences},
+  
+  title = {Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer},
+  
+  publisher = {arXiv},
+  
+  year = {2019},
+  
+  copyright = {arXiv.org perpetual, non-exclusive license}
 }
 
-@Manual{mwe,
-  title  = {The \texttt{mwe} Package},
-  author = {Martin Scharrer},
-  year   = {2017},
-  url    = {http://texdoc.net/mwe},
+@misc{mT5,
+  doi = {10.48550/ARXIV.2010.11934},
+  
+  url = {https://arxiv.org/abs/2010.11934},
+  
+  author = {Xue, Linting and Constant, Noah and Roberts, Adam and Kale, Mihir and Al-Rfou, Rami and Siddhant, Aditya and Barua, Aditya and Raffel, Colin},
+  
+  keywords = {Computation and Language (cs.CL), FOS: Computer and information sciences, FOS: Computer and information sciences},
+  
+  title = {mT5: A massively multilingual pre-trained text-to-text transformer},
+  
+  publisher = {arXiv},
+  
+  year = {2020},
+  
+  copyright = {arXiv.org perpetual, non-exclusive license}
 }
 
-@Misc{acmart,
-  author =       {Boris Veytsman},
-  year =         {2021},
-  month =        aug,
-  title =        {LaTeX Class for the Association for Computing Machinery -- Acknowledgement Information},
-  lastaccessed = {September 17, 2021},
-  url =          {https://github.com/borisveytsman/acmart/blob/1704c8bf7eee92a1515ff755f5118b6a22bb1f8e/samples/samples.dtx#L709},
+@inproceedings{GPT-2,
+  title={Language Models are Unsupervised Multitask Learners},
+
+  author={Alec Radford and Jeff Wu and Rewon Child and David Luan and Dario Amodei and Ilya Sutskever},
+
+  year={2019}
 }
+
+@misc{XLM,
+  doi = {10.48550/ARXIV.1901.07291},
+  
+  url = {https://arxiv.org/abs/1901.07291},
+  
+  author = {Lample, Guillaume and Conneau, Alexis},
+  
+  keywords = {Computation and Language (cs.CL), FOS: Computer and information sciences, FOS: Computer and information sciences},
+  
+  title = {Cross-lingual Language Model Pretraining},
+  
+  publisher = {arXiv},
+  
+  year = {2019},
+  
+  copyright = {arXiv.org perpetual, non-exclusive license}
+}
+
+@misc{XLM-R,
+  doi = {10.48550/ARXIV.1911.02116},
+  
+  url = {https://arxiv.org/abs/1911.02116},
+  
+  author = {Conneau, Alexis and Khandelwal, Kartikay and Goyal, Naman and Chaudhary, Vishrav and Wenzek, Guillaume and Guzmán, Francisco and Grave, Edouard and Ott, Myle and Zettlemoyer, Luke and Stoyanov, Veselin},
+  
+  keywords = {Computation and Language (cs.CL), FOS: Computer and information sciences, FOS: Computer and information sciences},
+  
+  title = {Unsupervised Cross-lingual Representation Learning at Scale},
+  
+  publisher = {arXiv},
+  
+  year = {2019},
+  
+  copyright = {arXiv.org perpetual, non-exclusive license}
+}
+
+@misc{mBART,
+  doi = {10.48550/ARXIV.1910.13461},
+  
+  url = {https://arxiv.org/abs/1910.13461},
+  
+  author = {Lewis, Mike and Liu, Yinhan and Goyal, Naman and Ghazvininejad, Marjan and Mohamed, Abdelrahman and Levy, Omer and Stoyanov, Ves and Zettlemoyer, Luke},
+  
+  keywords = {Computation and Language (cs.CL), Machine Learning (cs.LG), Machine Learning (stat.ML), FOS: Computer and information sciences, FOS: Computer and information sciences},
+  
+  title = {BART: Denoising Sequence-to-Sequence Pre-training for Natural Language Generation, Translation, and Comprehension},
+  
+  publisher = {arXiv},
+  
+  year = {2019},
+  
+  copyright = {arXiv.org perpetual, non-exclusive license}
+}
+
+@misc{mBART,
+  doi = {10.48550/ARXIV.2001.08210},
+  
+  url = {https://arxiv.org/abs/2001.08210},
+  
+  author = {Liu, Yinhan and Gu, Jiatao and Goyal, Naman and Li, Xian and Edunov, Sergey and Ghazvininejad, Marjan and Lewis, Mike and Zettlemoyer, Luke},
+  
+  keywords = {Computation and Language (cs.CL), FOS: Computer and information sciences, FOS: Computer and information sciences},
+  
+  title = {Multilingual Denoising Pre-training for Neural Machine Translation},
+  
+  publisher = {arXiv},
+  
+  year = {2020},
+  
+  copyright = {arXiv.org perpetual, non-exclusive license}
+}
+
+% Knowledge graph
+
+% Multilingual QA
 
 @Comment{jabref-meta: databaseType:bibtex;}
