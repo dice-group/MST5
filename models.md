@@ -105,8 +105,12 @@ A: not 100% reliable
 
 ## XLM
 
-- BERT-based
+- BERT-based (encoder)
+  - Casual Language Modeling (CLM)
+  - Masked Language Modeling (MLM)
+  - Translation Language Modeling (TLM)
 - cross-lingual pre-training objectives
+- reduce perplexity
 - 100 languages
 
 ### XLM-R
@@ -118,8 +122,10 @@ A: not 100% reliable
 
 ### mBART
 
+- sequence to sequence
+- denoising full texts in multiple languages
 - trained with a combination of span masking and sentence shuffling objectives
-- 25 languages (subset of XLM-R)
+- 25 languages (subset of XLM-R), 50 languages in mBART-50
 - denoising full texts in multiple languages
 
 ## MARGE
