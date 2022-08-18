@@ -115,7 +115,13 @@ A: not 100% reliable
 
 ### XLM-R
 
+- Sentence piece model
+- longer training time
+- larger model
+- outperforms monolingual BERT by making use of multilingual training
+- used CommonCrawl data instead of Wikipedia
 - trained with a cross-lingual masked language modeling objective
+- analysis the trade-offs and limitations of multilingual language models
 - 100 languages
 
 ## BART
