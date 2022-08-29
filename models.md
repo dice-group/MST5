@@ -52,6 +52,12 @@ A language model with sufficient capacity will begin to learn to infer and perfo
 - multitask
 - masked self-attention
 
+Input/Output(GPT):
+- input: text + position embedding
+- predict vector with decoder layers and sample a word with top-k sampling
+- use decoder to predict next token in language modeling
+- start(<s>), delimiter($) and end(<e>) tokens
+
 ## Language modeling
 
 predict the next token based on previous tokens
@@ -89,6 +95,10 @@ predict the next token based on previous tokens
 - pre-trained on C4
 - allows the use of exactly the same training objective (teacher-forced maximum- likelihood) for every task
 - computational effort
+
+Input/Output:
+- sequence-to-sequence
+- task-specific prefix in original input sequence
 
 ### mT5: multilingual pre-trained text-to-text transformer
 
