@@ -126,6 +126,10 @@ A: not 100% reliable
 
 ## BART
 
+- combined BERT and GPT
+- mask and reconstruct sentences
+- an additional encoder for machine translation before encoder
+
 ### mBART
 
 - sequence to sequence
