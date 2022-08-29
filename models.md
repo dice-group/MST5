@@ -99,6 +99,9 @@ predict the next token based on previous tokens
 Input/Output:
 - sequence-to-sequence
 - task-specific prefix in original input sequence
+- sequence of input tokens are mapped to a sequence of output embedding
+- output is fed into a dense layer with a softmax output, whose weights are shared with the input embedding matrix
+- text embedding + position embedding
 
 ### mT5: multilingual pre-trained text-to-text transformer
 
