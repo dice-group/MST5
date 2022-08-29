@@ -16,6 +16,15 @@
   - mask words
   - next sentence prediction
 
+Input/Output:
+- single sentence/pair of sentences
+- token Embeddings(WordPiece) + Segment Embeddings + Position Embeddings
+- Softmax output layer for token-level tasks
+- [CLS] for classification
+- SQuAD v1.1: introduce start and end vector during fine-tuning
+- SQuAD v2.0: start and end at [CLS]
+  
+
 ### mBert
 
 - Multilingual sequence-to-sequence denoising auto-encoder
