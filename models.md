@@ -162,8 +162,12 @@ A: not 100% reliable
 
 ## MARGE
 
+- document-level sequence-to-sequence
 - encoder-decoder
+- Encoder: retrieve related texts in many languages
+- Decoder: reconstruct the original text from retrieved texts
 - reconstruct a document in one language by retrieving documents in other languages
+- performs well even merely pre-training
 - 26 languages
 
 ## Evaluation
