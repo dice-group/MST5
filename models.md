@@ -170,6 +170,14 @@ A: not 100% reliable
 - performs well even merely pre-training
 - 26 languages
 
+## RemBert (Rebalanced multilingual BERT)
+
+- re-evaluate the standard practice of sharing weights between input and output embeddings
+- decoupled embeddings provide increased modeling flexibility, allowing us to significantly improve the efficiency of parameter allocation in the input embedding of multilingual models
+- reallocate the input embedding parameters
+- allocate additional capacity to the output embedding provides benefits to the model that persist through the fine-tuning stage even though the output embedding is discarded after pre-training
+- larger output embeddings prevent the model's last layers from overspecializaing to the pre-training task and encourage Transformer representations to be more general and more transferable to other tasks and languages
+
 ## Evaluation
 
 ### XTREME: A Massively Multilingual Multi-task Benchmark for Evaluating Cross-lingual Generalization
