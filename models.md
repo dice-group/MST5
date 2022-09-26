@@ -56,7 +56,7 @@ Input/Output(GPT):
 - input: text + position embedding
 - predict vector with decoder layers and sample a word with top-k sampling
 - use decoder to predict next token in language modeling
-- start(<s>), delimiter($) and end(<e>) tokens
+- start, delimiter($) and end tokens
 
 ## Language modeling
 
