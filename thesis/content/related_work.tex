@@ -1,9 +1,174 @@
 \section{Related Work}
 \label{sec:relatedwork}
 
-Transformers \cite{Transformers}
+% Language model
+\subsection*{Language model}
 
-BERT \cite{BERT}
+In Natural Language Processing (NLP), 
+a probability distribution of words is defined as a Language model. 
+Based on previous tokens and task, a language model predicts the next token continuously to generate a sequence. 
+There are various approaches in language model. 
+In feature-based approaches, linguistic features are extracted to understand a text. 
+In transformer-based approaches, self-attention plays an significant part.
 
-mBERT \cite{mBERT}
+% feature based
+\subsection*{Feature-based Approach}
 
+Feature-based approaches, e.g. parsing, POS tagging and Term Frequency-Inverse Document Frequency, 
+embed input text into a numerical representation by analysing linguistic features, 
+which are essential for computer to understand languages. 
+POS tagging assigns part-of-speech or grammatical tagging to each word in a text with e.g. nouns, verbs, adjectives and more. 
+Term Frequency-Inverse Document Frequency (TF-IDF) weights a word based on 
+how often it appears in a text and how many documents include it. 
+If a word appears rarely, it contains more information, therefore has a higher weight and vice versa. 
+Depending on the task, features are extracted from different aspects. 
+Frequently, these features are combined with transformer-based approach to achieve better performance.
+
+% Transformers (fine-tuning based)
+\subsection*{Transformer-based Approach}
+
+Transformers is another popular approach in Natural Language Processing using self-attention. 
+A model is pre-trained in unsupervised or semi-supervised manner on a large data set. 
+For downstream tasks, the pre-trained model only needs to be fine-tuned on a few data for a short time, 
+which saves a lot of time and compute resources. 
+In 2017, Vaswani et al. introduced the first Transformers \cite{Transformers}, 
+which allows all input tokens to be processed in parallel via self-attention. 
+In recent years, many transformer models are presented based on this paper, 
+including new pre-training methods, different architectures, etc. 
+
+Bidirectional Encoder Representations from Transformers \cite{BERT}, 
+referred to as BERT, is an encoder-based transformer, 
+which is pre-trained with two tasks: masked language model 
+and next sentence prediction on BooksCorpus \cite{DBLP:journals/corr/ZhuKZSUTF15} and English Wikipedia datasets. 
+mBERT \cite{mBERT} is a variant of BERT which is pre-trained on 104 languages with Wikipedia data. 
+After fine-tuning, it could be used for multilingual tasks e.g. translation. 
+Rebalanced multilingual BERT (RemBert) \cite{RemBert} improves mBERT by reducing input embedding and enlarging output embedding, 
+which shows that tweaking parameters is important in transformers and can lead to state-of-the-art performance. 
+
+GPT-2 \cite{radford2019language} is a decoder only transformer, 
+which functions like a language model: given all previous tokens to predict the next token. 
+GPT-2 is pre-trained in unsupervised manner with 40 GB WebText and can be used for tasks, 
+including question answering, summarization, and translation, even without fine-tuning. 
+
+Compare to BERT and GPT-2, 
+Text-To-Text Transfer Transformer (T5) \cite{DBLP:journals/corr/abs-1910-10683} combines 
+encoder and decoder to convert NLP tasks into a text-to-text format. 
+It is pre-trained on multi-tasking unsupervised and supervised. 
+In unsupervised training, a BERT style approach is applied, namely mask tokens and predict next sentence. 
+In supervised training, prefixes are given in input texts to define the tasks to be done. 
+Thus, pre-trained T5 model can process several tasks well via adding the specific prefix to the text, 
+e.g. "cola sentence: ..." for Sentence acceptability judgment (CoLA \cite{DBLP:journals/corr/abs-1805-12471}), 
+"summarize: ..." for summarization, 
+"mrpc sentence1: ... sentence2: ..." for Paraphrasing/sentence similarity (MRPC \cite{dolan-brockett-2005-automatically}), and more. 
+Xue et al. \cite{DBLP:journals/corr/abs-2010-11934} released mT5 which utilizes the methodology as T5 for 101 languages. 
+mT5 is trained on multilingual Colossal Clean Crawled Corpus (mC4) unsupervisedly, 
+therefore, if must be fine-tuned and prefixes are not necessary, unless a multi-task fine-tuning is required. 
+Similar to T5 model, BART \cite{DBLP:journals/corr/abs-1910-13461} is also a sequence-to-sequence model, 
+which consists of a encoder and a decoder and pre-trained with a combination of span masking and sentence shuffling objectives. 
+
+mBART \cite{DBLP:journals/corr/abs-2001-08210} is a cross-lingual version of BART, 
+pre-trained with denoising full texts in 25 languages. 
+In multilingual transformers, XLM \cite{DBLP:journals/corr/abs-1901-07291}, 
+XLM-RoBERTa \cite{DBLP:journals/corr/abs-1911-02116} also achieves state-of-the-art performance and support 100 languages. 
+Both of them optimize BERT architecture and pre-trained on 100 languages. 
+
+MARGE \cite{DBLP:journals/corr/abs-2006-15020} provides another pre-training approach, 
+reconstruct a document in one language by retrieving documents in other languages. 
+MARGE model supports 26 languages and performs well even merely pre-training. 
+
+% Knowledge graph
+\subsection*{Knowledge Graph}
+
+In contrast to many information in the Internet are stored in plain text, 
+Knowledge graphs manages in a structural fashion. 
+Relations between entities connects them together as edges in a graph, 
+so that knowledge is linked instead of a lot of isolated island and implicit knowledge can be simply retrieved. 
+Wikidata \cite{10.1145/2629489} is currently the largest knowledge graph, 
+which contains about 100 Million instances in over 400 languages. 
+It can be applied in e.g. enriching informations for applications, deriving new insights from stated data, etc.
+
+DBpedia \cite{10.1007/978-3-540-76298-0_52} consists of structured infobox information extracted from Wikipedia. 
+It contains about 900 million triples by January 2021 and provides free APIs for online accessing and querying. 
+
+YAGO \cite{10.1145/1242572.1242667} is also one of the large knowledge graph, 
+which combines information from Wikidata with WordNet \cite{Fellbaum1998}. 
+In the newest YAGO 4 \cite{10.1007/978-3-030-49461-2_34}, 
+they combine Wikidata with more user-friendly taxonomy from schema.org \cite{10.1145/2844544} 
+while containing more than 64 million entities and 2 billion facts. 
+
+NELL \cite{10.5555/2898607.2898816} is short for Never-Ending Language Learner developed by Carlson et al., 
+which performs a reading task and a learning task each day to extract information from Internet 
+while learning to categorise noun phrases and find relations to pairs of noun phrases. 
+NELLs expands itself rapidly, for example, it contains more than 242,000 new facts after running it 67 days. 
+
+OpenCyc \cite{opencyc} is a subset of Cyc knowledge base, 
+a knowledge graph with about forty years history. OpenCyc contains 239,000 concepts in its 4.0 version, 
+accessible via a interpreter on Linux and Microsoft Windows. However, it is not available after 2017.
+
+conceptnet \cite{speer2017conceptnet} represents facts in sentences in knowledge graph with terms and assertions, 
+including knowledge from Open Mind Common Sense (OMCS), Wiktionary, Open Multilingual WordNet \cite{bond-foster-2013-linking}, etc. 
+There are roughly 34 million statements in conceptnet and 304 language are supported in total, 10 of them have core support.
+
+Wikidata, DBpedia and YAGO have SPARQL endpoint while NELL and conceptnet doesn't support SPARQL query. 
+OpenCyc is currently not accessible. Wikidata has the most language supports in these knowledge graphs. 
+Moreover, entities and relations are represented 
+and stored with ids in Wikidata while these are all represented explicitly in DBpedia. 
+
+% Monolingual KGQA
+\subsection*{Knowledge Graph Question Answering (KGQA)}
+
+KGQA-Leaderboard \cite{DBLP:journals/corr/abs-2201-08174} is a open source platform to record 
+and compare scores of QA systems for different datasets. 
+Presently, SGPT \cite{sgpt} is leading in English QALD-9 \cite{qald9} dataset 
+and QAnswer in the multilingual QALD-9-PLUS \cite{qald9plus} dataset. 
+
+SGPT \cite{sgpt} combines feature-based approach and transformer-based approach. 
+Linguistic features, e.g. POS-tag, dependency relation embedding, are extracted from the question, 
+then fed into transformer encoders, lastly GPT-2 generates a SPARQL query. 
+This approach avoids high cost of templates and provides deeper understanding of questions using lingustic features. 
+
+To et al. \cite{9282949} derived a Linguistic Term Question Answering (LingTeQA), 
+in which a natural language question is analysed with dependency tree and converted to a question template, 
+then a SPARQL template is retrieved from pre-generated template set to create SPARQL query. 
+
+qaSQP \cite{https://doi.org/10.48550/arxiv.1910.09760} is proposed by Zheng et al. 
+Instead of detecting the template to use for a question, 
+they use a structural query pattern framework: 
+build a sketch of the query, then extend entities according to the question 
+and lastly add constraints defined in the question. 
+
+Panchbhai et al. \cite{panchbhai-2020} used a completely different approach. 
+They consider SPARQL as another language and use Neural Machine Translation to transform natural language questions to SPARQL queries. 
+A Neural SPARQL Machine is built to process the Sequence-to-Sequence task, 
+including three components, namely generator, learner and interpreter. 
+
+% Multilingual KGQA
+\subsection*{Multilingual KGQA}
+
+To the best of our knowledge, there are only a few researches focusing on multilingual KGQA. 
+
+Veyseh \cite{pouran-ben-veyseh-2016-cross} proposed a four-stage cross-lingual approach: 
+keyword extraction, keyword classification, entity linking and ontology type extraction 
+and answer extraction using unified semantic representation of concepts, 
+which is evaluated on Persian and Spanish.
+
+Hakimov et al. also used semantic parsing mapping natural language input into logical form 
+and developed AMUSE \cite{AMUSE}, which works for English, German ans Spanish. 
+
+Platypus \cite{10.1007/978-3-319-98192-5_21} is presented by Tanon et al., 
+integrating two analyzers: grammatical and template-based analyzer, for queuing Wikidata in 3 languages. 
+
+Diefenbach et al. \cite{https://doi.org/10.48550/arxiv.1803.00832} provided an approach over the Semantic Web, 
+which works on 5 knowledge-graphs with 5 different languages. 
+
+Recently, transformer-based approach is applied to multilingual KGQA.
+
+Zhou et al. \cite{zhou-etal-2021-improving} derived an approach using zero-shot transfer setting, 
+given only a high-resource language (e.g. English) 
+and exploit unsupervised bilingual lexicon induction (BLI) to generate augmented training data. 
+The effectiveness is proved by their experiment in 11 zero-resource languages. 
+
+Perevalov et al. \cite{MT-KGQA} experience with machine translation 
+to extend supported languages of existing multilingual KGQA systems. 
+They demonstrate that translated to English provides the best performance in most cases 
+and machine translation quality only has small or moderate positive correlation with the question answering score. 
