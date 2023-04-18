@@ -1,7 +1,6 @@
 import json
 import time
 from typing import Dict
-from query import ask_dbpedia, ask_wikidata
 
 def build_qald_entry(id, question_string, sparql_query, answer, language):
     # id-Object

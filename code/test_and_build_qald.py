@@ -1,9 +1,9 @@
 import argparse
-from preprocess import read_json
-from query import init_summarizer, predict_query, ask_wikidata
-from preprocess import replace_prefix_abbr, delete_sparql_prefix
-from postprocess import postprocessing_sparql
-from build_qald import build_qald_entry, export_json
+from utils.preprocess import read_json
+from utils.query import init_summarizer, predict_query, ask_wikidata
+from utils.preprocess import replace_prefix_abbr, delete_sparql_prefix
+from utils.postprocess import postprocessing_sparql
+from utils.build_qald import build_qald_entry, export_json
 
 
 def get_question_query_list_with_id(data, languages):

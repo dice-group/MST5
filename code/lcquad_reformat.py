@@ -1,7 +1,6 @@
 import argparse
 import csv
-import json
-from preprocess import read_json, replace_prefix_abbr, delete_sparql_prefix
+from utils.preprocess import read_json, replace_prefix_abbr, delete_sparql_prefix
 
 def get_question(lcqald_dict):
     return lcqald_dict["NNQT_question"].replace("{", "").replace("}", "").replace("<", "").replace(">", "")
