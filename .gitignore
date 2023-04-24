@@ -2,7 +2,6 @@
 pre_train_lcqald/*
 pred_files/*
 lcquad_tokenizer/*
-pred_files/*
 fine-tuned_models/*
 result_qald/*
 datasets/[^\d]
@@ -12,3 +11,4 @@ datasets/11_linguistic/*
 sparql-tokenizer-trainedon_all/*
 .lock
 papers/*
+code/utils/__pycache__/*
