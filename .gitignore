@@ -11,3 +11,4 @@ datasets/12/*
 datasets/11_linguistic/*
 sparql-tokenizer-trainedon_all/*
 .lock
+papers/*
