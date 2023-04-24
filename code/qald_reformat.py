@@ -1,6 +1,6 @@
 import argparse
-import csv
 from utils.preprocess import read_json, replace_prefix_abbr, delete_sparql_prefix
+from utils.export import export_csv
 
 supported_languages = [
     "en",
@@ -27,15 +27,8 @@ def get_question_query_list(data, languages):
                 delete_sparql_prefix(question_dict["query"]["sparql"]))
             if question["language"] in languages:
                 question_query_list.append([question["string"], query])
-    return question_query_list
-
-
-def extract_csv(output_file, question_query_list):
     question_query_list.insert(0, ['question, query'])
-    with open(output_file, "w") as f:
-        writer = csv.writer(f)
-        writer.writerows(question_query_list)
-    f.close()
+    return question_query_list
 
 
 def check_languages(args):
@@ -71,7 +64,7 @@ def main():
 
     qald_dataset = read_json(args.input)
     question_query_list = get_question_query_list(qald_dataset, languages)
-    extract_csv(args.output, question_query_list)
+    export_csv(args.output, question_query_list)
 
 
 # check if this module is the main program

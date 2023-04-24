@@ -2,9 +2,10 @@ import argparse
 import json
 import re
 import csv
-from preprocess import read_json
-from linguistic_parser import get_doc, get_pos, get_dep, get_root_node, get_dep_depth
 import spacy
+from utils.preprocess import read_json
+from utils.linguistic_parser import get_doc, get_pos, get_dep, get_root_node, get_dep_depth
+from utils.export import export_csv, export_json
 
 nlp_en = spacy.load("en_core_web_sm")
 nlp_zh = spacy.load("zh_core_web_sm")
@@ -47,7 +48,7 @@ def add_to_lcquad(dataset, nlp, output):
         ques_dict["pos"] = pos
         ques_dict["dep"] = dep
         ques_dict["dep_depth"] = depth_list
-    save_json(dataset, output)
+    export_json(output, dataset)
 
 def get_linguistic_context(nlp, ques):
     doc = get_doc(ques, nlp)
@@ -55,7 +56,7 @@ def get_linguistic_context(nlp, ques):
     dep = get_dep(doc)
     root = get_root_node(doc, dep)
     depth_list = get_dep_depth(root, [-1] * len(doc))
-    return doc, pos,dep,depth_list
+    return doc, pos, dep, depth_list
 
 def add_to_qald(dataset, output, output_csv):
     if output_csv:
@@ -75,20 +76,10 @@ def add_to_qald(dataset, output, output_csv):
                 depth_str_list = map(str, depth_list)
                 question_linguistic = " ".join(doc_list) + " <pad> " + " ".join(pos) + " <pad> " + " ".join(dep) + " <pad> " + " ".join(depth_str_list)
                 linguistic_query_list.append([question_linguistic, ques_dict["query"]["sparql"]])
-    save_json(dataset, output)
+    export_json(output, dataset)
     if output_csv:
-        save_csv(linguistic_query_list, output_csv)
+        export_csv(output_csv, linguistic_query_list)
 
-def save_json(dataset, output):
-    with open(output, 'w') as f:
-        json.dump(dataset, f)
-    print("Linguistic context is added and saved to ", output)
-
-def save_csv(linguistic_query_list, output_csv):
-    with open(output_csv, "w") as f:
-        writer = csv.writer(f)
-        writer.writerows(linguistic_query_list)
-    f.close()
 
 def main():
     parser = argparse.ArgumentParser(

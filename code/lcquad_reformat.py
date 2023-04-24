@@ -1,6 +1,7 @@
 import argparse
 import csv
 from utils.preprocess import read_json, replace_prefix_abbr, delete_sparql_prefix
+from utils.export import export_csv
 
 def get_question(lcqald_dict):
     return lcqald_dict["NNQT_question"].replace("{", "").replace("}", "").replace("<", "").replace(">", "")
@@ -20,10 +21,7 @@ def get_question_query(lcqald_dicts, kg, output):
         query = get_query(lcqald_dict, kg)
         query = replace_prefix_abbr(delete_sparql_prefix(query))
         question_query_list.append([question, query])
-    with open(output, "w") as f:
-        writer = csv.writer(f)
-        writer.writerows(question_query_list)
-    f.close()
+    export_csv(output, question_query_list)
 
 
 def main():

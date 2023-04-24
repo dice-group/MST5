@@ -3,7 +3,8 @@ from utils.preprocess import read_json
 from utils.query import init_summarizer, predict_query, ask_wikidata
 from utils.preprocess import replace_prefix_abbr, delete_sparql_prefix
 from utils.postprocess import postprocessing_sparql
-from utils.build_qald import build_qald_entry, export_json
+from utils.build_qald import build_qald_entry
+from utils.export import export_json
 
 
 def get_question_query_list_with_id(data, languages):
@@ -32,8 +33,10 @@ def main():
                         help="name of model path", required=True)
     parser.add_argument("-t", "--test", type=str,
                         help="name of test file", required=True)
+    parser.add_argument("-o", "--output", type=str, 
+                        help="name of output file", required=True)
     parser.add_argument("-l", "--language", type=str,
-                        help='required language of question', required=True)
+                        help="required language of question", required=True)
 
     # parse the arguments
     args = parser.parse_args()
@@ -52,7 +55,7 @@ def main():
             id, question_string, sparql_query, answer, args.language)
         pred_qald_list.append(qald_entry)
     qald_pred = {"questions": pred_qald_list}
-    export_json(qald_pred)
+    export_json(args.output, qald_pred)
 
 
 # check if this module is the main program
