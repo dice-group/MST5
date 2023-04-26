@@ -1,6 +1,7 @@
 import urllib.request
 import pandas as pd
 import argparse
+import re
 
 
 def get_html_data(id):
@@ -14,13 +15,15 @@ def get_html_data(id):
 
 def get_results(html, output_file):
     html = pd.read_html(html)[0].rename(columns={
-        "Unnamed: 3": "Benchmark"
+        "Unnamed: 3": "Benchmark",
     })
     html = html[html['Benchmark'].isna()]
-    result = html.drop(
+    for index, row in html.iterrows():
+        html.at[index, "Language"] = row["Annotator"][-13:-11]
+    html = html.drop(
         columns=[
             'Dataset',
-            'Language',
+            'Annotator',
             'Error Count',
             'avg millis/doc',
             'Timestamp',
@@ -28,7 +31,7 @@ def get_results(html, output_file):
             'Benchmark'
         ]
     )
-    result.to_csv(output_file, index=False)
+    html.to_csv(output_file, index=False)
 
 
 def main():
