@@ -12,11 +12,13 @@ supported_languages = [
     "be",
     "ba",
     "hy",
-    "es"
+    "es",
+    "zh",
+    "ja"
 ]
 
 
-def get_question_query_list(data, languages):
+def get_question_query_list(data, languages, linguistic):
     question_query_list = []
 
     questions_list = data["questions"]
@@ -26,7 +28,11 @@ def get_question_query_list(data, languages):
             query = replace_prefix_abbr(
                 delete_sparql_prefix(question_dict["query"]["sparql"]))
             if question["language"] in languages:
-                question_query_list.append([question["string"], query])
+                if linguistic:
+                    question_linguistic = " ".join(question["doc"]) + " <pad> " + " ".join(question["pos"]) + " <pad> " + " ".join(question["dep"]) + " <pad> " + " ".join(map(str, question["dep_depth"]))
+                    question_query_list.append([question_linguistic, query])
+                else:
+                    question_query_list.append([question["string"], query])
     question_query_list.insert(0, ['question, query'])
     return question_query_list
 
@@ -56,6 +62,7 @@ def main():
                         help="name of output file", required=True)
     parser.add_argument("-l", "--languages", nargs='+',
                         help='required languages of question', required=True)
+    parser.add_argument('--linguistic', action=argparse.BooleanOptionalAction)
 
     # parse the arguments
     args = parser.parse_args()
@@ -63,7 +70,8 @@ def main():
     languages = check_languages(args)
 
     qald_dataset = read_json(args.input)
-    question_query_list = get_question_query_list(qald_dataset, languages)
+    question_query_list = get_question_query_list(
+        qald_dataset, languages, args.linguistic)
     export_csv(args.output, question_query_list)
 
 
