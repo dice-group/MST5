@@ -1,26 +1,31 @@
 import argparse
 from utils.preprocess import read_json
 from utils.query import init_summarizer, predict_query, ask_wikidata
-from utils.preprocess import replace_prefix_abbr, delete_sparql_prefix
 from utils.postprocess import postprocessing_sparql
 from utils.build_qald import build_qald_entry
 from utils.export import export_json
 
 
-def get_question_query_list_with_id(data, languages):
-    question_query_list = []
+def get_question_list_with_id(data, languages, linguisitic_context):
+    question_list = []
 
     questions_list = data["questions"]
 
     for question_dict in questions_list:
         for question in question_dict["question"]:
-            query = replace_prefix_abbr(
-                delete_sparql_prefix(question_dict["query"]["sparql"]))
             if question["language"] in languages:
-                question_query_list.append(
-                    [question_dict["id"], question["string"], query])
+                if linguisitic_context:
+                    depth_str_list = map(str, question["dep_depth"])
+                    question_string = question["string"] \
+                    + "<pad>" + " ".join(question["doc"]) \
+                    + "<pad>" + " ".join(question["pos"]) \
+                    + "<pad>" + " ".join(question["dep"]) \
+                    + "<pad>" + " ".join(depth_str_list) 
+                else:
+                    question_string = question["string"]
+                question_list.append([question_dict["id"], question_string])
                 break
-    return question_query_list
+    return question_list
 
 
 def main():
@@ -37,17 +42,18 @@ def main():
                         help="name of output file", required=True)
     parser.add_argument("-l", "--language", type=str,
                         help="required language of question", required=True)
+    parser.add_argument('--linguistic_context', default=False, type=bool, help='With or without linguistic context in question string')
 
     # parse the arguments
     args = parser.parse_args()
 
     testset = read_json(args.test)
     summarizer = init_summarizer(args.model)
-    question_query_list = get_question_query_list_with_id(
-        testset, [args.language])
+    question_list = get_question_list_with_id(
+        testset, [args.language], args.linguistic_context)
 
     pred_qald_list = []
-    for id, question_string, _ in question_query_list:
+    for id, question_string in question_list:
         query_pred = predict_query(summarizer, question_string)
         sparql_query = postprocessing_sparql(query_pred)
         answer = ask_wikidata(sparql_query)
