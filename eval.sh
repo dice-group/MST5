@@ -1,8 +1,8 @@
 #!/bin/bash
 
 model="mt5_linguistic/11_linguistic_mt5"
-exp_setting="all languages mt5 linguistic"
-pred_pfad=pred_files/${model}_2
+exp_setting="all_languages_mt5_linguistic"
+pred_pfad=pred_files/${model}/
 linguitic_context="True"
 
 
