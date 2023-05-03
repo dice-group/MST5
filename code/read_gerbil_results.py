@@ -1,7 +1,6 @@
 import urllib.request
 import pandas as pd
 import argparse
-import re
 
 
 def get_html_data(id):
