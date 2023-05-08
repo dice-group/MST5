@@ -4,6 +4,7 @@ from utils.query import init_summarizer, predict_query, ask_wikidata
 from utils.postprocess import postprocessing_sparql
 from utils.build_qald import build_qald_entry
 from utils.export import export_json
+from tqdm import tqdm
 
 
 def get_question_list_with_id(data, languages, linguisitic_context):
@@ -53,7 +54,7 @@ def main():
         testset, [args.language], args.linguistic_context)
 
     pred_qald_list = []
-    for id, question_string in question_list:
+    for id, question_string in tqdm(question_list):
         query_pred = predict_query(summarizer, question_string)
         sparql_query = postprocessing_sparql(query_pred)
         answer = ask_wikidata(sparql_query)
