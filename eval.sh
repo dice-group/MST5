@@ -7,7 +7,6 @@ linguitic_context="True"
 
 
 languages=("en" "de" "ru" "fr" "zh" "lt" "ja" "ba" "be" "uk" "es")
-# languages=("fr")
 
 
 for lang in "${languages[@]}"
