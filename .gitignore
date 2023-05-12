@@ -12,3 +12,5 @@ sparql-tokenizer-trainedon_all/*
 .lock
 papers/*
 code/utils/__pycache__/*
+wandb/*
+code/__pycache__/*
