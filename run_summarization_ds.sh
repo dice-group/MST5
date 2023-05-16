@@ -1,19 +1,19 @@
 #!/bin/bash
 
-dataset_name="11_linguistic"
+dataset_name="lcquad"
 output_dir="fine-tuned_models/${dataset_name}_mt5-xl"
 
 deepspeed run_summarization.py \
     --deepspeed deepspeed/ds_config_zero3.json \
     --model_name_or_path "google/mt5-xl" \
     --do_train \
-    --train_file datasets/${dataset_name}/q9pp_train.csv \
+    --train_file datasets/lcquad/lcquad_wikidata.csv \
     --output_dir ${output_dir} \
-    --num_train_epochs 100 \
+    --num_train_epochs 32 \
     --per_device_train_batch_size=4 \
     --overwrite_output_dir \
-    --save_steps 30000 \
-    --save_total_limit 1 \
+    --save_steps 3000 \
+    --save_total_limit 2 \
     --report_to wandb \
     --tf32 1 \
     --fp16 0 \
