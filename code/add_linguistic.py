@@ -27,8 +27,7 @@ nlp_dict = {
     "uk": nlp_uk,
     "ru": nlp_ru,
     "ba": nlp_ru,
-    "be": nlp_ru,
-    "es": nlp_es
+    "be": nlp_ru
 }
 
 def preprocess_nnqt_question(NNQT_ques):
