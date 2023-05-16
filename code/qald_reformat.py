@@ -29,7 +29,10 @@ def get_question_query_list(data, languages, linguistic):
                 delete_sparql_prefix(question_dict["query"]["sparql"]))
             if question["language"] in languages:
                 if linguistic:
-                    question_linguistic = " ".join(question["doc"]) + " <pad> " + " ".join(question["pos"]) + " <pad> " + " ".join(question["dep"]) + " <pad> " + " ".join(map(str, question["dep_depth"]))
+                    question_linguistic = " ".join(question["doc"]) \
+                    + " <pad> " + " ".join(question["pos"]) \
+                    + " <pad> " + " ".join(question["dep"]) \
+                    + " <pad> " + " ".join(map(str, question["dep_depth"]))
                     question_query_list.append([question_linguistic, query])
                 else:
                     question_query_list.append([question["string"], query])

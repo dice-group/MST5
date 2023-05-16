@@ -17,8 +17,7 @@ def get_question_list_with_id(data, languages, linguisitic_context):
             if question["language"] in languages:
                 if linguisitic_context:
                     depth_str_list = map(str, question["dep_depth"])
-                    question_string = question["string"] \
-                    + "<pad>" + " ".join(question["doc"]) \
+                    question_string = " ".join(question["doc"]) \
                     + "<pad>" + " ".join(question["pos"]) \
                     + "<pad>" + " ".join(question["dep"]) \
                     + "<pad>" + " ".join(depth_str_list) 
