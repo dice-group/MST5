@@ -17,6 +17,6 @@ def export_json(output_file, dataset):
     dir_path = os.path.dirname(output_file)
     if not os.path.exists(dir_path):
         os.makedirs(dir_path)
-    with open(output_file, 'w') as f:
-        json.dump(dataset, f)
+    with open(output_file, 'w', encoding='utf-8') as f:
+        json.dump(dataset, f, ensure_ascii=False)
     print("json file is exported to ", output_file)
