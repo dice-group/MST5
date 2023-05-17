@@ -3,7 +3,7 @@
 dataset_name="11_linguistic"
 output_dir="fine-tuned_models/${dataset_name}_mt5"
 
-python run_summarization.py \
+python train.py \
     --model_name_or_path "google/mt5-base" \
     --do_train \
     --do_eval \

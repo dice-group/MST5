@@ -3,7 +3,7 @@
 dataset_name="lcquad"
 output_dir="fine-tuned_models/${dataset_name}_mt5-xl"
 
-deepspeed run_summarization.py \
+deepspeed train.py \
     --deepspeed deepspeed/ds_config_zero3.json \
     --model_name_or_path "google/mt5-xl" \
     --do_train \
