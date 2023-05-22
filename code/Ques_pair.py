@@ -1,29 +1,6 @@
 from sklearn.metrics import f1_score
 from utils.preprocess import delete_sparql_prefix, prefix_pattern
-from utils.preprocess import read_json
 import re
-import numpy as np
-import pandas as pd
-import argparse
-import logging
-
-# create logger
-logger = logging.getLogger('logger')
-logger.setLevel(logging.WARNING)
-
-# create console handler and set level to debug
-ch = logging.StreamHandler()
-ch.setLevel(logging.DEBUG)
-
-# create formatter
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-
-# add formatter to ch
-ch.setFormatter(formatter)
-
-# add ch to logger
-logger.addHandler(ch)
-
 
 def replace_prefix_with_abbr(sparql):
     for pattern in prefix_pattern:
@@ -87,19 +64,16 @@ class Ques_pair:
         return ref_relation_list, pred_relation_list
 
     def calculate_entity_f1(self):
-        logger.info("Calculate entity F1 score for question id " + self.id)
+    
         ref_entity_list, pred_entity_list = self.collect_entities()
         ref_entity_list, pred_entity_list = self.pad_list(ref_entity_list, pred_entity_list)
         score = f1_score(ref_entity_list, pred_entity_list, average="macro")
-        logger.info("Entity F1 score is " + str(score))
         return score
 
     def calculate_relation_f1(self):
-        logger.info("Calculate relation F1 score for question " + self.id)
         ref_relation_list, pred_relation_list = self.collect_relations()
         ref_relation_list, pred_relation_list = self.pad_list(ref_relation_list, pred_relation_list)
         score = f1_score(ref_relation_list, pred_relation_list, average="macro")
-        logger.info("Relation F1 score is " + str(score))
         return score
 
     def pad_list(self, ref, pred):
@@ -111,31 +85,3 @@ class Ques_pair:
         if ref == [] and pred == []:
             ref, pred = ["PAD_ref"], ["PAD_pred"]
         return ref,pred
-
-def main():
-    parser = argparse.ArgumentParser(
-        description="A script to calculate F1 scores for entity and relations")
-
-    # add arguments to the parser
-    parser.add_argument("--ref_file", type=str,
-                        help="path of reference file", required=True)
-    parser.add_argument("--pred_file", type=str,
-                        help="pfad of prediction file", required=True)
-
-    args = parser.parse_args()
-
-    ref_file = read_json(args.ref_file)
-    pred_file = read_json(args.pred_file)
-
-    logger.info("loaded ref file " + args.ref_file)
-    logger.info("loaded pred file " + args.pred_file)
-
-    ref_list = ref_file["questions"]
-    pred_list = pred_file["questions"]
-
-    ques_pair = Ques_pair(ref_list[0], pred_list[0])
-    ques_pair.calculate_entity_f1()
-    ques_pair.calculate_relation_f1()
-    
-if __name__ == "__main__":
-    main()
