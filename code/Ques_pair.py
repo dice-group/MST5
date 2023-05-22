@@ -45,13 +45,15 @@ class Ques_pair:
         except:
             return []
     
-    def print(self):
+    def print(self, print_answer=False):
         print("id: " + self.id)
         print("question: " + self.question_string)
         print("ref sparql: " + self.ref_sparql)
         print("pred sparql: " + self.pred_sparql)
-        print("ref_answer:\n", self.ref_answer)
-        print("pred_answer:\n", self.pred_answer)
+        if print_answer:
+            print("ref_answer:\n", self.ref_answer)
+            print("pred_answer:\n", self.pred_answer)
+        print()
 
     def collect_entities(self):
         ref_entity_list = re.findall(r'wd:[A-Z]*[0-9]*', self.ref_sparql)
