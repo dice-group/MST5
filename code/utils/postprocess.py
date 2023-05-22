@@ -19,6 +19,11 @@ replacement_back = [
     ["rdf_type", "rdf:type"],
     ["wd_", "wd:"],
     ["wdt_", "wdt:"],
+    ["p_", "p:"],
+    ["psv_", "psv:"],
+    ["wikibase_", "wikibase:"],
+    ["rdfs_label", "rdfs:label"],
+    ["xsd_integer", "xsd:integer"]
 ]
 
 def postprocessing_sparql(sparql_query):
