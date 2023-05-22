@@ -9,7 +9,7 @@ import logging
 
 # create logger
 logger = logging.getLogger('logger')
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.WARNING)
 
 # create console handler and set level to debug
 ch = logging.StreamHandler()
@@ -70,7 +70,7 @@ class Ques_pair:
     
     def print(self):
         print("id: " + self.id)
-        print("question: \n" + self.question_string)
+        print("question: " + self.question_string)
         print("ref sparql: " + self.ref_sparql)
         print("pred sparql: " + self.pred_sparql)
         print("ref_answer:\n", self.ref_answer)
