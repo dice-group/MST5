@@ -9,7 +9,7 @@ prefix_pattern = [
     [r'onto:(.*)', 'dbo:'],
     [r'<http://www.wikidata.org/prop/direct/(.*?)>', 'wdt:'],
     [r'<http://www.wikidata.org/prop/statement/(.*?)>\.?'],
-    [r'<http://www.wikidata.org/prop/qualifier/(.*?)>\.?']
+    [r'<http://www.wikidata.org/prop/qualifier/(.*?)>\.?'],
     [r'<http://www.wikidata.org/entity/(.*?)>', 'wd:'],
     [r'http://www.wikidata.org/prop/(.*?)', 'p:'],
     [r'<http://www.w3.org/2000/01/rdf-schema#(.*?)', 'rdfs:'],
