@@ -8,8 +8,8 @@ prefix_pattern = [
     [r'<http://dbpedia.org/class/yago/(.*?)>\.?', 'yago:'],
     [r'onto:(.*)', 'dbo:'],
     [r'<http://www.wikidata.org/prop/direct/(.*?)>', 'wdt:'],
-    [r'<http://www.wikidata.org/prop/statement/(.*?)>\.?'],
-    [r'<http://www.wikidata.org/prop/qualifier/(.*?)>\.?'],
+    [r'<http://www.wikidata.org/prop/statement/(.*?)>\.?', 'ps:'],
+    [r'<http://www.wikidata.org/prop/qualifier/(.*?)>\.?', 'pq:'],
     [r'<http://www.wikidata.org/entity/(.*?)>', 'wd:'],
     [r'http://www.wikidata.org/prop/(.*?)', 'p:'],
     [r'<http://www.w3.org/2000/01/rdf-schema#(.*?)', 'rdfs:'],
@@ -34,7 +34,9 @@ def delete_sparql_prefix(sparql_query):
         return sparql_query
     if "ASK" in sparql_query:
         return "ASK" + sparql_query.split("ASK", 1)[1]
-    return "SELECT" + sparql_query.split("SELECT", 1)[1]
+    if "SELECT" in sparql_query:
+        return "SELECT" + sparql_query.split("SELECT", 1)[1]
+    return sparql_query
 
 
 def replace_prefix_abbr(sparql_query):
