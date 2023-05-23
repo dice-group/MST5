@@ -1,6 +1,13 @@
 from sklearn.metrics import f1_score
 from utils.preprocess import delete_sparql_prefix, prefix_pattern
 import re
+from enum import Enum
+
+class Type(Enum):
+    BOOLEAN = "boolean"
+    RANK = "rank"
+    COUNT = "count"
+    SIMPLE = "simple"
 
 def replace_prefix_with_abbr(sparql):
     for pattern in prefix_pattern:
@@ -28,12 +35,12 @@ class Ques_pair:
     
     def detect_query_type(self):
         if "ASK" in self.ref_sparql:
-            return "Boolean"
+            return Type.BOOLEAN
         elif "ORDER" in self.ref_sparql:
-            return "Rank"
+            return Type.RANK
         elif "COUNT" in self.ref_sparql:
-            return "Count"
-        return "Simple"
+            return Type.COUNT
+        return Type.SIMPLE
     
     def get_answer(self, ques_dict):
         try:
