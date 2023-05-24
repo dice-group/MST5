@@ -25,10 +25,3 @@ def build_qald_entry(id, question_string, sparql_query, answer, language):
     }
 
     return qald_question_entry
-
-def export_json(data):
-    t = time.strftime("%m.%d.%Y_%H:%M")
-    file_name = "gerbil_eval_" + t + ".json"
-    f = open(file_name, 'w+', encoding='utf-8')
-    json.dump(data, f, ensure_ascii=False, indent=4)
-    print("json file is exported in " + file_name)
