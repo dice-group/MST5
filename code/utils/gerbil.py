@@ -50,42 +50,45 @@ def set_gold_data(name):
     }
 
 
-def set_pred_data(name, gold_name):
+def set_pred_data(name, ref_name):
     # set data
     return {
         'name': name,
-        'multiselect': 'AFDS_'+gold_name,
+        'multiselect': 'AFDS_'+ref_name,
         'qlang': '',
     }
 
 
-def upload_gold(gold_name, gold_file_path):
-    gold_file_dict = set_files(gold_file_path)
-    gold_data_dict = set_gold_data(gold_name)
+def upload_ref(ref_name, ref_file_path):
+    gold_file_dict = set_files(ref_file_path)
+    gold_data_dict = set_gold_data(ref_name)
     try:
         response = upload_file(gold_data_dict, gold_file_dict)
         response.raise_for_status()
-        print("Upload gold file successfully")
+        print("Upload ref file successfully")
     except requests.exceptions.HTTPError as error:
         print(f'Error: {error}')
 
 
-def upload_pred(exp_setting, pred_pfad_prefix, languages):
+def upload_pred_by_lang(exp_setting, pred_pfad_prefix, languages):
     for lang in languages:
-        pred_name = exp_setting + lang
         pred_file_path = pred_pfad_prefix + lang + ".json"
-        pred_file = lang + ".json"
-        pred_file_dict = set_files(pred_file_path)
-        pred_data_dict = set_pred_data(pred_name, pred_file)
-        try:
-            response = upload_file(pred_data_dict, pred_file_dict)
-            response.raise_for_status()
-            print("upload " + lang + ".json successfully")
-        except requests.exceptions.HTTPError as error:
-            print(f'Error: {error}')
+        upload_pred(exp_setting, pred_file_path)
+
+def upload_pred(exp_setting, pred_path):
+    pred_name = exp_setting
+    pred_file = pred_path.split("/")[-1]
+    pred_file_dict = set_files(pred_path)
+    pred_data_dict = set_pred_data(pred_name, pred_file)
+    try:
+        response = upload_file(pred_data_dict, pred_file_dict)
+        response.raise_for_status()
+        print(f"upload {pred_path} successfully")
+    except requests.exceptions.HTTPError as error:
+        print(f'Error: {error}')
 
 
-def run_experiment(gold, pred):
+def submit_experiment(gold, pred):
 
     url = 'https://gerbil-qa.aksw.org/gerbil/execute'
 
@@ -140,7 +143,7 @@ def run_experiment(gold, pred):
         print(f'Error: {error}')
 
 
-def get_html_data(id):
+def get_exp_result_content(id):
     url = "https://gerbil-qa.aksw.org/gerbil/experiment?id=" + id
     max_retries = 20
     retry_count = 0
@@ -164,7 +167,7 @@ def get_html_data(id):
     print("Experiment " + id + " takes too much time.")
 
 
-def get_results(html, output_file):
+def clean_gerbil_table(html, output_file):
     html = pd.read_html(html)[0].rename(columns={
         "Unnamed: 3": "Benchmark",
     })
@@ -182,5 +185,4 @@ def get_results(html, output_file):
             'Benchmark'
         ]
     )
-    html.to_csv(output_file, index=False)
-    print("experiment results is saved to " + output_file)
+    return html

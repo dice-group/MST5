@@ -3,8 +3,8 @@ from utils.gerbil import *
 import os
 import argparse
 
-gold_name = 'qald 9 plus test'
-gold_file_path = "datasets/qald9plus/qald_9_pp_test_wikidata.json"
+ref_name = 'qald 9 plus test'
+ref_file_path = "datasets/qald9plus/qald_9_pp_test_wikidata.json"
 
 def main():
     parser = argparse.ArgumentParser(
@@ -24,21 +24,23 @@ def main():
 
     languages = [f.split(".")[0] for f in os.listdir(pred_pfad) if f.endswith('.json')]
 
-    upload_gold(gold_name, gold_file_path)
-    upload_pred(exp_setting, pred_pfad, languages)
+    upload_ref(ref_name, ref_file_path)
+    upload_pred_by_lang(exp_setting, pred_pfad, languages)
 
     # set experiment data
-    gold = {gold_name: gold_file_path.split('/')[-1]}
+    ref = {ref_name: ref_file_path.split('/')[-1]}
 
     pred = dict()
     for lang in languages:
         pred[exp_setting + lang] = lang + '.json'
 
-    experiment_id = run_experiment(gold, pred).text
+    experiment_id = submit_experiment(ref, pred).text
     print(f"Experiment id: {experiment_id}")
-    gerbil_html = get_html_data(experiment_id)
+    gerbil_html = get_exp_result_content(experiment_id)
     if gerbil_html is not None:
-        get_results(gerbil_html, output_file)
+        gerbil_results_table = clean_gerbil_table(gerbil_html)
+        gerbil_results_table.to_csv(output_file, index=False)
+        print("Experiment results is saved to " + output_file)
     else: 
         print("Error when getting GERBIL results")
 
