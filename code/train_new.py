@@ -5,11 +5,9 @@ from dataclasses import dataclass, field
 from typing import Optional
 
 import datasets
-import evaluate
-import nltk  # Here to have a nice missing dependency error message early on
 import numpy as np
 from datasets import load_dataset
-from filelock import FileLock
+
 
 import transformers
 from transformers import (
@@ -18,17 +16,14 @@ from transformers import (
     AutoTokenizer,
     DataCollatorForSeq2Seq,
     HfArgumentParser,
-    MBart50Tokenizer,
-    MBart50TokenizerFast,
-    MBartTokenizer,
-    MBartTokenizerFast,
     Seq2SeqTrainer,
     Seq2SeqTrainingArguments,
     set_seed,
 )
 from transformers.trainer_utils import get_last_checkpoint
-from transformers.utils import check_min_version, is_offline_mode, send_example_telemetry
-from transformers.utils.versions import require_version
+from transformers.utils import check_min_version
+from utils.build_qald import build_qald_entry
+from utils.query import ask_wikidata
 
 logger = logging.getLogger(__name__)
 
@@ -235,6 +230,24 @@ class DataTrainingArguments:
                 assert extension in ["csv", "json"], "`validation_file` should be a csv or a json file."
         if self.val_max_target_length is None:
             self.val_max_target_length = self.max_target_length
+
+def postprocess_sparql(pred):
+    pass
+    # return sparql
+
+def build_qald(sparqls):
+    qald = []
+    for i, sparql in enumerate(sparqls):
+        answer = ask_wikidata(sparql)
+        qald.append(build_qald_entry(i, "tmp question", sparql, answer, "en"))
+    return {"questions": qald}
+
+def save_json(qald, path):
+    pass
+
+def run_gerbil():
+    pass
+    # return result
 
 def main():
     parser = HfArgumentParser((ModelArguments, DataTrainingArguments, Seq2SeqTrainingArguments))
@@ -454,17 +467,27 @@ def main():
         return preds, labels
     
     def compute_metrics(eval_preds):
-        preds, labels = eval_preds
+        preds, refs = eval_preds
         if isinstance(preds, tuple):
             preds = preds[0]
         decoded_preds = tokenizer.batch_decode(preds, skip_special_tokens=True)
+        ref = np.where(ref != -100, ref, tokenizer.pad_token_id)
+        decoded_refs = tokenizer.batch_decode(refs, skip_special_tokens=True)
 
         # Some simple post-processing
-        decoded_preds, decoded_labels = postprocess_text(decoded_preds, decoded_labels)
+        decoded_preds, decoded_refs = postprocess_text(decoded_preds, decoded_refs)
+
+        # GERBIL
+        pred_sparqls = []
+        for pred in decoded_preds:
+            pred_sparqls.append(postprocess_sparql(pred))
         
-        result = {
-            "F1 score": 1
-        }
+        pred_qald = build_qald(pred_sparqls)
+        ref_qald = build_qald(decoded_refs)
+        path = "/tmp/"
+        save_json(pred_qald, path)
+        save_json(ref_qald, path)
+        result = run_gerbil()
         return result
     
     # Override the decoding parameters of Seq2SeqTrainer
