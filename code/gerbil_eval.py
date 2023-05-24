@@ -35,6 +35,7 @@ def main():
         pred[exp_setting + lang] = lang + '.json'
 
     experiment_id = run_experiment(gold, pred).text
+    print(f"Experiment id: {experiment_id}")
     gerbil_html = get_html_data(experiment_id)
     if gerbil_html is not None:
         get_results(gerbil_html, output_file)
