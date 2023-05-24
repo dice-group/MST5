@@ -41,7 +41,7 @@ def upload_file(name:str, file_path: str, source):
     try:
         response = requests.post(url, headers=headers, data=data, files=files)
         response.raise_for_status()
-        print(f"Upload  successfully")
+        print(f"Upload {file_path} successfully")
     except requests.exceptions.HTTPError as error:
         print(f'Error: {error}')
     return
@@ -81,7 +81,7 @@ def upload_pred_by_lang(exp_setting, pred_pfad_prefix, languages):
         upload_file(exp_setting+lang, pred_file_path, "pred")
 
 
-def submit_experiment(gold, pred):
+def submit_experiment(ref, pred):
     url = 'https://gerbil-qa.aksw.org/gerbil/execute'
 
     # set headers
@@ -101,9 +101,9 @@ def submit_experiment(gold, pred):
         'sec-ch-ua-platform': '"macOS"',
     }
 
-    for key in gold:
+    for key in ref:
         gold_name = key
-        gold_file = gold[key]
+        gold_file = ref[key]
 
     answer_files = []
     for key in pred:
