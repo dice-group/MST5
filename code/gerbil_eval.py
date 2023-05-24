@@ -24,7 +24,7 @@ def main():
 
     languages = [f.split(".")[0] for f in os.listdir(pred_pfad) if f.endswith('.json')]
 
-    upload_ref(ref_name, ref_file_path)
+    upload_file(ref_name, ref_file_path, "ref")
     upload_pred_by_lang(exp_setting, pred_pfad, languages)
 
     # set experiment data
