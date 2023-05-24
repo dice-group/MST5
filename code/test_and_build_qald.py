@@ -1,7 +1,7 @@
 import argparse
 from utils.preprocess import read_json
 from utils.query import init_summarizer, predict_query, ask_wikidata
-from utils.postprocess import postprocessing_sparql
+from utils.postprocess import postprocess_sparql
 from utils.build_qald import build_qald_entry
 from utils.export import export_json
 from tqdm import tqdm
@@ -55,7 +55,7 @@ def main():
     pred_qald_list = []
     for id, question_string in tqdm(question_list):
         query_pred = predict_query(summarizer, question_string)
-        sparql_query = postprocessing_sparql(query_pred)
+        sparql_query = postprocess_sparql(query_pred)
         answer = ask_wikidata(sparql_query)
         qald_entry = build_qald_entry(
             id, question_string, sparql_query, answer, args.language)

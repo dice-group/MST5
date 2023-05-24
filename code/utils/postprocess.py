@@ -26,7 +26,7 @@ replacement_back = [
     ["xsd_integer", "xsd:integer"]
 ]
 
-def postprocessing_sparql(sparql_query):
+def postprocess_sparql(sparql_query):
     for r in replacement_back:
         if r[0] in sparql_query:
             sparql_query = sparql_query.replace(r[0], r[1])
