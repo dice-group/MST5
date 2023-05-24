@@ -36,7 +36,7 @@ def get_question_query_list(data, languages, linguistic):
                     question_query_list.append([question_linguistic, query])
                 else:
                     question_query_list.append([question["string"], query])
-    question_query_list.insert(0, ['question, query'])
+    question_query_list.insert(0, ['question', 'query'])
     return question_query_list
 
 
