@@ -2,6 +2,7 @@
 
 dataset_name="lcquad"
 output_dir="fine-tuned_models/${dataset_name}_mt5-xl"
+run_name="test run"
 
 deepspeed train.py \
     --deepspeed deepspeed/ds_config_zero3.json \
@@ -15,6 +16,7 @@ deepspeed train.py \
     --save_steps 3000 \
     --save_total_limit 2 \
     --report_to wandb \
+    --run_name ${run_name}\
     --tf32 1 \
     --fp16 0 \
     --gradient_checkpointing 1 \
