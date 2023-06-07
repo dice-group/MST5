@@ -1,11 +1,11 @@
 #!/bin/bash
 
-dataset_name="LC-QuAD"
+dataset_name=""
 model_name="google/mt5-xl"
 output_dir="fine-tuned_models/${dataset_name}"
 run_name="${model_name}-${dataset_name}"
-train_file="datasets/lcquad/lcquad_wikidata.csv"
-validation_file="datasets/q9pp_test_en.csv"
+train_file=""
+validation_file=""
 
 deepspeed code/train_new.py \
     --deepspeed deepspeed/ds_config_zero3.json \
@@ -26,10 +26,7 @@ deepspeed code/train_new.py \
     --tf32 1 \
     --fp16 0 \
     --gradient_checkpointing 1 \
-    --gradient_accumulation_steps 4 \
-    --max_train_samples 100 \
-    --max_eval_samples 20
-
+    --gradient_accumulation_steps 4
 
     # for testing
     # --max_train_samples 100 \
