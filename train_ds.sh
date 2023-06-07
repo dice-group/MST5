@@ -1,9 +1,11 @@
 #!/bin/bash
 
-dataset_name="12"
-model_name="fine-tuned_models/lcquad_mt5-xl"
-output_dir="fine-tuned_models/lcquad_mt5-xl/${dataset_name}"
+dataset_name=""
+model_name="google/mt5-xl"
+output_dir="fine-tuned_models/"
 run_name="${model_name} ${dataset_name}"
+train_file=""
+validation_file=""
 
 deepspeed code/train_new.py \
     --deepspeed deepspeed/ds_config_zero3.json \
@@ -11,8 +13,8 @@ deepspeed code/train_new.py \
     --do_train \
     --do_eval \
     --eval_steps 1500 \
-    --train_file datasets/12/q9pp_train.csv \
-    --validation_file datasets/1/q9pp_test.csv \
+    --train_file ${train_file} \
+    --validation_file  \
     --output_dir ${output_dir} \
     --num_train_epochs 15 \
     --per_device_train_batch_size=4 \
@@ -24,7 +26,7 @@ deepspeed code/train_new.py \
     --tf32 1 \
     --fp16 0 \
     --gradient_checkpointing 1 \
-    --gradient_accumulation_steps 4
+    --gradient_accumulation_steps 4 
 
 
     # for testing
