@@ -14,3 +14,4 @@ papers/*
 code/utils/__pycache__/*
 wandb/*
 code/__pycache__/*
+datasets/*.csv
