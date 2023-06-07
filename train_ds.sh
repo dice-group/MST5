@@ -2,8 +2,8 @@
 
 dataset_name=""
 model_name="google/mt5-xl"
-output_dir="fine-tuned_models/"
-run_name="${model_name} ${dataset_name}"
+output_dir="fine-tuned_models/${dataset_name}"
+run_name="${model_name}-${dataset_name}"
 train_file=""
 validation_file=""
 
@@ -14,7 +14,7 @@ deepspeed code/train_new.py \
     --do_eval \
     --eval_steps 1500 \
     --train_file ${train_file} \
-    --validation_file  \
+    --validation_file ${validation_file} \
     --output_dir ${output_dir} \
     --num_train_epochs 15 \
     --per_device_train_batch_size=4 \
@@ -26,8 +26,7 @@ deepspeed code/train_new.py \
     --tf32 1 \
     --fp16 0 \
     --gradient_checkpointing 1 \
-    --gradient_accumulation_steps 4 
-
+    --gradient_accumulation_steps 4
 
     # for testing
     # --max_train_samples 100 \
