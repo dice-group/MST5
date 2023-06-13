@@ -9,7 +9,6 @@ def main():
     parser = argparse.ArgumentParser(
         description="A script to run gerbil experiments")
 
-    # add arguments to the parser
     parser.add_argument("--exp_setting", type=str,
                         help="experiment setting", required=True)
     parser.add_argument("--pred_pfad", type=str,
@@ -44,5 +43,4 @@ def main():
         print("Error when getting GERBIL results")
 
 if __name__ == "__main__":
-    # call the main function
     main()

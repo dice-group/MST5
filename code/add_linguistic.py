@@ -1,8 +1,8 @@
 import argparse
 import spacy
 from utils.process_query import preprocess_nnqt_question
-from utils.linguistic_parser import get_doc, get_pos, get_dep, get_root_node, get_dep_depth
-from utils.data_io import export_json
+from utils.linguistic_parser import get_linguistic_context
+from utils.data_io import read_json, export_json
 
 nlp_en = spacy.load("en_core_web_sm")
 nlp_zh = spacy.load("zh_core_web_sm")
@@ -28,17 +28,6 @@ nlp_dict = {
     "ba": nlp_ru,
     "be": nlp_ru
 }
-
-
-
-
-def get_linguistic_context(nlp, ques):
-    doc = get_doc(ques, nlp)
-    pos = get_pos(doc)
-    dep = get_dep(doc)
-    root = get_root_node(doc, dep)
-    depth_list = get_dep_depth(root, [-1] * len(doc))
-    return doc, pos, dep, depth_list
 
 
 def add_to_lcquad(dataset, nlp, output):

@@ -67,7 +67,6 @@ class Ques_pair:
         return ref_relation_list, pred_relation_list
 
     def calculate_entity_f1(self):
-
         ref_entity_list, pred_entity_list = self.collect_entities()
         ref_entity_list, pred_entity_list = self.pad_list(
             ref_entity_list, pred_entity_list)
@@ -85,9 +84,9 @@ class Ques_pair:
     def pad_list(self, ref, pred):
         max_length = max(len(ref), len(pred))
         if len(ref) < max_length:
-            ref.extend(["PAD_ref" for i in range(max_length - len(ref))])
+            ref.extend(["PAD_ref" for _ in range(max_length - len(ref))])
         if len(pred) < max_length:
-            pred.extend(["PAD_pred" for i in range(max_length - len(pred))])
+            pred.extend(["PAD_pred" for _ in range(max_length - len(pred))])
         if ref == [] and pred == []:
             ref, pred = ["PAD_ref"], ["PAD_pred"]
         return ref, pred

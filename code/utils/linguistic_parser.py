@@ -1,3 +1,11 @@
+def get_linguistic_context(nlp, ques):
+    doc = get_doc(ques, nlp)
+    pos = get_pos(doc)
+    dep = get_dep(doc)
+    root = get_root_node(doc, dep)
+    depth_list = get_dep_depth(root, [-1] * len(doc))
+    return doc, pos, dep, depth_list
+
 def get_doc(text, nlp):
     return nlp(text)
 

@@ -2,36 +2,14 @@ import argparse
 from utils.data_io import read_json, export_json
 from utils.query import init_summarizer, predict_query, ask_wikidata
 from utils.process_query import postprocess_sparql
-from utils.build_qald import build_qald_entry
+from utils.qald import build_qald_entry, get_question_list_with_id
 from tqdm import tqdm
-
-
-def get_question_list_with_id(data, languages, linguisitic_context):
-    question_list = []
-
-    questions_list = data["questions"]
-
-    for question_dict in questions_list:
-        for question in question_dict["question"]:
-            if question["language"] in languages:
-                if linguisitic_context:
-                    depth_str_list = map(str, question["dep_depth"])
-                    question_string = " ".join(question["doc"]) \
-                        + "<pad>" + " ".join(question["pos"]) \
-                        + "<pad>" + " ".join(question["dep"]) \
-                        + "<pad>" + " ".join(depth_str_list)
-                else:
-                    question_string = question["string"]
-                question_list.append([question_dict["id"], question_string])
-                break
-    return question_list
 
 
 def main():
     parser = argparse.ArgumentParser(
         description="A program to use model to predict query and build qald dataset")
 
-    # add arguments to the parser
     parser.add_argument("--model", type=str,
                         help="name of model path", required=True)
     parser.add_argument("-t", "--test", type=str,
@@ -62,7 +40,5 @@ def main():
     export_json(args.output, qald_pred)
 
 
-# check if this module is the main program
 if __name__ == "__main__":
-    # call the main function
     main()
