@@ -8,17 +8,18 @@ import time
 
 upload_url = 'https://gerbil-qa.aksw.org/gerbil/file/upload'
 
-def upload_file(name:str, file_path: str, source: str) -> bool:
-    if source=="ref":
+
+def upload_file(name: str, file_path: str, source: str) -> bool:
+    if source == "ref":
         data = set_ref_data(name)
-    elif source=="pred":
+    elif source == "pred":
         data = set_pred_data(name, file_path.split("/")[-1])
     else:
         print("Error in create headers")
         return False
-    
+
     files = set_files(file_path)
-        
+
     # set headers
     headers = {
         'Accept': 'application/json, text/javascript, */*; q=0.01',
@@ -38,17 +39,18 @@ def upload_file(name:str, file_path: str, source: str) -> bool:
 
     try:
         response = requests.post(
-            url = 'https://gerbil-qa.aksw.org/gerbil/file/upload', 
-            headers = headers, 
-            data = data, 
-            files = files
-            )
+            url='https://gerbil-qa.aksw.org/gerbil/file/upload',
+            headers=headers,
+            data=data,
+            files=files
+        )
         response.raise_for_status()
         print(f"Upload {file_path} successfully")
         return True
     except requests.exceptions.HTTPError as error:
         print(f'Error: {error}')
         return False
+
 
 def set_files(file_path: str) -> dict:
     file_content = open(file_path, 'rb').read()
@@ -78,7 +80,6 @@ def upload_pred_by_lang(exp_setting: str, pred_pfad_prefix: str, languages: str)
     for lang in languages:
         pred_file_path = pred_pfad_prefix + lang + ".json"
         upload_file(exp_setting+lang, pred_file_path, "pred")
-
 
 
 def submit_experiment(ref: dict, pred: dict) -> requests.Response:
@@ -128,6 +129,7 @@ def submit_experiment(ref: dict, pred: dict) -> requests.Response:
     except requests.exceptions.HTTPError as error:
         print(f'Error: {error}')
 
+
 def get_exp_result_content(id: str, max_retry: int = 10) -> str:
     experiment_url = "https://gerbil-qa.aksw.org/gerbil/experiment?id=" + id
     retry_count = 0
@@ -140,7 +142,7 @@ def get_exp_result_content(id: str, max_retry: int = 10) -> str:
             if "The annotator caused too many single errors." in content:
                 print(f"Experiment {id} could not be executed.")
                 return
-            elif  "The experiment is still running." in content:
+            elif "The experiment is still running." in content:
                 print("The experiment is still running.")
                 time.sleep(30)
             else:
