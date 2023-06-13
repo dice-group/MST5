@@ -6,8 +6,6 @@ import urllib.request
 import pandas as pd
 import time
 
-upload_url = 'https://gerbil-qa.aksw.org/gerbil/file/upload'
-
 
 def upload_file(name: str, file_path: str, source: str) -> bool:
     if source == "ref":

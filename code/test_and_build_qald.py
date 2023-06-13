@@ -28,7 +28,6 @@ def get_question_list_with_id(data, languages, linguisitic_context):
 
 
 def main():
-    # create an ArgumentParser object
     parser = argparse.ArgumentParser(
         description="A program to use model to predict query and build qald dataset")
 
@@ -44,7 +43,6 @@ def main():
     parser.add_argument('--linguistic_context', default=False, type=bool,
                         help='With or without linguistic context in question string')
 
-    # parse the arguments
     args = parser.parse_args()
 
     testset = read_json(args.test)
