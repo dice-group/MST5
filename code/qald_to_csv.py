@@ -1,6 +1,6 @@
 import argparse
-from utils.preprocess import read_json, replace_prefix_abbr, delete_sparql_prefix
-from utils.export import export_csv
+from utils.process_query import read_json, replace_prefix_abbr, delete_sparql_prefix
+from utils.data_io import export_csv
 
 supported_languages = [
     "en",

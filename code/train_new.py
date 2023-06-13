@@ -1,8 +1,6 @@
 import logging
 import os
 import sys
-from dataclasses import dataclass, field
-from typing import Optional
 
 import datasets
 import numpy as np
@@ -26,8 +24,8 @@ from utils.data_training_arguments import DataTrainingArguments
 from utils.model_arguments import ModelArguments
 from utils.build_qald import build_qald_entry
 from utils.query import ask_wikidata
-from utils.export import export_json
-from utils.postprocess import postprocess_sparql
+from utils.data_io import export_json
+from utils.process_query import postprocess_sparql
 from utils.gerbil import *
 
 logger = logging.getLogger(__name__)

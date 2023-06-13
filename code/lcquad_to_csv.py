@@ -1,6 +1,6 @@
 import argparse
-from utils.preprocess import *
-from utils.export import export_csv
+from utils.process_query import *
+from utils.data_io import export_csv
 
 
 def get_question(lcqald_dict):

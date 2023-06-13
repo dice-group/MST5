@@ -2,6 +2,10 @@ import csv
 import json
 import os
 
+def read_json(json_file):
+    with open(json_file) as f:
+        return json.load(f)
+
 def export_csv(output_file, dataset):
     check_and_makedir_if_not_exist(output_file)
     with open(output_file, "w") as f:

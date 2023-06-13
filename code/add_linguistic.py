@@ -1,8 +1,8 @@
 import argparse
 import spacy
-from utils.preprocess import read_json, preprocess_nnqt_question
+from utils.process_query import preprocess_nnqt_question
 from utils.linguistic_parser import get_doc, get_pos, get_dep, get_root_node, get_dep_depth
-from utils.export import export_json
+from utils.data_io import export_json
 
 nlp_en = spacy.load("en_core_web_sm")
 nlp_zh = spacy.load("zh_core_web_sm")

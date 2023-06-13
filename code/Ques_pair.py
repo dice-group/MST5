@@ -1,7 +1,8 @@
 from sklearn.metrics import f1_score
-from utils.preprocess import delete_sparql_prefix, prefix_abbr
-import re
+from utils.process_query import preprocess_sparql
 from enum import Enum
+import re
+
 
 class Type(Enum):
     BOOLEAN = "boolean"
@@ -9,30 +10,23 @@ class Type(Enum):
     COUNT = "count"
     SIMPLE = "simple"
 
-def replace_prefix_with_abbr(sparql):
-    for pattern in prefix_abbr:
-        sparql = re.sub(pattern[0], pattern[1]+r'\1', sparql)
-    sparql = re.sub(' +', ' ', sparql)
-    return sparql
-
-def clean_sparql(sparql):
-    return replace_prefix_with_abbr(delete_sparql_prefix(sparql))
 
 class Ques_pair:
     def __init__(self, ques_ref, ques_pred) -> None:
         self.validate_ids(ques_ref, ques_pred)
         self.id = ques_ref["id"]
         self.question_string = ques_ref["question"][0]["string"]
-        self.ref_sparql = clean_sparql(ques_ref["query"]["sparql"])
-        self.pred_sparql = clean_sparql(ques_pred["query"]["sparql"])
+        self.ref_sparql = preprocess_sparql(ques_ref["query"]["sparql"])
+        self.pred_sparql = preprocess_sparql(ques_pred["query"]["sparql"])
         self.type = self.detect_query_type()
         self.ref_answer = self.get_answer(ques_ref)
         self.pred_answer = self.get_answer(ques_pred)
 
     def validate_ids(self, ques_ref, ques_pred):
         if ques_ref["id"] != ques_pred["id"]:
-            raise ValueError("predicted question dict doesn't have same id as reference")
-    
+            raise ValueError(
+                "predicted question dict doesn't have same id as reference")
+
     def detect_query_type(self):
         if "ASK" in self.ref_sparql:
             return Type.BOOLEAN
@@ -41,17 +35,17 @@ class Ques_pair:
         elif "COUNT" in self.ref_sparql:
             return Type.COUNT
         return Type.SIMPLE
-    
+
     def get_answer(self, ques_dict):
         try:
             return ques_dict["answers"][0]["results"]["bindings"]
-        except: 
+        except:
             pass
-        try: 
+        try:
             return ques_dict["answers"][0]["boolean"]
         except:
             return []
-    
+
     def print(self, print_answer=False):
         print("id: " + self.id)
         print("question: " + self.question_string)
@@ -66,23 +60,26 @@ class Ques_pair:
         ref_entity_list = re.findall(r'wd:[A-Z]*[0-9]*', self.ref_sparql)
         pred_entity_list = re.findall(r'wd:[A-Z]*[0-9]*', self.pred_sparql)
         return ref_entity_list, pred_entity_list
-    
+
     def collect_relations(self):
         ref_relation_list = re.findall(r'wdt:[A-Z]*[0-9]*', self.ref_sparql)
         pred_relation_list = re.findall(r'wdt:[A-Z]*[0-9]*', self.pred_sparql)
         return ref_relation_list, pred_relation_list
 
     def calculate_entity_f1(self):
-    
+
         ref_entity_list, pred_entity_list = self.collect_entities()
-        ref_entity_list, pred_entity_list = self.pad_list(ref_entity_list, pred_entity_list)
+        ref_entity_list, pred_entity_list = self.pad_list(
+            ref_entity_list, pred_entity_list)
         score = f1_score(ref_entity_list, pred_entity_list, average="macro")
         return score
 
     def calculate_relation_f1(self):
         ref_relation_list, pred_relation_list = self.collect_relations()
-        ref_relation_list, pred_relation_list = self.pad_list(ref_relation_list, pred_relation_list)
-        score = f1_score(ref_relation_list, pred_relation_list, average="macro")
+        ref_relation_list, pred_relation_list = self.pad_list(
+            ref_relation_list, pred_relation_list)
+        score = f1_score(ref_relation_list,
+                         pred_relation_list, average="macro")
         return score
 
     def pad_list(self, ref, pred):
@@ -93,4 +90,4 @@ class Ques_pair:
             pred.extend(["PAD_pred" for i in range(max_length - len(pred))])
         if ref == [] and pred == []:
             ref, pred = ["PAD_ref"], ["PAD_pred"]
-        return ref,pred
+        return ref, pred

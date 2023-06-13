@@ -1,9 +1,8 @@
 import argparse
-from utils.preprocess import read_json
+from utils.data_io import read_json, export_json
 from utils.query import init_summarizer, predict_query, ask_wikidata
-from utils.postprocess import postprocess_sparql
+from utils.process_query import postprocess_sparql
 from utils.build_qald import build_qald_entry
-from utils.export import export_json
 from tqdm import tqdm
 
 
@@ -18,9 +17,9 @@ def get_question_list_with_id(data, languages, linguisitic_context):
                 if linguisitic_context:
                     depth_str_list = map(str, question["dep_depth"])
                     question_string = " ".join(question["doc"]) \
-                    + "<pad>" + " ".join(question["pos"]) \
-                    + "<pad>" + " ".join(question["dep"]) \
-                    + "<pad>" + " ".join(depth_str_list) 
+                        + "<pad>" + " ".join(question["pos"]) \
+                        + "<pad>" + " ".join(question["dep"]) \
+                        + "<pad>" + " ".join(depth_str_list)
                 else:
                     question_string = question["string"]
                 question_list.append([question_dict["id"], question_string])
@@ -38,11 +37,12 @@ def main():
                         help="name of model path", required=True)
     parser.add_argument("-t", "--test", type=str,
                         help="name of test file", required=True)
-    parser.add_argument("-o", "--output", type=str, 
+    parser.add_argument("-o", "--output", type=str,
                         help="name of output file", required=True)
     parser.add_argument("-l", "--language", type=str,
                         help="required language of question", required=True)
-    parser.add_argument('--linguistic_context', default=False, type=bool, help='With or without linguistic context in question string')
+    parser.add_argument('--linguistic_context', default=False, type=bool,
+                        help='With or without linguistic context in question string')
 
     # parse the arguments
     args = parser.parse_args()

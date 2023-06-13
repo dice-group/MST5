@@ -1,4 +1,3 @@
-"""GERBIL Evaluation for QA systems."""
 from utils.gerbil import *
 import os
 import argparse
