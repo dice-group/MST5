@@ -1,7 +1,7 @@
 import re
 import json
 
-prefix_pattern = [
+prefix_abbr = [
     [r'<http://dbpedia.org/resource/(.*?)>\.?', 'dbr:'],
     [r'<http://dbpedia.org/property/(.*?)>\.?', 'dbp:'],
     [r'<http://dbpedia.org/ontology/(.*?)>\.?', 'dbo:'],
@@ -15,7 +15,7 @@ prefix_pattern = [
     [r'<http://www.w3.org/2000/01/rdf-schema#(.*?)', 'rdfs:'],
 ]
 
-replacement = [
+symbol_replacement = [
     ['<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>', 'rdf:type'],
     ['{', ' bra_open '],
     ['}', ' bra_close '],
@@ -32,17 +32,17 @@ def read_json(json_file):
 def delete_sparql_prefix(sparql_query):
     if "prefix" not in sparql_query.casefold():
         return sparql_query
-    if "ASK" in sparql_query:
+    elif "ASK" in sparql_query:
         return "ASK" + sparql_query.split("ASK", 1)[1]
-    if "SELECT" in sparql_query:
+    elif "SELECT" in sparql_query:
         return "SELECT" + sparql_query.split("SELECT", 1)[1]
     return sparql_query
 
 
 def replace_prefix_abbr(sparql_query):
-    for pattern in prefix_pattern:
-        sparql_query = re.sub(pattern[0], pattern[1]+r'\1', sparql_query)
-    for replace in replacement:
-        sparql_query = re.sub(replace[0], replace[1], sparql_query)
+    for prefix in prefix_abbr:
+        sparql_query = re.sub(prefix[0], prefix[1]+r'\1', sparql_query)
+    for symbol in symbol_replacement:
+        sparql_query = re.sub(symbol[0], symbol[1], sparql_query)
     sparql_query = re.sub(' +', ' ', sparql_query)
     return sparql_query

@@ -1,5 +1,5 @@
 from sklearn.metrics import f1_score
-from utils.preprocess import delete_sparql_prefix, prefix_pattern
+from utils.preprocess import delete_sparql_prefix, prefix_abbr
 import re
 from enum import Enum
 
@@ -10,7 +10,7 @@ class Type(Enum):
     SIMPLE = "simple"
 
 def replace_prefix_with_abbr(sparql):
-    for pattern in prefix_pattern:
+    for pattern in prefix_abbr:
         sparql = re.sub(pattern[0], pattern[1]+r'\1', sparql)
     sparql = re.sub(' +', ' ', sparql)
     return sparql

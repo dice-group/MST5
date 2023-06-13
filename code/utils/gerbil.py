@@ -132,10 +132,10 @@ def submit_experiment(ref: dict, pred: dict) -> requests.Response:
 
 def get_exp_result_content(id: str, max_retry: int = 10) -> str:
     experiment_url = "https://gerbil-qa.aksw.org/gerbil/experiment?id=" + id
-    retry_count = 0
+    retry = 0
 
-    while retry_count < max_retry:
-        retry_count += 1
+    while retry < max_retry:
+        retry += 1
         try:
             response = requests.get(experiment_url)
             content = response.text
