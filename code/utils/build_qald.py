@@ -1,27 +1,25 @@
-import json
-import time
 from typing import Dict
 
 def build_qald_entry(id, question_string, sparql_query, answer, language):
     # id-Object
-    json_id = {"id": id}
-
+    entry_id = {"id": id}
+    
     # question-Object
-    json_question = {"question": [
+    entry_question = {"question": [
         {"language": language, "string": question_string}]}
 
     # query-Object
-    json_query = {"query": {"sparql": sparql_query}}
+    entry_query = {"query": {"sparql": sparql_query}}
 
     # answers-Object
-    json_answers: Dict = {"answers": [answer]}
+    entry_answers: Dict = {"answers": [answer]}
 
     # Combined-Object
-    qald_question_entry = {
-        "id": json_id["id"],
-        "question": json_question["question"],
-        "query": json_query["query"],
-        "answers": json_answers["answers"],
+    qald_entry = {
+        "id": entry_id["id"],
+        "question": entry_question["question"],
+        "query": entry_query["query"],
+        "answers": entry_answers["answers"],
     }
 
-    return qald_question_entry
+    return qald_entry
