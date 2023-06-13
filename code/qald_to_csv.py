@@ -19,25 +19,29 @@ supported_languages = [
 
 
 def get_question_query_list(data, languages, linguistic):
-    question_query_list = []
+    question_query_list = [['question', 'query']]
 
-    questions_list = data["questions"]
+    qald_list = data["questions"]
 
-    for question_dict in questions_list:
-        for question in question_dict["question"]:
+    for qald_entry in qald_list:
+        for lang_ques_dict in qald_entry["question"]:
             query = replace_prefix_abbr(
-                delete_sparql_prefix(question_dict["query"]["sparql"]))
-            if question["language"] in languages:
+                delete_sparql_prefix(qald_entry["query"]["sparql"]))
+            if lang_ques_dict["language"] in languages:
                 if linguistic:
-                    question_linguistic = " ".join(question["doc"]) \
-                    + " <pad> " + " ".join(question["pos"]) \
-                    + " <pad> " + " ".join(question["dep"]) \
-                    + " <pad> " + " ".join(map(str, question["dep_depth"]))
-                    question_query_list.append([question_linguistic, query])
+                    ques_str = build_question_string_with_linguistic(
+                        lang_ques_dict)
                 else:
-                    question_query_list.append([question["string"], query])
-    question_query_list.insert(0, ['question', 'query'])
+                    ques_str = lang_ques_dict["string"]
+                question_query_list.append([ques_str, query])
     return question_query_list
+
+
+def build_question_string_with_linguistic(question):
+    return " ".join(question["doc"]) \
+        + " <pad> " + " ".join(question["pos"]) \
+        + " <pad> " + " ".join(question["dep"]) \
+        + " <pad> " + " ".join(map(str, question["dep_depth"]))
 
 
 def check_languages(args):
