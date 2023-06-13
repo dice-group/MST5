@@ -25,9 +25,11 @@ symbol_replacement = [
     ['\|', ' sep_or '],
 ]
 
+
 def read_json(json_file):
     with open(json_file) as f:
         return json.load(f)
+
 
 def delete_sparql_prefix(sparql_query):
     if "prefix" not in sparql_query.casefold():
@@ -46,3 +48,13 @@ def replace_prefix_abbr(sparql_query):
         sparql_query = re.sub(symbol[0], symbol[1], sparql_query)
     sparql_query = re.sub(' +', ' ', sparql_query)
     return sparql_query
+
+
+def preprocess_nnqt_question(NNQT_ques):
+    # Remove all specified characters
+    NNQT_ques = NNQT_ques.translate(str.maketrans('<>{},()', '       '))
+
+    # Replace multiple spaces with a single space
+    NNQT_ques = re.sub(' +', ' ', NNQT_ques)
+
+    return NNQT_ques

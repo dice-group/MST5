@@ -1,7 +1,6 @@
 import argparse
-import re
 import spacy
-from utils.preprocess import read_json
+from utils.preprocess import read_json, preprocess_nnqt_question
 from utils.linguistic_parser import get_doc, get_pos, get_dep, get_root_node, get_dep_depth
 from utils.export import export_json
 
@@ -31,14 +30,7 @@ nlp_dict = {
 }
 
 
-def preprocess_nnqt_question(NNQT_ques):
-    # Remove all specified characters
-    NNQT_ques = NNQT_ques.translate(str.maketrans('<>{},()', '       '))
 
-    # Replace multiple spaces with a single space
-    NNQT_ques = re.sub(' +', ' ', NNQT_ques)
-
-    return NNQT_ques
 
 def get_linguistic_context(nlp, ques):
     doc = get_doc(ques, nlp)
