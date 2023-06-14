@@ -16,8 +16,8 @@ class Ques_pair:
         self.validate_ids(ques_ref, ques_pred)
         self.id = ques_ref["id"]
         self.question_string = ques_ref["question"][0]["string"]
-        self.ref_sparql = preprocess_sparql(ques_ref["query"]["sparql"])
-        self.pred_sparql = preprocess_sparql(ques_pred["query"]["sparql"])
+        self.ref_sparql = ques_ref["query"]["sparql"]
+        self.pred_sparql = ques_pred["query"]["sparql"]
         self.type = self.detect_query_type()
         self.ref_answer = self.get_answer(ques_ref)
         self.pred_answer = self.get_answer(ques_pred)
