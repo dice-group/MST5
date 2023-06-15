@@ -6,6 +6,38 @@ import urllib.request
 import pandas as pd
 import time
 
+UPLOAD_HEADERS = {
+    'Accept': 'application/json, text/javascript, */*; q=0.01',
+    'Accept-Language': 'en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7',
+    'Cookie': 'JSESSIONID=265042E6F0ECFC6AEEA55C409FB7168F',
+    'Origin': 'https://gerbil-qa.aksw.org',
+    'Referer': 'https://gerbil-qa.aksw.org/gerbil/config',
+    'Sec-Fetch-Dest': 'empty',
+    'Sec-Fetch-Mode': 'cors',
+    'Sec-Fetch-Site': 'same-origin',
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 Edg/112.0.1722.58',
+    'X-Requested-With': 'XMLHttpRequest',
+    'sec-ch-ua': '"Chromium";v="112", "Microsoft Edge";v="112", "Not:A-Brand";v="99"',
+    'sec-ch-ua-mobile': '?0',
+    'sec-ch-ua-platform': '"macOS"',
+}
+
+SUBMIT_HEADERS = {
+    'Accept': '*/*',
+    'Accept-Language': 'en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7',
+    'Connection': 'keep-alive',
+    'Cookie': 'JSESSIONID=265042E6F0ECFC6AEEA55C409FB7168F',
+    'Referer': 'https://gerbil-qa.aksw.org/gerbil/config',
+    'Sec-Fetch-Dest': 'empty',
+    'Sec-Fetch-Mode': 'cors',
+    'Sec-Fetch-Site': 'same-origin',
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 Edg/112.0.1722.58',
+    'X-Requested-With': 'XMLHttpRequest',
+    'sec-ch-ua': '"Chromium";v="112", "Microsoft Edge";v="112", "Not:A-Brand";v="99"',
+    'sec-ch-ua-mobile': '?0',
+    'sec-ch-ua-platform': '"macOS"',
+}
+
 
 def upload_file(name: str, file_path: str, source: str) -> bool:
     if source == "ref":
@@ -13,32 +45,15 @@ def upload_file(name: str, file_path: str, source: str) -> bool:
     elif source == "pred":
         data = set_pred_data(name, file_path.split("/")[-1])
     else:
-        print("Error in create headers")
-        return False
+        print("Please provide source equals 'ref' or 'pred'")
+        return
 
     files = set_files(file_path)
-
-    # set headers
-    headers = {
-        'Accept': 'application/json, text/javascript, */*; q=0.01',
-        'Accept-Language': 'en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7',
-        'Cookie': 'JSESSIONID=265042E6F0ECFC6AEEA55C409FB7168F',
-        'Origin': 'https://gerbil-qa.aksw.org',
-        'Referer': 'https://gerbil-qa.aksw.org/gerbil/config',
-        'Sec-Fetch-Dest': 'empty',
-        'Sec-Fetch-Mode': 'cors',
-        'Sec-Fetch-Site': 'same-origin',
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 Edg/112.0.1722.58',
-        'X-Requested-With': 'XMLHttpRequest',
-        'sec-ch-ua': '"Chromium";v="112", "Microsoft Edge";v="112", "Not:A-Brand";v="99"',
-        'sec-ch-ua-mobile': '?0',
-        'sec-ch-ua-platform': '"macOS"',
-    }
 
     try:
         response = requests.post(
             url='https://gerbil-qa.aksw.org/gerbil/file/upload',
-            headers=headers,
+            headers=UPLOAD_HEADERS,
             data=data,
             files=files
         )
@@ -81,37 +96,18 @@ def upload_pred_by_lang(exp_setting: str, pred_pfad_prefix: str, languages: str)
 
 
 def submit_experiment(ref: dict, pred: dict) -> requests.Response:
-    headers = {
-        'Accept': '*/*',
-        'Accept-Language': 'en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7',
-        'Connection': 'keep-alive',
-        'Cookie': 'JSESSIONID=265042E6F0ECFC6AEEA55C409FB7168F',
-        'Referer': 'https://gerbil-qa.aksw.org/gerbil/config',
-        'Sec-Fetch-Dest': 'empty',
-        'Sec-Fetch-Mode': 'cors',
-        'Sec-Fetch-Site': 'same-origin',
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 Edg/112.0.1722.58',
-        'X-Requested-With': 'XMLHttpRequest',
-        'sec-ch-ua': '"Chromium";v="112", "Microsoft Edge";v="112", "Not:A-Brand";v="99"',
-        'sec-ch-ua-mobile': '?0',
-        'sec-ch-ua-platform': '"macOS"',
-    }
+    ref_name, ref_file = get_ref_name_and_file(ref)
 
-    for key in ref:
-        ref_name = key
-        ref_file = ref[key]
+    answer_file_names = get_answer_file_names(pred, ref_file)
 
-    answer_files = []
-    for key in pred:
-        answer_files.append(
-            'AF_'+key+'('+pred[key]+')(undefined)(AFDS_'+ref_file+')')
-
+    dataset_name = ['NIFDS_'+ref_name+'('+ref_file+')']
+    
     experiment_data = {
         'type': 'QA',
         'matching': 'STRONG_ENTITY_MATCH',
         'annotator': [],
-        'dataset': ['NIFDS_'+ref_name+'('+ref_file+')'],
-        'answerFiles': answer_files,
+        'dataset': dataset_name,
+        'answerFiles': answer_file_names,
         'questionLanguage': 'en'
     }
 
@@ -120,12 +116,26 @@ def submit_experiment(ref: dict, pred: dict) -> requests.Response:
     execute_url = f'https://gerbil-qa.aksw.org/gerbil/execute?experimentData={experiment_data_encoded}'
 
     try:
-        response = requests.get(execute_url, headers=headers)
+        response = requests.get(execute_url, headers=SUBMIT_HEADERS)
         response.raise_for_status()
         print("GERBIL experiment is submitted successfully")
         return response
     except requests.exceptions.HTTPError as error:
         print(f'Error: {error}')
+
+def get_ref_name_and_file(ref):
+    for name in ref:
+        ref_name = name
+        ref_file_name = ref[name]
+    return ref_name,ref_file_name
+
+def get_answer_file_names(pred, ref_file_name):
+    answer_files = []
+    for name in pred:
+        answer_files.append(
+            'AF_'+name+'('+pred[name]+')(undefined)(AFDS_'+ref_file_name+')')
+            
+    return answer_files
 
 
 def get_exp_result_content(id: str, max_retry: int = 10) -> str:
@@ -152,17 +162,19 @@ def get_exp_result_content(id: str, max_retry: int = 10) -> str:
 
 
 def clean_gerbil_table(html: str) -> str:
-    html = pd.read_html(html)[0].rename(columns={
-        "Unnamed: 3": "Benchmark",
-    })
+    html = rename_unnamed_column_to_benchmark(html)
     if "Benchmark" in html.columns:
-        html = html[html['Benchmark'].isna()]
-        html = html.drop(
-            columns=["Benchmark"]
-        )
+        html = select_where_benckmark_is_na(html)
+        html = drop_benckmark_column(html)
     for index, row in html.iterrows():
-        html.at[index, "Language"] = row["Annotator"][-13:-11]
-    html = html.drop(
+        language = row["Annotator"][-13:-11]
+        html.at[index, "Language"] = language
+    html = drop_unnecessary_columns(html)
+    return html
+
+
+def drop_unnecessary_columns(html):
+    return html.drop(
         columns=[
             'Dataset',
             'Annotator',
@@ -172,4 +184,21 @@ def clean_gerbil_table(html: str) -> str:
             'GERBIL version',
         ]
     )
+
+
+def select_where_benckmark_is_na(html):
+    return html[html['Benchmark'].isna()]
+
+
+def drop_benckmark_column(html):
+    return html.drop(
+        columns=["Benchmark"]
+    )
+
+
+def rename_unnamed_column_to_benchmark(html):
+    html = pd.read_html(html)[0].rename(columns={
+        "Unnamed: 3": "Benchmark",
+    })
+
     return html
