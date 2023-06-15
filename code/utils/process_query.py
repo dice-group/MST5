@@ -1,6 +1,6 @@
 import re
 
-replacement_back = [
+REPLACEMENT_BACK = [
     ["var-", " ?"],
     ["var_", " ?"],
     ["var=", " ?"],
@@ -28,7 +28,7 @@ replacement_back = [
     ["xsd_integer", "xsd:integer"]
 ]
 
-prefix_abbr = [
+PREFIX_ABBR = [
     [r'<http://dbpedia.org/resource/(.*?)>\.?', 'dbr:'],
     [r'<http://dbpedia.org/property/(.*?)>\.?', 'dbp:'],
     [r'<http://dbpedia.org/ontology/(.*?)>\.?', 'dbo:'],
@@ -42,7 +42,7 @@ prefix_abbr = [
     [r'<http://www.w3.org/2000/01/rdf-schema#(.*?)', 'rdfs:'],
 ]
 
-symbol_replacement = [
+SYMBOL_REPLACEMENT = [
     ['<http://www.w3.org/1999/02/22-rdf-syntax-ns#type>', 'rdf:type'],
     ['{', ' bra_open '],
     ['}', ' bra_close '],
@@ -57,16 +57,19 @@ def delete_sparql_prefix(sparql_query):
     if "prefix" not in sparql_query.casefold():
         return sparql_query
     elif "ASK" in sparql_query:
-        return "ASK" + sparql_query.split("ASK", 1)[1]
+        return "ASK" + split_query_after_keyword(sparql_query, "ASK")
     elif "SELECT" in sparql_query:
-        return "SELECT" + sparql_query.split("SELECT", 1)[1]
+        return "SELECT" + split_query_after_keyword(sparql_query, "SELECT")
     return sparql_query
+
+def split_query_after_keyword(sparql_query, keyword):
+    return sparql_query.split(keyword, 1)[1]
 
 
 def replace_prefix_abbr(sparql_query):
-    for prefix in prefix_abbr:
+    for prefix in PREFIX_ABBR:
         sparql_query = re.sub(prefix[0], prefix[1]+r'\1', sparql_query)
-    for symbol in symbol_replacement:
+    for symbol in SYMBOL_REPLACEMENT:
         sparql_query = re.sub(symbol[0], symbol[1], sparql_query)
     sparql_query = re.sub(' +', ' ', sparql_query)
     return sparql_query
@@ -88,7 +91,7 @@ def preprocess_sparql(sparql_query):
 
 
 def postprocess_sparql(sparql_query):
-    for r in replacement_back:
+    for r in REPLACEMENT_BACK:
         if r[0] in sparql_query:
             sparql_query = sparql_query.replace(r[0], r[1])
     return sparql_query
