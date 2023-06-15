@@ -26,5 +26,8 @@ def export_json(output_file, dataset):
 
 def check_and_makedir_if_not_exist(output_file):
     dir_path = os.path.dirname(output_file)
-    if not os.path.exists(dir_path):
+    if not is_path_exist(dir_path):
         os.makedirs(dir_path)
+
+def is_path_exist(dir_path):
+    return os.path.exists(dir_path)
