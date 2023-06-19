@@ -25,7 +25,6 @@ prefixes = [
 class Sgpt:
     def __init__(self, queries: list) -> None:
         self.queries: list = self.convert_file_to_Sgpt_entries(queries)
-        self.add_answers()
         self.ref_qald: list = []
         self.pred_qald: list = []
 
