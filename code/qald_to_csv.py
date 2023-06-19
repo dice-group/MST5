@@ -12,7 +12,6 @@ supported_languages = [
     "be",
     "ba",
     "hy",
-    "es",
     "zh",
     "ja"
 ]
