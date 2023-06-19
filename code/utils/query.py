@@ -20,7 +20,7 @@ def ask_wikidata(sparql_query):
                          params={'format': 'json', 'query': sparql_query})
         return r.json()
     except:
-        return {"answers": [{"head": {"vars": []}, "results": {"bindings": []}}]}
+        return {"head": {"vars": []}, "results": {"bindings": []}}
 
 
 def ask_dbpedia(sparql_query: str) -> Dict[str, Any]:
@@ -30,4 +30,4 @@ def ask_dbpedia(sparql_query: str) -> Dict[str, Any]:
         sparql.setQuery(sparql_query)
         return sparql.query().convert()
     except SPARQLWrapperException as exception:
-        return {"answers": [{"head": {"vars": []}, "results": {"bindings": []}}]}
+        return {"head": {"vars": []}, "results": {"bindings": []}}
