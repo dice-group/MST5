@@ -1,6 +1,6 @@
 import argparse
-from utils.qald import get_question_query_list
-from utils.data_io import read_json, export_csv
+from utils.data_io import read_json
+from utils.Qald import Qald
 
 supported_languages = [
     "en",
@@ -41,15 +41,21 @@ def main():
     parser.add_argument("-l", "--languages", nargs='+',
                         help='required languages of question', required=True)
     parser.add_argument('--linguistic', action=argparse.BooleanOptionalAction)
+    parser.add_argument('--entity_knowledge', action=argparse.BooleanOptionalAction)
+
 
     args = parser.parse_args()
 
     languages = check_languages(args)
 
-    qald_dataset = read_json(args.input)
-    question_query_list = get_question_query_list(
-        qald_dataset, languages, args.linguistic)
-    export_csv(args.output, question_query_list)
+    qald_file = read_json(args.input)
+    qald_dataset = Qald(qald_file)
+    qald_dataset.export_train_csv(
+        args.output, 
+        languages,
+        include_linguistic_context=args.linguistic,
+        include_entity_knowledge=args.entity_knowledge
+    )
 
 
 if __name__ == "__main__":
