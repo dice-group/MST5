@@ -25,6 +25,7 @@ prefixes = [
 class Sgpt:
     def __init__(self, queries: list) -> None:
         self.queries: list = self.convert_file_to_Sgpt_entries(queries)
+        self.add_answers()
         self.ref_qald: list = []
         self.pred_qald: list = []
 
@@ -40,21 +41,26 @@ class Sgpt:
         qald = {"questions": self.ref_qald}
         export_json(output_file, qald)
 
-    def build_ref_qald(self):
+    def build_ref_qald(self) -> None:
+        id: int
+        entry: Sgpt_entry
         for id, entry in enumerate(self.queries):
+            answer = entry.get_answer(entry.ref_query)
             self.ref_qald.append(build_qald_entry(
-                id, "example question", entry.ref_query, entry.ref_answer, "en"))
+                id, "example question", entry.ref_query, answer, "en"))
 
     def build_and_extract_pred_qald(self, output_file) -> None:
         self.build_pred_qald()
         qald = {"questions": self.pred_qald}
         export_json(output_file, qald)
 
-    def build_pred_qald(self):
+    def build_pred_qald(self) -> None:
+        id: int
+        entry: Sgpt_entry
         for id, entry in enumerate(self.queries):
-            self.ref_qald.append(build_qald_entry(
-                id, "example question", entry.pred_query, entry.pred_answer, "en"))
-
+            answer = entry.get_answer(entry.pred_query)
+            self.pred_qald.append(build_qald_entry(
+                id, "example question", entry.pred_query, answer, "en"))
 
 class Sgpt_entry:
     def __init__(self, ref_query: str, pred_query: str) -> None:
@@ -63,13 +69,7 @@ class Sgpt_entry:
 
     def add_prefixes(self, query: str) -> str:
         return (' ').join(prefixes) + query
-
-    def get_ref_answer(self) -> dict:
-        ref_query_with_prefixes = self.add_prefixes(self.ref_query)
-        self.ref_answer = ask_dbpedia(ref_query_with_prefixes)
-        return self.ref_answer
-
-    def get_pred_answer(self) -> dict:
-        pred_query_with_prefixes = self.add_prefixes(self.pred_query)
-        self.pred_answer = ask_dbpedia(pred_query_with_prefixes)
-        return self.pred_answer
+    
+    def get_answer(self, query: str) -> dict:
+        query_with_prefixes = self.add_prefixes(query)
+        return ask_dbpedia(query_with_prefixes)
