@@ -2,6 +2,7 @@ from utils.data_io import *
 from utils.process_query import preprocess_sparql
 from utils.linguistic_parser import get_linguistic_context
 import spacy
+import re
 
 nlp_en = spacy.load("en_core_web_sm")
 nlp_zh = spacy.load("zh_core_web_sm")
@@ -30,16 +31,24 @@ nlp_dict = {
 
 
 class Qald:
-    def __init__(self, qald_dataset: str) -> None:
+    def __init__(self, qald_dataset: dict) -> None:
         self.qald = self.init_qald_list(qald_dataset)
 
-    def init_qald_list(self, qald_dataset: str) -> list:
+    def init_qald_list(self, qald_dataset: dict) -> list:
         qald_list = []
-        dataset = qald_dataset["questions"]
-        for entry in dataset:
-            qald_entry = Qald_entry(entry)
-            qald_list.append(qald_entry)
+        if qald_dataset:
+            dataset = qald_dataset["questions"]
+            for entry in dataset:
+                qald_entry = Qald_entry(entry["id"], entry["question"], entry["query"]["sparql"], entry["answers"])
+                qald_list.append(qald_entry)
         return qald_list
+    
+    def add_entry(self, id, language, question_string, query, answers):
+        question = [{
+            "language": language,
+            "string": question_string
+        }]
+        self.qald.append(Qald_entry(id, question, query, answers))
 
     def export_train_csv(self, output_file, languages, include_linguistic_context=False, include_entity_knowledge=False) -> None:
         csv_dataset = [["question", "query"]]
@@ -69,11 +78,11 @@ class Qald:
         return questions_with_id
 
 class Qald_entry:
-    def __init__(self, entry: dict) -> None:
-        self.id = entry["id"]
-        self.questions: dict = self.get_questions(entry["question"])
-        self.query = entry["query"]["sparql"]
-        self.answers = entry["answers"]
+    def __init__(self, id, questions, query, answers) -> None:
+        self.id = id
+        self.questions: dict = self.get_questions(questions)
+        self.query = query
+        self.answers = answers
 
     def get_questions(self, questions: list) -> dict:
         question_strings = {}
@@ -82,8 +91,11 @@ class Qald_entry:
             question_strings[language] = Question(language, q["string"])
         return question_strings
 
-    def get_entity_knowledge(self):
-        pass
+    def get_entity_knowledge(self) -> list:
+        pattern = r'\bwd_\w+\b'
+        entities = re.findall(pattern, self.query)
+        return entities
+
 
     def build_qald_format_entry(self, languages: list, include_linguistic_context: bool, include_entity_knowledge: bool) -> dict:
         entry_id = {"id": self.id}
