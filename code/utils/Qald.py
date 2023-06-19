@@ -71,8 +71,7 @@ class Qald:
 class Qald_entry:
     def __init__(self, entry: dict) -> None:
         self.id = entry["id"]
-        self.questions: dict(str, list[Question]) = self.get_questions(
-            entry["question"])
+        self.questions: dict = self.get_questions(entry["question"])
         self.query = entry["query"]["sparql"]
         self.answers = entry["answers"]
 
@@ -81,6 +80,7 @@ class Qald_entry:
         for q in questions:
             language = q["language"]
             question_strings[language] = Question(language, q["string"])
+        return question_strings
 
     def get_entity_knowledge(self):
         pass
@@ -135,7 +135,7 @@ class Question:
         self.string = question_string
 
     def add_linguistic_context(self, nlp):
-        self.doc, self.pos, self.dep, self.depth_list = get_linguistic_context(
+        self.doc, self.pos, self.dep, self.dep_depth = get_linguistic_context(
             nlp, self.string)
 
     def add_entity_knowledge(self, entities):
