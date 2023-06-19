@@ -3,10 +3,6 @@ from utils.process_query import *
 from utils.data_io import read_json, export_csv
 
 
-def get_question(lcqald_dict):
-    return lcqald_dict["NNQT_question"].replace("{", "").replace("}", "").replace("<", "").replace(">", "")
-
-
 def get_query(lcqald_dict, kg):
     if kg == "wikidata":
         return lcqald_dict["sparql_wikidata"]
