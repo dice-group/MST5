@@ -1,0 +1,4075 @@
+{
+    "questions": [
+        {
+            "id": 0,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "res:RMS_Ministry dbp:timeZone ?uri }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 1,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?uri where { res:Germany dbo:mountain ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select res:President_of_the_United_States dbp:office_of_the_United_States . }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:Andrew_Taylor dbo:governor ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?height }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?uri }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:Frank_Herbert dbo:profession ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 8,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?uri }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 9,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select count dbr:FCC_Port_of_Spain }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 10,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?uri where { res:Airline dbo:programme dbr:Frequent flyer }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 11,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?uri where { dbr:European_Union dbo:architect ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 12,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:TwoCave dbo:location ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 13,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?uri }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 14,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?uri where { res:Dan_Monaco dbo:birthName ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 15,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?string where { res:Angela_Merkel dbo:birthName ?string }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "string"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": [
+                            {
+                                "string": {
+                                    "type": "literal",
+                                    "xml:lang": "en",
+                                    "value": "Angela Dorothea Kasner"
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "id": 16,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:Berlin dbo:leaderName ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 17,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select dbp:ethnic ?uri }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 18,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:MS_Hamster dbo:developer ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 19,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?uri }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 20,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 21,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:Sweden dbo:team ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 22,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?uri }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 23,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:All_Adams dbo:starring ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 24,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:Michael_Jackson dbo:deathPlace ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": [
+                            {
+                                "uri": {
+                                    "type": "uri",
+                                    "value": "http://dbpedia.org/resource/Los_Angeles,_California"
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "id": 25,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:United_States dbo:ago ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 26,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 27,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:Forbes dbo:foundationPlace ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 28,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:Amanda_Palmer dbo:spouse ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 29,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?uri where { res:The_East_West dbo:artist ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 30,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?uri where { res:Karakoram dbo:highest ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": [
+                            {
+                                "uri": {
+                                    "type": "uri",
+                                    "value": "http://dbpedia.org/resource/K2"
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "id": 31,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?date where { dbr:William_Adams dbo:beginningDate ?date }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "date"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 32,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:Big_Bang_Physics dbo:actor ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 33,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?program }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 34,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:Harry_Potter dbo:author ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 35,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?uri where { res:Nobel_Prize_in_Literature dbo:award ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 36,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:Nikola_Bridge dbo:starring ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 37,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?uri }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 38,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 39,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?density where { res:United_States dbo:densityrank ?density }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "density"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 40,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?uri where { res:China_River dbo:length ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 41,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:Berlin dbp:areaCode ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": [
+                            {
+                                "uri": {
+                                    "type": "typed-literal",
+                                    "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+                                    "value": "30"
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "id": 42,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?uri where { res:Vy_University dbo:profession dbr:Chemist }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 43,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:Australia dbo:nationality ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 44,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { dbr:Dominic_Green_Party dbo:party ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 45,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?n where { res:Lones_of_Mars dbo:numberOfLones ?n }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "n"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 46,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "dbr:Bruce_Green_ ( dwarf_planet ) dbp:officialName ?name }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 47,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:Elon_Musk dbo:influenced ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 48,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": ""
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 49,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "ask where { res:Andrew_Parnell dbo:governor ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": []
+                    },
+                    "boolean": false
+                }
+            ]
+        },
+        {
+            "id": 50,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?height }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 51,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:Carlo_Gley_William dbo:deathPlace ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 52,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:Elephant dbp:knownFor ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 53,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?uri where { res:Abraham_Lincoln dbo:spouse ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": [
+                            {
+                                "uri": {
+                                    "type": "uri",
+                                    "value": "http://dbpedia.org/resource/Mary_Todd_Lincoln"
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "id": 54,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?number }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 55,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "ask where { res:Pamela_and_Herb dbo:vegetarianism }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 56,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?uri }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 57,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?uri where { res:Germany dbo:populationTotal ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": [
+                            {
+                                "uri": {
+                                    "type": "typed-literal",
+                                    "datatype": "http://www.w3.org/2001/XMLSchema#nonNegativeInteger",
+                                    "value": "83695430"
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "id": 58,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?uri }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 59,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select count ( distinct ?num ) where { res:University_of_Amsterdam dbo:class ?num }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "callret-0"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": [
+                            {
+                                "callret-0": {
+                                    "type": "typed-literal",
+                                    "datatype": "http://www.w3.org/2001/XMLSchema#integer",
+                                    "value": "0"
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "id": 60,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?uri }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 61,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?n where { res:James_Bond dbo:numberOfKills ?n }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "n"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 62,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 63,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:Tom_Hanks dbo:spouse ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": [
+                            {
+                                "uri": {
+                                    "type": "uri",
+                                    "value": "http://dbpedia.org/resource/Rita_Wilson"
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "id": 64,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 65,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?uri where { res:German_Motors dbo:producer ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 66,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?date where { res:Michael_Jackson dbo:deathDate ?date }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "date"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": [
+                            {
+                                "date": {
+                                    "type": "typed-literal",
+                                    "datatype": "http://www.w3.org/2001/XMLSchema#date",
+                                    "value": "2009-06-25"
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "id": 67,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?uri where { dbr:Africa dbo:largestCity ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 68,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?author where { res:The_Poet dbo:author ?author }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "author"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 69,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:The_Prohibition dbo:influenced ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 70,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { ?uri dbo:mission res:Missile_Cosmodrome }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 71,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "ask where { res:Czech_film dbo:director ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": []
+                    },
+                    "boolean": false
+                }
+            ]
+        },
+        {
+            "id": 72,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { dbr:All_Stars dbo:starring ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 73,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:Australia dbo:largestCountry ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 74,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:Tom_Cruise dbo:starring ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 75,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?date where { dbr:Dracula_Motors dbo:creator ?date }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "date"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 76,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:English_Wikicat_Wikipedia dbo:author ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 77,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:Garry_Green_ ( actor ) dbo:ethnicity ?uri }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 78,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:Aldi dbo:owner ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 79,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?uri where { dbr:Danielle_Steel dbo:author ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 80,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { dbr:Soccer_in_Paris dbo:influenced ?uri . ?uri rdf:type dbo:Person ; dbo:influenced ?uri } order by desc ( ?uri ) offset 0 limit 1"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 81,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?height where { dbr:Lake_Chiemsee dbo:maximumDepth ?height }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "height"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 82,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?uri }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 83,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:Philippines dbo:nationality ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 84,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:The_Maude_of_Westminster dbo:parent ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 85,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:United_States dbo:castle ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 86,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:Estonia dbo:spokenIn ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 87,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:The_Slovenia dbo:criticants ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 88,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:Rhine_West dbp:connected ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 89,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:Elizabeth_II dbp:parent ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 90,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:Chemical_influenced dbo:instrument ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 91,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?uri }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 92,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select res:The_Bells_of_Netherlands dbp:beginningDate ?date }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 93,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:Lance_Bono dbo:spouse ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 94,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 95,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:Pakistan dbp:spokenIn ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 96,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?uri }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 97,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 98,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?uri where { res:Indigo dbo:bandMember ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 99,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?string where { res:Ramones dbo:bSide ?string }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "string"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 100,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:Scarface dbo:name ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 101,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 102,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:Fort_Knox dbo:location ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": [
+                            {
+                                "uri": {
+                                    "type": "uri",
+                                    "value": "http://dbpedia.org/resource/Kentucky"
+                                }
+                            },
+                            {
+                                "uri": {
+                                    "type": "uri",
+                                    "value": "http://dbpedia.org/resource/Fort_Knox__location__1"
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "id": 103,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 104,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?n where { res:China_of_the_Netherlands dbo:numberOfEmperors ?n }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "n"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 105,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?uri }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 106,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { dbr:Nikola_C .f . dbo:beginningDate ?uri }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 107,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?city where { dbr:University_of_Spain dbp:name ?city }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "city"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 108,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?date }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 109,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?height where { dbr:Nba dbp:activeYears ?height }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "height"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 110,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:Abraham_Lincoln dbo:deathPlace ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": [
+                            {
+                                "uri": {
+                                    "type": "uri",
+                                    "value": "http://dbpedia.org/resource/Washington,_D.C."
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "id": 111,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?date where { res:Jack_Wolfgang_von_Sebastian_Begins dbo:founded ?date }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "date"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 112,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 113,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?uri }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 114,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?date }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 115,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:Hylidae dbo:species ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 116,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:German_Herbert dbo:spouse ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 117,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?n where { res:Earth_dome dbo:diameter ?n }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "n"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 118,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "ask where { res:Barack_Obama dbo:spouse ?spouse }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": []
+                    },
+                    "boolean": true
+                }
+            ]
+        },
+        {
+            "id": 119,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 120,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?date where { dbr:Muhammad_Abdel_Saud ( persian ) dbp:deathDate ?date }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 121,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?uri }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 122,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?uri }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 123,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "ask where { res:Kurosawa dbo:director ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": []
+                    },
+                    "boolean": false
+                }
+            ]
+        },
+        {
+            "id": 124,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?uri }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 125,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "dbo:officialPage }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 126,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?height } limit 1"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 127,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:Library_established dbo:established ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 128,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:Netherlands dbo:nationality ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 129,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?uri }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 130,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?ff dbp:founded ?ff }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 131,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "ask where { res:Frank_Jafk dbo:deathPlace ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": []
+                    },
+                    "boolean": false
+                }
+            ]
+        },
+        {
+            "id": 132,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?uri }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 133,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "res:Bruce_Green_writer dbo:author ?writer }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 134,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "dbp:record }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 135,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { res:South_Rhine-Westphalia dbo:company ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 136,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?date }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 137,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { dbr:IBM dbo:foundedBy ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": [
+                            {
+                                "uri": {
+                                    "type": "uri",
+                                    "value": "http://dbpedia.org/resource/Thomas_J._Watson"
+                                }
+                            },
+                            {
+                                "uri": {
+                                    "type": "uri",
+                                    "value": "http://dbpedia.org/resource/Herman_Hollerith"
+                                }
+                            },
+                            {
+                                "uri": {
+                                    "type": "uri",
+                                    "value": "http://dbpedia.org/resource/Charles_Ranlett_Flint"
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "id": 138,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?uri where { res:Premier_League dbo:leaderName ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 139,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { dbr:Cat_Stevens dbo:instrument ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 140,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?num where { res:South_Carolina dbo:locatedInArea ?num }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "num"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 141,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select distinct ?uri where { dbr:Rod_Darling dbo:name ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 142,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?uri where { dbr:Africa dbo:country ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 143,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?uri where { res:Manhattan_Bridge dbo:type ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": [
+                            {
+                                "uri": {
+                                    "type": "uri",
+                                    "value": "http://dbpedia.org/resource/Suspension_bridge"
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "id": 144,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?org where { dbr:foundedBy ?org }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 145,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "res:Grand_Canyon dbo:inflow ?uri }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 146,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?uri where { res:The_Pillars_of_the_Earth dbo:numberOfPages ?x . ?x dbo:author ?uri } order by desc ( count ( ?uri ) ) offset 0 limit 1"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 147,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?uri where { dbr:United_States dbo:largest ?uri }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "uri"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 148,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?link where { dbr:Company dbo:numberOfEmployees ?link }"
+            },
+            "answers": [
+                {
+                    "head": {
+                        "link": [],
+                        "vars": [
+                            "link"
+                        ]
+                    },
+                    "results": {
+                        "distinct": false,
+                        "ordered": true,
+                        "bindings": []
+                    }
+                }
+            ]
+        },
+        {
+            "id": 149,
+            "question": [
+                {
+                    "language": "en",
+                    "string": "example question"
+                }
+            ],
+            "query": {
+                "sparql": "select ?uri }"
+            },
+            "answers": [
+                {
+                    "answers": [
+                        {
+                            "head": {
+                                "vars": []
+                            },
+                            "results": {
+                                "bindings": []
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
