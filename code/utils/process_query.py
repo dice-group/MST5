@@ -15,6 +15,8 @@ REPLACEMENT_BACK = [
     ["dbo_", "dbo:"],
     ["dbp_", "dbp:"],
     ["dbr_", "dbr:"],
+    ["pq_", "pq:"],
+    ["ps_", "ps:"],
     ["dct_", "dct:"],
     ["yago_", "yago:"],
     ["onto_", "onto:"],
@@ -25,7 +27,8 @@ REPLACEMENT_BACK = [
     ["psv_", "psv:"],
     ["wikibase_", "wikibase:"],
     ["rdfs_label", "rdfs:label"],
-    ["xsd_integer", "xsd:integer"]
+    ["xsd_integer", "xsd:integer"],
+    ["__a", "_:a"]
 ]
 
 PREFIX_ABBR = [
@@ -54,7 +57,7 @@ SYMBOL_REPLACEMENT = [
 
 
 def delete_sparql_prefix(sparql_query):
-    if "prefix" not in sparql_query.casefold():
+    if "prefix" not in sparql_query.lower():
         return sparql_query
     elif "ASK" in sparql_query:
         return "ASK" + split_query_after_keyword(sparql_query, "ASK")
