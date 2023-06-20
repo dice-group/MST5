@@ -22,7 +22,7 @@ from transformers.trainer_utils import get_last_checkpoint
 from transformers.utils import check_min_version
 from utils.data_training_arguments import DataTrainingArguments
 from utils.model_arguments import ModelArguments
-from code.utils.qald_utils import build_qald_entry
+from utils.qald_utils import build_qald_entry
 from utils.query import ask_wikidata
 from utils.data_io import export_json
 from utils.query import postprocess_sparql
