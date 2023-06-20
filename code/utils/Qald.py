@@ -71,8 +71,9 @@ class Qald:
         questions_with_id = []
         qald_entry: Qald_entry
         for qald_entry in self.qald:
-            question_string = qald_entry.get_question_string_by_language(language, include_linguistic_context, include_entity_knowledge)
-            questions_with_id.append([qald_entry.id, question_string])
+            if language in qald_entry.questions:
+                question_string = qald_entry.get_question_string_by_language(language, include_linguistic_context, include_entity_knowledge)
+                questions_with_id.append([qald_entry.id, question_string])
         return questions_with_id
 
 class Qald_entry:
