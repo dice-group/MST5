@@ -6,6 +6,27 @@ import urllib.request
 import pandas as pd
 import time
 
+class Gerbil:
+    def __init__(self) -> None:
+        pass
+
+    def add_experiment_id(self, experiment_id):
+        pass
+
+    def export_experiment_results(self):
+        pass
+
+    def add_ref_file(self, ref_name, ref_file):
+        pass
+
+    def add_pred_file(self, pred_name, pred_file, language):
+        pass
+
+    def submit_experiment(self):
+        pass
+    
+
+
 UPLOAD_HEADERS = {
     'Accept': 'application/json, text/javascript, */*; q=0.01',
     'Accept-Language': 'en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7',
