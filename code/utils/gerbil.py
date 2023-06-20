@@ -9,18 +9,20 @@ import time
 
 UPLOAD_HEADERS = {
     'Accept': 'application/json, text/javascript, */*; q=0.01',
-    'Accept-Language': 'en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7',
-    'Cookie': 'JSESSIONID=265042E6F0ECFC6AEEA55C409FB7168F',
+    'Accept-Language': 'en-US,en;q=0.9,zh-CN;q=0.8,zh-TW;q=0.7,zh;q=0.6,ja;q=0.5',
+    'Connection': 'keep-alive',
+    'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundaryBbipJCvvqkGEBh6H',
+    'Cookie': 'JSESSIONID=95939E4A9280DC982C1C75A437081F29',
     'Origin': 'https://gerbil-qa.aksw.org',
     'Referer': 'https://gerbil-qa.aksw.org/gerbil/config',
     'Sec-Fetch-Dest': 'empty',
     'Sec-Fetch-Mode': 'cors',
     'Sec-Fetch-Site': 'same-origin',
-    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36 Edg/112.0.1722.58',
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36 Edg/113.0.1774.57',
     'X-Requested-With': 'XMLHttpRequest',
-    'sec-ch-ua': '"Chromium";v="112", "Microsoft Edge";v="112", "Not:A-Brand";v="99"',
+    'sec-ch-ua': '"Microsoft Edge";v="113", "Chromium";v="113", "Not-A.Brand";v="24"',
     'sec-ch-ua-mobile': '?0',
-    'sec-ch-ua-platform': '"macOS"',
+    'sec-ch-ua-platform': '"macOS"'
 }
 
 SUBMIT_HEADERS = {
@@ -67,22 +69,26 @@ class Gerbil:
     def set_ref_data(self, name: str) -> dict:
         return {
             'name': name,
+            'URI': '',
             'multiselect': 'DBpedia Entity INEX',
-            'qlang': '',
+            'qlang': ''
         }
 
     def set_pred_data(self, name: str, pred_file: str) -> dict:
+        ref_file_name = self.ref_file.split('/')[-1]
         return {
             'name': name,
-            'multiselect': 'AFDS_'+pred_file,
-            'qlang': '',
+            'URI': '',
+            'name': 'en-mT5-xl-lcquad',
+            'multiselect': f'AFDS_{ref_file_name}',
+            'qlang': ''
         }
 
     def set_files(self, file_path: str) -> dict:
         file_content = open(file_path, 'rb').read()
         file_obj = io.BytesIO(file_content)
         return {
-            'files[]': (file_path, file_obj),
+            'files[]': (file_path, file_obj, 'application/json'),
         }
 
     def upload_file(self, data, file):
@@ -145,7 +151,7 @@ class Gerbil:
             json.dumps(experiment_data))
         return experiment_data_encoded
     
-    def run_and_export_results(self,output_file,  max_retry: int = 10):
+    def export_results(self,output_file,  max_retry: int = 10):
         gerbil_html = self.get_experiment_results(max_retry)
         if gerbil_html:
             gerbil_results_table = self.clean_gerbil_table(gerbil_html)
@@ -196,7 +202,7 @@ class Gerbil:
         answer_files = []
         for name in self.pred_files:
             answer_files.append(
-                f'AF_{name}({name}.json))(undefined)(AFDS_{ref_file_name})'
+                f'AF_{name}({name}.json)(undefined)(AFDS_{ref_file_name})'
                 )
 
         return answer_files
