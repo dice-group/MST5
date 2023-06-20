@@ -29,22 +29,6 @@ def build_question_string_with_linguistic(question):
         + " <pad> " + " ".join(map(str, question["dep_depth"]))
 
 
-def get_question_list_with_id(data, languages, linguisitic_context):
-    question_list = []
-    qald_list = data["questions"]
-
-    for qald_entry in qald_list:
-        for question in qald_entry["question"]:
-            if question["language"] in languages:
-                if linguisitic_context:
-                    build_question_string_with_linguistic(question)
-                else:
-                    ques_str = question["string"]
-                question_list.append([qald_entry["id"], ques_str])
-                break
-    return question_list
-
-
 def get_question_query_list(data, languages, linguistic):
     question_query_list = [['question', 'query']]
 
