@@ -117,24 +117,23 @@ class Gerbil:
         try:
             response = requests.get(execute_url, headers=SUBMIT_HEADERS)
             response.raise_for_status()
+            self.experiment_id = response.text
             print("GERBIL experiment is submitted successfully")
+            print(f"Experiment id: {self.experiment_id}")
             return response
         except requests.exceptions.HTTPError as error:
             print(f'Error: {error}')
 
     def set_experiment_data(self):
-        ref_name, ref_file = self.get_ref_name_and_file(ref)
-
-        answer_file_names = self.get_answer_file_names(pred, ref_file)
-
-        dataset_name = ['NIFDS_'+ref_name+'('+ref_file+')']
-        ref_dataset = [f'NIFDS_{self.ref}()']
+        ref_file_name = self.ref_file.split('/')[-1]
+        answer_file_names = self.get_answer_file_names(ref_file_name)
+        ref_dataset = [f'NIFDS_{self.ref}({ref_file_name})']
 
         experiment_data = {
             'type': 'QA',
             'matching': 'STRONG_ENTITY_MATCH',
             'annotator': [],
-            'dataset': dataset_name,
+            'dataset': ref_dataset,
             'answerFiles': answer_file_names,
             'questionLanguage': 'en'
         }
@@ -142,8 +141,17 @@ class Gerbil:
         experiment_data_encoded = urllib.parse.quote(
             json.dumps(experiment_data))
         return experiment_data_encoded
+    
+    def run_and_export_results(self,output_file,  max_retry: int = 10):
+        gerbil_html = self.get_exp_result_content(max_retry)
+        if gerbil_html:
+            gerbil_results_table = self.clean_gerbil_table(gerbil_html)
+            gerbil_results_table.to_csv(output_file, index=False)
+            print("Experiment results is saved to " + output_file)
+        else: 
+            print(f"Try later with {self.experiment_id}")
 
-    def export_experiment_results(self, max_retry: int = 10):
+    def get_experiment_results(self, max_retry):
         if not self.experiment_id:
             print("Please add an experiment id or submit an experiment.")
             return
@@ -212,11 +220,11 @@ class Gerbil:
             ref_file_name = ref[name]
         return ref_name, ref_file_name
 
-    def get_answer_file_names(self, pred, ref_file_name):
+    def get_answer_file_names(self, ref_file_name):
         answer_files = []
-        for name in pred:
+        for name in self.pred_files:
             answer_files.append(
-                f'AF_{name}({pred[name]}))(undefined)(AFDS_{ref_file_name})'
+                f'AF_{name}({name}.json))(undefined)(AFDS_{ref_file_name})'
                 )
 
         return answer_files
