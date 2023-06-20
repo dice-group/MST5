@@ -46,6 +46,9 @@ execute_url_prefix = "https://gerbil-qa.aksw.org/gerbil/execute?experimentData="
 class Gerbil:
     def __init__(self) -> None:
         self.pred_files = {}
+        self.ref_name = None
+        self.ref_file = None
+        self.experiment_id = None
 
     def add_experiment_id(self, experiment_id):
         self.experiment_id = experiment_id
@@ -127,7 +130,7 @@ class Gerbil:
     def set_experiment_data(self):
         ref_file_name = self.ref_file.split('/')[-1]
         answer_file_names = self.get_answer_file_names(ref_file_name)
-        ref_dataset = [f'NIFDS_{self.ref}({ref_file_name})']
+        ref_dataset = [f'NIFDS_{self.ref_name}({ref_file_name})']
 
         experiment_data = {
             'type': 'QA',
@@ -143,7 +146,7 @@ class Gerbil:
         return experiment_data_encoded
     
     def run_and_export_results(self,output_file,  max_retry: int = 10):
-        gerbil_html = self.get_exp_result_content(max_retry)
+        gerbil_html = self.get_experiment_results(max_retry)
         if gerbil_html:
             gerbil_results_table = self.clean_gerbil_table(gerbil_html)
             gerbil_results_table.to_csv(output_file, index=False)
@@ -274,7 +277,7 @@ def get_exp_result_content(id: str, max_retry: int = 10) -> str:
         try:
             response = requests.get(experiment_url)
             content = response.text
-            if "The annotator caused too many single errors." in content:
+            if "The annotator caused too many single errors." or "The annotator couldn't be loaded." in content:
                 print(f"Experiment {id} could not be executed.")
                 return
             elif "The experiment is still running." in content:
