@@ -179,6 +179,28 @@ class Gerbil:
                 time.sleep(30)
         print("Experiment " + id + " takes too much time.")
 
+    def rename_unnamed_column_to_benchmark(self, html):
+        html = pd.read_html(html)[0].rename(columns={
+            "Unnamed: 3": "Benchmark",
+        })
+
+        return html
+
+    def get_ref_name_and_file(self, ref):
+        for name in ref:
+            ref_name = name
+            ref_file_name = ref[name]
+        return ref_name, ref_file_name
+
+    def get_answer_file_names(self, ref_file_name):
+        answer_files = []
+        for name in self.pred_files:
+            answer_files.append(
+                f'AF_{name}({name}.json))(undefined)(AFDS_{ref_file_name})'
+                )
+
+        return answer_files
+
     def clean_gerbil_table(self, html: str) -> str:
         html = self.rename_unnamed_column_to_benchmark(html)
         if "Benchmark" in html.columns:
@@ -210,82 +232,4 @@ class Gerbil:
             columns=["Benchmark"]
         )
 
-    def rename_unnamed_column_to_benchmark(self, html):
-        html = pd.read_html(html)[0].rename(columns={
-            "Unnamed: 3": "Benchmark",
-        })
-
-        return html
-
-    def get_ref_name_and_file(self, ref):
-        for name in ref:
-            ref_name = name
-            ref_file_name = ref[name]
-        return ref_name, ref_file_name
-
-    def get_answer_file_names(self, ref_file_name):
-        answer_files = []
-        for name in self.pred_files:
-            answer_files.append(
-                f'AF_{name}({name}.json))(undefined)(AFDS_{ref_file_name})'
-                )
-
-        return answer_files
-
-
-def upload_pred_by_lang(exp_setting: str, pred_pfad_prefix: str, languages: str):
-    for lang in languages:
-        pred_file_path = pred_pfad_prefix + lang + ".json"
-        upload_file(exp_setting+lang, pred_file_path, "pred")
-
-
-def submit_experiment(ref: dict, pred: dict) -> requests.Response:
-    ref_name, ref_file = get_ref_name_and_file(ref)
-
-    answer_file_names = get_answer_file_names(pred, ref_file)
-
-    dataset_name = ['NIFDS_'+ref_name+'('+ref_file+')']
-
-    experiment_data = {
-        'type': 'QA',
-        'matching': 'STRONG_ENTITY_MATCH',
-        'annotator': [],
-        'dataset': dataset_name,
-        'answerFiles': answer_file_names,
-        'questionLanguage': 'en'
-    }
-
-    experiment_data_encoded = urllib.parse.quote(json.dumps(experiment_data))
-
-    execute_url = f'https://gerbil-qa.aksw.org/gerbil/execute?experimentData={experiment_data_encoded}'
-
-    try:
-        response = requests.get(execute_url, headers=SUBMIT_HEADERS)
-        response.raise_for_status()
-        print("GERBIL experiment is submitted successfully")
-        return response
-    except requests.exceptions.HTTPError as error:
-        print(f'Error: {error}')
-
-
-def get_exp_result_content(id: str, max_retry: int = 10) -> str:
-    experiment_url = "https://gerbil-qa.aksw.org/gerbil/experiment?id=" + id
-    retry = 0
-
-    while retry < max_retry:
-        retry += 1
-        try:
-            response = requests.get(experiment_url)
-            content = response.text
-            if "The annotator caused too many single errors." or "The annotator couldn't be loaded." in content:
-                print(f"Experiment {id} could not be executed.")
-                return
-            elif "The experiment is still running." in content:
-                print("The experiment is still running.")
-                time.sleep(30)
-            else:
-                return content
-        except requests.exceptions.RequestException as e:
-            print('Error: ', e)
-            time.sleep(30)
-    print("Experiment " + id + " takes too much time.")
+    
