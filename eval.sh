@@ -6,7 +6,7 @@ pred_pfad=pred_files/${model}/
 linguitic_context="True"
 
 
-languages=("en" "de" "ru" "fr" "zh" "lt" "ja" "ba" "be" "uk" "es")
+languages=("en" "de" "ru" "fr" "zh" "lt" "ja" "ba" "be" "uk")
 
 
 for lang in "${languages[@]}"

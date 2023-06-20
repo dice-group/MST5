@@ -150,14 +150,14 @@ class Gerbil:
         experiment_data_encoded = urllib.parse.quote(
             json.dumps(experiment_data))
         return experiment_data_encoded
-    
-    def export_results(self,output_file,  max_retry: int = 10):
+
+    def export_results(self, output_file,  max_retry: int = 10):
         gerbil_html = self.get_experiment_results(max_retry)
         if gerbil_html:
             gerbil_results_table = self.clean_gerbil_table(gerbil_html)
             gerbil_results_table.to_csv(output_file, index=False)
             print("Experiment results is saved to " + output_file)
-        else: 
+        else:
             print(f"Try later with {self.experiment_id}")
 
     def get_experiment_results(self, max_retry):
@@ -203,7 +203,7 @@ class Gerbil:
         for name in self.pred_files:
             answer_files.append(
                 f'AF_{name}({name}.json)(undefined)(AFDS_{ref_file_name})'
-                )
+            )
 
         return answer_files
 
@@ -211,7 +211,6 @@ class Gerbil:
         html = self.rename_unnamed_column_to_benchmark(html)
         if "Benchmark" in html.columns:
             html = self.select_where_benckmark_is_na(html)
-            html = self.drop_benckmark_column(html)
         for index, row in html.iterrows():
             language = row["Annotator"][-13:-11]
             html.at[index, "Language"] = language
@@ -219,16 +218,24 @@ class Gerbil:
         return html
 
     def drop_unnecessary_columns(self, html):
-        return html.drop(
-            columns=[
-                'Dataset',
-                'Annotator',
-                'Error Count',
-                'avg millis/doc',
-                'Timestamp',
-                'GERBIL version',
-            ]
-        )
+        columns_to_drop = [
+            'Dataset',
+            'Annotator',
+            'Error Count',
+            'avg millis/doc',
+            'Timestamp',
+            'GERBIL version',
+            'Benchmark'
+        ]
+        for column_name in columns_to_drop:
+            html = self.drop_column_by_name(html, column_name)
+        return html
+
+    def drop_column_by_name(self, df, column_name):
+        try:
+            return df.drop(column_name, axis=1)
+        except:
+            return df
 
     def select_where_benckmark_is_na(self, html):
         return html[html['Benchmark'].isna()]
@@ -237,5 +244,3 @@ class Gerbil:
         return html.drop(
             columns=["Benchmark"]
         )
-
-    
