@@ -31,8 +31,8 @@ nlp_dict = {
 
 
 class Qald:
-    def __init__(self, qald_dataset: dict) -> None:
-        self.qald = self.init_qald_list(qald_dataset)
+    def __init__(self, qald_file: dict) -> None:
+        self.qald = self.init_qald_list(qald_file)
 
     def init_qald_list(self, qald_dataset: dict) -> list:
         qald_list = []
@@ -54,10 +54,11 @@ class Qald:
         csv_dataset = [["question", "query"]]
         qald_entry: Qald_entry
         for qald_entry in self.qald:
-            query = preprocess_sparql(qald_entry.query)
+            query = qald_entry.preprocessed_query
             for language in languages:
-                question = qald_entry.get_question_string_by_language(language, include_linguistic_context, include_entity_knowledge)
-                csv_dataset.append([question, query])
+                if language in qald_entry.questions:
+                    question = qald_entry.get_question_string_by_language(language, include_linguistic_context, include_entity_knowledge)
+                    csv_dataset.append([question, query])
         export_csv(output_file, csv_dataset)
     
 
@@ -82,6 +83,7 @@ class Qald_entry:
         self.id = id
         self.questions: dict = self.get_questions(questions)
         self.query = query
+        self.preprocessed_query = preprocess_sparql(query)
         self.answers = answers
 
     def get_questions(self, questions: list) -> dict:
@@ -93,7 +95,7 @@ class Qald_entry:
 
     def get_entity_knowledge(self) -> list:
         pattern = r'\bwd_\w+\b'
-        entities = re.findall(pattern, self.query)
+        entities = re.findall(pattern, self.preprocessed_query)
         return entities
 
 
@@ -126,10 +128,11 @@ class Qald_entry:
         if include_entity_knowledge:
             entity_knowledge = self.get_entity_knowledge()
         for language in languages:
+            question_string = self.questions[language].build_question_string(include_linguistic_context, entity_knowledge)
             question_lang_and_string.append(
                 {
                     "language": language,
-                    "string": self.questions[language].build_question_string(include_linguistic_context, entity_knowledge)
+                    "string": question_string
                 }
             )
         return question_lang_and_string

@@ -40,20 +40,24 @@ def main():
                         help="name of output file", required=True)
     parser.add_argument("-l", "--languages", nargs='+',
                         help='required languages of question', required=True)
-    parser.add_argument('--linguistic', action=argparse.BooleanOptionalAction)
-    parser.add_argument('--entity_knowledge', action=argparse.BooleanOptionalAction)
+    parser.add_argument('--linguistic_context', default=False, type=bool,
+                        help='With or without linguistic context in question string')
+    parser.add_argument('--entity_knowledge', default=False, type=bool,
+                        help='With or without entity knowledge in question string')
 
 
     args = parser.parse_args()
 
     languages = check_languages(args)
+    print(args.linguistic_context)
+    print(args.entity_knowledge)
 
     qald_file = read_json(args.input)
     qald_dataset = Qald(qald_file)
     qald_dataset.export_train_csv(
         args.output, 
         languages,
-        include_linguistic_context=args.linguistic,
+        include_linguistic_context=args.linguistic_context,
         include_entity_knowledge=args.entity_knowledge
     )
 
