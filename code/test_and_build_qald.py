@@ -2,7 +2,8 @@ import argparse
 from utils.data_io import read_json, export_json
 from utils.query import init_summarizer, predict_query, ask_wikidata
 from utils.process_query import postprocess_sparql
-from utils.qald import build_qald_entry, get_question_list_with_id
+from utils.qald import build_qald_entry
+from utils.Qald import Qald
 from tqdm import tqdm
 
 
@@ -20,24 +21,23 @@ def main():
                         help="required language of question", required=True)
     parser.add_argument('--linguistic_context', default=False, type=bool,
                         help='With or without linguistic context in question string')
+    parser.add_argument('--entity_knowledge', default=False, type=bool,
+                        help='With or without entity knowledge in question string')
 
     args = parser.parse_args()
 
-    testset = read_json(args.test)
+    test_file = read_json(args.test)
+    testset = Qald(test_file)
     summarizer = init_summarizer(args.model)
-    question_list = get_question_list_with_id(
-        testset, [args.language], args.linguistic_context)
+    question_list = testset.get_question_string_with_id(args.language, args.linguistic_context, args.entity_knowledge)
 
-    pred_qald_list = []
+    result = Qald({})
     for id, question_string in tqdm(question_list):
         query_pred = predict_query(summarizer, question_string)
         sparql_query = postprocess_sparql(query_pred)
         answer = ask_wikidata(sparql_query)
-        qald_entry = build_qald_entry(
-            id, question_string, sparql_query, answer, args.language)
-        pred_qald_list.append(qald_entry)
-    qald_pred = {"questions": pred_qald_list}
-    export_json(args.output, qald_pred)
+        result.add_entry(id, args.language, question_string, sparql_query, answer)
+    result.export_qald_json([args.language], args.output)
 
 
 if __name__ == "__main__":
