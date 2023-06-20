@@ -1,6 +1,6 @@
 import argparse
 import spacy
-from utils.process_query import preprocess_nnqt_question
+from utils.query import preprocess_nnqt_question
 from utils.linguistic_parser import get_linguistic_context
 from utils.data_io import read_json, export_json
 

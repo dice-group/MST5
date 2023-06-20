@@ -1,5 +1,5 @@
 from utils.data_io import *
-from utils.process_query import preprocess_sparql
+from utils.query import preprocess_sparql
 from utils.linguistic_parser import get_linguistic_context
 import spacy
 import re
