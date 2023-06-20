@@ -1,5 +1,5 @@
 from utils.query import ask_dbpedia
-from utils.qald import build_qald_entry
+from code.utils.qald_utils import build_qald_entry
 from utils.data_io import export_json
 from utils.process_query import *
 
