@@ -1,3 +1,4 @@
+from pandas.io.sas.sasreader import FilePath
 import requests
 import io
 import json
@@ -5,27 +6,6 @@ import urllib.parse
 import urllib.request
 import pandas as pd
 import time
-
-class Gerbil:
-    def __init__(self) -> None:
-        pass
-
-    def add_experiment_id(self, experiment_id):
-        pass
-
-    def export_experiment_results(self):
-        pass
-
-    def add_ref_file(self, ref_name, ref_file):
-        pass
-
-    def add_pred_file(self, pred_name, pred_file, language):
-        pass
-
-    def submit_experiment(self):
-        pass
-    
-
 
 UPLOAD_HEADERS = {
     'Accept': 'application/json, text/javascript, */*; q=0.01',
@@ -59,55 +39,187 @@ SUBMIT_HEADERS = {
     'sec-ch-ua-platform': '"macOS"',
 }
 
+experiment_url_prefix = "https://gerbil-qa.aksw.org/gerbil/experiment?id="
+execute_url_prefix = "https://gerbil-qa.aksw.org/gerbil/execute?experimentData="
 
-def upload_file(name: str, file_path: str, source: str) -> bool:
-    if source == "ref":
-        data = set_ref_data(name)
-    elif source == "pred":
-        data = set_pred_data(name, file_path.split("/")[-1])
-    else:
-        print("Please provide source equals 'ref' or 'pred'")
-        return
 
-    files = set_files(file_path)
+class Gerbil:
+    def __init__(self) -> None:
+        self.pred_files = {}
 
-    try:
-        response = requests.post(
-            url='https://gerbil-qa.aksw.org/gerbil/file/upload',
-            headers=UPLOAD_HEADERS,
-            data=data,
-            files=files
+    def add_experiment_id(self, experiment_id):
+        self.experiment_id = experiment_id
+
+    def add_ref_file(self, name, file_path, replace=False):
+        if (self.ref_name or self.ref_file) and not replace:
+            print("Reference file already exists")
+        self.ref_name = name
+        self.ref_file = file_path
+
+    def add_pred_file(self, name, file_path, language, replace=False):
+        if language in self.pred_files and not replace:
+            print("Prediction file already exists")
+        self.pred_files[language] = [name, file_path]
+
+    def set_ref_data(self, name: str) -> dict:
+        return {
+            'name': name,
+            'multiselect': 'DBpedia Entity INEX',
+            'qlang': '',
+        }
+
+    def set_pred_data(self, name: str, pred_file: str) -> dict:
+        return {
+            'name': name,
+            'multiselect': 'AFDS_'+pred_file,
+            'qlang': '',
+        }
+
+    def set_files(self, file_path: str) -> dict:
+        file_content = open(file_path, 'rb').read()
+        file_obj = io.BytesIO(file_content)
+        return {
+            'files[]': (file_path, file_obj),
+        }
+
+    def upload_file(self, data, file):
+        try:
+            response = requests.post(
+                url='https://gerbil-qa.aksw.org/gerbil/file/upload',
+                headers=UPLOAD_HEADERS,
+                data=data,
+                files=file
+            )
+            response.raise_for_status()
+            print(f"Upload {file} successfully")
+            return True
+        except requests.exceptions.HTTPError as error:
+            print(f'Error: {error}')
+            return False
+
+    def upload_ref(self):
+        data = self.set_ref_data(self.ref_name)
+        file = self.set_files(self.ref_file)
+        self.upload_file(data, file)
+
+    def upload_pred(self):
+        for lang, [name, file_path] in self.pred_files.items():
+            data = self.set_pred_data(name, f"{lang}.json")
+            file = self.set_files(file_path)
+        self.upload_file(data, file)
+
+    def submit_experiment(self):
+        self.upload_ref()
+        self.upload_pred()
+        experiment_data = self.set_experiment_data()
+        execute_url = execute_url_prefix + experiment_data
+
+        try:
+            response = requests.get(execute_url, headers=SUBMIT_HEADERS)
+            response.raise_for_status()
+            print("GERBIL experiment is submitted successfully")
+            return response
+        except requests.exceptions.HTTPError as error:
+            print(f'Error: {error}')
+
+    def set_experiment_data(self):
+        ref_name, ref_file = self.get_ref_name_and_file(ref)
+
+        answer_file_names = self.get_answer_file_names(pred, ref_file)
+
+        dataset_name = ['NIFDS_'+ref_name+'('+ref_file+')']
+        ref_dataset = [f'NIFDS_{self.ref}()']
+
+        experiment_data = {
+            'type': 'QA',
+            'matching': 'STRONG_ENTITY_MATCH',
+            'annotator': [],
+            'dataset': dataset_name,
+            'answerFiles': answer_file_names,
+            'questionLanguage': 'en'
+        }
+
+        experiment_data_encoded = urllib.parse.quote(
+            json.dumps(experiment_data))
+        return experiment_data_encoded
+
+    def export_experiment_results(self, max_retry: int = 10):
+        if not self.experiment_id:
+            print("Please add an experiment id or submit an experiment.")
+            return
+        experiment_url = experiment_url_prefix + self.experiment_id
+        retry = 0
+
+        while retry < max_retry:
+            retry += 1
+            try:
+                response = requests.get(experiment_url)
+                content = response.text
+                if "The annotator caused too many single errors." in content:
+                    print(f"Experiment {id} could not be executed.")
+                    return
+                elif "The experiment is still running." in content:
+                    print("The experiment is still running.")
+                    time.sleep(30)
+                else:
+                    return content
+            except requests.exceptions.RequestException as e:
+                print('Error: ', e)
+                time.sleep(30)
+        print("Experiment " + id + " takes too much time.")
+
+    def clean_gerbil_table(self, html: str) -> str:
+        html = self.rename_unnamed_column_to_benchmark(html)
+        if "Benchmark" in html.columns:
+            html = self.select_where_benckmark_is_na(html)
+            html = self.drop_benckmark_column(html)
+        for index, row in html.iterrows():
+            language = row["Annotator"][-13:-11]
+            html.at[index, "Language"] = language
+        html = self.drop_unnecessary_columns(html)
+        return html
+
+    def drop_unnecessary_columns(self, html):
+        return html.drop(
+            columns=[
+                'Dataset',
+                'Annotator',
+                'Error Count',
+                'avg millis/doc',
+                'Timestamp',
+                'GERBIL version',
+            ]
         )
-        response.raise_for_status()
-        print(f"Upload {file_path} successfully")
-        return True
-    except requests.exceptions.HTTPError as error:
-        print(f'Error: {error}')
-        return False
 
+    def select_where_benckmark_is_na(self, html):
+        return html[html['Benchmark'].isna()]
 
-def set_files(file_path: str) -> dict:
-    file_content = open(file_path, 'rb').read()
-    file_obj = io.BytesIO(file_content)
-    return {
-        'files[]': (file_path, file_obj),
-    }
+    def drop_benckmark_column(self, html):
+        return html.drop(
+            columns=["Benchmark"]
+        )
 
+    def rename_unnamed_column_to_benchmark(self, html):
+        html = pd.read_html(html)[0].rename(columns={
+            "Unnamed: 3": "Benchmark",
+        })
 
-def set_ref_data(name: str) -> dict:
-    return {
-        'name': name,
-        'multiselect': 'DBpedia Entity INEX',
-        'qlang': '',
-    }
+        return html
 
+    def get_ref_name_and_file(self, ref):
+        for name in ref:
+            ref_name = name
+            ref_file_name = ref[name]
+        return ref_name, ref_file_name
 
-def set_pred_data(name: str, pred_file: str) -> dict:
-    return {
-        'name': name,
-        'multiselect': 'AFDS_'+pred_file,
-        'qlang': '',
-    }
+    def get_answer_file_names(self, pred, ref_file_name):
+        answer_files = []
+        for name in pred:
+            answer_files.append(
+                f'AF_{name}({pred[name]}))(undefined)(AFDS_{ref_file_name})'
+                )
+
+        return answer_files
 
 
 def upload_pred_by_lang(exp_setting: str, pred_pfad_prefix: str, languages: str):
@@ -122,7 +234,7 @@ def submit_experiment(ref: dict, pred: dict) -> requests.Response:
     answer_file_names = get_answer_file_names(pred, ref_file)
 
     dataset_name = ['NIFDS_'+ref_name+'('+ref_file+')']
-    
+
     experiment_data = {
         'type': 'QA',
         'matching': 'STRONG_ENTITY_MATCH',
@@ -143,20 +255,6 @@ def submit_experiment(ref: dict, pred: dict) -> requests.Response:
         return response
     except requests.exceptions.HTTPError as error:
         print(f'Error: {error}')
-
-def get_ref_name_and_file(ref):
-    for name in ref:
-        ref_name = name
-        ref_file_name = ref[name]
-    return ref_name,ref_file_name
-
-def get_answer_file_names(pred, ref_file_name):
-    answer_files = []
-    for name in pred:
-        answer_files.append(
-            'AF_'+name+'('+pred[name]+')(undefined)(AFDS_'+ref_file_name+')')
-            
-    return answer_files
 
 
 def get_exp_result_content(id: str, max_retry: int = 10) -> str:
@@ -180,46 +278,3 @@ def get_exp_result_content(id: str, max_retry: int = 10) -> str:
             print('Error: ', e)
             time.sleep(30)
     print("Experiment " + id + " takes too much time.")
-
-
-def clean_gerbil_table(html: str) -> str:
-    html = rename_unnamed_column_to_benchmark(html)
-    if "Benchmark" in html.columns:
-        html = select_where_benckmark_is_na(html)
-        html = drop_benckmark_column(html)
-    for index, row in html.iterrows():
-        language = row["Annotator"][-13:-11]
-        html.at[index, "Language"] = language
-    html = drop_unnecessary_columns(html)
-    return html
-
-
-def drop_unnecessary_columns(html):
-    return html.drop(
-        columns=[
-            'Dataset',
-            'Annotator',
-            'Error Count',
-            'avg millis/doc',
-            'Timestamp',
-            'GERBIL version',
-        ]
-    )
-
-
-def select_where_benckmark_is_na(html):
-    return html[html['Benchmark'].isna()]
-
-
-def drop_benckmark_column(html):
-    return html.drop(
-        columns=["Benchmark"]
-    )
-
-
-def rename_unnamed_column_to_benchmark(html):
-    html = pd.read_html(html)[0].rename(columns={
-        "Unnamed: 3": "Benchmark",
-    })
-
-    return html
