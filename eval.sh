@@ -1,6 +1,6 @@
 #!/bin/bash
 
-model="11_linguistic_mt5-xl"
+model="q9pp-ling-context"
 exp_setting="all_lang_linguistic_mt5-xl"
 pred_pfad=pred_files/${model}/
 linguitic_context="True"
