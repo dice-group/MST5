@@ -49,6 +49,8 @@ def main():
     args = parser.parse_args()
 
     languages = check_languages(args)
+    print(args.linguistic_context)
+    print(args.entity_knowledge)
 
     qald_file = read_json(args.input)
     qald_dataset = Qald(qald_file)
