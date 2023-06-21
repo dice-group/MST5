@@ -252,11 +252,6 @@ class Gerbil:
     def select_where_benckmark_is_na(self, html):
         return html[html['Benchmark'].isna()]
 
-    def drop_benckmark_column(self, html):
-        return html.drop(
-            columns=["Benchmark"]
-        )
-
 class Pred_file:
     def __init__(self, name: str, file_path: str) -> None:
         self.name = name
