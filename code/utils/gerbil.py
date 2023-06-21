@@ -5,14 +5,6 @@ import urllib.parse
 import urllib.request
 import pandas as pd
 import time
-import secrets
-
-def generate_jsessionid():
-    jsessionid = secrets.token_hex(16)
-    return jsessionid.upper()
-
-jsessionid = generate_jsessionid()
-print(f"jsessionid={jsessionid}")
 
 
 UPLOAD_HEADERS = {
