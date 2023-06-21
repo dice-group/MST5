@@ -1,8 +1,8 @@
 #!/bin/bash
 
-model="q9pp-ling-context"
-exp_setting="all_lang_linguistic_mt5-xl"
-pred_path=pred_files/${model}/
+model="mt5/12_mt5"
+exp_setting="mt5-base"
+pred_path=pred_files/${model}-new/
 linguitic_context="True"
 
 
@@ -16,8 +16,7 @@ do
         --model fine-tuned_models/${model} \
         -t datasets/qald9plus/qald_9_pp_test_wikidata_linguistic.json \
         -o pred_files/${model}/${lang}.json \
-        -l ${lang} \
-        --linguistic_context ${linguitic_context}
+        -l ${lang}
 done
 
 echo "Start running GERBIL experiment"
