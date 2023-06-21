@@ -1,4 +1,3 @@
-from pandas.io.sas.sasreader import FilePath
 import requests
 import io
 import json
@@ -6,13 +5,22 @@ import urllib.parse
 import urllib.request
 import pandas as pd
 import time
+import secrets
+
+def generate_jsessionid():
+    jsessionid = secrets.token_hex(16)
+    return jsessionid.upper()
+
+jsessionid = generate_jsessionid()
+print(f"jsessionid={jsessionid}")
+
 
 UPLOAD_HEADERS = {
     'Accept': 'application/json, text/javascript, */*; q=0.01',
     'Accept-Language': 'en-US,en;q=0.9,zh-CN;q=0.8,zh-TW;q=0.7,zh;q=0.6,ja;q=0.5',
     'Connection': 'keep-alive',
     'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundaryBbipJCvvqkGEBh6H',
-    'Cookie': 'JSESSIONID=95939E4A9280DC982C1C75A437081F29',
+    'Cookie': f'JSESSIONID={jsessionid}',
     'Origin': 'https://gerbil-qa.aksw.org',
     'Referer': 'https://gerbil-qa.aksw.org/gerbil/config',
     'Sec-Fetch-Dest': 'empty',
@@ -29,7 +37,7 @@ SUBMIT_HEADERS = {
     'Accept': '*/*',
     'Accept-Language': 'en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7',
     'Connection': 'keep-alive',
-    'Cookie': 'JSESSIONID=265042E6F0ECFC6AEEA55C409FB7168F',
+    'Cookie': f'JSESSIONID={jsessionid}',
     'Referer': 'https://gerbil-qa.aksw.org/gerbil/config',
     'Sec-Fetch-Dest': 'empty',
     'Sec-Fetch-Mode': 'cors',
