@@ -3,7 +3,7 @@ import argparse
 from utils.gerbil import Gerbil
 
 ref_name = 'qald 9 plus test'
-ref_file_path = "datasets/qald9plus/qald_9_pp_test_wikidata.json"
+ref_file_path = "datasets/qald9plus/qald_9_pp_test_wikidata_new.json"
 
 def main():
     parser = argparse.ArgumentParser(
