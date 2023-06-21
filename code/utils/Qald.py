@@ -1,5 +1,5 @@
 from utils.data_io import *
-from utils.query import preprocess_sparql
+from utils.query import preprocess_sparql, ask_wikidata
 from utils.linguistic_parser import get_linguistic_context
 import spacy
 import re
@@ -75,6 +75,10 @@ class Qald:
                 question_string = qald_entry.get_question_string_by_language(language, include_linguistic_context, include_entity_knowledge)
                 questions_with_id.append([qald_entry.id, question_string])
         return questions_with_id
+    
+    def update_answers(self):
+        for qald_entry in self.qald:
+            qald_entry.update_answer()
 
 class Qald_entry:
     def __init__(self, id, questions, query, answers) -> None:
@@ -126,13 +130,14 @@ class Qald_entry:
         if include_entity_knowledge:
             entity_knowledge = self.get_entity_knowledge()
         for language in languages:
-            question_string = self.questions[language].build_question_string(include_linguistic_context, entity_knowledge)
-            question_lang_and_string.append(
-                {
-                    "language": language,
-                    "string": question_string
-                }
-            )
+            if language in self.questions:
+                question_string = self.questions[language].build_question_string(include_linguistic_context, entity_knowledge)
+                question_lang_and_string.append(
+                    {
+                        "language": language,
+                        "string": question_string
+                    }
+                )
         return question_lang_and_string
     
     def get_question_string_by_language(self, language, include_linguistic_context: bool, include_entity_knowledge: bool) -> str:
@@ -140,6 +145,9 @@ class Qald_entry:
         if include_entity_knowledge:
             entity_knowledge = self.get_entity_knowledge()
         return self.questions[language].build_question_string(include_linguistic_context, entity_knowledge)
+
+    def update_answer(self):
+        self.answers = ask_wikidata(self.query)
 
 
 class Question:
