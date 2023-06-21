@@ -2,8 +2,8 @@ import os
 import argparse
 from utils.gerbil import Gerbil
 
-ref_name = 'qald 9 plus test'
-ref_file_path = "datasets/qald9plus/qald_9_pp_test_wikidata.json"
+default_ref_name = 'qald 9 plus test'
+default_ref_file_path = "datasets/qald9plus/qald_9_pp_test_wikidata_new.json"
 
 def main():
     parser = argparse.ArgumentParser(
@@ -13,12 +13,12 @@ def main():
     parser.add_argument("--ref_name", 
                         type=str,
                         help="name of reference file", 
-                        default='qald 9 plus test',
+                        default=default_ref_name,
                         required=False)
     parser.add_argument("--ref_file_path", 
                         type=str,
                         help="path of reference file", 
-                        default="datasets/qald9plus/qald_9_pp_test_wikidata.json",
+                        default=default_ref_file_path,
                         required=False)
     parser.add_argument("--experiment_id",
                         type=str,
