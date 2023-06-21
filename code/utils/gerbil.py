@@ -220,9 +220,10 @@ class Gerbil:
 
     def get_answer_file_names(self, ref_file_name):
         answer_files = []
-        for name in self.pred_files:
+        for lang, pred_file in self.pred_files.items():
+            file_name = pred_file.file_path.split('/')[-1]
             answer_files.append(
-                f'AF_{name}({name}.json)(undefined)(AFDS_{ref_file_name})'
+                f"AF_{pred_file.name}({file_name})(undefined)(AFDS_{ref_file_name})"
             )
 
         return answer_files
