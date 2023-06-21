@@ -64,7 +64,8 @@ class Gerbil:
     def add_pred_file(self, name, file_path, language, replace=False):
         if language in self.pred_files and not replace:
             print("Prediction file already exists")
-        self.pred_files[language] = [name, file_path]
+        pred_file = Pred_file(name, file_path)
+        self.pred_files[language] = pred_file
 
     def set_ref_data(self, name: str) -> dict:
         return {
@@ -74,12 +75,11 @@ class Gerbil:
             'qlang': ''
         }
 
-    def set_pred_data(self, name: str, pred_file: str) -> dict:
+    def set_pred_data(self, name: str) -> dict:
         ref_file_name = self.ref_file.split('/')[-1]
         return {
             'name': name,
             'URI': '',
-            'name': 'en-mT5-xl-lcquad',
             'multiselect': f'AFDS_{ref_file_name}',
             'qlang': ''
         }
@@ -93,12 +93,7 @@ class Gerbil:
 
     def upload_file(self, data, file):
         try:
-            response = requests.post(
-                url='https://gerbil-qa.aksw.org/gerbil/file/upload',
-                headers=UPLOAD_HEADERS,
-                data=data,
-                files=file
-            )
+            response = self.send_post_request_for_upload(data, file)
             response.raise_for_status()
             print(f"Upload {file} successfully")
             return True
@@ -106,16 +101,25 @@ class Gerbil:
             print(f'Error: {error}')
             return False
 
+    def send_post_request_for_upload(self, data, file):
+        return requests.post(
+                url='https://gerbil-qa.aksw.org/gerbil/file/upload',
+                headers=UPLOAD_HEADERS,
+                data=data,
+                files=file
+            )
+
     def upload_ref(self):
         data = self.set_ref_data(self.ref_name)
         file = self.set_files(self.ref_file)
         self.upload_file(data, file)
 
     def upload_pred(self):
-        for lang, [name, file_path] in self.pred_files.items():
-            data = self.set_pred_data(name, f"{lang}.json")
-            file = self.set_files(file_path)
-        self.upload_file(data, file)
+        pred_file: Pred_file
+        for pred_file in self.pred_files.values():
+            data = self.set_pred_data(pred_file.name)
+            file = self.set_files(pred_file.file_path)
+            self.upload_file(data, file)
 
     def submit_experiment(self):
         self.upload_ref()
@@ -124,7 +128,7 @@ class Gerbil:
         execute_url = execute_url_prefix + experiment_data
 
         try:
-            response = requests.get(execute_url, headers=SUBMIT_HEADERS)
+            response = self.send_get_request(execute_url)
             response.raise_for_status()
             self.experiment_id = response.text
             print("GERBIL experiment is submitted successfully")
@@ -132,6 +136,9 @@ class Gerbil:
             return response
         except requests.exceptions.HTTPError as error:
             print(f'Error: {error}')
+
+    def send_get_request(self, execute_url):
+        return requests.get(execute_url, headers=SUBMIT_HEADERS)
 
     def set_experiment_data(self):
         ref_file_name = self.ref_file.split('/')[-1]
@@ -170,12 +177,12 @@ class Gerbil:
         while retry < max_retry:
             retry += 1
             try:
-                response = requests.get(experiment_url)
+                response = self.send_get_request(experiment_url)
                 content = response.text
-                if "The annotator caused too many single errors." in content:
+                if self.is_error_in_experiment(content):
                     print(f"Experiment {id} could not be executed.")
                     return
-                elif "The experiment is still running." in content:
+                elif self.is_experiment_running(content):
                     print("The experiment is still running.")
                     time.sleep(30)
                 else:
@@ -185,11 +192,16 @@ class Gerbil:
                 time.sleep(30)
         print("Experiment " + id + " takes too much time.")
 
+    def is_error_in_experiment(self, content):
+        return "The annotator caused too many single errors." in content or "The dataset couldn't be loaded." in content
+
+    def is_experiment_running(self, content):
+        return "The experiment is still running." in content
+
     def rename_unnamed_column_to_benchmark(self, html):
         html = pd.read_html(html)[0].rename(columns={
             "Unnamed: 3": "Benchmark",
         })
-
         return html
 
     def get_ref_name_and_file(self, ref):
@@ -244,3 +256,9 @@ class Gerbil:
         return html.drop(
             columns=["Benchmark"]
         )
+
+class Pred_file:
+    def __init__(self, name: str, file_path: str) -> None:
+        self.name = name
+        self.file_path = file_path
+    
