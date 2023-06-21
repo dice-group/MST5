@@ -27,8 +27,8 @@ def main():
                         required=False)
     parser.add_argument("--exp_setting", type=str,
                         help="experiment setting", required=False)
-    parser.add_argument("--pred_pfad", type=str,
-                        help="pfad of prediction files", required=True)
+    parser.add_argument("--pred_path", type=str,
+                        help="path of prediction files", required=True)
 
     args = parser.parse_args()
 
@@ -36,15 +36,15 @@ def main():
 
     if args.experiment_id:
         gerbil.add_experiment_id(args.experiment_id)
-        gerbil.export_results(f"{args.pred_pfad}/result.csv")
+        gerbil.export_results(f"{args.pred_path}/result.csv")
         return
 
-    languages = [f.split(".")[0] for f in os.listdir(args.pred_pfad) if f.endswith('.json')]
+    languages = [f.split(".")[0] for f in os.listdir(args.pred_path) if f.endswith('.json')]
     gerbil.add_ref_file(args.ref_name, args.ref_file_path)
     for lang in languages:
-        gerbil.add_pred_file(f"{args.exp_setting}-{lang}", f"{args.pred_pfad}/{lang}.json", lang)
+        gerbil.add_pred_file(f"{args.exp_setting}-{lang}", f"{args.pred_path}/{lang}.json", lang)
     gerbil.submit_experiment()
-    gerbil.export_results(f"{args.pred_pfad}/result.csv")
+    gerbil.export_results(f"{args.pred_path}/result.csv")
 
 if __name__ == "__main__":
     main()

@@ -2,7 +2,7 @@
 
 model="q9pp-ling-context"
 exp_setting="all_lang_linguistic_mt5-xl"
-pred_pfad=pred_files/${model}/
+pred_path=pred_files/${model}/
 linguitic_context="True"
 
 
@@ -23,6 +23,6 @@ done
 echo "Start running GERBIL experiment"
 python code/gerbil_eval.py \
     --exp_setting ${exp_setting} \
-    --pred_pfad ${pred_pfad}
+    --pred_path ${pred_path}
 
 
