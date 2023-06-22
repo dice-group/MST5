@@ -5,6 +5,7 @@ from SPARQLWrapper import JSON
 from SPARQLWrapper import SPARQLWrapper
 from SPARQLWrapper.SPARQLExceptions import SPARQLWrapperException
 import re
+import sys
 
 REPLACEMENT_BACK = [
     ["var-", " ?"],
@@ -72,10 +73,14 @@ def predict_query(summarizer, question_string):
 
 
 def ask_wikidata(sparql_query):
+    endpoint_url = "https://query.wikidata.org/sparql"
     try:
-        r = requests.get('https://query.wikidata.org/sparql',
-                         params={'format': 'json', 'query': sparql_query})
-        return r.json()
+        user_agent = "WDQS-example Python/%s.%s" % (sys.version_info[0], sys.version_info[1])
+        # TODO adjust user agent; see https://w.wiki/CX6
+        sparql = SPARQLWrapper(endpoint_url, agent=user_agent)
+        sparql.setQuery(sparql_query)
+        sparql.setReturnFormat(JSON)
+        return sparql.query().convert()
     except:
         return {"head": {"vars": []}, "results": {"bindings": []}}
 
