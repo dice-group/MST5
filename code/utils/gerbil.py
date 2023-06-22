@@ -187,7 +187,7 @@ class Gerbil:
             except requests.exceptions.RequestException as e:
                 print('Error: ', e)
                 time.sleep(30)
-        print("Experiment " + id + " takes too much time.")
+        print(f"Experiment {self.experiment_id} takes too much time.")
 
     def is_error_in_experiment(self, content):
         return "The annotator caused too many single errors." in content or "The dataset couldn't be loaded." in content
