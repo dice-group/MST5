@@ -1,6 +1,6 @@
 #!/bin/bash
 
-model="mt5-xl-lcquad-300rt-ling"
+model="mt5-xl-lcquad-300rt"
 pred_path=pred_files/${model}
 linguitic_context="True"
 
