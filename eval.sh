@@ -15,9 +15,7 @@ do
         --model fine-tuned_models/${model} \
         -t datasets/qald9plus/qald_9_pp_test_wikidata_new.json \
         -o ${pred_path}/${lang}.json \
-        -l ${lang} \
-        --linguistic_context True \
-        --entity_knowledge True
+        -l ${lang}
 done
 
 echo "Start running GERBIL experiment"
