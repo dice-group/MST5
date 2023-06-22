@@ -77,6 +77,7 @@ class Qald:
         return questions_with_id
     
     def update_answers(self):
+        qald_entry: Qald_entry
         for qald_entry in self.qald:
             qald_entry.update_answer()
 
@@ -148,6 +149,8 @@ class Qald_entry:
 
     def update_answer(self):
         self.answers = ask_wikidata(self.query)
+        print(self.query)
+        print(self.answers)
 
 
 class Question:
