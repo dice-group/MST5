@@ -1,4 +1,4 @@
-from utils.Sgpt import Sgpt
+from utils.Sgpt import Sgpt_pred
 import argparse
 from utils.data_io import read_json
 
@@ -17,7 +17,7 @@ def main():
 
     sgpt_file: list = read_json(args.input)
 
-    Sgpt_dataset: Sgpt = Sgpt(sgpt_file)
+    Sgpt_dataset: Sgpt_pred = Sgpt_pred(sgpt_file)
 
     Sgpt_dataset.build_and_extract_pred_qald(args.output_pred)
     Sgpt_dataset.build_and_extract_ref_qald(args.output_ref)

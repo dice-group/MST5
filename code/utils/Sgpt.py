@@ -23,7 +23,7 @@ prefixes = [
 ]
 
 
-class Sgpt:
+class Sgpt_pred:
     def __init__(self, queries: list) -> None:
         self.queries: list = self.convert_file_to_Sgpt_entries(queries)
         self.ref_qald: list = []
