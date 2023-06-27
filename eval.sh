@@ -1,19 +1,18 @@
 #!/bin/bash
 
-model="mt5/11_mt5"
+model="mt5-base-qald9-dbpedia"
 pred_path=pred_files/${model}
-linguitic_context="True"
 
 
-languages=("en" "de" "ru" "fr" "zh" "lt" "ja" "ba" "be" "uk")
+languages=("en" "de" "ru" "fr" "lt" "ba" "be" "uk")
 
 
 for lang in "${languages[@]}"
 do
     echo "Generating predicted qald file for ${lang}"
     python code/test_and_build_qald.py \
-        --model fine-tuned_models/${model} \
-        -t datasets/qald9plus/qald_9_pp_test_wikidata_new.json \
+        --model fine-tuned_models/mt5-base-qald9-dbpedia/checkpoint-20000 \
+        -t datasets/qald9plus/dbpedia/qald_9_plus_test_dbpedia.json \
         -o ${pred_path}/${lang}.json \
         -l ${lang}
 done

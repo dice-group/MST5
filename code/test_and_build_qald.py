@@ -1,6 +1,6 @@
 import argparse
 from utils.data_io import read_json
-from utils.query import init_summarizer, predict_query, ask_wikidata
+from utils.query import ask_dbpedia, init_summarizer, predict_query, ask_wikidata
 from utils.query import postprocess_sparql
 from utils.Qald import Qald
 from tqdm import tqdm
@@ -9,7 +9,7 @@ from tqdm import tqdm
 def get_query_and_answer(summarizer, question_string):
     query_pred = predict_query(summarizer, question_string)
     sparql_query = postprocess_sparql(query_pred)
-    answer = ask_wikidata(sparql_query)
+    answer = ask_dbpedia(sparql_query)
     return sparql_query, answer
 
 
