@@ -125,6 +125,7 @@ class Query:
         except:
             return {"head": {"vars": []}, "results": {"bindings": []}}
         
+        
     def get_entity_knowledge(self) -> list:
         if self.knowledge_graph==Knowledge_graph.DBpedia:
             pattern = r'\b(dbr_\w+|res_\w+)\b'
