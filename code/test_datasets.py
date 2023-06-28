@@ -33,7 +33,8 @@ class LCquad1Test(unittest.TestCase):
         expected_query = Query("SELECT DISTINCT COUNT(?uri) WHERE {?uri <http://dbpedia.org/ontology/director> <http://dbpedia.org/resource/Stanley_Kubrick>  . }", Knowledge_graph.DBpedia)
 
 
-        self.assertEqual(query, expected_query)
+        self.assertEqual(query.sparql, expected_query.sparql)
+        self.assertEqual(query.knowledge_graph, expected_query.knowledge_graph)
 
 
 if __name__ == '__main__':
