@@ -1,3 +1,7 @@
+from dataset.Dataset import Dataset, Entry
+from components.Language import Language
+from components.Question import Question
+from components.Query import Query
 from utils.data_io import export_json
 
 prefixes = [
@@ -20,9 +24,9 @@ prefixes = [
 ]
 
 
-class Sgpt_pred:
-    def __init__(self, queries: list) -> None:
-        self.queries: list = self.convert_file_to_Sgpt_entries(queries)
+class Sgpt_pred(Dataset):
+    def __init__(self, sgpt_pred_file: list) -> None:
+        self.queries: list = self.convert_file_to_Sgpt_entries(sgpt_pred_file)
         self.ref_qald: list = []
         self.pred_qald: list = []
 
@@ -60,10 +64,14 @@ class Sgpt_pred:
                 id, "example question", entry.pred_query, answer, "en"))
 
 
+
 class Sgpt_entry:
     def __init__(self, ref_query: str, pred_query: str) -> None:
         self.ref_query: str = ref_query
         self.pred_query: str = pred_query
+
+    def build_pred_query(self, pred_sparql, knowledge_graph):
+        return Query(pred_sparql, knowledge_graph)
 
     def add_prefixes(self, query: str) -> str:
         return (' ').join(prefixes) + query
