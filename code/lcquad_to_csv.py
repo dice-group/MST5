@@ -1,6 +1,6 @@
 import argparse
 from utils.data_io import read_json
-from utils.LCquad import LCquad
+from dataset import LCquad2
 
 
 def main():
@@ -18,7 +18,7 @@ def main():
     args = parser.parse_args()
 
     lcquad_file = read_json(args.input)
-    lcquad_dataset = LCquad(lcquad_file)
+    lcquad_dataset = LCquad2(lcquad_file)
     lcquad_dataset.export_train_csv(args.output, args.linguistic_context, args.entity_knowledge)
 
 if __name__ == "__main__":
