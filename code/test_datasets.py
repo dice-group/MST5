@@ -591,5 +591,14 @@ class Test_LCquad2(unittest.TestCase):
         self.assertEqual(train_csv[1][0], "What is the country for head of state of Mahmoud Abbas")
         self.assertFalse(":" in train_csv[1][1])
 
+
+    def test_to_train_csv_with_ling_and_entity(self):
+        train_csv = self.lcquad2.to_train_csv(True, True)
+        self.assertEqual(train_csv[0], ["question", "query"])
+        self.assertTrue("ROOT" in train_csv[1][0])
+        self.assertTrue("wd_" in train_csv[1][1])
+        self.assertFalse(":" in train_csv[1][1])
+    
+
 if __name__ == '__main__':
     unittest.main()
