@@ -7,7 +7,7 @@ class Question:
 
 
     def get_linguistic_context(self):
-        nlp = Language.get_spacy_nlp(str(self.language))
+        nlp = Language.get_spacy_nlp(self.language)
         doc = self.get_doc(self.question_string, nlp)
         pos = self.get_pos(doc)
         dep = self.get_dep(doc)
@@ -20,7 +20,6 @@ class Question:
 
     def get_pos(self, doc):
         return [token.pos_ for token in doc]
-
 
     def get_dep(self, doc):
         return [token.dep_ for token in doc]
