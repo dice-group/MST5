@@ -2,6 +2,7 @@ import unittest
 from dataset.LCquad1 import LCquad1, LCquad1_entry
 from dataset.LCquad2 import LCquad2, LCquad2_entry
 from dataset.Qald import Qald, Qald_entry
+from dataset.Sgpt import Sgpt_pred, Sgpt_entry
 from components.Language import Language
 from components.Knowledge_graph import Knowledge_graph
 from components.Query import Query
@@ -598,6 +599,21 @@ class Test_LCquad2(unittest.TestCase):
         self.assertTrue("ROOT" in train_csv[1][0])
         self.assertTrue("wd_" in train_csv[1][1])
         self.assertFalse(":" in train_csv[1][1])
+
+
+class Test_Sgpt_entry(unittest.TestCase):
+    def setUp(self) -> None:
+        self.sample_entry = {
+            "id": "",
+            "ground_truth_sparql": "select distinct ?uri where { res:Berlin dbp:leader ?uri } ",
+            "predicted_sparql": "select distinct ?uri where { res:Berlin dbo:leaderName ?uri }"
+        }
+        return super().setUp()
+    
+    def test_build_pred_query(self):
+        entry = Sgpt_entry("", "")
+        pred_query: Query = entry.build_pred_query(self.sample_entry["predicted_sparql"], Knowledge_graph.DBpedia)
+        self.assertEqual(pred_query.sparql, "select distinct ?uri where { res:Berlin dbo:leaderName ?uri }")
     
 
 if __name__ == '__main__':
