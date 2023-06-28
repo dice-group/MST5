@@ -616,7 +616,7 @@ class Test_Sgpt_entry(unittest.TestCase):
         self.assertEqual(pred_query.sparql, "select distinct ?uri where { res:Berlin dbo:leaderName ?uri }")
 
     def test_build_pred_query(self):
-        entry = Sgpt_entry(self.sample_entry)
+        entry = Sgpt_entry(self.sample_entry, Knowledge_graph.DBpedia)
         self.assertEqual(entry.pred_query.sparql, "select distinct ?uri where { res:Berlin dbo:leaderName ?uri }")
         
     
