@@ -612,7 +612,7 @@ class Test_Sgpt_entry(unittest.TestCase):
     
     def test_build_query(self):
         entry = Sgpt_entry("", "")
-        pred_query: Query = entry.build_pred_query(self.sample_entry["predicted_sparql"], Knowledge_graph.DBpedia)
+        pred_query: Query = entry.build_query(self.sample_entry["predicted_sparql"], Knowledge_graph.DBpedia)
         self.assertEqual(pred_query.sparql, "select distinct ?uri where { res:Berlin dbo:leaderName ?uri }")
     
 
