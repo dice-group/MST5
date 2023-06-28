@@ -66,9 +66,9 @@ class Sgpt_pred(Dataset):
 
 
 class Sgpt_entry(Entry):
-    def __init__(self, ref_query: str, pred_query: str) -> None:
-        self.ref_query: str = ref_query
-        self.pred_query: str = pred_query
+    def __init__(self, entry, knowledge_graph) -> None:
+        self.ref_query: str = None
+        self.pred_query: str = super().build_query(entry["predicted_sparql"], knowledge_graph)
 
     def build_pred_query(self, pred_sparql, knowledge_graph):
         return Query(pred_sparql, knowledge_graph)
