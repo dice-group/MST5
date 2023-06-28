@@ -1,11 +1,12 @@
 import unittest
 from dataset.LCquad1 import LCquad1, LCquad1Entry
+from dataset.Qald import Qald, Qald_entry
 from components.Language import Language
 from components.Knowledge_graph import Knowledge_graph
 from components.Query import Query
 from components.Question import Question
 
-class LCquad1Test(unittest.TestCase):
+class Test_LCquad1_entry(unittest.TestCase):
     def setUp(self) -> None:
         self.input_entry = {"_id": "1501", 
                 "corrected_question": "How many movies did Stanley Kubrick direct?", 
@@ -75,6 +76,90 @@ class Test_LCquad1(unittest.TestCase):
         first_question, _ = csv[1]
         self.assertEqual(header, ['question', 'query'])
         self.assertEqual(first_question, "How many movies did Stanley Kubrick direct?")
+
+class Test_Qald_entry(unittest.TestCase):
+    def setUp(self) -> None:
+        self.id = "99"
+        self.questions = [
+                {
+                    "language": "en",
+                    "string": "What is the time zone of Salt Lake City?"
+                },
+                {
+                    "language": "de",
+                    "string": "Was ist die Zeitzone von Salt Lake City?"
+                },
+                {
+                    "language": "zh",
+                    "string": "盐湖城时区是什么？"
+                },
+                {
+                    "language": "ja",
+                    "string": "ソルトレイクシティのタイムゾーンは?"
+                },
+                {
+                    "language": "ru",
+                    "string": "В каком часовом поясе расположен Солт-Лейк-Сити?"
+                },
+                {
+                    "language": "uk",
+                    "string": "Який часовий пояс у Солт-Лейк Сіті?"
+                },
+                {
+                    "language": "ba",
+                    "string": "Ниндей вакыт поясы Солт-Лейк-Ситила"
+                },
+                {
+                    "language": "be",
+                    "string": "Які гадзінны пояс у Солт-Лэйк-Сіці"
+                },
+                {
+                    "language": "lt",
+                    "string": "Kokia laiko juosta yra Solt Leik Sityjes"
+                }
+            ]
+        self.sparql = "SELECT DISTINCT ?o1 WHERE { <http://www.wikidata.org/entity/Q23337>  <http://www.wikidata.org/prop/direct/P421>  ?o1 .  }"
+        self.answers = [
+                {
+                    "head": {
+                        "vars": [
+                            "o1"
+                        ]
+                    },
+                    "results": {
+                        "bindings": [
+                            {
+                                "o1": {
+                                    "type": "uri",
+                                    "value": "http://www.wikidata.org/entity/Q3134980"
+                                }
+                            },
+                            {
+                                "o1": {
+                                    "type": "uri",
+                                    "value": "http://www.wikidata.org/entity/Q2212"
+                                }
+                            }
+                        ]
+                    }
+                }
+            ]
+        self.qald_entry = Qald_entry(self.id, self.questions, self.sparql, Knowledge_graph.Wikidata, self.answers)
+        
+    def test_build_questions(self):
+        questions = self.qald_entry.build_questions(self.questions)
+        
+        self.assertEqual(questions["en"].question_string, "What is the time zone of Salt Lake City?")
+        self.assertEqual(questions["zh"].question_string, "盐湖城时区是什么？")
+
+    def test_build
+        
+
+    def test_init_qald_entry(self): 
+
+        self.assertEqual(self.qald_entry.id, self.id)
+        self.assertEqual(self.qald_entry.questions["en"].question_string, "What is the time zone of Salt Lake City?")
+        self.assertEqual(self.qald_entry.query.sparql, self.sparql)
 
 
 
