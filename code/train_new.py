@@ -20,13 +20,13 @@ from transformers import (
 )
 from transformers.trainer_utils import get_last_checkpoint
 from transformers.utils import check_min_version
-from utils.data_training_arguments import DataTrainingArguments
-from utils.model_arguments import ModelArguments
+from arguments.data_training_arguments import DataTrainingArguments
+from arguments.model_arguments import ModelArguments
 from utils.qald_utils import build_qald_entry
-from code.query.query import ask_wikidata
+from components.query import ask_wikidata
 from utils.data_io import export_json
-from code.query.query import postprocess_sparql
-from code.components.gerbil import *
+from components.query import postprocess_sparql
+from components.gerbil import *
 
 logger = logging.getLogger(__name__)
 
