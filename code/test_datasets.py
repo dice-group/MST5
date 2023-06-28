@@ -75,6 +75,10 @@ class Test_LCquad1(unittest.TestCase):
         first_question, _ = csv[1]
         self.assertEqual(header, ['question', 'query'])
         self.assertEqual(first_question, "How many movies did Stanley Kubrick direct?")
+
+class Test_Language(unittest.TestCase):
+    def test_get_nlp(self):
+        Language.get_spacy_nlp(Language.en)
         
 
 
