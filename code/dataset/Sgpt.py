@@ -87,20 +87,20 @@ def export_sgpt_file(output, sgpt_set):
     export_json(output, sgpt_train)
 
 
-def change_sparql(sgpt_dict, qald_entry, question_string):
-    fil_sparql = postprocess_sparql(
-        preprocess_sparql(qald_entry["query"]["sparql"]))
-    sgpt_dict[question_string]["fil_sparql"] = fil_sparql
+# def change_sparql(sgpt_dict, qald_entry, question_string):
+#     fil_sparql = postprocess_sparql(
+#         preprocess_sparql(qald_entry["query"]["sparql"]))
+#     sgpt_dict[question_string]["fil_sparql"] = fil_sparql
 
 
-def change_dbpedia_sparql_to_sparql(wikidata_qald, sgpt_dbpedia, output):
-    sgpt_dict = build_sgpt_dict(sgpt_dbpedia)
-    qald_entries = wikidata_qald["questions"]
-    for qald_entry_wikidata in qald_entries:
-        for question in qald_entry_wikidata["question"]:
-            if question["language"] == "en":
-                question_string = question["string"].lower()
-                if is_question_in_sgpt(question_string, sgpt_dict):
-                    change_sparql(sgpt_dict, qald_entry_wikidata,
-                                  question_string)
-    export_sgpt_file(output, sgpt_dict)
+# def change_dbpedia_sparql_to_sparql(wikidata_qald, sgpt_dbpedia, output):
+#     sgpt_dict = build_sgpt_dict(sgpt_dbpedia)
+#     qald_entries = wikidata_qald["questions"]
+#     for qald_entry_wikidata in qald_entries:
+#         for question in qald_entry_wikidata["question"]:
+#             if question["language"] == "en":
+#                 question_string = question["string"].lower()
+#                 if is_question_in_sgpt(question_string, sgpt_dict):
+#                     change_sparql(sgpt_dict, qald_entry_wikidata,
+#                                   question_string)
+#     export_sgpt_file(output, sgpt_dict)
