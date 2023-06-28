@@ -1,16 +1,19 @@
+from spacy import language
 from utils.data_io import export_csv
+from dataset.Dataset import Dataset, Entry
+from components.Question import Question
+from components.Query import Query
+import re
 
-nlp_en = spacy.load("en_core_web_sm")
 
-
-class LCquad:
+class LCquad2(Dataset):
     def __init__(self, lcquad_file) -> None:
-        self.lcquad = self.init_lcquad_list(lcquad_file)
+        self.entries = self.build_lcquad_list(lcquad_file)
 
-    def init_lcquad_list(self, lcquad_file: list):
+    def build_lcquad_list(self, lcquad_file: list):
         lcquad_list = []
         for lcquad in lcquad_file:
-            lcquad_entry = LCquad_entry(
+            lcquad_entry = LCquad2_entry(
                 lcquad["NNQT_question"],
                 lcquad["uid"],
                 lcquad["question"],
@@ -21,8 +24,8 @@ class LCquad:
 
     def export_train_csv(self, output_file, include_linguistic_context: bool = False, include_entity_knowledge: bool = False):
         csv_dataset = [["question", "query"]]
-        lcquad_entry: LCquad_entry
-        for lcquad_entry in self.lcquad:
+        lcquad_entry: LCquad2_entry
+        for lcquad_entry in self.entries:
             query = lcquad_entry.preprossed_query
             question = lcquad_entry.get_question_string(
                 include_linguistic_context, include_entity_knowledge)
@@ -30,13 +33,18 @@ class LCquad:
         export_csv(output_file, csv_dataset)
 
 
-class LCquad_entry:
-    def __init__(self, NNQT_question, uid, question, sparql_wikidata) -> None:
-        self.NNQT_question = self.preprocess_nnqt_question(NNQT_question)
+class LCquad2_entry(Entry):
+    def __init__(self, NNQT_question, uid, sparql, knowledge_graph) -> None:
         self.uid = uid
-        self.question = question
-        self.query = sparql_wikidata
-        self.preprossed_query = preprocess_sparql(sparql_wikidata)
+        self.question = self.build_question(NNQT_question, language)
+        self.query = self.build_query(sparql)
+
+    def build_question(self, question_string, language):
+        return Question(question_string, language)
+    
+    def build_query(self, sparql):
+        pass
+    
 
     def get_question_string(self, include_linguistic_context, include_entity_knowledge) -> str:
         question_string = self.NNQT_question
@@ -45,17 +53,6 @@ class LCquad_entry:
         if include_entity_knowledge:
             question_string += self.get_entity_knowledge()
         return question_string
-
-    def get_linguistic_context_string(self) -> str:
-        _, pos, dep, depth_list = get_linguistic_context(nlp_en, self.NNQT_question)
-        return " <pad> " + " ".join(pos) \
-                + " <pad> " + " ".join(dep) \
-                + " <pad> " + " ".join(map(str, depth_list))
-
-    def get_entity_knowledge(self) -> str:
-        pattern = r'\bwd_\w+\b'
-        entities = re.findall(pattern, self.preprossed_query)
-        return " <pad> " + (" ").join(entities)
 
     def preprocess_nnqt_question(self, NNQT_ques):
         NNQT_ques = NNQT_ques.translate(str.maketrans('<>{},()', '       '))
