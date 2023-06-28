@@ -11,11 +11,8 @@ datasets/11_linguistic/*
 sparql-tokenizer-trainedon_all/*
 .lock
 papers/*
-code/utils/__pycache__/*
 wandb/*
-code/__pycache__/*
 datasets/*.csv
 .vscode/*
 datasets/lcquad/*.csv
-code/components/__pycache__/*
-code/dataset/__pycache__/*
+**/__pycache__/*
