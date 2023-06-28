@@ -21,10 +21,16 @@ class Test_Query(unittest.TestCase):
         return super().setUp()
     
     def test_replace_prefix_abbr(self):
-        self.assertTrue(False)
+        processed_sparql = self.query.replace_prefix_abbr(self.query.sparql)
+        self.assertFalse("http://dbpedia.org/ontology" in processed_sparql)
+        self.assertFalse("http://dbpedia.org/resource/" in processed_sparql)
 
     def test_delete_sparql_prefix(self):
-        self.assertTrue(False)
+        query = Query("PREFIX wdt: <http://www.wikidata.org/prop/direct/> PREFIX wd: <http://www.wikidata.org/entity/> SELECT ?uri WHERE { ?uri wdt:P31 wd:Q8502 ; wdt:P2044 ?elevation ; wdt:P17 wd:Q183 . } ORDER BY DESC(?elevation) LIMIT 1", Knowledge_graph.Wikidata)
+        processed_sparql = query.delete_sparql_prefix(self.query.sparql)
+        self.assertFalse("PREFIX" in processed_sparql)
+        self.assertFalse("http://www.wikidata.org/entity/" in processed_sparql)
+
     
     def test_preprocess_sparql(self):
         preprocessed_query = self.query.preprocess()
