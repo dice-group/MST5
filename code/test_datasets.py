@@ -516,21 +516,73 @@ class Test_LCquad2_query(unittest.TestCase):
             "template_id": 2,
             "paraphrased_question": "What country is Mahmoud Abbas the head of state of?"
         }
-        self.entry = LCquad2_entry(lcquad2_entry["NNQT_question"], lcquad2_entry["uid"], lcquad2_entry["sparql_wikidata"], Knowledge_graph.Wikidata)
+        self.entry = LCquad2_entry(lcquad2_entry["uid"], lcquad2_entry["NNQT_question"], "en", lcquad2_entry["sparql_wikidata"], Knowledge_graph.Wikidata)
         return super().setUp()
     
     def test_build_question(self):
-        entry = LCquad2_entry("", "", "", Knowledge_graph.Wikidata)
+        entry = LCquad2_entry("", "", Language.en, "", Knowledge_graph.Wikidata)
         question = entry.build_question("What is the {country} for {head of state} of {Mahmoud Abbas}", "en")
         self.assertEqual(question.question_string, "What is the country for head of state of Mahmoud Abbas")
         self.assertEqual(question.language, Language.en)
 
     def test_build_query(self):
-        entry = LCquad2_entry("", "", "", Knowledge_graph.Wikidata)
+        entry = LCquad2_entry("", "", Language.en, "", Knowledge_graph.Wikidata)
         query:Query = entry.build_query(" select distinct ?sbj where { ?sbj wdt:P35 wd:Q127998 . ?sbj wdt:P31 wd:Q6256 } ", Knowledge_graph.Wikidata)
         self.assertTrue("wdt:P35" in query.sparql)
         self.assertEqual(Knowledge_graph.Wikidata, query.knowledge_graph)
         
+
+class Test_LCquad2(unittest.TestCase):
+    def setUp(self) -> None:
+        self.sample_lcquad2 = [
+                    {
+                "NNQT_question": "What is the {country} for {head of state} of {Mahmoud Abbas}",
+                "uid": 20258,
+                "subgraph": "simple question left",
+                "template_index": 604,
+                "question": "Who is the  {country} for {head of state} of {Mahmoud Abbas}",
+                "sparql_wikidata": " select distinct ?sbj where { ?sbj wdt:P35 wd:Q127998 . ?sbj wdt:P31 wd:Q6256 } ",
+                "sparql_dbpedia18": "select distinct ?subj where { ?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> ?subj . ?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://www.wikidata.org/entity/P35> . ?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> <http://wikidata.dbpedia.org/resource/Q127998> . ?subj <http://www.wikidata.org/entity/P31> <http://wikidata.dbpedia.org/resource/Q6256> } ",
+                "template": "<?S P O ; ?S InstanceOf Type>",
+                "answer": [],
+                "template_id": 2,
+                "paraphrased_question": "What country is Mahmoud Abbas the head of state of?"
+            },
+            {
+                "NNQT_question": "What is {population} of {Somalia} that is {point in time} is {2009-0-0} ?",
+                "uid": 7141,
+                "subgraph": "statement_property",
+                "template_index": 3586,
+                "question": "What was the population of Somalia in 2009-0-0?",
+                "sparql_wikidata": "SELECT ?obj WHERE { wd:Q1045 p:P1082 ?s . ?s ps:P1082 ?obj . ?s pq:P585 ?x filter(contains(YEAR(?x),'2009')) }",
+                "sparql_dbpedia18": "select distinct ?obj  where {\n?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> <http://wikidata.dbpedia.org/resource/Q1045> .\n?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://www.wikidata.org/entity/P1082> .\n?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> ?obj .\n?statement <http://www.wikidata.org/entity/P585> <2009-0-0>\n} \n",
+                "template": "(E pred F) prop ?value",
+                "answer": [],
+                "template_id": "statement_property_2",
+                "paraphrased_question": "As of 2009, how many people lived in Somalia?"
+            },
+            {
+                "NNQT_question": "What is {voice actresses} of {South Park}, that has {employment} is {singer} ?",
+                "uid": 12761,
+                "subgraph": "right-subgraph",
+                "template_index": 5331,
+                "question": "Which female actress is the voice over on South Park and is employed as a singer?",
+                "sparql_wikidata": "SELECT ?answer WHERE { wd:Q16538 wdt:P725 ?answer . ?answer wdt:P106 wd:Q177220}",
+                "sparql_dbpedia18": "SELECT ?answer WHERE { ?statement1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> <http://wikidata.dbpedia.org/resource/Q16538> . ?statement1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://www.wikidata.org/entity/P725>. ?statement1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> ?answer . ?statement2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> ?answer. ?statement2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://www.wikidata.org/entity/P106> . ?statement2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> <http://wikidata.dbpedia.org/resource/Q177220> . }",
+                "template": "E REF ?F . ?F RFG G",
+                "answer": [],
+                "template_id": 1,
+                "paraphrased_question": "Which female actress on South Park is the voice over and is used as a singer?"
+            }
+        ]
+        return super().setUp()
+    
+    def test_build_lcquad2_list(self):
+        lcquad2 = LCquad2([])
+        entries = lcquad2.build_lcquad2_list(self.sample_lcquad2)
+        self.assertEqual(len(entries), 3)
+        self.assertEqual(entries[1].uid, 7141)
+        self.assertEqual(entries[2].query.sparql, "SELECT ?answer WHERE { wd:Q16538 wdt:P725 ?answer . ?answer wdt:P106 wd:Q177220}")
 
 if __name__ == '__main__':
     unittest.main()
