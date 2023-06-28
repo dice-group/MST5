@@ -33,68 +33,44 @@ class Sgpt_pred(Dataset):
         for entry in sgpt_pred_file:
             entries.append(Sgpt_entry(entry, knowledge_graph))
         return entries
-    
-    def to_ref_qald(self):
+
+    def export_qald_json(self, source: str, output: str) -> None:
+        qald_entries: list = []
         entry: Sgpt_entry
-        for entry in self.entries:
-            entry.ref_query.sparql
-
-    def build_and_extract_ref_qald(self, output_file) -> None:
-        self.build_ref_qald()
-        qald = {"questions": self.ref_qald}
-        export_json(output_file, qald)
-
-
-    def build_ref_qald(self) -> None:
-        id: int
-        entry: Sgpt_entry
-        for id, entry in enumerate(self.queries):
-            answer = entry.get_answer(entry.ref_query)
-            self.ref_qald.append(build_qald_entry(
-                id, "example question", entry.ref_query, answer, "en"))
-
-    def build_and_extract_pred_qald(self, output_file) -> None:
-        self.build_pred_qald()
-        qald = {"questions": self.pred_qald}
-        export_json(output_file, qald)
-
-    def build_pred_qald(self) -> None:
-        id: int
-        entry: Sgpt_entry
-        for id, entry in enumerate(self.queries):
-            answer = entry.get_answer(entry.pred_query)
-            self.pred_qald.append(build_qald_entry(
-                id, "example question", entry.pred_query, answer, "en"))
-
+        for id, entry in enumerate(self.entries):
+            qald_entries.append(entry.build_qald_format_entry(id, source))
+        export_json(output, {"questions": qald_entries})
 
 
 class Sgpt_entry(Entry):
     def __init__(self, entry, knowledge_graph) -> None:
-        self.ref_query: Query = super().build_query(entry["ground_truth_sparql"], knowledge_graph)
-        self.pred_query: Query = super().build_query(entry["predicted_sparql"], knowledge_graph)
+        self.ref_query: Query = super().build_query(
+            entry["ground_truth_sparql"], knowledge_graph)
+        self.pred_query: Query = super().build_query(
+            entry["predicted_sparql"], knowledge_graph)
 
     def build_qald_format_entry(self, id, source):
-        if source=="ref":
+        if source == "ref":
             query = self.ref_query
-        elif source=="pred":
+        elif source == "pred":
             query = self.pred_query
         else:
             raise ValueError("Invalid source")
         question_lang_and_string = {
-                        "language": "en",
+            "language": "en",
                         "string": "example question"
-                    }
-        
+        }
         answer = query.get_answer()
-        
-        return super().build_qald_format_entry(id, question_lang_and_string, query.sparql, answer)
+        sparql = self.get_sparql_with_prefixes(source)
 
-    def add_prefixes(self, query: str) -> str:
-        return (' ').join(prefixes) + query
+        return super().build_qald_format_entry(id, question_lang_and_string, sparql, answer)
 
-    def get_answer(self, query: str) -> dict:
-        query_with_prefixes = self.add_prefixes(query)
-        return ask_dbpedia(query_with_prefixes)
+    def get_sparql_with_prefixes(self, source) -> str:
+        if source=="ref":
+            sparql = self.ref_query.sparql
+        if source=="pred":
+            sparql = self.pred_query.sparql
+        return (' ').join(prefixes) + sparql
 
 
 def build_sgpt_dict(sgpt_set):
