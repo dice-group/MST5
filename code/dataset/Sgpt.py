@@ -65,7 +65,7 @@ class Sgpt_pred(Dataset):
 
 
 
-class Sgpt_entry:
+class Sgpt_entry(Entry):
     def __init__(self, ref_query: str, pred_query: str) -> None:
         self.ref_query: str = ref_query
         self.pred_query: str = pred_query
