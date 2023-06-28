@@ -649,7 +649,7 @@ class Test_Sgpt(unittest.TestCase):
             "predicted_sparql": "select distinct ?uri where { res:Berlin dbo:leaderName ?uri }"
         }
         ]
-        self.sgpt = Sgpt_pred(sample_sgpt_pred_file)
+        self.sgpt = Sgpt_pred(sample_sgpt_pred_file, Knowledge_graph.DBpedia)
         return super().setUp()
 
     def test_sgpt_entries(self):
