@@ -25,10 +25,14 @@ prefixes = [
 
 
 class Sgpt_pred(Dataset):
-    def __init__(self, sgpt_pred_file: list) -> None:
-        self.queries: list = self.convert_file_to_Sgpt_entries(sgpt_pred_file)
-        self.ref_qald: list = []
-        self.pred_qald: list = []
+    def __init__(self, sgpt_pred_file: list, knowledge_graph) -> None:
+        self.entries = self.build_sgpt_list(sgpt_pred_file, knowledge_graph)
+
+    def build_sgpt_list(self, sgpt_pred_file, knowledge_graph):
+        entries = []
+        for entry in sgpt_pred_file:
+            entries.append(Sgpt_entry(entry, knowledge_graph))
+        return entries
 
     def convert_file_to_Sgpt_entries(self, queries: list) -> list:
         entries: list = list()
@@ -69,7 +73,7 @@ class Sgpt_entry(Entry):
     def __init__(self, entry, knowledge_graph) -> None:
         self.ref_query: str = super().build_query(entry["ground_truth_sparql"], knowledge_graph)
         self.pred_query: str = super().build_query(entry["predicted_sparql"], knowledge_graph)
-        
+
     def add_prefixes(self, query: str) -> str:
         return (' ').join(prefixes) + query
 
