@@ -3,6 +3,7 @@ from utils.data_io import export_csv
 from dataset.Dataset import Dataset, Entry
 from components.Question import Question
 from components.Query import Query
+from components.Language import Language
 import re
 
 
@@ -36,15 +37,15 @@ class LCquad2(Dataset):
 class LCquad2_entry(Entry):
     def __init__(self, NNQT_question, uid, sparql, knowledge_graph) -> None:
         self.uid = uid
-        self.question = self.build_question(NNQT_question, language)
-        self.query = self.build_query(sparql)
+        # self.question = self.build_question(NNQT_question, language)
+        # self.query = self.build_query(sparql, knowledge_graph)
 
     def build_question(self, NNQT_question, language):
         question_string = self.preprocess_nnqt_question(NNQT_question)
-        return Question(question_string, language)
+        return Question(question_string, Language(language))
     
-    def build_query(self, sparql):
-        pass
+    def build_query(self, sparql, knowledge_graph):
+        return 
     
 
     def get_question_string(self, include_linguistic_context, include_entity_knowledge) -> str:
