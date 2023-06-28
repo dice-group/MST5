@@ -39,7 +39,8 @@ class LCquad2_entry(Entry):
         self.question = self.build_question(NNQT_question, language)
         self.query = self.build_query(sparql)
 
-    def build_question(self, question_string, language):
+    def build_question(self, NNQT_question, language):
+        question_string = self.preprocess_nnqt_question(NNQT_question)
         return Question(question_string, language)
     
     def build_query(self, sparql):
@@ -57,4 +58,4 @@ class LCquad2_entry(Entry):
     def preprocess_nnqt_question(self, NNQT_ques):
         NNQT_ques = NNQT_ques.translate(str.maketrans('<>{},()', '       '))
         NNQT_ques = re.sub(' +', ' ', NNQT_ques)
-        return NNQT_ques
+        return NNQT_ques.strip()
