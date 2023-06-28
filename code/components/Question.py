@@ -6,6 +6,12 @@ class Question:
         self.language = language
 
 
+    def get_question_string_with_lingtuistic_context(self):
+        _, pos, dep, depth_list = self.get_linguistic_context()
+        return self.question_string + " <pad> " + " ".join(pos) \
+                    + " <pad> " + " ".join(dep) \
+                    + " <pad> " + " ".join(map(str, depth_list))
+
     def get_linguistic_context(self):
         nlp = Language.get_spacy_nlp(self.language)
         doc = self.get_doc(self.question_string, nlp)
@@ -34,3 +40,7 @@ class Question:
         for child in root.children:
             depth_list = self.get_dep_depth(child, depth_list, depth + 1)
         return depth_list
+
+
+    def add_entity_knowledge(self, question_string, entity_knowledge):
+        return question_string + " <pad> " + " ".join(entity_knowledge)
