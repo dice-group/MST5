@@ -16,9 +16,10 @@ class LCquad1(Dataset):
 
     def to_csv(self):
         csv = [['question', 'query']]
+        entry: LCquad1Entry
         for entry in self.entries:
             question_string = entry.question.question_string
-            sparql = entry.query.sparql
+            sparql = entry.query.preprocess()
             csv.append([question_string, sparql])
         return csv
     
