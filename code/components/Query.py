@@ -105,21 +105,21 @@ class Query:
             answer = self.ask_wikidata()
         return answer
     
-    def ask_dbpedia(sparql_query: str) -> dict[str, any]:
+    def ask_dbpedia(self) -> dict[str, any]:
         try:
             sparql = SPARQLWrapper("http://dbpedia.org/sparql/")
             sparql.setReturnFormat(JSON)
-            sparql.setQuery(sparql_query)
+            sparql.setQuery(self.sparql)
             return sparql.query().convert()
         except SPARQLWrapperException as exception:
             return {"head": {"vars": []}, "results": {"bindings": []}}
 
-    def ask_wikidata(sparql_query):
+    def ask_wikidata(self):
         endpoint_url = "https://query.wikidata.org/sparql"
         try:
             user_agent = "WDQS-example Python/%s.%s" % (sys.version_info[0], sys.version_info[1])
             sparql = SPARQLWrapper(endpoint_url, agent=user_agent)
-            sparql.setQuery(sparql_query)
+            sparql.setQuery(self.sparql)
             sparql.setReturnFormat(JSON)
             return sparql.query().convert()
         except:
