@@ -629,6 +629,12 @@ class Test_Sgpt_entry(unittest.TestCase):
     def test_build_ref_query(self):
         self.assertEqual(self.entry.ref_query.sparql,
                          "select distinct ?uri where { res:Berlin dbp:leader ?uri } ")
+    
+    def test_build_qald_format_entry(self):
+        qald_format_entry = self.entry.build_qald_format_entry(id="1", source="ref")
+
+        self.assertEqual(qald_format_entry["id"], "1")
+        self.assertEqual(qald_format_entry["query"]["sparql"], "select distinct ?uri where { res:Berlin dbp:leader ?uri } ")
 
 
 class Test_Sgpt(unittest.TestCase):
