@@ -22,8 +22,6 @@ from transformers.trainer_utils import get_last_checkpoint
 from transformers.utils import check_min_version
 from arguments.data_training_arguments import DataTrainingArguments
 from arguments.model_arguments import ModelArguments
-from utils.qald_utils import build_qald_entry
-from components.query import ask_wikidata
 from utils.data_io import export_json
 from components.query import postprocess_sparql
 from components.Gerbil import *
@@ -33,36 +31,36 @@ logger = logging.getLogger(__name__)
 check_min_version("4.28.0.dev0")
 
 
-def build_qald(sparqls):
-    qald = []
-    for i, sparql in enumerate(sparqls):
-        answer = ask_wikidata(sparql)
-        qald.append(build_qald_entry(i, "tmp question", sparql, answer, "en"))
-    return {"questions": qald}
+# def build_qald(sparqls):
+#     qald = []
+#     for i, sparql in enumerate(sparqls):
+#         answer = ask_wikidata(sparql)
+#         qald.append(build_qald_entry(i, "tmp question", sparql, answer, "en"))
+#     return {"questions": qald}
 
 
-def run_gerbil(ref_file_path, pred_file_path):
-    ref_name = "qald 9 plus test"
-    pred_name = "pred"
-    upload_file(ref_name, ref_file_path, "ref")
-    upload_file(pred_name, pred_file_path, "pred")
+# def run_gerbil(ref_file_path, pred_file_path):
+#     ref_name = "qald 9 plus test"
+#     pred_name = "pred"
+#     upload_file(ref_name, ref_file_path, "ref")
+#     upload_file(pred_name, pred_file_path, "pred")
 
-    # set experiment data
-    ref = {ref_name: ref_file_path.split('/')[-1]}
-    pred = {pred_name: pred_file_path.split('/')[-1]}
+#     # set experiment data
+#     ref = {ref_name: ref_file_path.split('/')[-1]}
+#     pred = {pred_name: pred_file_path.split('/')[-1]}
 
-    experiment_id = submit_experiment(ref, pred).text
-    print(f"Experiment id: {experiment_id}")
-    gerbil_html = get_exp_result_content(experiment_id)
-    if gerbil_html is not None:
-        gerbil_results_table = clean_gerbil_table(gerbil_html)
-        return {
-            "Micro F1": gerbil_results_table.loc[0, 'Micro F1'],
-            "Macro F1": gerbil_results_table.loc[0, 'Macro F1']
-        }
-    else:
-        print("Error when getting GERBIL results")
-    return {}
+#     experiment_id = submit_experiment(ref, pred).text
+#     print(f"Experiment id: {experiment_id}")
+#     gerbil_html = get_exp_result_content(experiment_id)
+#     if gerbil_html is not None:
+#         gerbil_results_table = clean_gerbil_table(gerbil_html)
+#         return {
+#             "Micro F1": gerbil_results_table.loc[0, 'Micro F1'],
+#             "Macro F1": gerbil_results_table.loc[0, 'Macro F1']
+#         }
+#     else:
+#         print("Error when getting GERBIL results")
+#     return {}
 
 
 def main():
