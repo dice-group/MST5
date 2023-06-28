@@ -478,10 +478,17 @@ class Test_Qald(unittest.TestCase):
         self.assertEqual(qald_list[1].id, "98")
 
     def test_get_id_question_list(self):
-        pass
+        id_question = self.qald.get_id_question_list("ru")
+        self.assertEqual(id_question[1], ["98", "Кто убил Цезаря"])
+
+    def test_get_id_question_list_with_ling_and_entity(self):
+        self.assertTrue(False)
 
     def test_to_train_csv(self):
-        pass
+        train_csv = self.qald.to_train_csv(["en", "de"], False, False)
+        self.assertEqual(train_csv[0], ["question", "query"])
+        self.assertEqual(train_csv[1][0], "What is the time zone of Salt Lake City?")
+        self.assertFalse(":" in train_csv[1][1])
 
 
 if __name__ == '__main__':
