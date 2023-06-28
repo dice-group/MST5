@@ -472,7 +472,7 @@ class Test_Qald(unittest.TestCase):
 
     def test_build_qald_list(self):
         empty_qald = Qald()
-        qald_list = empty_qald.build_qald_list(self.sample_qald)
+        qald_list = empty_qald.build_qald_list(self.sample_qald, Knowledge_graph.Wikidata)
         
         self.assertEqual(qald_list[0].id, "99")
         self.assertEqual(qald_list[1].id, "98")
