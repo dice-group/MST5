@@ -636,6 +636,12 @@ class Test_Sgpt_entry(unittest.TestCase):
         self.assertEqual(qald_format_entry["id"], "1")
         self.assertEqual(qald_format_entry["query"]["sparql"], "select distinct ?uri where { res:Berlin dbp:leader ?uri } ")
 
+    def test_get_sparql_with_prefixes(self):
+        sparql = self.entry.get_sparql_with_prefixes("ref")
+        self.assertTrue("dbp:leader" in sparql)
+        self.assertTrue("PREFIX prop: <http://dbpedia.org/property/>" in sparql)
+
+
 
 class Test_Sgpt(unittest.TestCase):
     def setUp(self) -> None:
