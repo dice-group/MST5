@@ -13,21 +13,7 @@ class LCquad1(Dataset):
     def parse_entries(self, entries):
         for entry in entries:
             self.entries.append(LCquad1_entry(entry))
-
     
-    def export_train_csv(self, output_file, include_linguistic_context=False, include_entity_knowledge=False):
-        csv_dataset = self.to_train_csv(include_linguistic_context, include_entity_knowledge)
-        export_csv(output_file, csv_dataset)
-        
-    def to_train_csv(self, include_linguistic_context=False, include_entity_knowledge=False):
-        csv = [['question', 'query']]
-        entry: LCquad1_entry
-        for entry in self.entries:
-            question = entry.question
-            question_string = super().get_question_string(include_linguistic_context, include_entity_knowledge, entry, question)
-            sparql = entry.query.preprocess()
-            csv.append([question_string, sparql])
-        return csv
     
 
 
