@@ -25,6 +25,10 @@ class Qald(Dataset):
 
 
     def export_train_csv(self, output_file, languages, include_linguistic_context=False, include_entity_knowledge=False) -> None:
+        csv_dataset = self.to_train_csv(languages, include_linguistic_context, include_entity_knowledge)
+        export_csv(output_file, csv_dataset)
+
+    def to_train_csv(self, languages, include_linguistic_context, include_entity_knowledge):
         csv_dataset = [["question", "query"]]
         entry: Qald_entry
         for entry in self.entries:
@@ -34,7 +38,7 @@ class Qald(Dataset):
                     question: Question = entry.questions[language]
                     question_string = super().get_question_string(include_linguistic_context, include_entity_knowledge, entry, question)
                     csv_dataset.append([question_string, sparql])
-        export_csv(output_file, csv_dataset)
+        return csv_dataset
 
 
     def export_qald_json(self, languages: list, output: str) -> None:
