@@ -152,7 +152,6 @@ class Test_Qald_entry(unittest.TestCase):
         self.assertEqual(questions["en"].question_string, "What is the time zone of Salt Lake City?")
         self.assertEqual(questions["zh"].question_string, "盐湖城时区是什么？")
 
-    def test_build
         
 
     def test_init_qald_entry(self): 
