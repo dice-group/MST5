@@ -482,12 +482,22 @@ class Test_Qald(unittest.TestCase):
         self.assertEqual(id_question[1], ["98", "Кто убил Цезаря"])
 
     def test_get_id_question_list_with_ling_and_entity(self):
-        self.assertTrue(False)
+        id_question = self.qald.get_id_question_list("ru", True, True)
+        self.assertEqual(id_question[1][0], "98")
+        self.assertTrue("ROOT" in id_question[1][1])
+        self.assertTrue("wd_" in id_question[1][1])
 
     def test_to_train_csv(self):
         train_csv = self.qald.to_train_csv(["en", "de"], False, False)
         self.assertEqual(train_csv[0], ["question", "query"])
         self.assertEqual(train_csv[1][0], "What is the time zone of Salt Lake City?")
+        self.assertFalse(":" in train_csv[1][1])
+
+    def test_to_train_csv_with_ling_and_entity(self):
+        train_csv = self.qald.to_train_csv(["en", "de"], True, True)
+        self.assertEqual(train_csv[0], ["question", "query"])
+        self.assertTrue("ROOT" in train_csv[1][0])
+        self.assertTrue("wd_" in train_csv[1][1])
         self.assertFalse(":" in train_csv[1][1])
 
 
