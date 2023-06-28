@@ -13,9 +13,8 @@ class LCquad1(Dataset):
     def parse_entries(self, entries):
         for entry in entries:
             self.entries.append(LCquad1_entry(entry))
-    
-    
 
+            
 
 class LCquad1_entry(Entry):
     def __init__(self, lcquad1_entry):
