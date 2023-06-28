@@ -124,3 +124,11 @@ class Query:
             return sparql.query().convert()
         except:
             return {"head": {"vars": []}, "results": {"bindings": []}}
+        
+    def get_entity_knowledge(self) -> list:
+        if self.knowledge_graph==Knowledge_graph.DBpedia:
+            pattern = r'\bdbr_\w+\b'
+        elif self.knowledge_graph==Knowledge_graph.Wikidata:
+            pattern = r'\bwd_\w+\b'
+        entities = re.findall(pattern, self.preprocess())
+        return entities
