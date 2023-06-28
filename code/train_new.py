@@ -23,10 +23,10 @@ from transformers.utils import check_min_version
 from utils.data_training_arguments import DataTrainingArguments
 from utils.model_arguments import ModelArguments
 from utils.qald_utils import build_qald_entry
-from utils.query import ask_wikidata
+from code.query.query import ask_wikidata
 from utils.data_io import export_json
-from utils.query import postprocess_sparql
-from utils.gerbil import *
+from code.query.query import postprocess_sparql
+from code.components.gerbil import *
 
 logger = logging.getLogger(__name__)
 

@@ -1,5 +1,5 @@
 from utils.data_io import *
-from utils.query import preprocess_sparql, ask_wikidata
+from code.query.query import preprocess_sparql, ask_wikidata
 from utils.linguistic_parser import get_linguistic_context
 import spacy
 import re

@@ -11,3 +11,9 @@ class Language(Enum):
     uk = 'uk'
     be = 'be'
     ba = 'ba'
+
+    def cast_to_language_enum(value):
+        try:
+            return Language.__members__[value]
+        except KeyError:
+            raise ValueError(f"Invalid language: {value}")

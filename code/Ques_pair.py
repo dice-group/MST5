@@ -1,5 +1,5 @@
 from sklearn.metrics import f1_score
-from utils.query import preprocess_sparql
+from code.query.query import preprocess_sparql
 from enum import Enum
 import re
 

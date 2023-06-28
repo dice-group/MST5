@@ -1,7 +1,7 @@
-from utils.query import ask_dbpedia
+from code.query.query import ask_dbpedia
 from utils.qald_utils import build_qald_entry
 from utils.data_io import export_json
-from utils.query import *
+from code.query.query import *
 
 prefixes = [
     "PREFIX dbo: <http://dbpedia.org/ontology/>"

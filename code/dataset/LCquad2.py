@@ -1,6 +1,6 @@
 import re
 from utils.data_io import export_csv
-from utils.query import preprocess_sparql
+from code.query.query import preprocess_sparql
 import spacy
 from utils.linguistic_parser import get_linguistic_context
 

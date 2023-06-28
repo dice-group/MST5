@@ -1,5 +1,5 @@
 from typing import Dict
-from utils.query import preprocess_sparql
+from code.query.query import preprocess_sparql
 
 
 def build_qald_entry(id, question_string, sparql_query, answer, language):
