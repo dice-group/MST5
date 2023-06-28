@@ -27,3 +27,12 @@ class Test_Query(unittest.TestCase):
     def test_get_entities(self):
         entities = self.query.get_entity_knowledge()
         self.assertTrue("dbr_" in entities[0])
+
+    def test_get_dbpedia_answer(self):
+        answer = self.query.get_answer()
+        self.assertTrue(answer["results"]["bindings"])
+
+    def test_get_wikidata_answer(self):
+        wikidata_query = Query("SELECT DISTINCT ?o1 WHERE { <http://www.wikidata.org/entity/Q23337>  <http://www.wikidata.org/prop/direct/P421>  ?o1 .  }", Knowledge_graph.Wikidata)
+        answer = wikidata_query.get_answer()
+        self.assertTrue(answer["results"]["bindings"])
