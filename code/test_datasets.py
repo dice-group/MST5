@@ -1,5 +1,6 @@
 import unittest
-from dataset.LCquad1 import LCquad1, LCquad1Entry
+from dataset.LCquad1 import LCquad1, LCquad1_entry
+from dataset.LCquad2 import LCquad2, LCquad2_entry
 from dataset.Qald import Qald, Qald_entry
 from components.Language import Language
 from components.Knowledge_graph import Knowledge_graph
@@ -15,7 +16,7 @@ class Test_LCquad1_entry(unittest.TestCase):
                             "sparql_query": "SELECT DISTINCT COUNT(?uri) WHERE {?uri <http://dbpedia.org/ontology/director> <http://dbpedia.org/resource/Stanley_Kubrick>  . }",
                             "sparql_template_id": 101}
 
-        self.entry = LCquad1Entry(self.input_entry)
+        self.entry = LCquad1_entry(self.input_entry)
 
     def test_parse_lcquad_entry(self):
         self.assertEqual(self.entry.question.question_string,
@@ -27,7 +28,7 @@ class Test_LCquad1_entry(unittest.TestCase):
                          Knowledge_graph.DBpedia)
 
     def test_return_sparql_query(self):
-        query: Query = self.entry.get_query_from_input_entry(self.input_entry)
+        query: Query = self.entry.build_query_from_input_entry(self.input_entry)
 
         expected_query = Query(
             "SELECT DISTINCT COUNT(?uri) WHERE {?uri <http://dbpedia.org/ontology/director> <http://dbpedia.org/resource/Stanley_Kubrick>  . }", Knowledge_graph.DBpedia)
@@ -37,7 +38,7 @@ class Test_LCquad1_entry(unittest.TestCase):
 
     def test_return_question(self):
 
-        question: Question = self.entry.get_question_from_input_query(
+        question: Question = self.entry.build_question_from_input_query(
             self.input_entry)
 
         expected_question = Question(
@@ -500,6 +501,28 @@ class Test_Qald(unittest.TestCase):
         self.assertTrue("wd_" in train_csv[1][1])
         self.assertFalse(":" in train_csv[1][1])
 
+class Test_LCquad2_query(unittest.TestCase):
+    def setUp(self) -> None:
+        lcquad2_entry = {
+            "NNQT_question": "What is the {country} for {head of state} of {Mahmoud Abbas}",
+            "uid": 20258,
+            "subgraph": "simple question left",
+            "template_index": 604,
+            "question": "Who is the  {country} for {head of state} of {Mahmoud Abbas}",
+            "sparql_wikidata": " select distinct ?sbj where { ?sbj wdt:P35 wd:Q127998 . ?sbj wdt:P31 wd:Q6256 } ",
+            "sparql_dbpedia18": "select distinct ?subj where { ?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#subject> ?subj . ?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate> <http://www.wikidata.org/entity/P35> . ?statement <http://www.w3.org/1999/02/22-rdf-syntax-ns#object> <http://wikidata.dbpedia.org/resource/Q127998> . ?subj <http://www.wikidata.org/entity/P31> <http://wikidata.dbpedia.org/resource/Q6256> } ",
+            "template": "<?S P O ; ?S InstanceOf Type>",
+            "answer": [],
+            "template_id": 2,
+            "paraphrased_question": "What country is Mahmoud Abbas the head of state of?"
+        }
+        self.entry = LCquad2_entry(lcquad2_entry["NNQT_question"], lcquad2_entry["uid"], lcquad2_entry["sparql_wikidata"], Knowledge_graph.Wikidata)
+        return super().setUp()
+    
+    def test_build_question(self):
+        entry = LCquad2_entry("", "", "", Knowledge_graph.Wikidata)
+        question = entry.build_question("What is the {country} for {head of state} of {Mahmoud Abbas}", "en")
+        self.assertEqual(question.question_string, "What is the country for head of state of Mahmoud Abbas")
 
 if __name__ == '__main__':
     unittest.main()
