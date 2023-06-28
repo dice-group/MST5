@@ -20,6 +20,12 @@ class Test_Query(unittest.TestCase):
         self.query = Query("SELECT DISTINCT COUNT(?uri) WHERE {?uri <http://dbpedia.org/ontology/director> <http://dbpedia.org/resource/Stanley_Kubrick>  . }", Knowledge_graph.DBpedia)
         return super().setUp()
     
+    def test_replace_prefix_abbr(self):
+        self.assertTrue(False)
+
+    def test_delete_sparql_prefix(self):
+        self.assertTrue(False)
+    
     def test_preprocess_sparql(self):
         preprocessed_query = self.query.preprocess()
         self.assertTrue(not ":" in preprocessed_query)
