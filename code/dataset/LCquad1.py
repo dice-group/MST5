@@ -11,7 +11,6 @@ class LCquad1(Dataset):
 
 class LCquad1Entry(Entry):
     def __init__(self, lcquad1_entry):
-        
         self.question = Question("", Language.en)
         self.query = Query("", Knowledge_graph.DBpedia)
 
@@ -19,3 +18,6 @@ class LCquad1Entry(Entry):
         sparql = entry["sparql_query"]
         return Query(sparql, Knowledge_graph.DBpedia)
     
+    def get_question_from_input_query(self, entry):
+        question_string = entry["corrected_question"]
+        return Question(question_string, Language.en)
