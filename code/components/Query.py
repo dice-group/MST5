@@ -127,7 +127,8 @@ class Query:
         
     def get_entity_knowledge(self) -> list:
         if self.knowledge_graph==Knowledge_graph.DBpedia:
-            pattern = r'\bdbr_\w+\b'
+            # TODO: add pattern for "res" or "dbr"
+            pattern = r'\bres_\w+\b'
         elif self.knowledge_graph==Knowledge_graph.Wikidata:
             pattern = r'\bwd_\w+\b'
         entities = re.findall(pattern, self.preprocess())
