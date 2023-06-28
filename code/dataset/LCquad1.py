@@ -6,7 +6,13 @@ from components.Language import Language
 
 class LCquad1(Dataset):
     def __init__(self, entries):
-        self.entries = entries
+        self.entries = []
+        self.parse_entries(entries)
+
+    def parse_entries(self, entries):
+        for entry in entries:
+            self.entries.append(LCquad1Entry(entry))
+        
 
 
 class LCquad1Entry(Entry):
