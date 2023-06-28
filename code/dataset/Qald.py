@@ -19,7 +19,10 @@ class Qald(Dataset):
         return qald_list
     
     def add_entry(self, id, language, question_string, sparql, knowledge_graph, answers=None):
-        question = Question(question_string, Language[language])
+        question = [{
+            "language": language,
+            "string": question_string
+        }]
         query = Query(sparql, knowledge_graph)
         self.entries.append(Qald_entry(id, question, query, answers))
 
@@ -70,7 +73,7 @@ class Qald(Dataset):
 class Qald_entry(Entry):
     def __init__(self, id, questions, sparql, knowledge_graph, answers=None) -> None:
         self.id = id
-        self.questions: dict[Question] = self.build_questions(questions)
+        self.questions: dict[str, Question] = self.build_questions(questions)
         self.query: Query = self.build_query(sparql, knowledge_graph)
         self.answers = answers
 
