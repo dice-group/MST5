@@ -610,15 +610,12 @@ class Test_Sgpt_entry(unittest.TestCase):
         }
         self.entry = Sgpt_entry(self.sample_entry, Knowledge_graph.DBpedia)
         return super().setUp()
-    
-    def test_build_query(self):
-        pred_query: Query = self.entry.build_query(self.sample_entry["predicted_sparql"], Knowledge_graph.DBpedia)
-        self.assertEqual(pred_query.sparql, "select distinct ?uri where { res:Berlin dbo:leaderName ?uri }")
 
     def test_build_pred_query(self):
-        entry = Sgpt_entry(self.sample_entry, Knowledge_graph.DBpedia)
         self.assertEqual(self.entry.pred_query.sparql, "select distinct ?uri where { res:Berlin dbo:leaderName ?uri }")
-        
+
+    def test_build_ref_query(self):
+        self.assertEqual(self.entry.ref_query.sparql, "select distinct ?uri where { res:Berlin dbp:leader ?uri } ")
     
 
 if __name__ == '__main__':
