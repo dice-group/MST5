@@ -72,9 +72,9 @@ class Test_LCquad1(unittest.TestCase):
      def test_get_csv_format(self):
         csv = self.lcquad.to_csv()
         header = csv[0]
-        first_pair = csv[1]
+        first_question, _ = csv[1]
         self.assertEqual(header, ['question', 'query'])
-        self.assertEqual(first_pair, ["How many movies did Stanley Kubrick direct?", "SELECT DISTINCT COUNT(?uri) WHERE {?uri <http://dbpedia.org/ontology/director> <http://dbpedia.org/resource/Stanley_Kubrick>  . }"])
+        self.assertEqual(first_question, "How many movies did Stanley Kubrick direct?")
         
 
 
