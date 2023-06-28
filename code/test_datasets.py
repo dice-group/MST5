@@ -575,6 +575,7 @@ class Test_LCquad2(unittest.TestCase):
                 "paraphrased_question": "Which female actress on South Park is the voice over and is used as a singer?"
             }
         ]
+        self.lcquad2 = LCquad2(self.sample_lcquad2)
         return super().setUp()
     
     def test_build_lcquad2_list(self):
@@ -583,6 +584,12 @@ class Test_LCquad2(unittest.TestCase):
         self.assertEqual(len(entries), 3)
         self.assertEqual(entries[1].uid, 7141)
         self.assertEqual(entries[2].query.sparql, "SELECT ?answer WHERE { wd:Q16538 wdt:P725 ?answer . ?answer wdt:P106 wd:Q177220}")
+
+    def test_to_train_csv(self):
+        train_csv = self.lcquad2.to_train_csv(False, False)
+        self.assertEqual(train_csv[0], ["question", "query"])
+        self.assertEqual(train_csv[1][0], "What is the country for head of state of Mahmoud Abbas")
+        self.assertFalse(":" in train_csv[1][1])
 
 if __name__ == '__main__':
     unittest.main()
