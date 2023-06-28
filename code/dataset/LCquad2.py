@@ -1,8 +1,4 @@
-import re
 from utils.data_io import export_csv
-from code.query.query import preprocess_sparql
-import spacy
-from utils.linguistic_parser import get_linguistic_context
 
 nlp_en = spacy.load("en_core_web_sm")
 
