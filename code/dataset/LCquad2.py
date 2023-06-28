@@ -2,14 +2,13 @@ from components.Knowledge_graph import Knowledge_graph
 from utils.data_io import export_csv
 from dataset.Dataset import Dataset, Entry
 from components.Question import Question
-from components.Query import Query
 from components.Language import Language
 import re
 
 
 class LCquad2(Dataset):
-    def __init__(self, lcquad_file) -> None:
-        self.entries = self.build_lcquad2_list(lcquad_file)
+    def __init__(self, lcquad2_file) -> None:
+        self.entries = self.build_lcquad2_list(lcquad2_file)
 
     def build_lcquad2_list(self, lcquad_file: list):
         lcquad_list = []

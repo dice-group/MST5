@@ -1,20 +1,18 @@
 from dataset.Dataset import Dataset, Entry
-from components.Query import Query
 from components.Question import Question
 from components.Knowledge_graph import Knowledge_graph
 from components.Language import Language
-from utils.data_io import export_csv
 
 class LCquad1(Dataset):
-    def __init__(self, entries):
-        self.entries: list[LCquad1_entry] = []
-        self.parse_entries(entries)
+    def __init__(self, lcquad1_file):
+        self.entries: list[LCquad1_entry] = self.build_lcquad1_list(lcquad1_file)
 
-    def parse_entries(self, entries):
-        for entry in entries:
-            self.entries.append(LCquad1_entry(entry))
-
-            
+    def build_lcquad1_list(self, lcquad1_file):
+        entries = []
+        for entry in lcquad1_file:
+            entries.append(LCquad1_entry(entry))
+        return entries
+    
 
 class LCquad1_entry(Entry):
     def __init__(self, lcquad1_entry):
