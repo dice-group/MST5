@@ -14,19 +14,36 @@ class LCquad1(Dataset):
         for entry in entries:
             self.entries.append(LCquad1Entry(entry))
 
-    def to_csv(self):
+    
+    def export_csv(self, output_file, include_linguistic_context=False, include_entity_knowledge=False):
+        csv_dataset = self.to_csv(include_linguistic_context, include_entity_knowledge)
+        export_csv(output_file, csv_dataset)
+        
+    def to_csv(self, include_linguistic_context=False, include_entity_knowledge=False):
         csv = [['question', 'query']]
         entry: LCquad1Entry
         for entry in self.entries:
-            question_string = entry.question.question_string
+            question = entry.question
+            question_string = question.question_string
+            if include_linguistic_context:
+                question_string = self.add_linguistic_context(question, question_string)
+            if include_entity_knowledge:
+                question_string = self.add_entity_knowledge(entry, question_string)
             sparql = entry.query.preprocess()
             csv.append([question_string, sparql])
         return csv
-    
-    def export_csv(self, output_file):
-        csv_dataset = self.to_csv()
-        export_csv(output_file, csv_dataset)
-        
+
+    def add_linguistic_context(self, question, question_string):
+        _, pos, dep, depth_list = question.get_linguistic_context()
+        question_string += " <pad> " + " ".join(pos) \
+                    + " <pad> " + " ".join(dep) \
+                    + " <pad> " + " ".join(map(str, depth_list))
+        return question_string
+
+    def add_entity_knowledge(self, entry, question_string):
+        entity_knowledge = entry.query.get_entity_knowledge()
+        question_string += " <pad> " + " ".join(entity_knowledge)
+        return question_string
 
 
 class LCquad1Entry(Entry):
