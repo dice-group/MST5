@@ -29,7 +29,8 @@ class Test_LCquad1_entry(unittest.TestCase):
                          Knowledge_graph.DBpedia)
 
     def test_return_sparql_query(self):
-        query: Query = self.entry.build_query(self.input_entry["sparql_query"], Knowledge_graph.DBpedia)
+        query: Query = self.entry.build_query(
+            self.input_entry["sparql_query"], Knowledge_graph.DBpedia)
 
         expected_query = Query(
             "SELECT DISTINCT COUNT(?uri) WHERE {?uri <http://dbpedia.org/ontology/director> <http://dbpedia.org/resource/Stanley_Kubrick>  . }", Knowledge_graph.DBpedia)
@@ -474,8 +475,9 @@ class Test_Qald(unittest.TestCase):
 
     def test_build_qald_list(self):
         empty_qald = Qald()
-        qald_list = empty_qald.build_qald_list(self.sample_qald, Knowledge_graph.Wikidata)
-        
+        qald_list = empty_qald.build_qald_list(
+            self.sample_qald, Knowledge_graph.Wikidata)
+
         self.assertEqual(qald_list[0].id, "99")
         self.assertEqual(qald_list[1].id, "98")
 
@@ -492,7 +494,8 @@ class Test_Qald(unittest.TestCase):
     def test_to_train_csv(self):
         train_csv = self.qald.to_train_csv(["en", "de"], False, False)
         self.assertEqual(train_csv[0], ["question", "query"])
-        self.assertEqual(train_csv[1][0], "What is the time zone of Salt Lake City?")
+        self.assertEqual(
+            train_csv[1][0], "What is the time zone of Salt Lake City?")
         self.assertFalse(":" in train_csv[1][1])
 
     def test_to_train_csv_with_ling_and_entity(self):
@@ -501,6 +504,7 @@ class Test_Qald(unittest.TestCase):
         self.assertTrue("ROOT" in train_csv[1][0])
         self.assertTrue("wd_" in train_csv[1][1])
         self.assertFalse(":" in train_csv[1][1])
+
 
 class Test_LCquad2_query(unittest.TestCase):
     def setUp(self) -> None:
@@ -517,26 +521,32 @@ class Test_LCquad2_query(unittest.TestCase):
             "template_id": 2,
             "paraphrased_question": "What country is Mahmoud Abbas the head of state of?"
         }
-        self.entry = LCquad2_entry(lcquad2_entry["uid"], lcquad2_entry["NNQT_question"], "en", lcquad2_entry["sparql_wikidata"], Knowledge_graph.Wikidata)
+        self.entry = LCquad2_entry(lcquad2_entry["uid"], lcquad2_entry["NNQT_question"],
+                                   "en", lcquad2_entry["sparql_wikidata"], Knowledge_graph.Wikidata)
         return super().setUp()
-    
+
     def test_build_question(self):
-        entry = LCquad2_entry("", "", Language.en, "", Knowledge_graph.Wikidata)
-        question = entry.build_question("What is the {country} for {head of state} of {Mahmoud Abbas}", "en")
-        self.assertEqual(question.question_string, "What is the country for head of state of Mahmoud Abbas")
+        entry = LCquad2_entry("", "", Language.en, "",
+                              Knowledge_graph.Wikidata)
+        question = entry.build_question(
+            "What is the {country} for {head of state} of {Mahmoud Abbas}", "en")
+        self.assertEqual(question.question_string,
+                         "What is the country for head of state of Mahmoud Abbas")
         self.assertEqual(question.language, Language.en)
 
     def test_build_query(self):
-        entry = LCquad2_entry("", "", Language.en, "", Knowledge_graph.Wikidata)
-        query:Query = entry.build_query(" select distinct ?sbj where { ?sbj wdt:P35 wd:Q127998 . ?sbj wdt:P31 wd:Q6256 } ", Knowledge_graph.Wikidata)
+        entry = LCquad2_entry("", "", Language.en, "",
+                              Knowledge_graph.Wikidata)
+        query: Query = entry.build_query(
+            " select distinct ?sbj where { ?sbj wdt:P35 wd:Q127998 . ?sbj wdt:P31 wd:Q6256 } ", Knowledge_graph.Wikidata)
         self.assertTrue("wdt:P35" in query.sparql)
         self.assertEqual(Knowledge_graph.Wikidata, query.knowledge_graph)
-        
+
 
 class Test_LCquad2(unittest.TestCase):
     def setUp(self) -> None:
         self.sample_lcquad2 = [
-                    {
+            {
                 "NNQT_question": "What is the {country} for {head of state} of {Mahmoud Abbas}",
                 "uid": 20258,
                 "subgraph": "simple question left",
@@ -578,20 +588,21 @@ class Test_LCquad2(unittest.TestCase):
         ]
         self.lcquad2 = LCquad2(self.sample_lcquad2)
         return super().setUp()
-    
+
     def test_build_lcquad2_list(self):
         lcquad2 = LCquad2([])
         entries = lcquad2.build_lcquad2_list(self.sample_lcquad2)
         self.assertEqual(len(entries), 3)
         self.assertEqual(entries[1].uid, 7141)
-        self.assertEqual(entries[2].query.sparql, "SELECT ?answer WHERE { wd:Q16538 wdt:P725 ?answer . ?answer wdt:P106 wd:Q177220}")
+        self.assertEqual(
+            entries[2].query.sparql, "SELECT ?answer WHERE { wd:Q16538 wdt:P725 ?answer . ?answer wdt:P106 wd:Q177220}")
 
     def test_to_train_csv(self):
         train_csv = self.lcquad2.to_train_csv(False, False)
         self.assertEqual(train_csv[0], ["question", "query"])
-        self.assertEqual(train_csv[1][0], "What is the country for head of state of Mahmoud Abbas")
+        self.assertEqual(
+            train_csv[1][0], "What is the country for head of state of Mahmoud Abbas")
         self.assertFalse(":" in train_csv[1][1])
-
 
     def test_to_train_csv_with_ling_and_entity(self):
         train_csv = self.lcquad2.to_train_csv(True, True)
@@ -612,11 +623,39 @@ class Test_Sgpt_entry(unittest.TestCase):
         return super().setUp()
 
     def test_build_pred_query(self):
-        self.assertEqual(self.entry.pred_query.sparql, "select distinct ?uri where { res:Berlin dbo:leaderName ?uri }")
+        self.assertEqual(self.entry.pred_query.sparql,
+                         "select distinct ?uri where { res:Berlin dbo:leaderName ?uri }")
 
     def test_build_ref_query(self):
-        self.assertEqual(self.entry.ref_query.sparql, "select distinct ?uri where { res:Berlin dbp:leader ?uri } ")
-    
+        self.assertEqual(self.entry.ref_query.sparql,
+                         "select distinct ?uri where { res:Berlin dbp:leader ?uri } ")
+
+
+class Test_Sgpt(unittest.TestCase):
+    def setUp(self) -> None:
+        sample_sgpt_pred_file = [{
+            "id": "",
+            "ground_truth_sparql": "select distinct ?string where { res:San_Francisco foaf:nick ?string } ",
+            "predicted_sparql": "select ?uri where { res:Dan_Monaco dbo:birthName ?uri }"
+        },
+            {
+            "id": "",
+            "ground_truth_sparql": "select distinct ?string where { res:Angela_Merkel dbp:birthName ?string } ",
+            "predicted_sparql": "select ?string where { res:Angela_Merkel dbo:birthName ?string }"
+        },
+            {
+            "id": "",
+            "ground_truth_sparql": "select distinct ?uri where { res:Berlin dbp:leader ?uri } ",
+            "predicted_sparql": "select distinct ?uri where { res:Berlin dbo:leaderName ?uri }"
+        }
+        ]
+        self.sgpt = Sgpt_pred(sample_sgpt_pred_file)
+        return super().setUp()
+
+    def test_sgpt_entries(self):
+        self.assertEqual(self.sgpt.entries[0].ref_query.sparql, "select distinct ?string where { res:San_Francisco foaf:nick ?string } ")
+        self.assertEqual(self.sgpt.entries[2].pred_query.sparql, "select distinct ?uri where { res:Berlin dbo:leaderName ?uri }")
+
 
 if __name__ == '__main__':
     unittest.main()
