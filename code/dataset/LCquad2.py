@@ -45,6 +45,11 @@ class LCquad2_entry(Entry):
         question_string = self.preprocess_nnqt_question(NNQT_question)
         return Question(question_string, Language(language))
     
+    def preprocess_nnqt_question(self, NNQT_ques):
+        NNQT_ques = NNQT_ques.translate(str.maketrans('<>{},()', '       '))
+        NNQT_ques = re.sub(' +', ' ', NNQT_ques)
+        return NNQT_ques.strip()
+    
     def build_query(self, sparql, knowledge_graph):
         return Query(sparql, knowledge_graph)
 
@@ -56,7 +61,3 @@ class LCquad2_entry(Entry):
             question_string += self.get_entity_knowledge()
         return question_string
 
-    def preprocess_nnqt_question(self, NNQT_ques):
-        NNQT_ques = NNQT_ques.translate(str.maketrans('<>{},()', '       '))
-        NNQT_ques = re.sub(' +', ' ', NNQT_ques)
-        return NNQT_ques.strip()
