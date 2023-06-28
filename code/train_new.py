@@ -301,20 +301,20 @@ def main():
             decoded_preds, decoded_refs)
 
         # GERBIL
-        pred_sparqls = []
-        for pred in decoded_preds:
-            pred_sparqls.append(postprocess_sparql(pred))
+        # pred_sparqls = []
+        # for pred in decoded_preds:
+        #     pred_sparqls.append(postprocess_sparql(pred))
 
-        pred_path = "tmp/pred.json"
-        pred_qald = build_qald(pred_sparqls)
-        export_json(pred_path, pred_qald)
+        # pred_path = "tmp/pred.json"
+        # pred_qald = build_qald(pred_sparqls)
+        # export_json(pred_path, pred_qald)
 
-        ref_path = "tmp/ref.json"
-        ref_qald = build_qald(decoded_refs)
-        export_json(ref_path, ref_qald)
+        # ref_path = "tmp/ref.json"
+        # ref_qald = build_qald(decoded_refs)
+        # export_json(ref_path, ref_qald)
 
-        result = run_gerbil(ref_path, pred_path)
-        return result
+        # result = run_gerbil(ref_path, pred_path)
+        # return result
 
     # Override the decoding parameters of Seq2SeqTrainer
     training_args.generation_max_length = (
