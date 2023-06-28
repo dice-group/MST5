@@ -523,6 +523,7 @@ class Test_LCquad2_query(unittest.TestCase):
         entry = LCquad2_entry("", "", "", Knowledge_graph.Wikidata)
         question = entry.build_question("What is the {country} for {head of state} of {Mahmoud Abbas}", "en")
         self.assertEqual(question.question_string, "What is the country for head of state of Mahmoud Abbas")
+        self.assertEqual(question.language, Language.en)
 
     def test_build_query(self):
         entry = LCquad2_entry("", "", "", Knowledge_graph.Wikidata)
