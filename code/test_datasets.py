@@ -524,5 +524,12 @@ class Test_LCquad2_query(unittest.TestCase):
         question = entry.build_question("What is the {country} for {head of state} of {Mahmoud Abbas}", "en")
         self.assertEqual(question.question_string, "What is the country for head of state of Mahmoud Abbas")
 
+    def test_build_query(self):
+        entry = LCquad2_entry("", "", "", Knowledge_graph.Wikidata)
+        query:Query = entry.build_query(" select distinct ?sbj where { ?sbj wdt:P35 wd:Q127998 . ?sbj wdt:P31 wd:Q6256 } ", Knowledge_graph.Wikidata)
+        self.assertTrue("wdt:P35" in query.sparql)
+        self.assertEqual(Knowledge_graph.Wikidata, query.knowledge_graph)
+        
+
 if __name__ == '__main__':
     unittest.main()
