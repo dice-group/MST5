@@ -3,15 +3,28 @@ from components.Query import Query
 from components.Question import Question
 from components.Knowledge_graph import Knowledge_graph
 from components.Language import Language
+from utils.data_io import export_csv
 
 class LCquad1(Dataset):
     def __init__(self, entries):
-        self.entries = []
+        self.entries: list[LCquad1Entry] = []
         self.parse_entries(entries)
 
     def parse_entries(self, entries):
         for entry in entries:
             self.entries.append(LCquad1Entry(entry))
+
+    def to_csv(self):
+        csv = [['question', 'query']]
+        for entry in self.entries:
+            question_string = entry.question.question_string
+            sparql = entry.query.sparql
+            csv.append([question_string, sparql])
+        return csv
+    
+    def export_csv(self, output_file):
+        csv_dataset = self.to_csv()
+        export_csv(output_file, csv_dataset)
         
 
 
