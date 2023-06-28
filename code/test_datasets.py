@@ -63,10 +63,19 @@ class Test_LCquad1(unittest.TestCase):
                 "sparql_query": "SELECT DISTINCT ?uri WHERE {?uri <http://dbpedia.org/ontology/riverMouth> <http://dbpedia.org/resource/Dead_Sea>  . ?uri <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/River>}", 
                 "sparql_template_id": 301
         } ]
+        self.lcquad = LCquad1(self.entries)
           
      def test_lcquad_entries(self):
-        lcquad = LCquad1(self.entries)
-        self.assertEqual(lcquad.entries[1].question.question_string, "Which city's foundeer is John Forbes?")
+        second_question_string = self.lcquad.entries[1].question.question_string
+        self.assertEqual(second_question_string, "Which city's foundeer is John Forbes?")
+
+     def test_get_csv_format(self):
+        csv = self.lcquad.to_csv()
+        header = csv[0]
+        first_pair = csv[1]
+        self.assertEqual(header, ['question', 'query'])
+        self.assertEqual(first_pair, ["How many movies did Stanley Kubrick direct?", "SELECT DISTINCT COUNT(?uri) WHERE {?uri <http://dbpedia.org/ontology/director> <http://dbpedia.org/resource/Stanley_Kubrick>  . }"])
+        
 
 
 if __name__ == '__main__':
