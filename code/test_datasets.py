@@ -70,7 +70,7 @@ class Test_LCquad1(unittest.TestCase):
         self.assertEqual(second_question_string, "Which city's foundeer is John Forbes?")
 
      def test_get_csv_format(self):
-        csv = self.lcquad.to_csv()
+        csv = self.lcquad.to_train_csv()
         header = csv[0]
         first_question, _ = csv[1]
         self.assertEqual(header, ['question', 'query'])
