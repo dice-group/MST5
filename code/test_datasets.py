@@ -79,7 +79,7 @@ class Test_LCquad1(unittest.TestCase):
 
 class Test_Qald_entry(unittest.TestCase):
     def setUp(self) -> None:
-        self.id = "99"
+        self.qald_id = "99"
         self.questions = [
                 {
                     "language": "en",
@@ -144,11 +144,12 @@ class Test_Qald_entry(unittest.TestCase):
                     }
                 }
             ]
-        self.qald_entry = Qald_entry(self.id, self.questions, self.sparql, Knowledge_graph.Wikidata, self.answers)
+        self.qald_entry = Qald_entry(self.qald_id, self.questions, self.sparql, Knowledge_graph.Wikidata, self.answers)
+        return super().setUp()
         
     def test_build_questions(self):
         questions = self.qald_entry.build_questions(self.questions)
-        
+
         self.assertEqual(questions["en"].question_string, "What is the time zone of Salt Lake City?")
         self.assertEqual(questions["zh"].question_string, "盐湖城时区是什么？")
 
@@ -160,7 +161,7 @@ class Test_Qald_entry(unittest.TestCase):
 
     def test_get_dbpedia_entity_knowledge(self):
         qald_entry = Qald_entry(
-            self.id, 
+            self.qald_id, 
             self.questions, 
             "PREFIX res: <http://dbpedia.org/resource/> PREFIX dbp: <http://dbpedia.org/property/> SELECT DISTINCT ?uri WHERE { res:Salt_Lake_City <http://dbpedia.org/ontology/timeZone> ?uri }", 
             Knowledge_graph.DBpedia
@@ -179,7 +180,7 @@ class Test_Qald_entry(unittest.TestCase):
         pass
 
     def test_init_qald_entry(self): 
-        self.assertEqual(self.qald_entry.id, self.id)
+        self.assertEqual(self.qald_entry.id, self.qald_id)
         self.assertEqual(self.qald_entry.questions["en"].question_string, "What is the time zone of Salt Lake City?")
         self.assertEqual(self.qald_entry.query.sparql, self.sparql)
 
