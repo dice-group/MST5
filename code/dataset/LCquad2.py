@@ -1,9 +1,9 @@
+import re
 from components.Knowledge_graph import Knowledge_graph
 from utils.data_io import export_csv
 from dataset.Dataset import Dataset, Entry
 from components.Question import Question
 from components.Language import Language
-import re
 
 
 class LCquad2(Dataset):

@@ -1,6 +1,4 @@
 from dataset.Dataset import Dataset, Entry
-from components.Language import Language
-from components.Question import Question
 from components.Query import Query
 from utils.data_io import export_json
 
