@@ -36,3 +36,13 @@ class Entry:
 
     def build_query(self, sparql, knowledge_graph):
         return Query(sparql, knowledge_graph)
+
+    def build_qald_format_entry(self, qid, question_lang_and_string, sparql, answers):
+        qald_format_entry = {
+            "id": qid,
+            "question": question_lang_and_string,
+            "query": {"sparql": sparql},
+            "answers": [answers],
+        }
+
+        return qald_format_entry

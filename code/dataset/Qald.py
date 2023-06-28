@@ -89,26 +89,8 @@ class Qald_entry(Entry):
 
 
     def build_qald_format_entry(self, languages: list) -> dict:
-        entry_id = {"id": self.id}
-
         question_lang_and_string = self.get_question_lang_and_strings(languages)
-
-        entry_question = {
-            "question": question_lang_and_string
-        }
-
-        entry_query = {"query": {"sparql": self.query.sparql}}
-
-        entry_answers: dict = {"answers": [self.answers]}
-
-        qald_entry = {
-            "id": entry_id["id"],
-            "question": entry_question["question"],
-            "query": entry_query["query"],
-            "answers": entry_answers["answers"],
-        }
-
-        return qald_entry
+        return super().build_qald_format_entry(self.id, question_lang_and_string, self.query.sparql, self.answers)
 
     def get_question_lang_and_strings(self, languages) -> list:
         question_lang_and_string = []
