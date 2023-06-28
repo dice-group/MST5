@@ -11,8 +11,8 @@ class LCquad1(Dataset):
 
 class LCquad1Entry(Entry):
     def __init__(self, lcquad1_entry):
-        self.question = Question("", Language.en)
-        self.query = Query("", Knowledge_graph.DBpedia)
+        self.question = self.get_question_from_input_query(lcquad1_entry)
+        self.query = self.get_query_from_input_entry(lcquad1_entry)
 
     def get_query_from_input_entry(self, entry):
         sparql = entry["sparql_query"]
