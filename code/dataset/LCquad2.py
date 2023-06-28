@@ -45,7 +45,7 @@ class LCquad2_entry(Entry):
         return Question(question_string, Language(language))
     
     def build_query(self, sparql, knowledge_graph):
-        return 
+        return Query(sparql, knowledge_graph)
     
 
     def get_question_string(self, include_linguistic_context, include_entity_knowledge) -> str:
