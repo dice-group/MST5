@@ -26,7 +26,7 @@ from utils.qald_utils import build_qald_entry
 from components.query import ask_wikidata
 from utils.data_io import export_json
 from components.query import postprocess_sparql
-from components.gerbil import *
+from components.Gerbil import *
 
 logger = logging.getLogger(__name__)
 

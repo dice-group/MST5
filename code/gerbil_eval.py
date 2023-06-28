@@ -1,6 +1,6 @@
 import os
 import argparse
-from code.components.gerbil import Gerbil
+from components.Gerbil import Gerbil
 
 default_ref_name = 'qald 9 plus test'
 default_ref_file_path = "datasets/qald9plus/dbpedia/qald_9_plus_test_dbpedia.json"
