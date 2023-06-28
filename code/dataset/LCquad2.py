@@ -39,7 +39,7 @@ class LCquad2_entry(Entry):
     def __init__(self, uid, NNQT_question, language, sparql, knowledge_graph) -> None:
         self.uid = uid
         self.question = self.build_question(NNQT_question, language)
-        self.query = self.build_query(sparql, knowledge_graph)
+        self.query = super().build_query(sparql, knowledge_graph)
 
     def build_question(self, NNQT_question, language):
         question_string = self.preprocess_nnqt_question(NNQT_question)
@@ -49,9 +49,6 @@ class LCquad2_entry(Entry):
         NNQT_ques = NNQT_ques.translate(str.maketrans('<>{},()', '       '))
         NNQT_ques = re.sub(' +', ' ', NNQT_ques)
         return NNQT_ques.strip()
-    
-    def build_query(self, sparql, knowledge_graph):
-        return Query(sparql, knowledge_graph)
 
     def get_question_string(self, include_linguistic_context, include_entity_knowledge) -> str:
         question_string = self.NNQT_question

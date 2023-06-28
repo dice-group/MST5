@@ -29,7 +29,7 @@ class Test_LCquad1_entry(unittest.TestCase):
                          Knowledge_graph.DBpedia)
 
     def test_return_sparql_query(self):
-        query: Query = self.entry.build_query_from_input_entry(self.input_entry)
+        query: Query = self.entry.build_query(self.input_entry["sparql_query"], Knowledge_graph.DBpedia)
 
         expected_query = Query(
             "SELECT DISTINCT COUNT(?uri) WHERE {?uri <http://dbpedia.org/ontology/director> <http://dbpedia.org/resource/Stanley_Kubrick>  . }", Knowledge_graph.DBpedia)
@@ -610,7 +610,7 @@ class Test_Sgpt_entry(unittest.TestCase):
         }
         return super().setUp()
     
-    def test_build_pred_query(self):
+    def test_build_query(self):
         entry = Sgpt_entry("", "")
         pred_query: Query = entry.build_pred_query(self.sample_entry["predicted_sparql"], Knowledge_graph.DBpedia)
         self.assertEqual(pred_query.sparql, "select distinct ?uri where { res:Berlin dbo:leaderName ?uri }")

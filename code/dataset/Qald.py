@@ -74,7 +74,7 @@ class Qald_entry(Entry):
     def __init__(self, id, questions, sparql, knowledge_graph, answers=None) -> None:
         self.id = id
         self.questions: dict[str, Question] = self.build_questions(questions)
-        self.query: Query = self.build_query(sparql, knowledge_graph)
+        self.query: Query = super().build_query(sparql, knowledge_graph)
         self.answers = answers
 
     def build_questions(self, questions: list[dict]) -> dict:
@@ -82,9 +82,6 @@ class Qald_entry(Entry):
         for q in questions:
             entry_questions[q["language"]] = Question(q["string"], Language[q["language"]])
         return entry_questions
-    
-    def build_query(self, sparql, knowledge_graph):
-        return Query(sparql, knowledge_graph)
 
 
     def get_entity_knowledge(self) -> list:

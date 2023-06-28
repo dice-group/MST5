@@ -33,3 +33,6 @@ class Entry:
     def __init__(self, question: Question, query: Query):
         self.question = question
         self.query = query
+
+    def build_query(self, sparql, knowledge_graph):
+        return Query(sparql, knowledge_graph)

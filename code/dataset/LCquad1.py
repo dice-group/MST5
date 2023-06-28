@@ -19,11 +19,7 @@ class LCquad1(Dataset):
 class LCquad1_entry(Entry):
     def __init__(self, lcquad1_entry):
         self.question = self.build_question_from_input_query(lcquad1_entry)
-        self.query = self.build_query_from_input_entry(lcquad1_entry)
-
-    def build_query_from_input_entry(self, entry):
-        sparql = entry["sparql_query"]
-        return Query(sparql, Knowledge_graph.DBpedia)
+        self.query = super().build_query(lcquad1_entry["sparql_query"], Knowledge_graph.DBpedia)
     
     def build_question_from_input_query(self, entry):
         question_string = entry["corrected_question"]
