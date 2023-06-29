@@ -63,7 +63,7 @@ SYMBOL_REPLACEMENT = [
 
 class Query:
     def __init__(self, sparql: str, knowledge_graph: Knowledge_graph) -> None:
-        self.sparql = sparql
+        self.sparql = self.postprocess_sparql(sparql)
         self.knowledge_graph = knowledge_graph
 
     def preprocess(self):
@@ -91,7 +91,7 @@ class Query:
         return sparql_query.split(keyword, 1)[1]
 
 
-    def postprocess_sparql(sparql):
+    def postprocess_sparql(self, sparql):
         for r in REPLACEMENT_BACK:
             if r[0] in sparql:
                 sparql = sparql.replace(r[0], r[1])

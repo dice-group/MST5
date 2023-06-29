@@ -458,25 +458,27 @@ class Test_Qald(unittest.TestCase):
                 }
             ]
         }
-        self.qald = Qald(self.sample_qald, Knowledge_graph.Wikidata)
+        self.qald = Qald(self.sample_qald, "Wikidata")
         return super().setUp()
 
     def test_add_entry(self):
-        empty_qald = Qald()
+        empty_qald = Qald({}, "DBpedia")
         empty_qald.add_entry(
             "1",
             "en",
             "What is the time zone of Salt Lake City?",
             "SELECT DISTINCT ?o1 WHERE { <http://www.wikidata.org/entity/Q23337>  <http://www.wikidata.org/prop/direct/P421>  ?o1 .  }",
-            Knowledge_graph.DBpedia
         )
 
         self.assertTrue(empty_qald.entries)
+        self.assertEqual(empty_qald.entries[0].questions["en"].question_string, "What is the time zone of Salt Lake City?")
+        self.assertEqual(empty_qald.entries[0].query.sparql, "SELECT DISTINCT ?o1 WHERE { <http://www.wikidata.org/entity/Q23337>  <http://www.wikidata.org/prop/direct/P421>  ?o1 .  }")
+
 
     def test_build_qald_list(self):
-        empty_qald = Qald()
+        empty_qald = Qald({}, "DBpedia")
         qald_list = empty_qald.build_qald_list(
-            self.sample_qald, Knowledge_graph.Wikidata)
+            self.sample_qald)
 
         self.assertEqual(qald_list[0].id, "99")
         self.assertEqual(qald_list[1].id, "98")

@@ -10,7 +10,7 @@ languages=("en" "de" "ru" "fr" "lt" "ba" "be" "uk")
 for lang in "${languages[@]}"
 do
     echo "Generating predicted qald file for ${lang}"
-    python code/test_and_build_qald.py \
+    python code/pred_and_build_qald.py \
         --model fine-tuned_models/mt5-base-qald9-dbpedia/checkpoint-20000 \
         -t datasets/qald9plus/dbpedia/qald_9_plus_test_dbpedia.json \
         -o ${pred_path}/${lang}.json \
