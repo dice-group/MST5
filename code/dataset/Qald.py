@@ -8,15 +8,15 @@ from components.Query import Query
 
 class Qald(Dataset):
     def __init__(self, qald_file: dict={}, knowledge_graph=None) -> None:
-        self.entries = self.build_qald_list(qald_file, knowledge_graph)
         self.knowledge_graph = Knowledge_graph[knowledge_graph]
+        self.entries = self.build_qald_list(qald_file)
 
-    def build_qald_list(self, qald_dataset: dict, knowledge_graph) -> list:
+    def build_qald_list(self, qald_dataset: dict) -> list:
         qald_list = []
         if qald_dataset:
             dataset = qald_dataset["questions"]
             for entry in dataset:
-                qald_entry = Qald_entry(entry["id"], entry["question"], entry["query"]["sparql"], knowledge_graph, entry["answers"])
+                qald_entry = Qald_entry(entry["id"], entry["question"], entry["query"]["sparql"], self.knowledge_graph, entry["answers"])
                 qald_list.append(qald_entry)
         return qald_list
     
