@@ -47,6 +47,14 @@
                     "language": "es",
                     "string": "¿En qué zona horaria se encuentra Salt Lake City?",
                     "keywords": "Salt Lake City,  zona horaria"
+                },
+                {
+                    "language": "zh",
+                    "string": "盐湖城时区是什么？"
+                },
+                {
+                    "language": "ja",
+                    "string": "ソルトレイクシティのタイムゾーンは?"
                 }
             ],
             "query": {
@@ -112,6 +120,14 @@
                     "language": "es",
                     "string": "¿Quién mató a César?",
                     "keywords": "asesino, César "
+                },
+                {
+                    "language": "zh",
+                    "string": "谁杀了凯撒？"
+                },
+                {
+                    "language": "ja",
+                    "string": "カエサルを殺したのは誰？"
                 }
             ],
             "query": {
@@ -259,6 +275,14 @@
                     "language": "es",
                     "string": "¿Cuál es la montaña más alta de Alemania?",
                     "keywords": "más alto ,   montaña ,   Alemania "
+                },
+                {
+                    "language": "zh",
+                    "string": "德国最高的山是什么？"
+                },
+                {
+                    "language": "ja",
+                    "string": "ドイツで最も高い山は何ですか?"
                 }
             ],
             "query": {
@@ -332,6 +356,14 @@
                     "language": "es",
                     "string": "¿Qué presidentes estadounidenses estuvieron en el cargo durante la Guerra de Vietnam?",
                     "keywords": "presidente estadounidense, en el cargo, guerra, Vietnam"
+                },
+                {
+                    "language": "zh",
+                    "string": "越南战争期间有哪些美国总统在任？"
+                },
+                {
+                    "language": "ja",
+                    "string": "ベトナム戦争中に在職していたアメリカの大統領は?"
                 }
             ],
             "query": {
@@ -417,6 +449,14 @@
                     "language": "es",
                     "string": "¿De qué estado americano es gobernador Butch Otter?",
                     "keywords": "estado americano,  gobernador,  Butch Otter"
+                },
+                {
+                    "language": "zh",
+                    "string": "Butch Otter 是美国哪个州的州长？"
+                },
+                {
+                    "language": "ja",
+                    "string": "ブッチ・オッターは、アメリカ合衆国のどの州の知事ですか?"
                 }
             ],
             "query": {
@@ -491,6 +531,14 @@
                     "language": "es",
                     "string": "¿Cuántas medallas de oro ganó Michael Phelps durante los juegos olímpicos de 2008?",
                     "keywords": "Michael Phelps,  medallas de oro,  juegos olímpicos,  2008"
+                },
+                {
+                    "language": "zh",
+                    "string": "迈克尔-菲尔普斯在2008年奥运会上赢得多少枚金牌？"
+                },
+                {
+                    "language": "ja",
+                    "string": "マイケル・フェルプスは2008年オリンピックで何個の金メダルを獲得した？"
                 }
             ],
             "query": {
@@ -569,6 +617,14 @@
                     "language": "es",
                     "string": "¿Qué artistas nacieron en la misma fecha que Rachel Stevens?",
                     "keywords": "artistas,  misma fecha nacimiento,  Rachel Stevens"
+                },
+                {
+                    "language": "zh",
+                    "string": "哪些艺术家与雷切尔史蒂文斯同一天出生？"
+                },
+                {
+                    "language": "ja",
+                    "string": "レイチェル・スティーブンスと同じ日に生まれたアーティストは?"
                 }
             ],
             "query": {
@@ -662,6 +718,14 @@
                     "language": "es",
                     "string": "¿Cuál es la profesión de Frank Herbert? ",
                     "keywords": "profesión, Frank Herbert "
+                },
+                {
+                    "language": "zh",
+                    "string": "弗兰克赫伯特的职业是什么？"
+                },
+                {
+                    "language": "ja",
+                    "string": "フランク・ハーバートの職業は?"
                 }
             ],
             "query": {
@@ -732,6 +796,14 @@
                     "language": "es",
                     "string": "¿Es el Taiko un tipo de instrumento musical japonés?",
                     "keywords": "Taiko,  tipo de instrumento musical, japonés"
+                },
+                {
+                    "language": "zh",
+                    "string": "太鼓是一种日本乐器吗？"
+                },
+                {
+                    "language": "ja",
+                    "string": "太鼓は日本の楽器ですか？"
                 }
             ],
             "query": {
@@ -797,6 +869,14 @@
                     "language": "es",
                     "string": "¿Cuántos asientos tiene el estadio del FC Porto?",
                     "keywords": "asientos, estadio, FC Porto"
+                },
+                {
+                    "language": "zh",
+                    "string": "FC Porto 的主场有多少座位？"
+                },
+                {
+                    "language": "ja",
+                    "string": "FCポルトのホームスタジアムの座席数は?"
                 }
             ],
             "query": {
@@ -871,6 +951,14 @@
                     "language": "es",
                     "string": "¿Qué programa de viajero frecuente tiene más aerolíneas? ",
                     "keywords": "programa de viajero frecuente, más aerolíneas"
+                },
+                {
+                    "language": "zh",
+                    "string": "哪个常旅客计划拥有最多的航空公司？"
+                },
+                {
+                    "language": "ja",
+                    "string": "航空会社が最も多いフリークエント フライヤー プログラムは?"
                 }
             ],
             "query": {
@@ -940,6 +1028,14 @@
                     "language": "es",
                     "string": "¿Qué países europeos tienen una monarquía constitucional?",
                     "keywords": "países europeos,  monarquía constitucional"
+                },
+                {
+                    "language": "zh",
+                    "string": "哪些欧洲国家实行君主立宪制？"
+                },
+                {
+                    "language": "ja",
+                    "string": "立憲君主制を採用しているヨーロッパの国は?"
                 }
             ],
             "query": {
@@ -1039,6 +1135,14 @@
                     "language": "es",
                     "string": "¿Qué países tienen lugares con más de dos cuevas?",
                     "keywords": "país,  lugar,  cuevas,  más de dos"
+                },
+                {
+                    "language": "zh",
+                    "string": "哪些国家有超过两个洞穴的地方？"
+                },
+                {
+                    "language": "ja",
+                    "string": "2つ以上の洞窟がある国は?"
                 }
             ],
             "query": {
@@ -1364,6 +1468,14 @@
                     "language": "es",
                     "string": "¿Qué aeropuertos hay en California?",
                     "keywords": "aeropuertos, California"
+                },
+                {
+                    "language": "zh",
+                    "string": "哪些机场位于美国加利福尼亚州？"
+                },
+                {
+                    "language": "ja",
+                    "string": "米国カリフォルニア州にはどの空港がありますか?"
                 }
             ],
             "query": {
@@ -1951,6 +2063,14 @@
                     "language": "es",
                     "string": "¿Qué apodos tiene San Francisco?",
                     "keywords": "San Francisco,  apodo"
+                },
+                {
+                    "language": "zh",
+                    "string": "旧金山有哪些绰号？"
+                },
+                {
+                    "language": "ja",
+                    "string": "サンフランシスコのニックネームは何ですか？"
                 }
             ],
             "query": {
@@ -2017,6 +2137,14 @@
                     "language": "es",
                     "string": "¿Cuál es el nombre de nacimiento de Angela Merkel?",
                     "keywords": "nombre de nacimiento,  Angela Merkel"
+                },
+                {
+                    "language": "zh",
+                    "string": "安吉拉·默克尔的本名是什么？"
+                },
+                {
+                    "language": "ja",
+                    "string": "アンゲラ・メルケルの本名は?"
                 }
             ],
             "query": {
@@ -2079,6 +2207,14 @@
                     "language": "es",
                     "string": "¿Quién es el alcalde de Berlín?",
                     "keywords": "Berlín,  alcalde"
+                },
+                {
+                    "language": "zh",
+                    "string": "柏林市长是谁？"
+                },
+                {
+                    "language": "ja",
+                    "string": "ベルリン市長は誰？"
                 }
             ],
             "query": {
@@ -2137,6 +2273,14 @@
                     "language": "es",
                     "string": "¿Qué países de la Unión Europea utilizan el euro como su moneda?",
                     "keywords": "países,  Unión Europea,  moneda,  Euro"
+                },
+                {
+                    "language": "zh",
+                    "string": "欧盟哪些国家采用欧元？"
+                },
+                {
+                    "language": "ja",
+                    "string": "欧州連合のどの国がユーロを採用しましたか?"
                 }
             ],
             "query": {
@@ -2576,6 +2720,14 @@
                     "language": "es",
                     "string": "¿Qué productos de software publicó Mean Hamster Software?",
                     "keywords": "productos de software, publicado, Mean Hamster Software"
+                },
+                {
+                    "language": "zh",
+                    "string": "Mean Hamster Software发布过哪些软件？"
+                },
+                {
+                    "language": "ja",
+                    "string": "Mean Hamster Softwareが発表したソフトウェアは？"
                 }
             ],
             "query": {
@@ -2641,6 +2793,14 @@
                     "language": "es",
                     "string": "¿En qué país nació Bill Gates?",
                     "keywords": "país, nacimiento,  Bill Gates"
+                },
+                {
+                    "language": "zh",
+                    "string": "比尔盖茨出生在哪个国家？"
+                },
+                {
+                    "language": "ja",
+                    "string": "ビル・ゲイツが生まれた国は?"
                 }
             ],
             "query": {
@@ -2706,6 +2866,14 @@
                     "language": "es",
                     "string": "¿Cuántos nietos tuvo Jacques Cousteau?",
                     "keywords": "número nietos,  Jacques Cousteau"
+                },
+                {
+                    "language": "zh",
+                    "string": "雅克·库斯托有几个孙子？"
+                },
+                {
+                    "language": "ja",
+                    "string": "ジャック・クストーには何人の孫がいましたか?"
                 }
             ],
             "query": {
@@ -2768,6 +2936,14 @@
                     "language": "es",
                     "string": "¿Qué skaters profesionales son de Suecia?",
                     "keywords": "skaters, profesional,  Suecia"
+                },
+                {
+                    "language": "zh",
+                    "string": "给我来自瑞典的所有职业滑板手。"
+                },
+                {
+                    "language": "ja",
+                    "string": "スウェーデンのプロスケートボーダー全員をください。"
                 }
             ],
             "query": {
@@ -2822,6 +2998,14 @@
                     "language": "es",
                     "string": "¿Qué monarcas del Reino Unido estaban casados con una persona alemana?",
                     "keywords": "Reino Unido,  monarca, casado,alemán"
+                },
+                {
+                    "language": "zh",
+                    "string": "英国有哪些君主嫁给了德国人？"
+                },
+                {
+                    "language": "ja",
+                    "string": "イギリスのどの君主がドイツ人と結婚した?"
                 }
             ],
             "query": {
@@ -2876,6 +3060,14 @@
                     "language": "es",
                     "string": "Dame todas las películas argentinas.",
                     "keywords": "películas,  argentinas"
+                },
+                {
+                    "language": "zh",
+                    "string": "给我所有的阿根廷电影。"
+                },
+                {
+                    "language": "ja",
+                    "string": "アルゼンチン映画を全部ください。"
                 }
             ],
             "query": {
@@ -13211,6 +13403,14 @@
                     "language": "es",
                     "string": "¿Cómo murió Michael Jackson?",
                     "keywords": "tipo de muerte,  Michael Jackson"
+                },
+                {
+                    "language": "zh",
+                    "string": "迈克尔杰克逊是怎么死的？"
+                },
+                {
+                    "language": "ja",
+                    "string": "マイケル・ジャクソンはどのように死んだのですか?"
                 }
             ],
             "query": {
@@ -13277,6 +13477,14 @@
                     "language": "es",
                     "string": "¿Qué estado americano fue el último en ser admitido?",
                     "keywords": "estado americano,  admitido,  último"
+                },
+                {
+                    "language": "zh",
+                    "string": "哪个州是最后被纳入美国的？"
+                },
+                {
+                    "language": "ja",
+                    "string": "最後にアメリカ合衆国に編入された州は?"
                 }
             ],
             "query": {
@@ -13346,6 +13554,14 @@
                     "language": "es",
                     "string": "¿A qué clases pertenece el milpiés?",
                     "keywords": "milpiés, clase, pertenece"
+                },
+                {
+                    "language": "zh",
+                    "string": "千足虫属于哪几类？"
+                },
+                {
+                    "language": "ja",
+                    "string": "ヤスデはどのクラスに属しますか?"
                 }
             ],
             "query": {
@@ -13412,6 +13628,14 @@
                     "language": "es",
                     "string": "Dame la página web de Forbes.",
                     "keywords": "página de web,  Forbes"
+                },
+                {
+                    "language": "zh",
+                    "string": "给我福布斯的主页。"
+                },
+                {
+                    "language": "ja",
+                    "string": "フォーブスのホームページをください。"
                 }
             ],
             "query": {
@@ -13466,6 +13690,14 @@
                     "language": "es",
                     "string": "¿Quién es el marido de Amanda Palmer?",
                     "keywords": "Amanda Palmer,  marido"
+                },
+                {
+                    "language": "zh",
+                    "string": "アマンダ・パーマーの夫は誰?"
+                },
+                {
+                    "language": "ja",
+                    "string": "阿曼达帕尔默的丈夫是谁？"
                 }
             ],
             "query": {
@@ -13532,6 +13764,14 @@
                     "language": "es",
                     "string": "¿Quién pintó La Tormenta en el mar de Galilea?",
                     "keywords": "La Tormenta en el mar de Galilea,  pintor"
+                },
+                {
+                    "language": "zh",
+                    "string": "谁画了加利利海上的风暴？"
+                },
+                {
+                    "language": "ja",
+                    "string": "ガリラヤの海の嵐を描いたのは誰?"
                 }
             ],
             "query": {
@@ -13601,6 +13841,14 @@
                     "language": "es",
                     "string": "¿Cuál es el punto más alto del Karakorum?",
                     "keywords": "Karakorum,  punto más alto"
+                },
+                {
+                    "language": "zh",
+                    "string": "喀喇昆仑最高的地方在哪里？"
+                },
+                {
+                    "language": "ja",
+                    "string": "カラコルムの最高地点は？"
                 }
             ],
             "query": {
@@ -13666,6 +13914,14 @@
                     "language": "es",
                     "string": "¿Cuándo se unió Finlandia a la Unión Europea?",
                     "keywords": "Finlandia , Unión Europea ,  unirse "
+                },
+                {
+                    "language": "zh",
+                    "string": "芬兰什么时候加入欧盟的？"
+                },
+                {
+                    "language": "ja",
+                    "string": "フィンランドがEUに加盟したのはいつですか."
                 }
             ],
             "query": {
@@ -13736,6 +13992,14 @@
                     "language": "es",
                     "string": "¿Qué actores participan en The Big Bang Theory?",
                     "keywords": "actores, The Big Bang Theory"
+                },
+                {
+                    "language": "zh",
+                    "string": "哪些演员出演了生活大爆炸？"
+                },
+                {
+                    "language": "ja",
+                    "string": "ビッグバン セオリーで演じている俳優は?"
                 }
             ],
             "query": {
@@ -13871,6 +14135,14 @@
                     "language": "es",
                     "string": "¿Qué ingeniero informático ganó un Oscar?",
                     "keywords": "ingeniero informático,  ganó,  Oscar"
+                },
+                {
+                    "language": "zh",
+                    "string": "哪位计算机科学家获得了奥斯卡奖？"
+                },
+                {
+                    "language": "ja",
+                    "string": "オスカーを受賞したコンピューター科学者は?"
                 }
             ],
             "query": {
@@ -13933,6 +14205,14 @@
                     "language": "es",
                     "string": "¿Quién escribió Harry Potter?",
                     "keywords": "escritor,  Harry Potter"
+                },
+                {
+                    "language": "zh",
+                    "string": "哈利波特是谁写的？"
+                },
+                {
+                    "language": "ja",
+                    "string": "ハリー・ポッターを書いたのは誰ですか?"
                 }
             ],
             "query": {
@@ -14014,6 +14294,14 @@
                     "language": "es",
                     "string": "¿Qué escritores ganaron el premio Nobel de Literatura?",
                     "keywords": "escritores, premio Nobel de Literatura"
+                },
+                {
+                    "language": "zh",
+                    "string": "给我所有获得诺贝尔文学奖的作家。"
+                },
+                {
+                    "language": "ja",
+                    "string": "ノーベル文学賞を受賞した作家をすべて教えてください。"
                 }
             ],
             "query": {
@@ -14255,6 +14543,14 @@
                     "language": "es",
                     "string": "¿Qué actores ingleses protagonizan Lovesick?",
                     "keywords": "actores Ingleses,  protagonistas,  Lovesick "
+                },
+                {
+                    "language": "zh",
+                    "string": "给我主演相思病的英国演员。"
+                },
+                {
+                    "language": "ja",
+                    "string": "Lovesickに出演しているイギリスの俳優を教えてください。"
                 }
             ],
             "query": {
@@ -14338,6 +14634,14 @@
                     "language": "es",
                     "string": "¿Cuál es el apodo de Bagdad?",
                     "keywords": "Bagdad, apodo"
+                },
+                {
+                    "language": "zh",
+                    "string": "巴格达的绰号是什么？"
+                },
+                {
+                    "language": "ja",
+                    "string": "バグダッドのニックネームは？"
                 }
             ],
             "query": {
@@ -14416,6 +14720,14 @@
                     "language": "es",
                     "string": "¿En qué ciudad nació el presidente de Montenegro?",
                     "keywords": "ciudad,  nació,  presidente, Montenegro"
+                },
+                {
+                    "language": "zh",
+                    "string": "黑山总统出生在哪个城市？"
+                },
+                {
+                    "language": "ja",
+                    "string": "モンテネグロの大統領が生まれた都市は?"
                 }
             ],
             "query": {
@@ -14503,6 +14815,14 @@
                     "language": "es",
                     "string": "¿Qué estado de los Estados Unidos de América tiene la mayor densidad poblacional?",
                     "keywords": "estado,  Estados Unidos de América, densidad poblacional"
+                },
+                {
+                    "language": "zh",
+                    "string": "美国哪个州的人口密度最高？"
+                },
+                {
+                    "language": "ja",
+                    "string": "人口密度が最も高い米国の州は?"
                 }
             ],
             "query": {
@@ -14577,6 +14897,14 @@
                     "language": "es",
                     "string": "¿Cuál es el río más largo de China?",
                     "keywords": "río, más largo, China"
+                },
+                {
+                    "language": "zh",
+                    "string": "中国最长的河流是什么？"
+                },
+                {
+                    "language": "ja",
+                    "string": "中国で最も長い川は?"
                 }
             ],
             "query": {
@@ -14643,6 +14971,14 @@
                     "language": "es",
                     "string": "¿Cuál es el código de área de Berlín?",
                     "keywords": "código de área,  Berlín"
+                },
+                {
+                    "language": "zh",
+                    "string": "柏林的区号是多少？"
+                },
+                {
+                    "language": "ja",
+                    "string": "ベルリンの市外局番は何ですか?"
                 }
             ],
             "query": {
@@ -14720,6 +15056,14 @@
                     "language": "es",
                     "string": "¿Cuántos científicos se han graduado de una Universidad de la Ivy League?",
                     "keywords": "científicos,  graduado,  Universidad, Ivy League"
+                },
+                {
+                    "language": "zh",
+                    "string": "有多少科学家毕业于常春藤盟校？"
+                },
+                {
+                    "language": "ja",
+                    "string": "アイビーリーグの大学を卒業した科学者は何人ですか?"
                 }
             ],
             "query": {
@@ -14790,6 +15134,14 @@
                     "language": "es",
                     "string": "¿Qué surfistas profesionales nacieron en Australia?",
                     "keywords": "surfista profesional,  nacido,  Australia"
+                },
+                {
+                    "language": "zh",
+                    "string": "哪些职业冲浪者出生在澳大利亚？"
+                },
+                {
+                    "language": "ja",
+                    "string": "オーストラリア生まれのプロサーファーは?"
                 }
             ],
             "query": {
@@ -14852,6 +15204,14 @@
                     "language": "es",
                     "string": "Dame todos los partidos políticos holandeses",
                     "keywords": "partidos políticos holandeses"
+                },
+                {
+                    "language": "zh",
+                    "string": "给我所有的荷兰派对。"
+                },
+                {
+                    "language": "ja",
+                    "string": "すべてのオランダのパーティーをください。"
                 }
             ],
             "query": {
@@ -15055,6 +15415,14 @@
                     "language": "es",
                     "string": "¿Cuántas lunas tiene Marte?",
                     "keywords": "Número de lunas,  Marte"
+                },
+                {
+                    "language": "zh",
+                    "string": "火星有多少颗卫星？"
+                },
+                {
+                    "language": "ja",
+                    "string": "火星にはいくつの月がありますか?"
                 }
             ],
             "query": {
@@ -15129,6 +15497,14 @@
                     "language": "es",
                     "string": "¿Cuál es el verdadero nombre de Batman?",
                     "keywords": "verdadero nombre, Batman"
+                },
+                {
+                    "language": "zh",
+                    "string": "蝙蝠侠的真名是什么？"
+                },
+                {
+                    "language": "ja",
+                    "string": "バットマンの本名は？"
                 }
             ],
             "query": {
@@ -15191,6 +15567,14 @@
                     "language": "es",
                     "string": "¿Por qué es famoso Elon Musk?",
                     "keywords": "famoso,  Elon Musk"
+                },
+                {
+                    "language": "zh",
+                    "string": "伊隆·马斯克以什么出名？"
+                },
+                {
+                    "language": "ja",
+                    "string": "イーロン・マスクは何のために有名ですか?"
                 }
             ],
             "query": {
@@ -15253,6 +15637,14 @@
                     "language": "es",
                     "string": "¿Quién es el autor de WikiLeaks?",
                     "keywords": "autor ,   wikileaks "
+                },
+                {
+                    "language": "zh",
+                    "string": "维基解密的作者是谁？"
+                },
+                {
+                    "language": "ja",
+                    "string": "ウィキリークスの作者は?"
                 }
             ],
             "query": {
@@ -15322,6 +15714,14 @@
                     "language": "es",
                     "string": "¿De qué estado americano fue gobernador Sean Parnell?",
                     "keywords": "estado americano,  Gobernador,  Sean Parnell"
+                },
+                {
+                    "language": "zh",
+                    "string": "肖恩-帕内尔是美国哪个州的州长？"
+                },
+                {
+                    "language": "ja",
+                    "string": "ショーン・パーネルは米国のどの州の知事だった？"
                 }
             ],
             "query": {
@@ -15392,6 +15792,14 @@
                     "language": "es",
                     "string": "¿Cuántos años se fabricó el Ford Modelo T?",
                     "keywords": "años ,   Ford Modelo T ,   fabricado "
+                },
+                {
+                    "language": "zh",
+                    "string": "福特T型车生产了多少年？"
+                },
+                {
+                    "language": "ja",
+                    "string": "T型フォードが製造されたのは何年？"
                 }
             ],
             "query": {
@@ -15462,6 +15870,14 @@
                     "language": "es",
                     "string": "¿Cuándo le dispararon a Carlo Giuliani?",
                     "keywords": "fecha,  disparo,  Carlo Giuliani"
+                },
+                {
+                    "language": "zh",
+                    "string": "卡罗·朱利安尼什么时候被枪杀的？"
+                },
+                {
+                    "language": "ja",
+                    "string": "カルロ・ジュリアーニが撃たれたのはいつですか?"
                 }
             ],
             "query": {
@@ -15532,6 +15948,14 @@
                     "language": "es",
                     "string": "¿Qué animales están extintos?",
                     "keywords": "animales extintos"
+                },
+                {
+                    "language": "zh",
+                    "string": "给我所有已灭绝的动物。"
+                },
+                {
+                    "language": "ja",
+                    "string": "絶滅した動物をすべて教えてください。"
                 }
             ],
             "query": {
@@ -17529,6 +17953,14 @@
                     "language": "es",
                     "string": "¿Quién era la esposa del presidente Lincoln?",
                     "keywords": "esposa ,   presidente ,   Lincoln "
+                },
+                {
+                    "language": "zh",
+                    "string": "林肯总统的妻子是谁？"
+                },
+                {
+                    "language": "ja",
+                    "string": "リンカーン大統領の妻は誰?"
                 }
             ],
             "query": {
@@ -17599,6 +18031,14 @@
                     "language": "es",
                     "string": "¿Cuántos premios tiene Bertrand Russell?",
                     "keywords": "Bertrand Russell, premios"
+                },
+                {
+                    "language": "zh",
+                    "string": "伯特兰·罗素得过多少奖？"
+                },
+                {
+                    "language": "ja",
+                    "string": "バートランド・ラッセルはいくつの賞を受賞していますか?"
                 }
             ],
             "query": {
@@ -17661,6 +18101,14 @@
                     "language": "es",
                     "string": "¿Es Pamela Anderson vegana?",
                     "keywords": "Pamela Anderson,  vegano"
+                },
+                {
+                    "language": "zh",
+                    "string": "帕梅拉安德森是素食主义者吗？"
+                },
+                {
+                    "language": "ja",
+                    "string": "パメラ・アンダーソンはビーガンですか？"
                 }
             ],
             "query": {
@@ -17714,6 +18162,14 @@
                     "language": "es",
                     "string": "¿Qué sondas espaciales fueron enviadas en órbita alrededor del sol?",
                     "keywords": "sondas espaciales,  órbita, alrededor sol"
+                },
+                {
+                    "language": "zh",
+                    "string": "哪些太空探测器被送入绕日轨道？"
+                },
+                {
+                    "language": "ja",
+                    "string": "太陽の周りの軌道に送られた宇宙探査機は?"
                 }
             ],
             "query": {
@@ -17871,6 +18327,14 @@
                     "language": "es",
                     "string": "¿Qué ciudades alemanas tienen más de 250000 habitantes?",
                     "keywords": "cuidad,  Alemania,  habitantes,  más de 250000"
+                },
+                {
+                    "language": "zh",
+                    "string": "德国哪些城市的居民超过25万？"
+                },
+                {
+                    "language": "ja",
+                    "string": "人口が25万人を超えるドイツの都市は?"
                 }
             ],
             "query": {
@@ -17954,6 +18418,14 @@
                     "language": "es",
                     "string": "¿Con quién está casada la hija de Robert Kennedy?",
                     "keywords": "Robert Kennedy,  hija,  casada"
+                },
+                {
+                    "language": "zh",
+                    "string": "罗伯特肯尼迪的女儿嫁给了谁？"
+                },
+                {
+                    "language": "ja",
+                    "string": "ロバート・ケネディの娘は誰と結婚した?"
                 }
             ],
             "query": {
@@ -18049,6 +18521,14 @@
                     "language": "es",
                     "string": "¿Cuántos estudiantes tiene la Universidad Libre de Ámsterdam?",
                     "keywords": "Universidad Libre de Ámsterdam,  estudiantes"
+                },
+                {
+                    "language": "zh",
+                    "string": "阿姆斯特丹自由大学有多少学生？"
+                },
+                {
+                    "language": "ja",
+                    "string": "アムステルダム自由大学には何人の学生がいますか?"
                 }
             ],
             "query": {
@@ -18127,6 +18607,14 @@
                     "language": "es",
                     "string": "¿Cuáles son los ingresos generados por IBM?",
                     "keywords": "ingresos, IBM "
+                },
+                {
+                    "language": "zh",
+                    "string": "IBM 的收入是多少？"
+                },
+                {
+                    "language": "ja",
+                    "string": "IBMの収益はいくらですか?"
                 }
             ],
             "query": {
@@ -18193,6 +18681,14 @@
                     "language": "es",
                     "string": "¿Cuántas películas de James Bond existen?",
                     "keywords": "número de películas,  James Bond"
+                },
+                {
+                    "language": "zh",
+                    "string": "有多少詹姆斯邦德电影存在？"
+                },
+                {
+                    "language": "ja",
+                    "string": "ジェームズ・ボンドの映画は何本存在しますか?"
                 }
             ],
             "query": {
@@ -18255,6 +18751,14 @@
                     "language": "es",
                     "string": "¿Quién interpreta la voz de Bart Simpson?",
                     "keywords": "interprete,  voz,  Bart Simpson"
+                },
+                {
+                    "language": "zh",
+                    "string": "谁为巴特·辛普森配音？"
+                },
+                {
+                    "language": "ja",
+                    "string": "バート・シンプソンの声は誰?"
                 }
             ],
             "query": {
@@ -18317,6 +18821,14 @@
                     "language": "es",
                     "string": "¿Con quién estuvo casado Tom Hanks?",
                     "keywords": "Tom Hanks, casado"
+                },
+                {
+                    "language": "zh",
+                    "string": "汤姆汉克斯娶了谁？"
+                },
+                {
+                    "language": "ja",
+                    "string": "トム・ハンクスの結婚相手は？"
                 }
             ],
             "query": {
@@ -18375,6 +18887,14 @@
                     "language": "es",
                     "string": "¿Por qué países fluye el río Yenisei?",
                     "keywords": "países,  fluye,  río Yenisei"
+                },
+                {
+                    "language": "zh",
+                    "string": "叶尼塞河流经哪些国家？"
+                },
+                {
+                    "language": "ja",
+                    "string": "エニセイ川が流れる国は?"
                 }
             ],
             "query": {
@@ -18437,6 +18957,14 @@
                     "language": "es",
                     "string": "¿Qué autos son producidos en Alemania?",
                     "keywords": "coches,  producidos,  Alemania"
+                },
+                {
+                    "language": "zh",
+                    "string": "给我所有在德国生产的汽车。"
+                },
+                {
+                    "language": "ja",
+                    "string": "ドイツで生産されているすべての車を教えてください。"
                 }
             ],
             "query": {
@@ -19510,6 +20038,14 @@
                     "language": "es",
                     "string": "¿Cuándo murió Michael Jackson?",
                     "keywords": "Michael Jackson,  muerto"
+                },
+                {
+                    "language": "zh",
+                    "string": "迈克尔杰克逊什么时候死的？"
+                },
+                {
+                    "language": "ja",
+                    "string": "マイケル・ジャクソンが亡くなったのはいつですか？"
                 }
             ],
             "query": {
@@ -19584,6 +20120,14 @@
                     "language": "es",
                     "string": "¿Cuál es el volcán más alto en África?",
                     "keywords": "volcán,  más alto,  África"
+                },
+                {
+                    "language": "zh",
+                    "string": "非洲最高的火山是什么？"
+                },
+                {
+                    "language": "ja",
+                    "string": "アフリカで最も高い火山は何ですか?"
                 }
             ],
             "query": {
@@ -19649,6 +20193,14 @@
                     "language": "es",
                     "string": "¿Qué poeta ha escrito el mayor número de libros?",
                     "keywords": "poeta,  mayor número,  libros, escrito"
+                },
+                {
+                    "language": "zh",
+                    "string": "哪位诗人写的书最多？"
+                },
+                {
+                    "language": "ja",
+                    "string": "最も多くの本を書いた詩人は?"
                 }
             ],
             "query": {
@@ -19714,6 +20266,14 @@
                     "language": "es",
                     "string": "Dame todos los mafiosos de la era de la prohibición.",
                     "keywords": "mafiosos, era de la prohibición "
+                },
+                {
+                    "language": "zh",
+                    "string": "给我所有禁酒令时代的黑帮成员。"
+                },
+                {
+                    "language": "ja",
+                    "string": "禁酒法時代のギャングを全部出せ。"
                 }
             ],
             "query": {
@@ -20001,6 +20561,14 @@
                     "language": "es",
                     "string": "¿Qué naves espaciales volaron a Marte?",
                     "keywords": "naves espaciales,  volado,  Marte"
+                },
+                {
+                    "language": "zh",
+                    "string": "给我所有飞到火星的宇宙飞船。"
+                },
+                {
+                    "language": "ja",
+                    "string": "火星に飛んだすべての宇宙船をくれ。"
                 }
             ],
             "query": {
@@ -20116,6 +20684,14 @@
                     "language": "es",
                     "string": "Muéstrame todas las películas Checas",
                     "keywords": "películas, checas"
+                },
+                {
+                    "language": "zh",
+                    "string": "给我看所有捷克电影。"
+                },
+                {
+                    "language": "ja",
+                    "string": "チェコ映画を全部見せて。"
                 }
             ],
             "query": {
@@ -20601,6 +21177,14 @@
                     "language": "es",
                     "string": "Dame todos los taikonautas.",
                     "keywords": "taikonautas"
+                },
+                {
+                    "language": "zh",
+                    "string": "给我所有的中国的宇航员"
+                },
+                {
+                    "language": "ja",
+                    "string": "すべての中国人宇宙飛行士のために"
                 }
             ],
             "query": {
@@ -20702,6 +21286,14 @@
                     "language": "es",
                     "string": "¿Qué países tienen más de diez volcanes?",
                     "keywords": "países, más de diez, volcanes"
+                },
+                {
+                    "language": "zh",
+                    "string": "哪些国家的火山超过十座？"
+                },
+                {
+                    "language": "ja",
+                    "string": "10以上の火山がある国は?"
                 }
             ],
             "query": {
@@ -20893,6 +21485,14 @@
                     "language": "es",
                     "string": "¿En qué películas participa Tom Cruise?",
                     "keywords": "películas, Tom Cruice"
+                },
+                {
+                    "language": "zh",
+                    "string": "给我汤姆克鲁斯的所有电影。"
+                },
+                {
+                    "language": "ja",
+                    "string": "トム・クルーズの映画を全部ください。"
                 }
             ],
             "query": {
@@ -21204,6 +21804,14 @@
                     "language": "es",
                     "string": "¿Cuándo murió el creador de Drácula?",
                     "keywords": "muerte, creador, Drácula"
+                },
+                {
+                    "language": "zh",
+                    "string": "德古拉的创造者什么时候死的？"
+                },
+                {
+                    "language": "ja",
+                    "string": "ドラキュラの作者が亡くなったのはいつ？"
                 }
             ],
             "query": {
@@ -21274,6 +21882,14 @@
                     "language": "es",
                     "string": "¿Quién creó Wikipedia en inglés?",
                     "keywords": "creador, Inglés, Wikipedia "
+                },
+                {
+                    "language": "zh",
+                    "string": "谁创建了英文维基百科？"
+                },
+                {
+                    "language": "ja",
+                    "string": "英語版ウィキペディアを作成したのは誰?"
                 }
             ],
             "query": {
@@ -21349,6 +21965,14 @@
                     "language": "es",
                     "string": "¿Qué cancilleres de Alemania eran mujeres?",
                     "keywords": "canciller de Alemania,  mujer"
+                },
+                {
+                    "language": "zh",
+                    "string": "给我所有的德国女总理。"
+                },
+                {
+                    "language": "ja",
+                    "string": "すべての女性ドイツ首相を私にください。"
                 }
             ],
             "query": {
@@ -21414,6 +22038,14 @@
                     "language": "es",
                     "string": "¿Quién es el dueño de Aldi?",
                     "keywords": "Aldi, dueño"
+                },
+                {
+                    "language": "zh",
+                    "string": "谁拥有Aldi？"
+                },
+                {
+                    "language": "ja",
+                    "string": "アルディの所有者は誰ですか?"
                 }
             ],
             "query": {
@@ -21480,6 +22112,14 @@
                     "language": "es",
                     "string": "¿Qué libros escribió Danielle Steel?",
                     "keywords": "libros, escritor, Danielle Steel"
+                },
+                {
+                    "language": "zh",
+                    "string": "Danielle Steel 写了哪些书？"
+                },
+                {
+                    "language": "ja",
+                    "string": "ダニエル・スティールが書いた本は?"
                 }
             ],
             "query": {
@@ -21863,6 +22503,14 @@
                     "language": "es",
                     "string": "¿Quién fue influenciado por Sócrates?",
                     "keywords": "influenciado,  Sócrates"
+                },
+                {
+                    "language": "zh",
+                    "string": "谁受到了苏格拉底的影响？"
+                },
+                {
+                    "language": "ja",
+                    "string": "ソクラテスの影響を受けたのは誰?"
                 }
             ],
             "query": {
@@ -22144,6 +22792,14 @@
                     "language": "es",
                     "string": "¿Qué tan profundo es el lago Chiem?",
                     "keywords": "Lago Chiem, profundidad"
+                },
+                {
+                    "language": "zh",
+                    "string": "基姆湖有多深？"
+                },
+                {
+                    "language": "ja",
+                    "string": "キームゼー湖の深さは？"
                 }
             ],
             "query": {
@@ -22226,6 +22882,14 @@
                     "language": "es",
                     "string": "¿Qué empresas trabajan tanto en la industria aeroespacial como en la medicina?",
                     "keywords": "empresas,  industria aeroespacial, industria médica"
+                },
+                {
+                    "language": "zh",
+                    "string": "哪些公司既从事航空航天业又从事医药业？"
+                },
+                {
+                    "language": "ja",
+                    "string": "医療だけでなく航空宇宙産業でも活動している企業は?"
                 }
             ],
             "query": {
@@ -22296,6 +22960,14 @@
                     "language": "es",
                     "string": "¿Qué surfistas profesionales nacieron en las Filipinas?",
                     "keywords": "surfista profesional,  nacido,  Filipinas"
+                },
+                {
+                    "language": "zh",
+                    "string": "哪些职业冲浪者出生在菲律宾？"
+                },
+                {
+                    "language": "ja",
+                    "string": "フィリピン生まれのプロサーファーは？"
                 }
             ],
             "query": {
@@ -22366,6 +23038,14 @@
                     "language": "es",
                     "string": "¿Quiénes fueron los padres de la reina Victoria?",
                     "keywords": "padres,  reina Victoria"
+                },
+                {
+                    "language": "zh",
+                    "string": "维多利亚女王的父母是谁？"
+                },
+                {
+                    "language": "ja",
+                    "string": "ヴィクトリア女王の両親は?"
                 }
             ],
             "query": {
@@ -22453,6 +23133,14 @@
                     "language": "es",
                     "string": "¿Hay castillos en los Estados Unidos?",
                     "keywords": "castillos, Estados Unidos"
+                },
+                {
+                    "language": "zh",
+                    "string": "美国有城堡吗？"
+                },
+                {
+                    "language": "ja",
+                    "string": "アメリカに城はありますか？"
                 }
             ],
             "query": {
@@ -22506,6 +23194,14 @@
                     "language": "es",
                     "string": "¿Qué idiomas se hablan en Estonia?",
                     "keywords": "idiomas,  Estonia"
+                },
+                {
+                    "language": "zh",
+                    "string": "爱沙尼亚使用哪些语言？"
+                },
+                {
+                    "language": "ja",
+                    "string": "エストニアではどの言語が話されていますか?"
                 }
             ],
             "query": {
@@ -22653,6 +23349,14 @@
                     "language": "es",
                     "string": "¿Qué aves están en peligro de extinción?",
                     "keywords": "aves,  peligro de extinción"
+                },
+                {
+                    "language": "zh",
+                    "string": "给我一份所有极度濒危鸟类的清单。"
+                },
+                {
+                    "language": "ja",
+                    "string": "絶滅の危機に瀕しているすべての鳥のリストを教えてください。"
                 }
             ],
             "query": {
@@ -22891,6 +23595,14 @@
                     "language": "es",
                     "string": "¿Qué países une el río Rin?",
                     "keywords": "río Rin,  une,  países"
+                },
+                {
+                    "language": "zh",
+                    "string": "莱茵河与哪些国家相连？"
+                },
+                {
+                    "language": "ja",
+                    "string": "ライン川で結ばれている国は?"
                 }
             ],
             "query": {
@@ -22965,6 +23677,14 @@
                     "language": "es",
                     "string": "¿Quién fue el padre de la reina Isabel II?",
                     "keywords": "padre,  reina Isabel II"
+                },
+                {
+                    "language": "zh",
+                    "string": "伊丽莎白二世的父亲是谁？"
+                },
+                {
+                    "language": "ja",
+                    "string": "エリザベス2世女王の父親は?"
                 }
             ],
             "query": {
@@ -23039,6 +23759,14 @@
                     "language": "es",
                     "string": "Dame todos los elementos químicos.",
                     "keywords": "elementos químicos"
+                },
+                {
+                    "language": "zh",
+                    "string": "给我所有的化学元素。"
+                },
+                {
+                    "language": "ja",
+                    "string": "すべての化学元素を教えてください。"
                 }
             ],
             "query": {
@@ -23844,6 +24572,14 @@
                     "language": "es",
                     "string": "¿Quiénes fueron presidentes de Estados Unidos en los últimos 20 años?",
                     "keywords": "Presidentes americanos, últimos 20 años"
+                },
+                {
+                    "language": "zh",
+                    "string": "给我过去20年的所有美国总统。"
+                },
+                {
+                    "language": "ja",
+                    "string": "過去20年間のアメリカ大統領をすべて教えてください。"
                 }
             ],
             "query": {
@@ -23902,6 +24638,14 @@
                     "language": "es",
                     "string": "¿Cuándo se estrena la película Worst Case Scenario en los Países Bajos?",
                     "keywords": "película,  Worst Case Scenario,  cines,  Países Bajos"
+                },
+                {
+                    "language": "zh",
+                    "string": "电影《最坏情况》什么时候在荷兰上映？"
+                },
+                {
+                    "language": "ja",
+                    "string": "映画「ワースト ケース シナリオ」がオランダで公開されるのはいつですか?"
                 }
             ],
             "query": {
@@ -23968,6 +24712,14 @@
                     "language": "es",
                     "string": "¿Con quién se casó Lance Bass?",
                     "keywords": "esposa,  Lance Bass"
+                },
+                {
+                    "language": "zh",
+                    "string": "兰斯·巴斯和谁结婚了？"
+                },
+                {
+                    "language": "ja",
+                    "string": "ランス・バスは誰と結婚しましたか?"
                 }
             ],
             "query": {
@@ -24026,6 +24778,14 @@
                     "language": "es",
                     "string": "¿Qué subsidiario de TUI Travel opera tanto en Glasgow y en Dublín?",
                     "keywords": "subsidiario,  TUI Travel,  opera,  Glasgow,  Dublín"
+                },
+                {
+                    "language": "zh",
+                    "string": "TUI旅行社的哪个子公司同时提供格拉斯哥和都柏林的服务？"
+                },
+                {
+                    "language": "ja",
+                    "string": "TUIトラベルのどの子会社がグラスゴーとダブリンの両方に就航していますか？"
                 }
             ],
             "query": {
@@ -24080,6 +24840,14 @@
                     "language": "es",
                     "string": "¿Qué idiomas se hablan en Pakistán?",
                     "keywords": "idiomas,  Pakistán"
+                },
+                {
+                    "language": "zh",
+                    "string": "巴基斯坦说什么语言？"
+                },
+                {
+                    "language": "ja",
+                    "string": "パキスタンでは何語が話されていますか?"
                 }
             ],
             "query": {
@@ -24147,6 +24915,14 @@
                     "language": "es",
                     "string": "¿Con quién está casada la hija de Bill Clinton?",
                     "keywords": "Bill Clinton, hija, esposo"
+                },
+                {
+                    "language": "zh",
+                    "string": "比尔克林顿的女儿嫁给了谁？"
+                },
+                {
+                    "language": "ja",
+                    "string": "ビル・クリントンの娘と結婚したのは誰?"
                 }
             ],
             "query": {
@@ -24208,6 +24984,14 @@
                     "language": "es",
                     "string": "¿Quién estuvo en la misión Apolo 11?",
                     "keywords": "presente,  misión, Apolo 11"
+                },
+                {
+                    "language": "zh",
+                    "string": "谁参加了阿波罗11号任务？"
+                },
+                {
+                    "language": "ja",
+                    "string": "アポロ11号のミッションに参加したのは誰?"
                 }
             ],
             "query": {
@@ -24292,6 +25076,14 @@
                     "language": "es",
                     "string": "¿Cuál es la longitud de onda de Índigo?",
                     "keywords": "longitud de onda, color índigo "
+                },
+                {
+                    "language": "zh",
+                    "string": "靛蓝的波长是多少？"
+                },
+                {
+                    "language": "ja",
+                    "string": "インディゴの波長は？"
                 }
             ],
             "query": {
@@ -24374,6 +25166,14 @@
                     "language": "es",
                     "string": "Dame todos los lados B de los Ramones.",
                     "keywords": "Ramones,  lado B"
+                },
+                {
+                    "language": "zh",
+                    "string": "给我雷蒙斯的所有B面曲。"
+                },
+                {
+                    "language": "ja",
+                    "string": "ラモーンズの B 面をすべて教えてください。"
                 }
             ],
             "query": {
@@ -24432,6 +25232,14 @@
                     "language": "es",
                     "string": "¿Quién se llamaba Caracortada?",
                     "keywords": "apodo,  Caracortada"
+                },
+                {
+                    "language": "zh",
+                    "string": "谁叫疤面煞星？"
+                },
+                {
+                    "language": "ja",
+                    "string": "誰がスカーフェイスと呼ばれましたか?"
                 }
             ],
             "query": {
@@ -24515,6 +25323,14 @@
                     "language": "es",
                     "string": "¿Qué ríos desembocan en el Mar del Norte?",
                     "keywords": "ríos,  desembocan,  Mar del Norte"
+                },
+                {
+                    "language": "zh",
+                    "string": "哪些河流流入北海？"
+                },
+                {
+                    "language": "ja",
+                    "string": "北海に流れ込む川は?"
                 }
             ],
             "query": {
@@ -24780,6 +25596,14 @@
                     "language": "es",
                     "string": "¿Dónde se encuentra ubicado Fort Knox?",
                     "keywords": "Fort Knox, ubicación"
+                },
+                {
+                    "language": "zh",
+                    "string": "诺克斯堡位于哪里？"
+                },
+                {
+                    "language": "ja",
+                    "string": "フォート ノックスはどこにありますか ?"
                 }
             ],
             "query": {
@@ -24853,6 +25677,14 @@
                     "language": "es",
                     "string": "¿Qué hijas de condes británicos murieron en el mismo lugar donde nacieron?",
                     "keywords": "hijas,  condes británicos,  murieron,  lugar de nacimiento"
+                },
+                {
+                    "language": "zh",
+                    "string": "英国伯爵的哪些女儿死于她们的出生地？"
+                },
+                {
+                    "language": "ja",
+                    "string": "イギリスの伯爵の娘で、生まれた場所と同じ場所で亡くなったのは?"
                 }
             ],
             "query": {
@@ -24974,6 +25806,14 @@
                     "language": "es",
                     "string": "¿Cuántos emperadores tuvo China?",
                     "keywords": "número de emperadores, China"
+                },
+                {
+                    "language": "zh",
+                    "string": "中国有几个皇帝？"
+                },
+                {
+                    "language": "ja",
+                    "string": "中国の皇帝は何人？"
                 }
             ],
             "query": {
@@ -25052,6 +25892,14 @@
                     "language": "es",
                     "string": "¿Cuáles son los nombres de las Tortugas Ninja?",
                     "keywords": "nombres,  Tortugas Ninja"
+                },
+                {
+                    "language": "zh",
+                    "string": "忍者神龟的名字是什么？"
+                },
+                {
+                    "language": "ja",
+                    "string": "ティーンエイジ・ミュータント・ニンジャ・タートルズの名前は?"
                 }
             ],
             "query": {
@@ -25110,6 +25958,14 @@
                     "language": "es",
                     "string": "¿Dónde empieza Piccadilly?",
                     "keywords": "principio,  Piccadilly"
+                },
+                {
+                    "language": "zh",
+                    "string": "皮卡迪利从哪里开始？"
+                },
+                {
+                    "language": "ja",
+                    "string": "ピカデリーはどこから始まりますか?"
                 }
             ],
             "query": {
@@ -25183,6 +26039,14 @@
                     "language": "es",
                     "string": "¿En qué universidad estudió la esposa de Obama?",
                     "keywords": "universidad, esposa, Obama,  estudió"
+                },
+                {
+                    "language": "zh",
+                    "string": "奥巴马夫人就读的大学叫什么名字？"
+                },
+                {
+                    "language": "ja",
+                    "string": "オバマの妻が学んだ大学の名前は?"
                 }
             ],
             "query": {
@@ -25245,6 +26109,14 @@
                     "language": "es",
                     "string": "¿Cuándo proclamó su independencia Paraguay?",
                     "keywords": "Paraguay, proclamar, independencia"
+                },
+                {
+                    "language": "zh",
+                    "string": "巴拉圭什么时候宣布独立的？"
+                },
+                {
+                    "language": "ja",
+                    "string": "パラグアイが独立を宣言したのはいつ?"
                 }
             ],
             "query": {
@@ -25307,6 +26179,14 @@
                     "language": "es",
                     "string": "¿Cuánto mide el jugador activo más bajo de la NBA?",
                     "keywords": "tamaño,  jugador más bajo,  NBA"
+                },
+                {
+                    "language": "zh",
+                    "string": "最矮的现役NBA球员有多矮？"
+                },
+                {
+                    "language": "ja",
+                    "string": "アクティブなNBAプレーヤーで最も身長が低いのは?"
                 }
             ],
             "query": {
@@ -25389,6 +26269,14 @@
                     "language": "es",
                     "string": "¿Dónde murió Abrahan Lincoln?",
                     "keywords": "Abrahan Lincoln, lugar de muerte"
+                },
+                {
+                    "language": "zh",
+                    "string": "亚伯拉罕·林肯死在哪里？"
+                },
+                {
+                    "language": "ja",
+                    "string": "エイブラハム・リンカーンが亡くなった場所は?"
                 }
             ],
             "query": {
@@ -25462,6 +26350,14 @@
                     "language": "es",
                     "string": "¿Cuándo se fundó Jack Wolfskin?",
                     "keywords": "Jack Wolfskin,  fundación"
+                },
+                {
+                    "language": "zh",
+                    "string": "Jack Wolfskin什么时候成立的？"
+                },
+                {
+                    "language": "ja",
+                    "string": "ジャック・ウルフスキンが設立されたのはいつですか."
                 }
             ],
             "query": {
@@ -25524,6 +26420,14 @@
                     "language": "es",
                     "string": "¿En qué ciudad está la sede de Air China?",
                     "keywords": "ciudad,  sede, Air China"
+                },
+                {
+                    "language": "zh",
+                    "string": "国航总部在哪个城市？"
+                },
+                {
+                    "language": "ja",
+                    "string": "中国国際航空の本社がある都市は?"
                 }
             ],
             "query": {
@@ -25589,6 +26493,14 @@
                     "language": "es",
                     "string": "¿En qué año fue fundada la cervecería que produce Pilsner Urquell?",
                     "keywords": "Pilsner Urquell,  cervecería,  año de fundación"
+                },
+                {
+                    "language": "zh",
+                    "string": "生产Pilsner Urquell的啤酒厂是哪一年成立的？"
+                },
+                {
+                    "language": "ja",
+                    "string": "ピルスナー・ウルケルを生産する醸造所の創業年は?"
                 }
             ],
             "query": {
@@ -25647,6 +26559,14 @@
                     "language": "es",
                     "string": "¿Cuándo tuvo lugar el Motín del té?",
                     "keywords": "Motín del té,  fecha"
+                },
+                {
+                    "language": "zh",
+                    "string": "波士顿倾茶事件是什么时候发生的？"
+                },
+                {
+                    "language": "ja",
+                    "string": "ボストン茶会事件が起こったのはいつですか."
                 }
             ],
             "query": {
@@ -25713,6 +26633,14 @@
                     "language": "es",
                     "string": "¿Qué animales están en peligro crítico de extinción?",
                     "keywords": "animales,  peligro crítico de extinción"
+                },
+                {
+                    "language": "zh",
+                    "string": "哪些动物极度濒危？"
+                },
+                {
+                    "language": "ja",
+                    "string": "絶滅の危機に瀕している動物は?"
                 }
             ],
             "query": {
@@ -28020,6 +28948,14 @@
                     "language": "es",
                     "string": "¿Qué políticos estuvieron casados con una persona alemana?",
                     "keywords": "políticos, casados, alemán"
+                },
+                {
+                    "language": "zh",
+                    "string": "哪些政客和德国人结婚了？"
+                },
+                {
+                    "language": "ja",
+                    "string": "ドイツ人と結婚した政治家は?"
                 }
             ],
             "query": {
@@ -28203,6 +29139,14 @@
                     "language": "es",
                     "string": "¿Qué tan grande es el diámetro de la tierra?",
                     "keywords": "grande ,   tierra ,   diámetro "
+                },
+                {
+                    "language": "zh",
+                    "string": "地球的直径是多少？"
+                },
+                {
+                    "language": "ja",
+                    "string": "地球の直径はどれくらいですか？"
                 }
             ],
             "query": {
@@ -28285,6 +29229,14 @@
                     "language": "es",
                     "string": "¿La esposa del presidente Obama se llama Michelle?",
                     "keywords": "esposa,  presidente, Obama,  nombre, Michelle "
+                },
+                {
+                    "language": "zh",
+                    "string": "奥巴马总统的妻子叫米歇尔吗？"
+                },
+                {
+                    "language": "ja",
+                    "string": "オバマ大統領の妻はミシェルと呼ばれていますか?"
                 }
             ],
             "query": {
@@ -28342,6 +29294,14 @@
                     "language": "es",
                     "string": "¿Qué estado americano tiene la abreviación MN?",
                     "keywords": "estado americano,  abreviación,  MN"
+                },
+                {
+                    "language": "zh",
+                    "string": "美国哪个州的缩写是MN？"
+                },
+                {
+                    "language": "ja",
+                    "string": "アメリカのどの州にMNという略語がある?"
                 }
             ],
             "query": {
@@ -28400,6 +29360,14 @@
                     "language": "es",
                     "string": "¿Cuándo falleció Muhammad?",
                     "keywords": "Muhammad,  muerte"
+                },
+                {
+                    "language": "zh",
+                    "string": "穆罕默德什么时候死的？"
+                },
+                {
+                    "language": "ja",
+                    "string": "ムハンマドが亡くなったのはいつですか？"
                 }
             ],
             "query": {
@@ -28462,6 +29430,14 @@
                     "language": "es",
                     "string": "¿De qué se compone la atmósfera de la Luna?",
                     "keywords": "composición,  atmósfera, la Luna "
+                },
+                {
+                    "language": "zh",
+                    "string": "月球的大气层是由什么组成的？"
+                },
+                {
+                    "language": "ja",
+                    "string": "月の大気は何でできているのですか？"
                 }
             ],
             "query": {
@@ -28574,6 +29550,14 @@
                     "language": "es",
                     "string": "¿Quién es el gobernador de Texas?",
                     "keywords": "gobernador ,   Texas "
+                },
+                {
+                    "language": "zh",
+                    "string": "得克萨斯州州长是谁？"
+                },
+                {
+                    "language": "ja",
+                    "string": "テキサス州知事は誰?"
                 }
             ],
             "query": {
@@ -28650,6 +29634,14 @@
                     "language": "es",
                     "string": "¿Qué películas ha dirigido Kurosawa?",
                     "keywords": "película,  director, Kurosawa"
+                },
+                {
+                    "language": "zh",
+                    "string": "黑泽明导演了哪些电影？"
+                },
+                {
+                    "language": "ja",
+                    "string": "黒澤監督が監督した映画は？"
                 }
             ],
             "query": {
@@ -28905,6 +29897,14 @@
                     "language": "es",
                     "string": "¿Cuál es el nombre de la famosa batalla en San Antonio en 1836?",
                     "keywords": "famosa batalla ,   1836 ,   San Antonio "
+                },
+                {
+                    "language": "zh",
+                    "string": "1836年圣安东尼奥著名战役的名称是什么？"
+                },
+                {
+                    "language": "ja",
+                    "string": "1836年にサンアントニオで起こった有名な戦いの名前は?"
                 }
             ],
             "query": {
@@ -28980,6 +29980,14 @@
                     "language": "es",
                     "string": "Dame las páginas web oficiales de los actores de programa de televisión Charmed",
                     "keywords": "sitio web oficial ,   actores , programa de televisión, Charmed"
+                },
+                {
+                    "language": "zh",
+                    "string": "给我电视节目Charmed演员的官方网站。"
+                },
+                {
+                    "language": "ja",
+                    "string": "テレビ番組「チャームド」の俳優の公式ウェブサイトを教えてください。"
                 }
             ],
             "query": {
@@ -29038,6 +30046,14 @@
                     "language": "es",
                     "string": "¿Cuántas calorías tiene una baguette?",
                     "keywords": "calorías,  baguette"
+                },
+                {
+                    "language": "zh",
+                    "string": "一根法棍有多少卡路里？"
+                },
+                {
+                    "language": "ja",
+                    "string": "バゲットのカロリーは？"
                 }
             ],
             "query": {
@@ -29108,6 +30124,14 @@
                     "language": "es",
                     "string": "¿Qué librerías fueron construidas antes de 1400?",
                     "keywords": "librerías, construidas,  antes de 1400"
+                },
+                {
+                    "language": "zh",
+                    "string": "给我1400年之前建立的所有图书馆。"
+                },
+                {
+                    "language": "ja",
+                    "string": "1400年より前に設立されたすべての図書館を教えてください。"
                 }
             ],
             "query": {
@@ -29221,6 +30245,14 @@
                     "language": "es",
                     "string": "¿Qué islas pertenecientes a las islas Frisias son parte de los Países Bajos?",
                     "keywords": "islas Frisias,  Países Bajos"
+                },
+                {
+                    "language": "zh",
+                    "string": "给我所有属于荷兰的弗里斯兰群岛。"
+                },
+                {
+                    "language": "ja",
+                    "string": "オランダに属するフリジア諸島をすべて教えてください。"
                 }
             ],
             "query": {
@@ -29365,6 +30397,14 @@
                     "language": "es",
                     "string": "¿Cuándo se fundó la empresa De Beers?",
                     "keywords": "Empresa De Beers ,   fundado "
+                },
+                {
+                    "language": "zh",
+                    "string": "戴比尔斯公司是什么时候成立的？"
+                },
+                {
+                    "language": "ja",
+                    "string": "デビアス社が設立されたのはいつですか?"
                 }
             ],
             "query": {
@@ -29435,6 +30475,14 @@
                     "language": "es",
                     "string": "¿Quién asumió el cargo de presidente luego de la muerte de JFK?",
                     "keywords": "presidente,  tras la muerte,  JFK"
+                },
+                {
+                    "language": "zh",
+                    "string": "肯尼迪死后谁当上了总统？"
+                },
+                {
+                    "language": "ja",
+                    "string": "JFKの死後、大統領になったのは誰?"
                 }
             ],
             "query": {
@@ -29489,6 +30537,14 @@
                     "language": "es",
                     "string": "¿Quiénes son los padres de la esposa de Juan Carlos I?",
                     "keywords": "padres,  esposa,  Juan Carlos I"
+                },
+                {
+                    "language": "zh",
+                    "string": "胡安卡洛斯一世的妻子的父母是谁？"
+                },
+                {
+                    "language": "ja",
+                    "string": "フアン・カルロス1世の妻の両親は?"
                 }
             ],
             "query": {
@@ -29547,6 +30603,14 @@
                     "language": "es",
                     "string": "¿Qué novelista escribió Canción de hielo y fuego?",
                     "keywords": "Canción de hielo y fuego, escribió, novelista"
+                },
+                {
+                    "language": "zh",
+                    "string": "冰与火之歌的小说作者是谁？"
+                },
+                {
+                    "language": "ja",
+                    "string": "作品「氷と炎の歌」の小説家は誰?"
                 }
             ],
             "query": {
@@ -29612,6 +30676,14 @@
                     "language": "es",
                     "string": "¿En qué estudio grabaron los Beatles su primer álbum?",
                     "keywords": "Beatles,  primer álbum,  estudio"
+                },
+                {
+                    "language": "zh",
+                    "string": "甲壳虫乐队在哪个录音室录制他们的第一张专辑？"
+                },
+                {
+                    "language": "ja",
+                    "string": "ビートルズが最初のアルバムをレコーディングしたスタジオは?"
                 }
             ],
             "query": {
@@ -29678,6 +30750,14 @@
                     "language": "es",
                     "string": "¿Qué empresas cerveceras hay en Renania del Norte-Westfalia?",
                     "keywords": "empresas cerveceras, Renania del Norte-Westfalia"
+                },
+                {
+                    "language": "zh",
+                    "string": "哪些啤酒酿造公司位于北莱茵威斯特法伦州？"
+                },
+                {
+                    "language": "ja",
+                    "string": "ノルトライン ヴェストファーレン州にあるビール醸造会社は?"
                 }
             ],
             "query": {
@@ -29769,6 +30849,14 @@
                     "language": "es",
                     "string": "¿Cuándo murió la princesa Diana?",
                     "keywords": "fecha fallecimiento,  princesa Diana"
+                },
+                {
+                    "language": "zh",
+                    "string": "戴安娜王妃什么时候死的？"
+                },
+                {
+                    "language": "ja",
+                    "string": "ダイアナ妃が亡くなったのはいつ？"
                 }
             ],
             "query": {
@@ -29827,6 +30915,14 @@
                     "language": "es",
                     "string": "¿Quién fundó Intel?",
                     "keywords": "Intel,  fundación"
+                },
+                {
+                    "language": "zh",
+                    "string": "谁创立了英特尔？"
+                },
+                {
+                    "language": "ja",
+                    "string": "インテルを設立したのは誰ですか?"
                 }
             ],
             "query": {
@@ -29898,6 +30994,14 @@
                     "language": "es",
                     "string": "¿Quién es el jugador más joven de la Premier League?",
                     "keywords": "jugador,  más joven,  Premier League"
+                },
+                {
+                    "language": "zh",
+                    "string": "谁是英超联赛中最年轻的球员？"
+                },
+                {
+                    "language": "ja",
+                    "string": "プレミアリーグで最年少の選手は?"
                 }
             ],
             "query": {
@@ -29975,6 +31079,14 @@
                     "language": "es",
                     "string": "¿Qué instrumentos toca Cat Stevens?",
                     "keywords": "Cat Stevens,  instrumentos,  toca"
+                },
+                {
+                    "language": "zh",
+                    "string": "Cat Stevens会演奏哪些乐器？"
+                },
+                {
+                    "language": "ja",
+                    "string": "キャット・スティーブンスが演奏する楽器は?"
                 }
             ],
             "query": {
@@ -30042,6 +31154,14 @@
                     "language": "es",
                     "string": "¿Cuántos ríos y lagos hay en Carolina del Sur?",
                     "keywords": "ríos ,   lagos ,   Sur Carolina "
+                },
+                {
+                    "language": "zh",
+                    "string": "南卡罗来纳州有多少河流和湖泊？"
+                },
+                {
+                    "language": "ja",
+                    "string": "サウスカロライナ州にはいくつの川と湖がありますか?"
                 }
             ],
             "query": {
@@ -30104,6 +31224,14 @@
                     "language": "es",
                     "string": "¿Quién era conocido como Rodzilla?",
                     "keywords": "apodo,  Rodzilla"
+                },
+                {
+                    "language": "zh",
+                    "string": "谁被称为Rodzilla？"
+                },
+                {
+                    "language": "ja",
+                    "string": "ロジラと呼ばれたのは誰ですか？"
                 }
             ],
             "query": {
@@ -30154,6 +31282,14 @@
                     "language": "es",
                     "string": "Dame las capitales de todos los países africanos.",
                     "keywords": "países,  africanos,  capital"
+                },
+                {
+                    "language": "zh",
+                    "string": "给我非洲所有国家的首都。"
+                },
+                {
+                    "language": "ja",
+                    "string": "アフリカのすべての国の首都を教えてください。"
                 }
             ],
             "query": {
@@ -30595,6 +31731,14 @@
                     "language": "es",
                     "string": "¿Qué puentes son del mismo tipo que el puente de Manhattan?",
                     "keywords": "puente,  mismo tipo,  puente de Manhattan"
+                },
+                {
+                    "language": "zh",
+                    "string": "与曼哈顿大桥属于同一类型的桥梁有哪些？"
+                },
+                {
+                    "language": "ja",
+                    "string": "マンハッタン橋と同じタイプの橋は?"
                 }
             ],
             "query": {
@@ -31940,6 +33084,14 @@
                     "language": "es",
                     "string": "¿Cuántas compañías han sido fundadas por el fundador de Facebook?",
                     "keywords": "compañías,  fundadas,  fundador de Facebook"
+                },
+                {
+                    "language": "zh",
+                    "string": "Facebook的创始人创办了多少家公司？"
+                },
+                {
+                    "language": "ja",
+                    "string": "Facebookの創設者によって設立された会社はいくつありますか?"
                 }
             ],
             "query": {
@@ -32006,6 +33158,14 @@
                     "language": "es",
                     "string": "¿En qué rutas de senderismo del Gran Cañón no hay riesgo de inundaciones repentinas?",
                     "keywords": "rutas senderismo,  Gran Cañón,  no riesgo,  inundaciones repentinas"
+                },
+                {
+                    "language": "zh",
+                    "string": "查找大峡谷中没有山洪危险的徒步路径。"
+                },
+                {
+                    "language": "ja",
+                    "string": "鉄砲水の危険がないグランドキャニオンのハイキングコースを教えてください。"
                 }
             ],
             "query": {
@@ -32073,6 +33233,14 @@
                     "language": "es",
                     "string": "¿Cuál es el libro con más páginas?",
                     "keywords": "libro,  más paginas"
+                },
+                {
+                    "language": "zh",
+                    "string": "哪本书的页数最多？"
+                },
+                {
+                    "language": "ja",
+                    "string": "ページ数が多い本は？"
                 }
             ],
             "query": {
@@ -32138,6 +33306,14 @@
                     "language": "es",
                     "string": "¿Cuál es el estado más grande de los Estados Unidos?",
                     "keywords": "más grande, estado , Estados Unidos "
+                },
+                {
+                    "language": "zh",
+                    "string": "美国最大的州是哪个？"
+                },
+                {
+                    "language": "ja",
+                    "string": "アメリカ合衆国で最大の州は?"
                 }
             ],
             "query": {
@@ -32195,6 +33371,14 @@
                     "language": "es",
                     "string": "Dame todas las páginas de Web de empresas con más de 500000 empleados.",
                     "keywords": "página de Web,  empresas,  empleados,  más de 500000"
+                },
+                {
+                    "language": "zh",
+                    "string": "给我员工数超过50万人的公司的网站。"
+                },
+                {
+                    "language": "ja",
+                    "string": "従業員が50万人を超える企業のWebサイトを教えてください。"
                 }
             ],
             "query": {
@@ -32428,8 +33612,16 @@
                 },
                 {
                     "language": "es",
-                    "string": "¿Cómo se llamaban los tres barcos utilizados por Colón?",
-                    "keywords": "Tres barcos ,   nombre ,   Colón "
+                    "string": "Dame todas las páginas de Web de empresas con más de 500000 empleados.",
+                    "keywords": "página de Web,  empresas,  empleados,  más de 500000"
+                },
+                {
+                    "language": "zh",
+                    "string": "哥伦布的三艘船叫什么名字？"
+                },
+                {
+                    "language": "ja",
+                    "string": "コロンブスの3隻の船の名前は?"
                 }
             ],
             "query": {
