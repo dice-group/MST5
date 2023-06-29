@@ -22,7 +22,7 @@ nlp_dict = {
     "ru": nlp_ru,
     "ba": nlp_ru,
     "be": nlp_ru,
-    "es": nlp_es
+    "es": nlp_es,
 }
 
 
@@ -38,6 +38,7 @@ class Language(Enum):
     be = 'be'
     ba = 'ba'
     es = 'es'
+    hy = "hy"
 
     @classmethod
     def has_member_key(cls, key):
