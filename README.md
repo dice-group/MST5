@@ -11,17 +11,44 @@ python3 code/generate_train_csv.py -i datasets/lcquad1/train-data.json -o datase
 
 lcquad2:
 ```bash
-python3 code/generate_train_csv.py -i datasets/lcquad2/train.json -o datasets/lcquad2/train.csv -t lcquad2 -l all --linguistic_context True --entity_knowledge True
-csv file is exported to  datasets/lcquad2/train.csv
+python3 code/generate_train_csv.py 
+-i datasets/lcquad2/train.json \ 
+-o datasets/lcquad2/train.csv \
+-t lcquad2 \
+-l all \
+--linguistic_context \
+--entity_knowledge
 ```
 
 qald dbpedia:
 ```bash
-python3 code/generate_train_csv.py -i datasets/qald9plus/dbpedia/qald_9_plus_train_dbpedia.json -o datasets/qald9plus/dbpedia/qald_9_plus-train_dbpedia.csv -t qald -kg DBpedia -l all --linguistic_context True --entity_knowledge True
+python3 code/generate_train_csv.py \
+-i datasets/qald9plus/dbpedia/qald_9_plus_train_dbpedia.json \
+-o datasets/qald9plus/dbpedia/qald_9_plus-train_dbpedia.csv \
+-t qald \
+-kg DBpedia \
+-l all \
+--linguistic_context \
+--entity_knowledge
 ```
 
 qald wikidata:
 ```bash
-python3 code/generate_train_csv.py -i datasets/qald9plus/wikidata/qald_9_plus_train_wikidata.json -o datasets/qald9plus/wikidata/qald_9_plus_train_wikidata.csv -t qald -kg Wikidata -l all --linguistic_context True --entity_knowledge True
+python3 code/generate_train_csv.py \
+-i datasets/qald9plus/wikidata/qald_9_plus_train_wikidata.json \
+-o datasets/qald9plus/wikidata/qald_9_plus_train_wikidata.csv \
+-t qald \
+-kg Wikidata \ 
+-l all \
+--linguistic_context \
+--entity_knowledge
 ```
+
+## Train on a csv dataset
+
+`train_ds.sh` or `train.sh`
+
+## Evaluation
+
+`eval.sh`
 
