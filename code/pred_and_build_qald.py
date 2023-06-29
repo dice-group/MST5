@@ -1,24 +1,8 @@
 import argparse
 from utils.data_io import read_json
-from code.query.query import ask_dbpedia, init_summarizer, predict_query, ask_wikidata
-from code.query.query import postprocess_sparql
-from utils.Qald import Qald
+from dataset.Qald import Qald
 from tqdm import tqdm
-
-
-def get_query_and_answer(summarizer, question_string):
-    query_pred = predict_query(summarizer, question_string)
-    sparql_query = postprocess_sparql(query_pred)
-    answer = ask_dbpedia(sparql_query)
-    return sparql_query, answer
-
-
-def get_question_list(args, test_file):
-    testset = Qald(test_file)
-    question_list = testset.get_question_string_with_id(
-        args.language, args.linguistic_context, args.entity_knowledge)
-
-    return question_list
+from components.Summarizer import Summarizer
 
 
 def main():
@@ -29,6 +13,8 @@ def main():
                         help="name of model path", required=True)
     parser.add_argument("-t", "--test", type=str,
                         help="name of test file", required=True)
+    parser.add_argument("--knowledge_graph", type=str,
+                        help="type of knowledge_graph", required=True)
     parser.add_argument("-o", "--output", type=str,
                         help="name of output file", required=True)
     parser.add_argument("-l", "--language", type=str,
@@ -41,16 +27,20 @@ def main():
     args = parser.parse_args()
 
     test_file = read_json(args.test)
-    question_list = get_question_list(args, test_file)
-
-    summarizer = init_summarizer(args.model)
-    result = Qald({})
-    for id, question_string in tqdm(question_list):
-        sparql_query, answer = get_query_and_answer(
-            summarizer, question_string)
-        result.add_entry(id, args.language, question_string,
-                         sparql_query, answer)
-    result.export_qald_json([args.language], args.output)
+    test_qald = Qald(test_file, args.knowledge_graph)
+    question_list = test_qald.get_id_question_list(args.language,
+                                                   args.linguistic_context,
+                                                   args.entity_knowledge)
+    summarizer = Summarizer(args.model)
+    pred_qald = Qald({}, args.knowledge_graph)
+    for id, question_string in tqdm(question_list[:3]):
+        pred_sparql = summarizer.predict_sparql(question_string)
+        pred_qald.add_entry(id,
+                            args.language,
+                            question_string,
+                            pred_sparql)
+    pred_qald.update_answers()
+    pred_qald.export_qald_json([args.language], args.output)
 
 
 if __name__ == "__main__":
