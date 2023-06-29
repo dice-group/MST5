@@ -37,6 +37,7 @@ class Language(Enum):
     uk = 'uk'
     be = 'be'
     ba = 'ba'
+    es = 'es'
 
     @classmethod
     def has_member_key(cls, key):
