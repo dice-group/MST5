@@ -19,9 +19,9 @@ def main():
                         help="name of output file", required=True)
     parser.add_argument("-l", "--language", type=str,
                         help="required language of question", required=True)
-    parser.add_argument('--linguistic_context', default=False, type=bool,
+    parser.add_argument('--linguistic_context', action=argparse.BooleanOptionalAction,
                         help='With or without linguistic context in question string')
-    parser.add_argument('--entity_knowledge', default=False, type=bool,
+    parser.add_argument('--entity_knowledge', action=argparse.BooleanOptionalAction,
                         help='With or without entity knowledge in question string')
 
     args = parser.parse_args()
@@ -33,7 +33,7 @@ def main():
                                                    args.entity_knowledge)
     summarizer = Summarizer(args.model)
     pred_qald = Qald({}, args.knowledge_graph)
-    for id, question_string in tqdm(question_list[:3]):
+    for id, question_string in tqdm(question_list):
         pred_sparql = summarizer.predict_sparql(question_string)
         pred_qald.add_entry(id,
                             args.language,
