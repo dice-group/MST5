@@ -108,5 +108,4 @@ class Qald_entry(Entry):
     
 
     def update_answer(self):
-        print(self.query.sparql)
         self.answers = self.query.get_answer()
