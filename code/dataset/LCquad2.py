@@ -23,16 +23,6 @@ class LCquad2(Dataset):
             lcquad_list.append(lcquad_entry)
         return lcquad_list
 
-    def export_train_csv(self, output_file, include_linguistic_context: bool = False, include_entity_knowledge: bool = False):
-        csv_dataset = [["question", "query"]]
-        lcquad_entry: LCquad2_entry
-        for lcquad_entry in self.entries:
-            query = lcquad_entry.preprossed_query
-            question = lcquad_entry.get_question_string(
-                include_linguistic_context, include_entity_knowledge)
-            csv_dataset.append([question, query])
-        export_csv(output_file, csv_dataset)
-
 
 class LCquad2_entry(Entry):
     def __init__(self, uid, NNQT_question, language, sparql, knowledge_graph) -> None:

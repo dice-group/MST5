@@ -22,9 +22,9 @@ from transformers.trainer_utils import get_last_checkpoint
 from transformers.utils import check_min_version
 from arguments.data_training_arguments import DataTrainingArguments
 from arguments.model_arguments import ModelArguments
-from utils.data_io import export_json
-from components.query import postprocess_sparql
-from components.Gerbil import *
+# from utils.data_io import export_json
+# from components.query import postprocess_sparql
+# from components.Gerbil import *
 
 logger = logging.getLogger(__name__)
 
