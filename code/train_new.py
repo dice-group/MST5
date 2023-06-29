@@ -20,49 +20,47 @@ from transformers import (
 )
 from transformers.trainer_utils import get_last_checkpoint
 from transformers.utils import check_min_version
-from utils.data_training_arguments import DataTrainingArguments
-from utils.model_arguments import ModelArguments
-from utils.qald_utils import build_qald_entry
-from utils.query import ask_wikidata
-from utils.data_io import export_json
-from utils.query import postprocess_sparql
-from utils.gerbil import *
+from arguments.data_training_arguments import DataTrainingArguments
+from arguments.model_arguments import ModelArguments
+# from utils.data_io import export_json
+# from components.query import postprocess_sparql
+# from components.Gerbil import *
 
 logger = logging.getLogger(__name__)
 
 check_min_version("4.28.0.dev0")
 
 
-def build_qald(sparqls):
-    qald = []
-    for i, sparql in enumerate(sparqls):
-        answer = ask_wikidata(sparql)
-        qald.append(build_qald_entry(i, "tmp question", sparql, answer, "en"))
-    return {"questions": qald}
+# def build_qald(sparqls):
+#     qald = []
+#     for i, sparql in enumerate(sparqls):
+#         answer = ask_wikidata(sparql)
+#         qald.append(build_qald_entry(i, "tmp question", sparql, answer, "en"))
+#     return {"questions": qald}
 
 
-def run_gerbil(ref_file_path, pred_file_path):
-    ref_name = "qald 9 plus test"
-    pred_name = "pred"
-    upload_file(ref_name, ref_file_path, "ref")
-    upload_file(pred_name, pred_file_path, "pred")
+# def run_gerbil(ref_file_path, pred_file_path):
+#     ref_name = "qald 9 plus test"
+#     pred_name = "pred"
+#     upload_file(ref_name, ref_file_path, "ref")
+#     upload_file(pred_name, pred_file_path, "pred")
 
-    # set experiment data
-    ref = {ref_name: ref_file_path.split('/')[-1]}
-    pred = {pred_name: pred_file_path.split('/')[-1]}
+#     # set experiment data
+#     ref = {ref_name: ref_file_path.split('/')[-1]}
+#     pred = {pred_name: pred_file_path.split('/')[-1]}
 
-    experiment_id = submit_experiment(ref, pred).text
-    print(f"Experiment id: {experiment_id}")
-    gerbil_html = get_exp_result_content(experiment_id)
-    if gerbil_html is not None:
-        gerbil_results_table = clean_gerbil_table(gerbil_html)
-        return {
-            "Micro F1": gerbil_results_table.loc[0, 'Micro F1'],
-            "Macro F1": gerbil_results_table.loc[0, 'Macro F1']
-        }
-    else:
-        print("Error when getting GERBIL results")
-    return {}
+#     experiment_id = submit_experiment(ref, pred).text
+#     print(f"Experiment id: {experiment_id}")
+#     gerbil_html = get_exp_result_content(experiment_id)
+#     if gerbil_html is not None:
+#         gerbil_results_table = clean_gerbil_table(gerbil_html)
+#         return {
+#             "Micro F1": gerbil_results_table.loc[0, 'Micro F1'],
+#             "Macro F1": gerbil_results_table.loc[0, 'Macro F1']
+#         }
+#     else:
+#         print("Error when getting GERBIL results")
+#     return {}
 
 
 def main():
@@ -303,20 +301,20 @@ def main():
             decoded_preds, decoded_refs)
 
         # GERBIL
-        pred_sparqls = []
-        for pred in decoded_preds:
-            pred_sparqls.append(postprocess_sparql(pred))
+        # pred_sparqls = []
+        # for pred in decoded_preds:
+        #     pred_sparqls.append(postprocess_sparql(pred))
 
-        pred_path = "tmp/pred.json"
-        pred_qald = build_qald(pred_sparqls)
-        export_json(pred_path, pred_qald)
+        # pred_path = "tmp/pred.json"
+        # pred_qald = build_qald(pred_sparqls)
+        # export_json(pred_path, pred_qald)
 
-        ref_path = "tmp/ref.json"
-        ref_qald = build_qald(decoded_refs)
-        export_json(ref_path, ref_qald)
+        # ref_path = "tmp/ref.json"
+        # ref_qald = build_qald(decoded_refs)
+        # export_json(ref_path, ref_qald)
 
-        result = run_gerbil(ref_path, pred_path)
-        return result
+        # result = run_gerbil(ref_path, pred_path)
+        # return result
 
     # Override the decoding parameters of Seq2SeqTrainer
     training_args.generation_max_length = (

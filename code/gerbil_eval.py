@@ -1,9 +1,9 @@
 import os
 import argparse
-from utils.gerbil import Gerbil
+from components.Gerbil import Gerbil
 
 default_ref_name = 'qald 9 plus test'
-default_ref_file_path = "datasets/qald9plus/qald_9_pp_test_wikidata_new.json"
+default_ref_file_path = "datasets/qald9plus/dbpedia/qald_9_plus_test_dbpedia.json"
 
 def main():
     parser = argparse.ArgumentParser(
