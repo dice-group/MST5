@@ -9,6 +9,7 @@ nlp_ja = spacy.load("ja_core_news_sm")
 nlp_lt = spacy.load("lt_core_news_sm")
 nlp_ru = spacy.load("ru_core_news_sm")
 nlp_uk = spacy.load("uk_core_news_sm")
+nlp_es = spacy.load("es_core_news_sm")
 
 nlp_dict = {
     "en": nlp_en,
@@ -20,7 +21,8 @@ nlp_dict = {
     "uk": nlp_uk,
     "ru": nlp_ru,
     "ba": nlp_ru,
-    "be": nlp_ru
+    "be": nlp_ru,
+    "es": nlp_es
 }
 
 
@@ -35,6 +37,10 @@ class Language(Enum):
     uk = 'uk'
     be = 'be'
     ba = 'ba'
+
+    @classmethod
+    def has_member_key(cls, key):
+        return key in cls.__members__
     
     def get_spacy_nlp(language):
         try:
