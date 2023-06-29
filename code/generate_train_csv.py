@@ -47,7 +47,12 @@ def main():
         dataset.export_train_csv(args.output, args.linguistic_context, args.entity_knowledge)
     if dataset_type == "qald":
         dataset = Qald(input_file, Knowledge_graph[args.knowledge_graph])
-        languages = get_only_supported_languages(args.languages)
+        if args.languages[0]=="all":
+            languages = [language.value for language in Language]
+            if args.linguistic_context:
+                languages.remove("hy")
+        else:
+            languages = get_only_supported_languages(args.languages)
         dataset.export_train_csv(
         args.output, 
         languages,
