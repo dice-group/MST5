@@ -31,36 +31,45 @@ class Test_Question(unittest.TestCase):
     def test_input_length(self):
         question_string = "What is the common affiliation of the Monroe Carell Jr. Children's Hospital at Vanderbilt and alma mater of the Duncan U. Fletcher? <pad> PRON AUX DET ADJ NOUN ADP DET PROPN PROPN PROPN PROPN PART PROPN ADP PROPN CCONJ NOUN NOUN ADP DET PROPN PROPN PROPN PUNCT <pad> attr ROOT det amod nsubj prep det compound compound compound poss case pobj prep pobj cc compound conj prep det compound compound pobj punct <pad> 2 1 3 3 2 3 6 7 7 6 5 6 4 5 6 7 6 5 6 8 8 8 7 2 <pad> dbr_Monroe_Carell_Jr dbr_Duncan_U"
         question_string_split = question_string.split(" ")
-        # self.assertEqual(question_string_split, "?")
         self.assertLessEqual(len(question_string_split), 128)
 
-    def test_detect_entity_with_flair(self):
-        response = self.question.send_entity_detection_request("flair_ner")
+    def test_detect_entity_with_flair_and_mgenre_el_for_wikidata(self):
+        response = self.question.send_entity_detection_request("flair_ner", "mgenre_el")
         self.assertTrue("ent_mentions" in response)
+        self.assertTrue("Trump" in response)
 
-    def test_detect_entity_with_davlan(self):
-        response = self.question.send_entity_detection_request("davlan_ner")
+    def test_detect_entity_with_davlan_mgenre_el_for_wikidata(self):
+        response = self.question.send_entity_detection_request("davlan_ner", "mgenre_el")
         self.assertTrue("ent_mentions" in response)
+        self.assertTrue("Trump" in response)
+
+
+    def test_detect_entity_with_mag_el_for_dbpedia_en(self):
+        question = Question("Who wrote Harry Potter?", Language.en)
+        response = question.send_entity_detection_request("babelscape_ner","mag_el")
+        self.assertTrue("ent_mentions" in response)
+        self.assertTrue("http://dbpedia.org/resource" in response)
+
+    def test_detect_entity_with_mag_el_for_dbpedia_de(self):
+        question = Question("Welcher US-Bundesstaat hat die höchste Bevölkerungsdichte?", Language.de)
+        response = question.send_entity_detection_request("babelscape_ner","mag_el")
+        self.assertTrue("ent_mentions" in response)
+        self.assertTrue("http://de.dbpedia.org/resource" in response)
+    
+    def test_detect_entity_with_mag_el_for_dbpedia_fr(self):
+        question = Question("Qui a écrit Harry Potter?", Language.fr)
+        response = question.send_entity_detection_request("babelscape_ner","mag_el")
+        print(type(response))
         print(response)
+        self.assertTrue("ent_mentions" in response)
+        self.assertTrue("http://fr.dbpedia.org/resource" in response)
+    
 
     def test_process_ner_response(self):
         response = '''{"components":"davlan_ner, mgenre_el","ent_mentions":[{"end":10,"link":"Q782","link_candidates":[["Hawaii","de","Q782"]],"start":4,"surface_form":"Hawaii"},{"end":35,"link":"Q22686","link_candidates":[["Donald Trump","de","Q22686"]],"start":30,"surface_form":"Trump"}],"kb":"wd","lang":"de","placeholder":"00","replace_before":false,"text":"Ist Hawaii der Geburtsort von Trump?"}'''
         entities = self.question.process_ner_response(response)
         self.assertEqual(entities["Hawaii"], "wd_Q782")
         self.assertEqual(entities["Donald Trump"], "wd_Q22686")
-
-    def test_ner_with_dbpedia_spotlight(self):
-        question = Question('Google LLC is an American multinational technology company.', Language.en)
-        entities = question.ner_with_dbpedia_spotlight()
-        self.assertEqual(entities['Google LLC'], 'dbr_Google')
-        self.assertEqual(entities['American'], 'dbr_United_States')
-
-    def test_dict_values(self):
-        d = {
-            'Google LLC': 'dbr_Google',
-            'American': 'dbr_United_States'
-        }
-        self.assertEqual(list(d.values()), ['dbr_Google', 'dbr_United_States'])
 
 
 class Test_Query(unittest.TestCase):
@@ -96,25 +105,6 @@ class Test_Query(unittest.TestCase):
         wikidata_query = Query("SELECT DISTINCT ?o1 WHERE { <http://www.wikidata.org/entity/Q23337>  <http://www.wikidata.org/prop/direct/P421>  ?o1 .  }", Knowledge_graph.Wikidata)
         answer = wikidata_query.get_answer()
         self.assertTrue(answer["results"]["bindings"])
-
-
-class Test_DBpedia_spotlight(unittest.TestCase):
-    def test_dbpedia_spotlight(self):
-        nlp = spacy.load('en_core_web_sm')
-        nlp.add_pipe('dbpedia_spotlight', first=True)
-        doc = nlp('Google LLC is an American multinational technology company.')
-        outputs = [(ent.text, ent.kb_id_) for ent in doc.ents]
-        self.assertEqual(outputs[0], ('Google LLC', 'http://dbpedia.org/resource/Google'))
-        self.assertEqual(outputs[1], ('American', 'http://dbpedia.org/resource/United_States'))
-
-    def test_dbpedia_spotlight_german(self):
-        nlp = Language.get_spacy_nlp(Language.de)
-        nlp.add_pipe('dbpedia_spotlight', first=True)
-        doc = nlp('Ist Hawaii der Geburtsort von Trump?')
-        outputs = [(ent.text, ent.kb_id_) for ent in doc.ents]
-        self.assertEqual(outputs[0], ('Hawaii', "http://de.dbpedia.org/resource/Hawaii"))
-        self.assertEqual(outputs[1], ('Trump', 'http://de.dbpedia.org/resource/Donald_Trump'))
-        
 
 if __name__ == '__main__':
     unittest.main()
