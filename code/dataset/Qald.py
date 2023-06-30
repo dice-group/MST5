@@ -59,7 +59,7 @@ class Qald(Dataset):
         for entry in self.entries:
             if language in entry.questions:
                 question: Question = entry.questions[language]
-                question_string = super().get_question_string(entry, question, include_linguistic_context, include_entity_knowledge)
+                question_string = super().get_question_string(entry, question, include_linguistic_context, include_entity_knowledge, True)
                 questions_with_id.append([entry.id, question_string])
         return questions_with_id
     
