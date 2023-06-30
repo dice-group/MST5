@@ -10,9 +10,11 @@ from components.Knowledge_graph import Knowledge_graph
 from components.Query import Query
 from components.Question import Question
 
+
 class Test_Dataset(unittest.TestCase):
     def setUp(self) -> None:
-        self.dataset = Dataset([], Knowledge_graph.Wikidata)
+        self.dataset_wikidata = Dataset([], Knowledge_graph.Wikidata)
+        self.dataset_dbpedia = Dataset([], Knowledge_graph.DBpedia)
         qald_id = "99"
         questions = [
             {
@@ -52,45 +54,25 @@ class Test_Dataset(unittest.TestCase):
                 "string": "Kokia laiko juosta yra Solt Leik Sityjes"
             }
         ]
-        sparql = "SELECT DISTINCT ?o1 WHERE { <http://www.wikidata.org/entity/Q23337>  <http://www.wikidata.org/prop/direct/P421>  ?o1 .  }"
-        answers = [
-            {
-                "head": {
-                    "vars": [
-                        "o1"
-                    ]
-                },
-                "results": {
-                    "bindings": [
-                        {
-                            "o1": {
-                                "type": "uri",
-                                "value": "http://www.wikidata.org/entity/Q3134980"
-                            }
-                        },
-                        {
-                            "o1": {
-                                "type": "uri",
-                                "value": "http://www.wikidata.org/entity/Q2212"
-                            }
-                        }
-                    ]
-                }
-            }
-        ]
-        self.qald_entry = Qald_entry(
-            qald_id, questions, sparql, Knowledge_graph.Wikidata, answers)
-        
+        sparql_wikidata = "SELECT DISTINCT ?o1 WHERE { <http://www.wikidata.org/entity/Q23337>  <http://www.wikidata.org/prop/direct/P421>  ?o1 .  }"
+        sparql_dbpedia = "PREFIX res: <http://dbpedia.org/resource/> PREFIX dbp: <http://dbpedia.org/property/> SELECT DISTINCT ?uri WHERE { res:Salt_Lake_City <http://dbpedia.org/ontology/timeZone> ?uri }"
+        self.qald_entry_wikidata = Qald_entry(
+            qald_id, questions, sparql_wikidata, Knowledge_graph.Wikidata
+        )
+        self.qald_entry_dbpedia = Qald_entry(
+            qald_id, questions, sparql_dbpedia, Knowledge_graph.DBpedia
+        )
+
         return super().setUp()
-    
+
     def test_no_supported_ner(self):
-        self.assertTrue(self.dataset.no_supported_ner("no_ner"))
+        self.assertTrue(self.dataset_wikidata.no_supported_ner("no_ner"))
 
     def test_is_kg_dbpedia(self):
-        self.assertFalse(self.dataset.is_kg_dbpedia())
+        self.assertFalse(self.dataset_wikidata.is_kg_dbpedia())
 
     def test_is_kg_wikidata(self):
-        self.assertTrue(self.dataset.is_kg_wikidata())
+        self.assertTrue(self.dataset_wikidata.is_kg_wikidata())
 
     def test_get_wikidata_entities_for_en(self):
 
@@ -98,8 +80,9 @@ class Test_Dataset(unittest.TestCase):
             "What is the time zone of Salt Lake City?",
             Language.en
         )
-        
-        entities = self.dataset.get_wikidata_entities(self.qald_entry, question)
+
+        entities = self.dataset_wikidata.get_wikidata_entities(
+            self.qald_entry_wikidata, question)
         self.assertTrue("wd_" in entities[0])
 
     def test_get_wikidata_entities_for_zh(self):
@@ -107,8 +90,9 @@ class Test_Dataset(unittest.TestCase):
             "盐湖城时区是什么？",
             Language.zh
         )
-        
-        entities = self.dataset.get_wikidata_entities(self.qald_entry, question)
+
+        entities = self.dataset_wikidata.get_wikidata_entities(
+            self.qald_entry_wikidata, question)
         self.assertTrue("wd_" in entities[0])
 
     def test_get_wikidata_entities_for_ja(self):
@@ -116,8 +100,9 @@ class Test_Dataset(unittest.TestCase):
             "ソルトレイクシティのタイムゾーンは?",
             Language.ja
         )
-        
-        entities = self.dataset.get_wikidata_entities(self.qald_entry, question)
+
+        entities = self.dataset_wikidata.get_wikidata_entities(
+            self.qald_entry_wikidata, question)
         self.assertTrue("wd_" in entities[0])
 
     def test_get_wikidata_entities_for_ru(self):
@@ -125,9 +110,14 @@ class Test_Dataset(unittest.TestCase):
             "В каком часовом поясе расположен Солт-Лейк-Сити?",
             Language.ru
         )
-        
-        entities = self.dataset.get_wikidata_entities(self.qald_entry, question)
+
+        entities = self.dataset_wikidata.get_wikidata_entities(
+            self.qald_entry_wikidata, question)
         self.assertTrue("wd_" in entities[0])
+
+    def test_get_dbpedia_entities(self):
+        entities = self.dataset_dbpedia.get_dbpedia_entities(self.qald_entry_dbpedia)
+        self.assertTrue("dbr_" in entities[0])
 
 
 class Test_LCquad1_entry(unittest.TestCase):
@@ -592,9 +582,10 @@ class Test_Qald(unittest.TestCase):
         )
 
         self.assertTrue(empty_qald.entries)
-        self.assertEqual(empty_qald.entries[0].questions["en"].question_string, "What is the time zone of Salt Lake City?")
-        self.assertEqual(empty_qald.entries[0].query.sparql, "SELECT DISTINCT ?o1 WHERE { <http://www.wikidata.org/entity/Q23337>  <http://www.wikidata.org/prop/direct/P421>  ?o1 .  }")
-
+        self.assertEqual(
+            empty_qald.entries[0].questions["en"].question_string, "What is the time zone of Salt Lake City?")
+        self.assertEqual(empty_qald.entries[0].query.sparql,
+                         "SELECT DISTINCT ?o1 WHERE { <http://www.wikidata.org/entity/Q23337>  <http://www.wikidata.org/prop/direct/P421>  ?o1 .  }")
 
     def test_build_qald_list(self):
         empty_qald = Qald({}, "DBpedia")
@@ -630,10 +621,12 @@ class Test_Qald(unittest.TestCase):
 
     @unittest.skip
     def test_update_answers(self):
-        qald9plus_dbpedia_file = read_json("datasets/qald9plus/dbpedia/qald_9_plus_test_dbpedia.json")
+        qald9plus_dbpedia_file = read_json(
+            "datasets/qald9plus/dbpedia/qald_9_plus_test_dbpedia.json")
         qald9plus_dbpedia = Qald(qald9plus_dbpedia_file, "DBpedia")
         qald9plus_dbpedia.update_answers()
-        qald9plus_dbpedia.export_qald_json([language.value for language in Language], "datasets/qald9plus/dbpedia/qald_9_plus_test_dbpedia-new.json")
+        qald9plus_dbpedia.export_qald_json(
+            [language.value for language in Language], "datasets/qald9plus/dbpedia/qald_9_plus_test_dbpedia-new.json")
 
 
 class Test_LCquad2_query(unittest.TestCase):
@@ -759,18 +752,20 @@ class Test_Sgpt_entry(unittest.TestCase):
     def test_build_ref_query(self):
         self.assertEqual(self.entry.ref_query.sparql,
                          "select distinct ?uri where { res:Berlin dbp:leader ?uri } ")
-    
+
     def test_build_qald_format_entry(self):
-        qald_format_entry = self.entry.build_qald_format_entry(id="1", source="ref")
+        qald_format_entry = self.entry.build_qald_format_entry(
+            id="1", source="ref")
 
         self.assertEqual(qald_format_entry["id"], "1")
-        self.assertTrue("select distinct ?uri where { res:Berlin dbp:leader ?uri } " in qald_format_entry["query"]["sparql"])
+        self.assertTrue(
+            "select distinct ?uri where { res:Berlin dbp:leader ?uri } " in qald_format_entry["query"]["sparql"])
 
     def test_get_sparql_with_prefixes(self):
         sparql = self.entry.get_sparql_with_prefixes("ref")
         self.assertTrue("dbp:leader" in sparql)
-        self.assertTrue("PREFIX prop: <http://dbpedia.org/property/>" in sparql)
-
+        self.assertTrue(
+            "PREFIX prop: <http://dbpedia.org/property/>" in sparql)
 
 
 class Test_Sgpt(unittest.TestCase):
@@ -795,8 +790,10 @@ class Test_Sgpt(unittest.TestCase):
         return super().setUp()
 
     def test_sgpt_entries(self):
-        self.assertEqual(self.sgpt.entries[0].ref_query.sparql, "select distinct ?string where { res:San_Francisco foaf:nick ?string } ")
-        self.assertEqual(self.sgpt.entries[2].pred_query.sparql, "select distinct ?uri where { res:Berlin dbo:leaderName ?uri }")
+        self.assertEqual(self.sgpt.entries[0].ref_query.sparql,
+                         "select distinct ?string where { res:San_Francisco foaf:nick ?string } ")
+        self.assertEqual(self.sgpt.entries[2].pred_query.sparql,
+                         "select distinct ?uri where { res:Berlin dbo:leaderName ?uri }")
 
 
 if __name__ == '__main__':
