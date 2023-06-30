@@ -44,7 +44,7 @@ class Dataset:
 
     def is_kg_dbpedia(self):
         return self.knowledge_graph==Knowledge_graph.DBpedia
-
+    
     def get_wikidata_entities(self, entry, question):
         ner = Language.get_supported_ner(question.language)
         if self.no_supported_ner(ner):
@@ -52,13 +52,15 @@ class Dataset:
         else:
             entity_knowledge = question.recognize_entities(self.knowledge_graph, ner)
         return entity_knowledge
+    
+    def no_supported_ner(self, ner):
+        return ner=="no_ner"
+
 
     def get_dbpedia_entities(self, entry):
         return entry.questions["en"].recognize_entities(self.knowledge_graph)
     
 
-    def no_supported_ner(self, ner):
-        return ner=="no_ner"
 
 class Entry:
     def __init__(self, question: Question, query: Query):
