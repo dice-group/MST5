@@ -53,20 +53,28 @@ class Question:
         if knowledge_graph==Knowledge_graph.Wikidata:
             ner = "davlan_ner"
             ner_response = self.send_entity_detection_request(ner)
-
+            entities = self.process_ner_response(ner_response)
+        elif knowledge_graph==Knowledge_graph.DBpedia:
+            entities = self.ner_with_dbpedia_spotlight()
+        return entities
 
     def ner_with_dbpedia_spotlight(self):
         nlp = Language.get_spacy_nlp(self.language)
         nlp.add_pipe('dbpedia_spotlight', first=True)
-        doc = nlp(self.question_string)
+        ner_result = nlp(self.question_string)
+        entities = self.process_dbpedia_spotlight_ner(ner_result)
+        return entities
+
+    def process_dbpedia_spotlight_ner(self, ner_response):
         entities = {}
-        for ent in doc.ents:
+        for ent in ner_response.ents:
             entity_id = self.process_dbpedia_kb_id(ent.kb_id_)
             entities[str(ent)] = entity_id
         return entities
        
     def process_dbpedia_kb_id(self, kb_id_):
         return kb_id_.replace("http://dbpedia.org/resource/", "dbr_")
+
 
     def send_entity_detection_request(self, ner):
         url = 'http://nebula.cs.upb.de:6100/custom-pipeline'
