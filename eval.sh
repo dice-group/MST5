@@ -1,10 +1,11 @@
 #!/bin/bash
 
-model="mT5-lcquad-ling-entity"
+model="mt5-xl-qald-9-plus-dbpedia"
 pred_path=pred_files/${model}
-test_dataset="datasets/qald9plus/wikidata/qald_9_plus_test_wikidata_new.json"
-knowledge_graph="Wikidata"
-languages=("en" "de" "ru" "fr" "lt" "ba" "be" "uk" "zh" "ja" "es")
+test_dataset="datasets/qald9plus/dbpedia/qald_9_plus_test_dbpedia-new.json"
+knowledge_graph="DBpedia"
+# languages=("en" "de" "ru" "fr" "lt" "ba" "be" "uk" "zh" "ja" "es")
+languages=("en" "de" "fr")
 
 include_linguistic_context=true
 include_entity_knowledge=true
