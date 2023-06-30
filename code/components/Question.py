@@ -47,8 +47,22 @@ class Question:
     def add_entity_knowledge(self, question_string, entity_knowledge):
         return question_string + " <pad> " + " ".join(entity_knowledge)
     
+
     def recognize_entities(self, knowledge_graph):
         pass
+
+    def ner_with_dbpedia_spotlight(self):
+        nlp = Language.get_spacy_nlp(self.language)
+        nlp.add_pipe('dbpedia_spotlight', first=True)
+        doc = nlp(self.question_string)
+        entities = {}
+        for ent in doc.ents:
+            entity_id = self.process_dbpedia_kb_id(ent.kb_id_)
+            entities[str(ent)] = entity_id
+        return entities
+       
+    def process_dbpedia_kb_id(self, kb_id_):
+        return kb_id_.replace("http://dbpedia.org/resource/", "dbr_")
 
     def send_entity_detection_request(self, ner):
         url = 'http://nebula.cs.upb.de:6100/custom-pipeline'
