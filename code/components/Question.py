@@ -1,4 +1,3 @@
-from components.Knowledge_graph import Knowledge_graph
 from components.Language import Language
 import requests
 import json
@@ -89,13 +88,14 @@ class Question:
         entities = {}
         response: dict = self.convert_ner_response_to_dict(ner_response)
         detection: dict
-        for detection in response["ent_mentions"]:
-            try:
-                uri = detection["link"]
-                uri = self.process_dbpedia_uri(uri)
-                entities[detection["surface_form"]] = uri
-            except:
-                pass
+        if "ent_mentions" in response:
+            for detection in response["ent_mentions"]:
+                try:
+                    uri = detection["link"]
+                    uri = self.process_dbpedia_uri(uri)
+                    entities[detection["surface_form"]] = uri
+                except:
+                    pass
         return entities
     
     def process_dbpedia_uri(self, uri:str):

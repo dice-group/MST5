@@ -5,6 +5,7 @@ import urllib.parse
 import urllib.request
 import pandas as pd
 import time
+from utils.data_io import export_csv
 
 
 UPLOAD_HEADERS = {
@@ -168,13 +169,14 @@ class Gerbil:
         return requests.get(execute_url, headers=SUBMIT_HEADERS)
 
 
-    def export_results(self, output_file,  max_retry: int = 10):
+    def export_results(self, output_file, max_retry: int = 10):
         gerbil_html = self.get_experiment_results(max_retry)
         if gerbil_html:
             gerbil_results_table = self.clean_gerbil_table(gerbil_html)
             gerbil_results_table.to_csv(output_file, index=False)
             print("Experiment results is saved to " + output_file)
         else:
+            export_csv(output_file, [["gerbil experiment id"],[self.experiment_id]])
             print(f"Try later with {self.experiment_id}")
 
     def get_experiment_results(self, max_retry):
@@ -209,7 +211,7 @@ class Gerbil:
         return "The experiment is still running." in content
     
 
-    def clean_gerbil_table(self, html: str) -> str:
+    def clean_gerbil_table(self, html: pd.DataFrame) -> pd.DataFrame:
         html = self.rename_unnamed_column_to_benchmark(html)
         if "Benchmark" in html.columns:
             html = self.select_where_benckmark_is_na(html)
