@@ -1,4 +1,5 @@
 import unittest
+from utils.data_io import read_json
 from dataset.LCquad1 import LCquad1, LCquad1_entry
 from dataset.LCquad2 import LCquad2, LCquad2_entry
 from dataset.Qald import Qald, Qald_entry
@@ -506,6 +507,13 @@ class Test_Qald(unittest.TestCase):
         self.assertTrue("ROOT" in train_csv[1][0])
         self.assertTrue("wd_" in train_csv[1][1])
         self.assertFalse(":" in train_csv[1][1])
+
+    @unittest.skip
+    def test_update_answers(self):
+        qald9plus_dbpedia_file = read_json("datasets/qald9plus/dbpedia/qald_9_plus_test_dbpedia.json")
+        qald9plus_dbpedia = Qald(qald9plus_dbpedia_file, "DBpedia")
+        qald9plus_dbpedia.update_answers()
+        qald9plus_dbpedia.export_qald_json([language.value for language in Language], "datasets/qald9plus/dbpedia/qald_9_plus_test_dbpedia-new.json")
 
 
 class Test_LCquad2_query(unittest.TestCase):
