@@ -26,7 +26,7 @@ do
     python code/pred_and_build_qald.py \
         --model fine-tuned_models/${model} \
         -t ${test_dataset} \
-        --knowledge_graph DBpedia \
+        --knowledge_graph ${knowledge_graph} \
         -o ${pred_path}/${lang}.json \
         -l ${lang} \
         ${linguistic_context} \
@@ -35,6 +35,7 @@ done
 
 echo "Start running GERBIL experiment"
 python code/gerbil_eval.py \
+    --ref_file_path ${test_dataset}
     --exp_setting ${model} \
     --pred_path ${pred_path}
 
