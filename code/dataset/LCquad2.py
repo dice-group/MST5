@@ -39,11 +39,3 @@ class LCquad2_entry(Entry):
         NNQT_ques = re.sub(' +', ' ', NNQT_ques)
         return NNQT_ques.strip()
 
-    def get_question_string(self, include_linguistic_context, include_entity_knowledge) -> str:
-        question_string = self.NNQT_question
-        if include_linguistic_context:
-            question_string += self.get_linguistic_context_string()
-        if include_entity_knowledge:
-            question_string += self.get_entity_knowledge()
-        return question_string
-
