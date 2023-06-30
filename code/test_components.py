@@ -10,6 +10,10 @@ class Test_Language(unittest.TestCase):
     def test_get_nlp(self):
         Language.get_spacy_nlp(Language.en)
 
+    def test_get_supported_ner_for_en(self):
+        ner = Language.get_supported_ner(Language.en)
+        self.assertEqual(ner, "davlan_ner")
+
 class Test_Question(unittest.TestCase):
     def setUp(self) -> None:
         self.question = Question("Ist Hawaii der Geburtsort von Trump?", Language.de)
@@ -41,6 +45,13 @@ class Test_Question(unittest.TestCase):
         entities = question.ner_with_dbpedia_spotlight()
         self.assertEqual(entities['Google LLC'], 'dbr_Google')
         self.assertEqual(entities['American'], 'dbr_United_States')
+
+    def test_dict_values(self):
+        d = {
+            'Google LLC': 'dbr_Google',
+            'American': 'dbr_United_States'
+        }
+        self.assertEqual(list(d.values()), ['dbr_Google', 'dbr_United_States'])
 
 
 class Test_Query(unittest.TestCase):
