@@ -2,8 +2,9 @@
 
 model="mt5-xl-qald-9-plus-dbpedia"
 pred_path=pred_files/${model}
-test_dataset="datasets/qald9plus/dbpedia/qald_9_plus_test_dbpedia.json"
+test_dataset="datasets/qald9plus/dbpedia/qald_9_plus_test_dbpedia-new.json"
 knowledge_graph="DBpedia"
+languages=("en" "de" "ru" "fr" "lt" "ba" "be" "uk" "es" "zh" "ja")
 include_linguistic_context=true
 include_entity_knowledge=true
 
@@ -18,10 +19,6 @@ if [ "$include_entity_knowledge" = true ]; then
 else
   entity_knowledge="--no-entity_knowledge"
 fi
-
-
-languages=("en" "de" "ru" "fr" "lt" "ba" "be" "uk" "es")
-
 
 for lang in "${languages[@]}"
 do
