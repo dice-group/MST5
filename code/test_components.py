@@ -12,11 +12,11 @@ class Test_Language(unittest.TestCase):
 
     def test_get_supported_ner_for_en(self):
         ner = Language.get_supported_ner(Language.en)
-        self.assertEqual(ner, "davlan_ner")
+        self.assertEqual(ner, "spacy_ner")
 
-    def test_get_babelspace_ner_for_ru(self):
-        ner = Language.get_supported_ner(Language.ru)
-        self.assertEqual(ner, "babelscape_ner")
+    def test_get_babelspace_ner_for_zh(self):
+        ner = Language.get_supported_ner(Language.zh)
+        self.assertEqual(ner, "davlan_ner")
 
     def test_no_ner_for_ja(self):
         ner = Language.get_supported_ner(Language.ja)
@@ -59,8 +59,6 @@ class Test_Question(unittest.TestCase):
     def test_detect_entity_with_mag_el_for_dbpedia_fr(self):
         question = Question("Qui a écrit Harry Potter?", Language.fr)
         response = question.send_entity_detection_request("babelscape_ner","mag_el")
-        print(type(response))
-        print(response)
         self.assertTrue("ent_mentions" in response)
         self.assertTrue("http://fr.dbpedia.org/resource" in response)
     
