@@ -59,7 +59,10 @@ class Question:
 
     def ner_with_dbpedia_spotlight(self):
         nlp = Language.get_spacy_nlp(self.language)
-        nlp.add_pipe('dbpedia_spotlight', first=True)
+        try:
+            nlp.add_pipe('dbpedia_spotlight', first=True)
+        except:
+            pass
         ner_result = nlp(self.question_string)
         entities = self.process_dbpedia_spotlight_ner(ner_result)
         return entities
