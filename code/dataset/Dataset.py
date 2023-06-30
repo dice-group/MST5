@@ -48,9 +48,9 @@ class Dataset:
     def get_wikidata_entities(self, entry, question):
         ner = Language.get_supported_ner(question.language)
         if self.no_supported_ner(ner):
-            entity_knowledge = entry.questions["en"].recognize_entities(self.knowledge_graph, "babelscape_ner")
+            entity_knowledge = entry.questions["en"].recognize_entities("babelscape_ner", "mgenre_el")
         else:
-            entity_knowledge = question.recognize_entities(self.knowledge_graph, ner)
+            entity_knowledge = question.recognize_entities(ner, "mgenre_el")
         return entity_knowledge
     
     def no_supported_ner(self, ner):
