@@ -1,4 +1,6 @@
 from components.Language import Language
+import requests
+import json
 
 class Question:
     def __init__(self, question_string: str, language: Language) -> None:
@@ -44,3 +46,71 @@ class Question:
 
     def add_entity_knowledge(self, question_string, entity_knowledge):
         return question_string + " <pad> " + " ".join(entity_knowledge)
+    
+
+    def recognize_entities(self, ner, el):
+        ner_response = self.send_entity_detection_request(ner, el)
+        if el=="mgenre_el":
+            entities = self.process_wikidata_ner_response(ner_response)
+        elif el=="mag_el":
+            entities = self.process_dbpedia_ner_response(ner_response)
+        return list(entities.values())
+
+    def send_entity_detection_request(self, ner, el):
+        url = 'http://nebula.cs.upb.de:6100/custom-pipeline'
+        headers = {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+        data = {
+            'query': self.question_string,
+            'full_json': 'True',
+            'components': f'{ner}, {el}',
+            'lang': self.language.value
+        }
+
+        response = requests.post(url, headers=headers, data=data)
+        return response.text
+    
+    def process_wikidata_ner_response(self, ner_response:str):
+        entities = {}
+        response: dict = self.convert_ner_response_to_dict(ner_response)
+        detection: dict
+        for detection in response["ent_mentions"]:
+            try:
+                link_candidates = detection["link_candidates"]
+                entity_name, _, entity_id = link_candidates[0]
+                entities[entity_name] = f"wd_{entity_id}"
+            except:
+                pass
+        return entities
+    
+    def process_dbpedia_ner_response(self, ner_response: str):
+        entities = {}
+        response: dict = self.convert_ner_response_to_dict(ner_response)
+        detection: dict
+        if "ent_mentions" in response:
+            for detection in response["ent_mentions"]:
+                try:
+                    uri = detection["link"]
+                    uri = self.process_dbpedia_uri(uri)
+                    entities[detection["surface_form"]] = uri
+                except:
+                    pass
+        return entities
+    
+    def process_dbpedia_uri(self, uri:str):
+        uri = uri.replace("http://dbpedia.org/resource/", "dbr_")
+        uri = uri.replace("http://fr.dbpedia.org/resource/", "dbr_")
+        uri = uri.replace("http://de.dbpedia.org/resource/", "dbr_")
+        return uri
+
+
+    
+
+    def convert_ner_response_to_dict(self, ner_response) -> dict:
+        ner_response = ner_response.replace("false", '''"False"''')
+        ner_response = ner_response.replace("true", '''"True"''')
+        return json.loads(ner_response)
+
+
+

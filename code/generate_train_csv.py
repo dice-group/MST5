@@ -34,9 +34,9 @@ def main():
                         help="type of knowledge_graph", required=False)
     parser.add_argument("-l", "--languages", nargs='+',
                         help='required languages of question', required=False)
-    parser.add_argument('--linguistic_context', default=False, type=bool,
+    parser.add_argument('--linguistic_context', action=argparse.BooleanOptionalAction,
                         help='With or without linguistic context in question string')
-    parser.add_argument('--entity_knowledge', default=False, type=bool,
+    parser.add_argument('--entity_knowledge', action=argparse.BooleanOptionalAction,
                         help='With or without entity knowledge in question string')
     args = parser.parse_args()
 

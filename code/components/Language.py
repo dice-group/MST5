@@ -26,6 +26,7 @@ nlp_dict = {
 }
 
 
+
 class Language(Enum):
     en = 'en'
     de = 'de'
@@ -40,6 +41,7 @@ class Language(Enum):
     es = 'es'
     hy = "hy"
 
+
     @classmethod
     def has_member_key(cls, key):
         return key in cls.__members__
@@ -49,4 +51,26 @@ class Language(Enum):
             return nlp_dict[language.value]
         except KeyError:
             raise ValueError(f"No spacy nlp for {language}")
-    
+        
+    def get_supported_ner(language):
+        spacy_ner = [
+            Language.en, 
+            Language.de,
+            Language.es,
+            Language.fr,
+            Language.ru
+        ]
+        davlan_ner = [
+            Language.en,
+            Language.es,
+            Language.fr,
+            Language.de,
+            Language.ru,
+            Language.zh
+        ]
+        if language in spacy_ner:
+            return "spacy_ner"
+        elif language in davlan_ner:
+            return "davlan_ner"
+        else:
+            return "no_ner"
