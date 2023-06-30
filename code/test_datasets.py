@@ -115,8 +115,12 @@ class Test_Dataset(unittest.TestCase):
             self.qald_entry_wikidata, question)
         self.assertTrue("wd_" in entities[0])
 
-    def test_get_dbpedia_entities(self):
-        entities = self.dataset_dbpedia.get_dbpedia_entities(self.qald_entry_dbpedia)
+    def test_get_dbpedia_entities_for_en(self):
+        question = question = Question(
+            "Who wrote Harry Potter?",
+            Language.en
+        )
+        entities = self.dataset_dbpedia.get_dbpedia_entities(question)
         self.assertTrue("dbr_" in entities[0])
 
 

@@ -51,6 +51,7 @@ class Question:
 
     def recognize_entities(self, ner, el):
         ner_response = self.send_entity_detection_request(ner, el)
+        print(ner_response)
         entities = self.process_ner_response(ner_response)
         return list(entities.values())
 
