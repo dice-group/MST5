@@ -51,8 +51,10 @@ class Question:
 
     def recognize_entities(self, ner, el):
         ner_response = self.send_entity_detection_request(ner, el)
-        print(ner_response)
-        entities = self.process_wikidata_ner_response(ner_response)
+        if el=="mgenre_el":
+            entities = self.process_wikidata_ner_response(ner_response)
+        elif el=="mag_el":
+            entities = self.process_dbpedia_ner_response(ner_response)
         return list(entities.values())
 
     def send_entity_detection_request(self, ner, el):
@@ -70,7 +72,7 @@ class Question:
         response = requests.post(url, headers=headers, data=data)
         return response.text
     
-    def process_wikidata_ner_response(self, ner_response: str):
+    def process_wikidata_ner_response(self, ner_response:str):
         entities = {}
         response: dict = self.convert_ner_response_to_dict(ner_response)
         detection: dict
@@ -79,6 +81,25 @@ class Question:
             entity_name, _, entity_id = link_candidates[0]
             entities[entity_name] = f"wd_{entity_id}"
         return entities
+    
+    def process_dbpedia_ner_response(self, ner_response: str):
+        entities = {}
+        response: dict = self.convert_ner_response_to_dict(ner_response)
+        detection: dict
+        for detection in response["ent_mentions"]:
+            uri = detection["link"]
+            uri = self.process_dbpedia_uri(uri)
+            entities[detection["surface_form"]] = uri
+        return entities
+    
+    def process_dbpedia_uri(self, uri:str):
+        uri = uri.replace("http://dbpedia.org/resource/", "dbr_")
+        uri = uri.replace("http://fr.dbpedia.org/resource/", "dbr_")
+        uri = uri.replace("http://de.dbpedia.org/resource/", "dbr_")
+        return uri
+
+
+    
 
     def convert_ner_response_to_dict(self, ner_response) -> dict:
         ner_response = ner_response.replace("false", '''"False"''')
