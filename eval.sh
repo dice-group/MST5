@@ -4,8 +4,7 @@ model="mT5-lcquad-ling-entity"
 pred_path=pred_files/${model}
 test_dataset="datasets/qald9plus/wikidata/qald_9_plus_test_wikidata_new.json"
 knowledge_graph="Wikidata"
-# languages=("en" "de" "ru" "fr" "lt" "ba" "be" "uk" "zh" "ja")
-languages=("ru" "fr" "lt" "ba" "be" "uk" "zh" "ja")
+languages=("en" "de" "ru" "fr" "lt" "ba" "be" "uk" "zh" "ja")
 
 include_linguistic_context=true
 include_entity_knowledge=true
