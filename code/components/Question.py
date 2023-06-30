@@ -1,5 +1,6 @@
 from components.Language import Language
 import requests
+import json
 
 class Question:
     def __init__(self, question_string: str, language: Language) -> None:
@@ -63,6 +64,21 @@ class Question:
 
         response = requests.post(url, headers=headers, data=data)
         return response.text
+    
+    def process_ner_response(self, ner_response: str):
+        entities = {}
+        response: dict = self.convert_ner_response_to_dict(ner_response)
+        detection: dict
+        for detection in response["ent_mentions"]:
+            link_candidates = detection["link_candidates"]
+            entity_name, _, entity_id = link_candidates[0]
+            entities[entity_name] = entity_id
+        return entities
+
+    def convert_ner_response_to_dict(self, ner_response) -> dict:
+        ner_response = ner_response.replace("false", '''"False"''')
+        ner_response = ner_response.replace("true", '''"True"''')
+        return json.loads(ner_response)
 
 
 
