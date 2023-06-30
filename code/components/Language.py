@@ -72,4 +72,4 @@ class Language(Enum):
         elif language in babelscape_ner:
             return "babelscape_ner"
         else:
-            return "davlan_ner"
+            return "no_ner"
