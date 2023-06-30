@@ -1,4 +1,5 @@
-from code.components.Knowledge_graph import Knowledge_graph
+from components.Knowledge_graph import Knowledge_graph
+from components.Language import Language
 from components.Query import Query
 from components.Question import Question
 from utils.data_io import export_csv
@@ -28,12 +29,19 @@ class Dataset:
             question_string = question.get_question_string_with_lingtuistic_context()
         if include_entity_knowledge:
             if pred:
-                entity_knowledge = question.recognize_entities(self.knowledge_graph)
+                if self.knowledge_graph==Knowledge_graph.Wikidata:
+                    ner = Language.get_supported_ner(question.language)
+                    entity_knowledge = entry.questions["en"].recognize_entities(self.knowledge_graph)
+                if self.knowledge_graph==Knowledge_graph.DBpedia:
+                    entity_knowledge = entry.questions["en"].recognize_entities(self.knowledge_graph)
             else:
                 entity_knowledge = entry.query.get_entity_knowledge()
 
             question_string = question.add_entity_knowledge(question_string, entity_knowledge)
         return question_string
+    
+    def get_supported_ner(self, language: Language):
+        pass
 
 class Entry:
     def __init__(self, question: Question, query: Query):
