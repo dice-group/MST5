@@ -81,5 +81,14 @@ class Test_DBpedia_spotlight(unittest.TestCase):
         self.assertEqual(outputs[0], ('Google LLC', 'http://dbpedia.org/resource/Google'))
         self.assertEqual(outputs[1], ('American', 'http://dbpedia.org/resource/United_States'))
 
+    def test_dbpedia_spotlight_german(self):
+        nlp = Language.get_spacy_nlp(Language.de)
+        nlp.add_pipe('dbpedia_spotlight', first=True)
+        doc = nlp('Ist Hawaii der Geburtsort von Trump?')
+        outputs = [(ent.text, ent.kb_id_) for ent in doc.ents]
+        self.assertEqual(outputs[0], ('Hawaii', "http://de.dbpedia.org/resource/Hawaii"))
+        self.assertEqual(outputs[1], ('Trump', 'http://de.dbpedia.org/resource/Donald_Trump'))
+        
+
 if __name__ == '__main__':
     unittest.main()
