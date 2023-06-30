@@ -32,7 +32,7 @@ class Dataset:
                 if self.is_kg_wikidata():
                     entity_knowledge = self.get_wikidata_entities(entry, question)
                 elif self.is_kg_dbpedia():
-                    entity_knowledge = self.get_dbpedia_entities(entry)
+                    entity_knowledge = self.get_dbpedia_entities(question)
             else:
                 entity_knowledge = entry.query.get_entity_knowledge()
 
@@ -57,8 +57,8 @@ class Dataset:
         return ner=="no_ner"
 
 
-    def get_dbpedia_entities(self, entry):
-        return entry.questions["en"].recognize_entities(self.knowledge_graph)
+    def get_dbpedia_entities(self, question: Question):
+        return question.recognize_entities("mgenre_el")
     
 
 

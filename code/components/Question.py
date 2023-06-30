@@ -49,36 +49,12 @@ class Question:
         return question_string + " <pad> " + " ".join(entity_knowledge)
     
 
-    def recognize_entities(self, knowledge_graph, ner=None):
-        if knowledge_graph==Knowledge_graph.Wikidata:
-            ner_response = self.send_entity_detection_request(ner)
-            entities = self.process_ner_response(ner_response)
-        elif knowledge_graph==Knowledge_graph.DBpedia:
-            entities = self.ner_with_dbpedia_spotlight()
+    def recognize_entities(self, ner, el):
+        ner_response = self.send_entity_detection_request(ner, el)
+        entities = self.process_ner_response(ner_response)
         return list(entities.values())
 
-    def ner_with_dbpedia_spotlight(self):
-        nlp = Language.get_spacy_nlp(self.language)
-        try:
-            nlp.add_pipe('dbpedia_spotlight', first=True)
-        except:
-            pass
-        ner_result = nlp(self.question_string)
-        entities = self.process_dbpedia_spotlight_ner(ner_result)
-        return entities
-
-    def process_dbpedia_spotlight_ner(self, ner_response):
-        entities = {}
-        for ent in ner_response.ents:
-            entity_id = self.process_dbpedia_kb_id(ent.kb_id_)
-            entities[str(ent)] = entity_id
-        return entities
-       
-    def process_dbpedia_kb_id(self, kb_id_):
-        return kb_id_.replace("http://dbpedia.org/resource/", "dbr_")
-
-
-    def send_entity_detection_request(self, ner):
+    def send_entity_detection_request(self, ner, el):
         url = 'http://nebula.cs.upb.de:6100/custom-pipeline'
         headers = {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -86,7 +62,7 @@ class Question:
         data = {
             'query': self.question_string,
             'full_json': 'True',
-            'components': f'{ner}, mgenre_el',
+            'components': f'{ner}, {el}',
             'lang': self.language.value
         }
 
