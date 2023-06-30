@@ -1,4 +1,5 @@
 from components.Language import Language
+import requests
 
 class Question:
     def __init__(self, question_string: str, language: Language) -> None:
@@ -44,3 +45,24 @@ class Question:
 
     def add_entity_knowledge(self, question_string, entity_knowledge):
         return question_string + " <pad> " + " ".join(entity_knowledge)
+    
+    def recognize_entities(self, knowledge_graph):
+        pass
+
+    def send_entity_detection_request(self, ner):
+        url = 'http://nebula.cs.upb.de:6100/custom-pipeline'
+        headers = {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+        data = {
+            'query': self.question_string,
+            'full_json': 'True',
+            'components': f'{ner}, mgenre_el',
+            'lang': self.language.value
+        }
+
+        response = requests.post(url, headers=headers, data=data)
+        return response.text
+
+
+
