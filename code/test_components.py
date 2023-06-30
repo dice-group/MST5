@@ -65,9 +65,22 @@ class Test_Question(unittest.TestCase):
 
     def test_process_wikidata_ner_response(self):
         response = '''{"components":"davlan_ner, mgenre_el","ent_mentions":[{"end":10,"link":"Q782","link_candidates":[["Hawaii","de","Q782"]],"start":4,"surface_form":"Hawaii"},{"end":35,"link":"Q22686","link_candidates":[["Donald Trump","de","Q22686"]],"start":30,"surface_form":"Trump"}],"kb":"wd","lang":"de","placeholder":"00","replace_before":false,"text":"Ist Hawaii der Geburtsort von Trump?"}'''
-        entities = self.question.process_ner_response(response)
+        entities = self.question.process_wikidata_ner_response(response)
         self.assertEqual(entities["Hawaii"], "wd_Q782")
         self.assertEqual(entities["Donald Trump"], "wd_Q22686")
+
+    def test_process_dbpedia_ner_response(self):
+        response = '''{"components":"babelscape_ner, mag_el","ent_mentions":[{"end":22,"link":"http://dbpedia.org/resource/IGN","start":10,"surface_form":"Harry Potter"}],"kb":"dbp","lang":"en","placeholder":"00","replace_before":false,"text":"Who wrote Harry Potter?"}'''
+        entities = self.question.process_dbpedia_ner_response(response)
+        self.assertEqual(entities["Harry Potter"], "dbr_IGN")
+
+
+    def test_process_dbpedia_ner_response_fr(self):
+        response = '''{"components":"babelscape_ner, mag_el","ent_mentions":[{"end":24,"link":"http://fr.dbpedia.org/resource/Harry_Potter","start":12,"surface_form":"Harry Potter"}],"kb":"dbp","lang":"fr","placeholder":"00","replace_before":false,"text":"Qui a \u00e9crit Harry Potter?"}'''
+        entities = self.question.process_dbpedia_ner_response(response)
+        self.assertEqual(entities["Harry Potter"], "dbr_Harry_Potter")
+
+
 
 
 class Test_Query(unittest.TestCase):
