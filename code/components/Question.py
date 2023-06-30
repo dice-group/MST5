@@ -52,7 +52,7 @@ class Question:
     def recognize_entities(self, ner, el):
         ner_response = self.send_entity_detection_request(ner, el)
         print(ner_response)
-        entities = self.process_ner_response(ner_response)
+        entities = self.process_wikidata_ner_response(ner_response)
         return list(entities.values())
 
     def send_entity_detection_request(self, ner, el):
@@ -70,7 +70,7 @@ class Question:
         response = requests.post(url, headers=headers, data=data)
         return response.text
     
-    def process_ner_response(self, ner_response: str):
+    def process_wikidata_ner_response(self, ner_response: str):
         entities = {}
         response: dict = self.convert_ner_response_to_dict(ner_response)
         detection: dict
