@@ -14,6 +14,10 @@ class Test_Language(unittest.TestCase):
         ner = Language.get_supported_ner(Language.en)
         self.assertEqual(ner, "davlan_ner")
 
+    def test_get_babelspace_ner_for_ru(self):
+        ner = Language.get_supported_ner(Language.ru)
+        self.assertEqual(ner, "babelspace_ner")
+
 class Test_Question(unittest.TestCase):
     def setUp(self) -> None:
         self.question = Question("Ist Hawaii der Geburtsort von Trump?", Language.de)
