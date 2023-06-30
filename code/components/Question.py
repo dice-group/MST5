@@ -49,14 +49,13 @@ class Question:
         return question_string + " <pad> " + " ".join(entity_knowledge)
     
 
-    def recognize_entities(self, knowledge_graph):
+    def recognize_entities(self, knowledge_graph, ner=None):
         if knowledge_graph==Knowledge_graph.Wikidata:
-            ner = "davlan_ner"
             ner_response = self.send_entity_detection_request(ner)
             entities = self.process_ner_response(ner_response)
         elif knowledge_graph==Knowledge_graph.DBpedia:
             entities = self.ner_with_dbpedia_spotlight()
-        return entities
+        return list(entities.values())
 
     def ner_with_dbpedia_spotlight(self):
         nlp = Language.get_spacy_nlp(self.language)
