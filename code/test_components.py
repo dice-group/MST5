@@ -1,4 +1,5 @@
 import unittest
+import spacy
 from components.Language import Language
 from components.Query import Query
 from components.Question import Question
@@ -19,9 +20,6 @@ class Test_Question(unittest.TestCase):
         question_string_split = question_string.split(" ")
         # self.assertEqual(question_string_split, "?")
         self.assertLessEqual(len(question_string_split), 128)
-
-    def test_recognize_entities(self):
-        pass
 
     def test_detect_entity_with_flair(self):
         response = self.question.send_entity_detection_request("flair_ner")
@@ -73,6 +71,15 @@ class Test_Query(unittest.TestCase):
         answer = wikidata_query.get_answer()
         self.assertTrue(answer["results"]["bindings"])
 
+
+class Test_DBpedia_spotlight(unittest.TestCase):
+    def test_dbpedia_spotlight(self):
+        nlp = spacy.load('en_core_web_sm')
+        nlp.add_pipe('dbpedia_spotlight', first=True)
+        doc = nlp('Google LLC is an American multinational technology company.')
+        outputs = [(ent.text, ent.kb_id_) for ent in doc.ents]
+        self.assertEqual(outputs[0], ('Google LLC', 'http://dbpedia.org/resource/Google'))
+        self.assertEqual(outputs[1], ('American', 'http://dbpedia.org/resource/United_States'))
 
 if __name__ == '__main__':
     unittest.main()
