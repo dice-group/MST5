@@ -23,8 +23,11 @@ class Test_Question(unittest.TestCase):
     def test_recognize_entities(self):
         pass
 
+    def test_detect_entity_with_flair(self):
+        response = self.question.send_entity_detection_request("flair_ner")
+        self.assertTrue("ent_mentions" in response)
+
     def test_detect_entity_with_davlan(self):
-        self.question = Question("Ist Hawaii der Geburtsort von Trump?", Language.de)
         response = self.question.send_entity_detection_request("davlan_ner")
         self.assertTrue("ent_mentions" in response)
         print(response)
