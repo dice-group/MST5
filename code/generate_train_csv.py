@@ -46,7 +46,7 @@ def main():
         dataset = get_lcquad_dataset(input_file, dataset_type)
         dataset.export_train_csv(args.output, args.linguistic_context, args.entity_knowledge)
     if dataset_type == "qald":
-        dataset = Qald(input_file, Knowledge_graph[args.knowledge_graph])
+        dataset = Qald(input_file, args.knowledge_graph)
         if args.languages[0]=="all":
             languages = [language.value for language in Language]
             if args.linguistic_context:
