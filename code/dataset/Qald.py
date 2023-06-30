@@ -40,7 +40,7 @@ class Qald(Dataset):
             for language in languages:
                 if language in entry.questions:
                     question: Question = entry.questions[language]
-                    question_string = super().get_question_string(include_linguistic_context, include_entity_knowledge, entry, question)
+                    question_string = super().get_question_string(entry, question, include_linguistic_context, include_entity_knowledge)
                     csv_dataset.append([question_string, sparql])
         return csv_dataset
 
@@ -59,7 +59,7 @@ class Qald(Dataset):
         for entry in self.entries:
             if language in entry.questions:
                 question: Question = entry.questions[language]
-                question_string = super().get_question_string(include_linguistic_context, include_entity_knowledge, entry, question)
+                question_string = super().get_question_string(entry, question, include_linguistic_context, include_entity_knowledge)
                 questions_with_id.append([entry.id, question_string])
         return questions_with_id
     
