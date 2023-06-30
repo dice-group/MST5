@@ -5,9 +5,9 @@ from components.Question import Question
 from utils.data_io import export_csv
 
 class Dataset:
-    def __init__(self, entries: list[Query]):
+    def __init__(self, entries: list[Query], knowledge_graph=None):
         self.entries = entries
-        self.knowledge_graph = None
+        self.knowledge_graph = knowledge_graph
 
     def export_train_csv(self, output_file, include_linguistic_context=False, include_entity_knowledge=False):
         csv_dataset = self.to_train_csv(include_linguistic_context, include_entity_knowledge)
@@ -29,19 +29,35 @@ class Dataset:
             question_string = question.get_question_string_with_lingtuistic_context()
         if include_entity_knowledge:
             if pred:
-                if self.knowledge_graph==Knowledge_graph.Wikidata:
-                    ner = Language.get_supported_ner(question.language)
-                    entity_knowledge = entry.questions["en"].recognize_entities(self.knowledge_graph)
-                if self.knowledge_graph==Knowledge_graph.DBpedia:
-                    entity_knowledge = entry.questions["en"].recognize_entities(self.knowledge_graph)
+                if self.is_kg_wikidata():
+                    entity_knowledge = self.get_wikidata_entities(entry, question)
+                elif self.is_kg_dbpedia():
+                    entity_knowledge = self.get_dbpedia_entities(entry)
             else:
                 entity_knowledge = entry.query.get_entity_knowledge()
 
             question_string = question.add_entity_knowledge(question_string, entity_knowledge)
         return question_string
-    
-    def get_supported_ner(self, language: Language):
-        pass
+
+    def get_dbpedia_entities(self, entry):
+        return entry.questions["en"].recognize_entities(self.knowledge_graph)
+
+    def get_wikidata_entities(self, entry, question):
+        ner = Language.get_supported_ner(question.language)
+        if self.no_supported_ner(ner):
+            entity_knowledge = entry.questions["en"].recognize_entities(self.knowledge_graph, "davlan_ner")
+        else:
+            entity_knowledge = question.recognize_entities(self.knowledge_graph, ner)
+        return entity_knowledge
+
+    def is_kg_dbpedia(self):
+        return self.knowledge_graph==Knowledge_graph.DBpedia
+
+    def is_kg_wikidata(self):
+        return self.knowledge_graph==Knowledge_graph.Wikidata
+
+    def no_supported_ner(self, ner):
+        return ner=="no_ner"
 
 class Entry:
     def __init__(self, question: Question, query: Query):
