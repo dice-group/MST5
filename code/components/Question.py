@@ -77,9 +77,12 @@ class Question:
         response: dict = self.convert_ner_response_to_dict(ner_response)
         detection: dict
         for detection in response["ent_mentions"]:
-            link_candidates = detection["link_candidates"]
-            entity_name, _, entity_id = link_candidates[0]
-            entities[entity_name] = f"wd_{entity_id}"
+            try:
+                link_candidates = detection["link_candidates"]
+                entity_name, _, entity_id = link_candidates[0]
+                entities[entity_name] = f"wd_{entity_id}"
+            except:
+                pass
         return entities
     
     def process_dbpedia_ner_response(self, ner_response: str):
@@ -87,9 +90,12 @@ class Question:
         response: dict = self.convert_ner_response_to_dict(ner_response)
         detection: dict
         for detection in response["ent_mentions"]:
-            uri = detection["link"]
-            uri = self.process_dbpedia_uri(uri)
-            entities[detection["surface_form"]] = uri
+            try:
+                uri = detection["link"]
+                uri = self.process_dbpedia_uri(uri)
+                entities[detection["surface_form"]] = uri
+            except:
+                pass
         return entities
     
     def process_dbpedia_uri(self, uri:str):
