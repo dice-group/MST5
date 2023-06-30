@@ -1,5 +1,4 @@
 import unittest
-import spacy
 from components.Language import Language
 from components.Query import Query
 from components.Question import Question
