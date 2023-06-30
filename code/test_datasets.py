@@ -1,4 +1,5 @@
 import unittest
+from dataset.Dataset import Dataset
 from utils.data_io import read_json
 from dataset.LCquad1 import LCquad1, LCquad1_entry
 from dataset.LCquad2 import LCquad2, LCquad2_entry
@@ -8,6 +9,125 @@ from components.Language import Language
 from components.Knowledge_graph import Knowledge_graph
 from components.Query import Query
 from components.Question import Question
+
+class Test_Dataset(unittest.TestCase):
+    def setUp(self) -> None:
+        self.dataset = Dataset([], Knowledge_graph.Wikidata)
+        qald_id = "99"
+        questions = [
+            {
+                "language": "en",
+                "string": "What is the time zone of Salt Lake City?"
+            },
+            {
+                "language": "de",
+                "string": "Was ist die Zeitzone von Salt Lake City?"
+            },
+            {
+                "language": "zh",
+                "string": "盐湖城时区是什么？"
+            },
+            {
+                "language": "ja",
+                "string": "ソルトレイクシティのタイムゾーンは?"
+            },
+            {
+                "language": "ru",
+                "string": "В каком часовом поясе расположен Солт-Лейк-Сити?"
+            },
+            {
+                "language": "uk",
+                "string": "Який часовий пояс у Солт-Лейк Сіті?"
+            },
+            {
+                "language": "ba",
+                "string": "Ниндей вакыт поясы Солт-Лейк-Ситила"
+            },
+            {
+                "language": "be",
+                "string": "Які гадзінны пояс у Солт-Лэйк-Сіці"
+            },
+            {
+                "language": "lt",
+                "string": "Kokia laiko juosta yra Solt Leik Sityjes"
+            }
+        ]
+        sparql = "SELECT DISTINCT ?o1 WHERE { <http://www.wikidata.org/entity/Q23337>  <http://www.wikidata.org/prop/direct/P421>  ?o1 .  }"
+        answers = [
+            {
+                "head": {
+                    "vars": [
+                        "o1"
+                    ]
+                },
+                "results": {
+                    "bindings": [
+                        {
+                            "o1": {
+                                "type": "uri",
+                                "value": "http://www.wikidata.org/entity/Q3134980"
+                            }
+                        },
+                        {
+                            "o1": {
+                                "type": "uri",
+                                "value": "http://www.wikidata.org/entity/Q2212"
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+        self.qald_entry = Qald_entry(
+            qald_id, questions, sparql, Knowledge_graph.Wikidata, answers)
+        
+        return super().setUp()
+    
+    def test_no_supported_ner(self):
+        self.assertTrue(self.dataset.no_supported_ner("no_ner"))
+
+    def test_is_kg_dbpedia(self):
+        self.assertFalse(self.dataset.is_kg_dbpedia())
+
+    def test_is_kg_wikidata(self):
+        self.assertTrue(self.dataset.is_kg_wikidata())
+
+    def test_get_wikidata_entities_for_en(self):
+
+        question = Question(
+            "What is the time zone of Salt Lake City?",
+            Language.en
+        )
+        
+        entities = self.dataset.get_wikidata_entities(self.qald_entry, question)
+        self.assertTrue("wd_" in entities[0])
+
+    def test_get_wikidata_entities_for_zh(self):
+        question = Question(
+            "盐湖城时区是什么？",
+            Language.zh
+        )
+        
+        entities = self.dataset.get_wikidata_entities(self.qald_entry, question)
+        self.assertTrue("wd_" in entities[0])
+
+    def test_get_wikidata_entities_for_ja(self):
+        question = Question(
+            "ソルトレイクシティのタイムゾーンは?",
+            Language.ja
+        )
+        
+        entities = self.dataset.get_wikidata_entities(self.qald_entry, question)
+        self.assertTrue("wd_" in entities[0])
+
+    def test_get_wikidata_entities_for_ru(self):
+        question = Question(
+            "В каком часовом поясе расположен Солт-Лейк-Сити?",
+            Language.ru
+        )
+        
+        entities = self.dataset.get_wikidata_entities(self.qald_entry, question)
+        self.assertTrue("wd_" in entities[0])
 
 
 class Test_LCquad1_entry(unittest.TestCase):
