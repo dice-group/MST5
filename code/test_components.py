@@ -33,8 +33,8 @@ class Test_Question(unittest.TestCase):
     def test_process_ner_response(self):
         response = '''{"components":"davlan_ner, mgenre_el","ent_mentions":[{"end":10,"link":"Q782","link_candidates":[["Hawaii","de","Q782"]],"start":4,"surface_form":"Hawaii"},{"end":35,"link":"Q22686","link_candidates":[["Donald Trump","de","Q22686"]],"start":30,"surface_form":"Trump"}],"kb":"wd","lang":"de","placeholder":"00","replace_before":false,"text":"Ist Hawaii der Geburtsort von Trump?"}'''
         entities = self.question.process_ner_response(response)
-        self.assertEqual(entities["Hawaii"], "Q782")
-        self.assertEqual(entities["Donald Trump"], "Q22686")
+        self.assertEqual(entities["Hawaii"], "wd_Q782")
+        self.assertEqual(entities["Donald Trump"], "wd_Q22686")
 
     def test_ner_with_dbpedia_spotlight(self):
         question = Question('Google LLC is an American multinational technology company.', Language.en)

@@ -1,3 +1,4 @@
+from components.Knowledge_graph import Knowledge_graph
 from components.Language import Language
 import requests
 import json
@@ -49,7 +50,10 @@ class Question:
     
 
     def recognize_entities(self, knowledge_graph):
-        pass
+        if knowledge_graph==Knowledge_graph.Wikidata:
+            ner = "davlan_ner"
+            ner_response = self.send_entity_detection_request(ner)
+
 
     def ner_with_dbpedia_spotlight(self):
         nlp = Language.get_spacy_nlp(self.language)
@@ -86,7 +90,7 @@ class Question:
         for detection in response["ent_mentions"]:
             link_candidates = detection["link_candidates"]
             entity_name, _, entity_id = link_candidates[0]
-            entities[entity_name] = entity_id
+            entities[entity_name] = f"wd_{entity_id}"
         return entities
 
     def convert_ner_response_to_dict(self, ner_response) -> dict:
