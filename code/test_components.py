@@ -1,6 +1,7 @@
 import unittest
 from components.Language import Language
 from components.Query import Query
+from components.Question import Question
 from components.Knowledge_graph import Knowledge_graph
 
 
@@ -14,6 +15,14 @@ class Test_Question(unittest.TestCase):
         question_string_split = question_string.split(" ")
         # self.assertEqual(question_string_split, "?")
         self.assertLessEqual(len(question_string_split), 128)
+
+    def test_recognize_entities(self):
+        pass
+
+    def test_detect_entity_with_davlan(self):
+        question = Question("Ist Hawaii der Geburtsort von Trump?", Language.de)
+        response = question.send_entity_detection_request("davlan_ner")
+        self.assertTrue("ent_mentions" in response)
 
 class Test_Query(unittest.TestCase):
     def setUp(self) -> None:
