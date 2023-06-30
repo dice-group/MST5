@@ -35,7 +35,13 @@ class Test_Question(unittest.TestCase):
         entities = self.question.process_ner_response(response)
         self.assertEqual(entities["Hawaii"], "Q782")
         self.assertEqual(entities["Donald Trump"], "Q22686")
-        
+
+    def test_ner_with_dbpedia_spotlight(self):
+        question = Question('Google LLC is an American multinational technology company.', Language.en)
+        entities = question.ner_with_dbpedia_spotlight()
+        self.assertEqual(entities['Google LLC'], 'dbr_Google')
+        self.assertEqual(entities['American'], 'dbr_United_States')
+
 
 class Test_Query(unittest.TestCase):
     def setUp(self) -> None:
