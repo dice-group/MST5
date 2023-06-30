@@ -39,8 +39,11 @@ class Dataset:
             question_string = question.add_entity_knowledge(question_string, entity_knowledge)
         return question_string
 
-    def get_dbpedia_entities(self, entry):
-        return entry.questions["en"].recognize_entities(self.knowledge_graph)
+    def is_kg_wikidata(self):
+        return self.knowledge_graph==Knowledge_graph.Wikidata
+
+    def is_kg_dbpedia(self):
+        return self.knowledge_graph==Knowledge_graph.DBpedia
 
     def get_wikidata_entities(self, entry, question):
         ner = Language.get_supported_ner(question.language)
@@ -50,11 +53,9 @@ class Dataset:
             entity_knowledge = question.recognize_entities(self.knowledge_graph, ner)
         return entity_knowledge
 
-    def is_kg_dbpedia(self):
-        return self.knowledge_graph==Knowledge_graph.DBpedia
-
-    def is_kg_wikidata(self):
-        return self.knowledge_graph==Knowledge_graph.Wikidata
+    def get_dbpedia_entities(self, entry):
+        return entry.questions["en"].recognize_entities(self.knowledge_graph)
+    
 
     def no_supported_ner(self, ner):
         return ner=="no_ner"
