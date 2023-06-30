@@ -53,4 +53,23 @@ class Language(Enum):
             raise ValueError(f"No spacy nlp for {language}")
     
     def get_supported_ner(language):
-        return "davlan_ner"
+        davlan_ner = [
+            Language.en, 
+            Language.de,
+            Language.es,
+            Language.fr,
+            Language.zh,
+        ]
+        babelscape_ner = [
+            Language.en,
+            Language.es,
+            Language.fr,
+            Language.de,
+            Language.ru
+        ]
+        if language in davlan_ner:
+            return "davlan_ner"
+        elif language in babelscape_ner:
+            return "babelscape_ner"
+        else:
+            return "davlan_ner"
