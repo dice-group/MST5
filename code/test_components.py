@@ -16,7 +16,12 @@ class Test_Language(unittest.TestCase):
 
     def test_get_babelspace_ner_for_ru(self):
         ner = Language.get_supported_ner(Language.ru)
-        self.assertEqual(ner, "babelspace_ner")
+        self.assertEqual(ner, "babelscape_ner")
+
+    def test_no_ner_for_ja(self):
+        ner = Language.get_supported_ner(Language.ja)
+        self.assertEqual(ner, "no_ner")
+
 
 class Test_Question(unittest.TestCase):
     def setUp(self) -> None:
