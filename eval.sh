@@ -1,6 +1,6 @@
 #!/bin/bash
 
-model="mt5-xl-qald-9-plus-dbpedia"
+model="mt5-base-qald9-dbpedia"
 pred_path=pred_files/${model}
 test_dataset="datasets/qald9plus/dbpedia/qald_9_plus_test_dbpedia-new.json"
 knowledge_graph="DBpedia"
@@ -22,18 +22,18 @@ else
   entity_knowledge="--no-entity_knowledge"
 fi
 
-for lang in "${languages[@]}"
-do
-    echo "Generating predicted qald file for ${lang}"
-    python code/pred_and_build_qald.py \
-        --model fine-tuned_models/${model} \
-        -t ${test_dataset} \
-        --knowledge_graph ${knowledge_graph} \
-        -o ${pred_path}/${lang}.json \
-        -l ${lang} \
-        ${linguistic_context} \
-        ${entity_knowledge}
-done
+# for lang in "${languages[@]}"
+# do
+#     echo "Generating predicted qald file for ${lang}"
+#     python code/pred_and_build_qald.py \
+#         --model fine-tuned_models/${model} \
+#         -t ${test_dataset} \
+#         --knowledge_graph ${knowledge_graph} \
+#         -o ${pred_path}/${lang}.json \
+#         -l ${lang} \
+#         ${linguistic_context} \
+#         ${entity_knowledge}
+# done
 
 echo "Start running GERBIL experiment"
 python code/gerbil_eval.py \
