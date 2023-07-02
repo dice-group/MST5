@@ -52,3 +52,7 @@ python3 code/generate_train_csv.py \
 
 `eval.sh`
 
+If you only want to export GERBIL results to a csv file:
+```bash
+python3 code/gerbil_eval.py --experiment_id [experiment_id] --pred_path [path_for_output]
+```
