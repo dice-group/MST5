@@ -1,6 +1,6 @@
 #!/bin/bash
 
-model="exp11-fine-tune"
+model="exp12-fine-tune"
 pred_path=pred_files/${model}
 test_dataset="datasets/qald9plus/dbpedia/qald_9_plus_test_dbpedia-new.json"
 knowledge_graph="DBpedia"
