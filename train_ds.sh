@@ -1,9 +1,9 @@
 #!/bin/bash
 
-run_name="mt5-xl-qald-9-plus-dbpedia"
-model_name="fine-tuned_models/LC-QuAD-dbpedia"
+run_name="exp8-lc"
+model_name="fine-tuned_models/lcquad-ling-entity"
 output_dir="fine-tuned_models/${run_name}"
-train_file="datasets/qald9plus/dbpedia/qald_9_plus-train_dbpedia.csv"
+train_file="datasets/qald9plus/wikidata/qald_9_plus_train_wikidata.csv"
 
 deepspeed --include=localhost:0 --master_port 60000 code/train_new.py \
     --deepspeed deepspeed/ds_config_zero3.json \
