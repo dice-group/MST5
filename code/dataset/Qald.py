@@ -81,7 +81,10 @@ class Qald_entry(Entry):
     def build_questions(self, questions: list[dict]) -> dict:
         entry_questions = {}
         for q in questions:
-            entry_questions[q["language"]] = Question(q["string"], Language[q["language"]])
+            try:
+                entry_questions[q["language"]] = Question(q["string"], Language[q["language"]])
+            except:
+                pass
         return entry_questions
 
 
