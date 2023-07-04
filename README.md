@@ -6,13 +6,19 @@ Mengshi Ma's master's thesis
 
 lcquad1:
 ```bash
-python3 code/generate_train_csv.py -i datasets/lcquad1/train-data.json -o datasets/lcquad1/train.json -t lcquad1 -l all --linguistic_context True --entity_knowledge True
+python3 code/generate_train_csv.py \
+-i datasets/lcquad1/train-data.json \
+-o datasets/lcquad1/train.json \
+-t lcquad1 \
+-l all \
+--linguistic_context \
+--entity_knowledge 
 ```
 
 lcquad2:
 ```bash
-python3 code/generate_train_csv.py 
--i datasets/lcquad2/train.json \ 
+python3 code/generate_train_csv.py \
+-i datasets/lcquad2/train.json \
 -o datasets/lcquad2/train.csv \
 -t lcquad2 \
 -l all \
@@ -38,7 +44,7 @@ python3 code/generate_train_csv.py \
 -i datasets/qald9plus/wikidata/qald_9_plus_train_wikidata.json \
 -o datasets/qald9plus/wikidata/qald_9_plus_train_wikidata.csv \
 -t qald \
--kg Wikidata \ 
+-kg Wikidata \
 -l all \
 --linguistic_context \
 --entity_knowledge
