@@ -99,7 +99,7 @@ class Test_Question(unittest.TestCase):
         self.assertEqual(en_uri, "dbr_Harry_Potter")
 
     def test_pad_question_string(self):
-        question_string: str = self.question.pad_to_length()
+        question_string: str = self.question.pad_to_length(self.question.question_string)
         self.assertTrue("<pad>" in question_string)
         self.assertTrue(len(question_string.split(" ")), 64)
 
