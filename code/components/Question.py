@@ -12,9 +12,21 @@ class Question:
 
     def get_question_string_with_lingtuistic_context(self):
         _, pos, dep, depth_list = self.get_linguistic_context()
+        question_string = self.get_question_string_padded_to_64()
         return self.question_string + " <pad> " + " ".join(pos) \
                     + " <pad> " + " ".join(dep) \
                     + " <pad> " + " ".join(map(str, depth_list))
+    
+    def pad_to_64(self, string: str=None):
+        if not string:
+            string = self.question_string
+        tokens = string.split()
+        padded_tokens = tokens[:64] + ["<pad>"] * max(0, 64 - len(tokens))
+        padded_question = " ".join(padded_tokens)
+        return padded_question
+
+    
+        
 
     def get_linguistic_context(self):
         nlp = Language.get_spacy_nlp(self.language)
