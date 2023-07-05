@@ -1,9 +1,9 @@
 #!/bin/bash
 
-run_name="exp8-lc"
-model_name="fine-tuned_models/lcquad-ling-entity"
-output_dir="fine-tuned_models/${run_name}"
-train_file="datasets/qald9plus/wikidata/qald_9_plus_train_wikidata.csv"
+run_name="lcquad-lc-ek-pad"
+model_name="google/mt5-xl"
+output_dir="pre-trained_models/${run_name}"
+train_file="datasets/lcquad2/train.csv"
 
 deepspeed --include=localhost:0 --master_port 60000 code/train_new.py \
     --deepspeed deepspeed/ds_config_zero3.json \
@@ -14,7 +14,7 @@ deepspeed --include=localhost:0 --master_port 60000 code/train_new.py \
     --num_train_epochs 15 \
     --per_device_train_batch_size=16 \
     --overwrite_output_dir \
-    --save_steps 600 \
+    --save_steps 4000 \
     --save_total_limit 2 \
     --report_to wandb \
     --run_name ${run_name}\
