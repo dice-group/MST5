@@ -12,7 +12,7 @@ class Question:
 
     def get_question_string_with_lingtuistic_context(self):
         _, pos, dep, dep_depth = self.get_linguistic_context()
-        padded_question_string = self.pad_to_length(length=64)
+        padded_question_string = self.pad_to_length(self.question_string, length=64)
         padded_pos_tags = self.pad_to_length(" ".join(pos), length=64)
         padded_dependency_relations = self.pad_to_length(" ".join(dep), length=64)
         padded_dependency_depth = self.pad_to_length(" ".join(map(str, dep_depth)), length=64)
@@ -48,17 +48,17 @@ class Question:
         return depth_list
     
     def pad_to_length(self, string: str=None, length:int=64):
-        if not string:
-            string = self.question_string
         tokens = string.split()
         padded_tokens = tokens[:length] + ["<pad>"] * max(0, length - len(tokens))
         padded_question = " ".join(padded_tokens)
         return padded_question
 
 
-    def add_entity_knowledge(self, question_string, entity_knowledge):
-
-        return question_string + " <pad> " + " ".join(entity_knowledge)
+    def add_entity_knowledge(self, question_string:str=None, entity_knowledge=[]):
+        if not question_string:
+            question_string = self.question_string
+        padded_entity_knowledge = self.pad_to_length(" ".join(entity_knowledge), length=10)
+        return f"{question_string} {padded_entity_knowledge}"
     
 
     def recognize_entities(self, ner, el):
