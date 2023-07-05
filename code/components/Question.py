@@ -11,11 +11,41 @@ class Question:
 
 
     def get_question_string_with_lingtuistic_context(self):
-        _, pos, dep, depth_list = self.get_linguistic_context()
-        question_string = self.get_question_string_padded_to_64()
-        return self.question_string + " <pad> " + " ".join(pos) \
-                    + " <pad> " + " ".join(dep) \
-                    + " <pad> " + " ".join(map(str, depth_list))
+        _, pos, dep, dep_depth = self.get_linguistic_context()
+        padded_question_string = self.pad_to_64()
+        padded_pos_tags = self.pad_to_64(" ".join(pos))
+        padded_dependency_relations = self.pad_to_64(" ".join(dep))
+        padded_dependency_depth = self.pad_to_64(" ".join(map(str, dep_depth)))
+        return f"{padded_question_string} {padded_pos_tags} {padded_dependency_relations} {padded_dependency_depth}"
+    
+    def get_linguistic_context(self):
+        nlp = Language.get_spacy_nlp(self.language)
+        doc = self.get_doc(self.question_string, nlp)
+        pos = self.get_pos_tags(doc)
+        dep = self.get_dependency_relation(doc)
+        root = self.get_root_node(doc, dep)
+        depth_list = self.get_dependency_relation_depth(root, [-1] * len(doc))
+        return doc, pos, dep, depth_list
+
+    def get_doc(self, text, nlp):
+        return nlp(text)
+
+    def get_pos_tags(self, doc):
+        return [token.pos_ for token in doc]
+
+    def get_dependency_relation(self, doc):
+        return [token.dep_ for token in doc]
+
+    def get_root_node(self, doc, dep):
+        return doc[dep.index("ROOT")]
+
+    def get_dependency_relation_depth(self, root, depth_list, depth=1):
+        depth_list[root.i] = depth
+        if len(list(root.children)) == 0:
+            return depth_list
+        for child in root.children:
+            depth_list = self.get_dependency_relation_depth(child, depth_list, depth + 1)
+        return depth_list
     
     def pad_to_64(self, string: str=None):
         if not string:
@@ -25,40 +55,9 @@ class Question:
         padded_question = " ".join(padded_tokens)
         return padded_question
 
-    
-        
-
-    def get_linguistic_context(self):
-        nlp = Language.get_spacy_nlp(self.language)
-        doc = self.get_doc(self.question_string, nlp)
-        pos = self.get_pos(doc)
-        dep = self.get_dep(doc)
-        root = self.get_root_node(doc, dep)
-        depth_list = self.get_dep_depth(root, [-1] * len(doc))
-        return doc, pos, dep, depth_list
-
-    def get_doc(self, text, nlp):
-        return nlp(text)
-
-    def get_pos(self, doc):
-        return [token.pos_ for token in doc]
-
-    def get_dep(self, doc):
-        return [token.dep_ for token in doc]
-
-    def get_root_node(self, doc, dep):
-        return doc[dep.index("ROOT")]
-
-    def get_dep_depth(self, root, depth_list, depth=1):
-        depth_list[root.i] = depth
-        if len(list(root.children)) == 0:
-            return depth_list
-        for child in root.children:
-            depth_list = self.get_dep_depth(child, depth_list, depth + 1)
-        return depth_list
-
 
     def add_entity_knowledge(self, question_string, entity_knowledge):
+        
         return question_string + " <pad> " + " ".join(entity_knowledge)
     
 
