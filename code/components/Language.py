@@ -53,6 +53,11 @@ class Language(Enum):
             raise ValueError(f"No spacy nlp for {language}")
         
     def get_supported_ner(language):
+        flair_ner = [
+            Language.en,
+            Language.de,
+            Language.es
+        ]
         spacy_ner = [
             Language.en, 
             Language.de,
@@ -68,9 +73,10 @@ class Language(Enum):
             Language.ru,
             Language.zh
         ]
-        if language in spacy_ner:
-            return "spacy_ner"
-        elif language in davlan_ner:
-            return "davlan_ner"
-        else:
-            return "no_ner"
+        ner_options = {
+            'flair_ner': flair_ner,
+            'spacy_ner': spacy_ner,
+            'davlan_ner': davlan_ner
+        }
+
+        return next((option for option, ner in ner_options.items() if language in ner), 'no_ner')
