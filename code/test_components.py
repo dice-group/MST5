@@ -129,6 +129,13 @@ class Test_Query(unittest.TestCase):
         answer = wikidata_query.get_answer()
         self.assertTrue(answer["results"]["bindings"])
 
+    def test_get_sameAs_uri(self):
+        ask_sameAs_sparql = "SELECT DISTINCT ?uri WHERE { ?uri owl:sameAs <http://fr.dbpedia.org/resource/Donald_Trump> .}"
+        query = Query(ask_sameAs_sparql, Knowledge_graph.DBpedia)
+        en_uri = query.get_en_uri()
+        self.assertEqual("http://dbpedia.org/resource/Donald_Trump", en_uri)
+
+
 
 if __name__ == '__main__':
     unittest.main()
