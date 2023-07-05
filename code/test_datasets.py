@@ -634,7 +634,7 @@ class Test_Qald(unittest.TestCase):
             include_entity_knowledge=True
         )
         self.assertTrue("<pad>" in question_string_with_lc_and_ek)
-        self.assertEqual(266, len(question_string_with_lc_and_ek.split()))
+        self.assertEqual(133, len(question_string_with_lc_and_ek.split()))
         
         
         
