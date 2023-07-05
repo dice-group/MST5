@@ -99,9 +99,15 @@ class Test_Question(unittest.TestCase):
         self.assertEqual(en_uri, "dbr_Harry_Potter")
 
     def test_pad_question_string(self):
-        question_string: str = self.question.pad_to_64("Ist Hawaii der Geburtsort von Trump?")
+        question_string: str = self.question.pad_to_64()
         self.assertTrue("<pad>" in question_string)
         self.assertTrue(len(question_string.split(" ")), 64)
+
+    def test_pad_pos(self):
+        pos_tags = "PRON AUX DET ADJ NOUN ADP NOUN ADP PROPN PROPN PROPN"
+        padded_pos_tags = self.question.pad_to_64(pos_tags)
+        self.assertTrue("<pad>" in padded_pos_tags)
+        self.assertTrue(len(padded_pos_tags.split(" ")), 64)
 
 
 
