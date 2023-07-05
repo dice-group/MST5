@@ -133,3 +133,7 @@ class Query:
             pattern = r'\bwd_\w+\b'
         entities = re.findall(pattern, self.preprocess())
         return entities
+    
+    def get_en_uri(self):
+        response = self.ask_dbpedia()
+        return response["results"]["bindings"][0]["uri"]["value"]
