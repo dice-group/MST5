@@ -98,6 +98,12 @@ class Test_Question(unittest.TestCase):
         en_uri = self.question.process_dbpedia_uri(uri)
         self.assertEqual(en_uri, "dbr_Harry_Potter")
 
+    def test_pad_question_string(self):
+        question_string: str = self.question.get_question_string_padded_to_64()
+        self.assertTrue("<pad>" in question_string)
+        self.assertTrue(len(question_string.split(" ")), 64)
+
+
 
 
 
