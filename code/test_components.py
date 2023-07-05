@@ -99,7 +99,7 @@ class Test_Question(unittest.TestCase):
         self.assertEqual(en_uri, "dbr_Harry_Potter")
 
     def test_pad_question_string(self):
-        question_string: str = self.question.get_question_string_padded_to_64()
+        question_string: str = self.question.pad_to_64("Ist Hawaii der Geburtsort von Trump?")
         self.assertTrue("<pad>" in question_string)
         self.assertTrue(len(question_string.split(" ")), 64)
 
