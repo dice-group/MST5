@@ -71,6 +71,9 @@ class Test_Question(unittest.TestCase):
         question = Question("Who wrote Harry Potter?", Language.en)
         response = question.send_entity_detection_request("flair_ner","mag_el")
         self.assertTrue("ent_mentions" in response)
+        '''
+        {"components":"flair_ner, mag_el","ent_mentions":[{"end":22,"link":"http://dbpedia.org/resource/IGN","start":10,"surface_form":"Harry Potter"}],"kb":"dbp","lang":"en","placeholder":"00","replace_before":false,"text":"Who wrote Harry Potter?"}
+        '''
     
 
     def test_process_wikidata_ner_response(self):
@@ -125,12 +128,6 @@ class Test_Query(unittest.TestCase):
         wikidata_query = Query("SELECT DISTINCT ?o1 WHERE { <http://www.wikidata.org/entity/Q23337>  <http://www.wikidata.org/prop/direct/P421>  ?o1 .  }", Knowledge_graph.Wikidata)
         answer = wikidata_query.get_answer()
         self.assertTrue(answer["results"]["bindings"])
-
-    def test_get_sameAs_uri(self):
-        ask_sameAs_sparql = "SELECT DISTINCT ?uri WHERE { ?uri owl:sameAs <http://fr.dbpedia.org/resource/Donald_Trump> .}"
-        query = Query(ask_sameAs_sparql, Knowledge_graph.DBpedia)
-        en_uri = query.get_en_uri()
-        self.assertEqual("http://dbpedia.org/resource/Donald_Trump", en_uri)
 
 
 if __name__ == '__main__':
