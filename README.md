@@ -8,7 +8,7 @@ lcquad1:
 ```bash
 python3 code/generate_train_csv.py \
 -i datasets/lcquad1/train-data.json \
--o datasets/lcquad1/train.json \
+-o datasets/lcquad1/train-data.csv \
 -t lcquad1 \
 -l all \
 --linguistic_context \
