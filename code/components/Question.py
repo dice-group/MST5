@@ -100,6 +100,11 @@ class Question:
                     pass
         return entities
     
+    def convert_ner_response_to_dict(self, ner_response) -> dict:
+        ner_response = ner_response.replace("false", '''"False"''')
+        ner_response = ner_response.replace("true", '''"True"''')
+        return json.loads(ner_response)
+    
     def process_dbpedia_uri(self, uri:str):
         if self.is_uri_not_in_en(uri):
             ask_sameAs_sparql = f"SELECT DISTINCT ?uri WHERE {{ ?uri owl:sameAs <{uri}> .}}"
@@ -112,12 +117,6 @@ class Question:
         return 'fr' in uri or 'de' in uri
 
 
-    
-
-    def convert_ner_response_to_dict(self, ner_response) -> dict:
-        ner_response = ner_response.replace("false", '''"False"''')
-        ner_response = ner_response.replace("true", '''"True"''')
-        return json.loads(ner_response)
 
 
 
