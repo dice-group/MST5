@@ -1,3 +1,5 @@
+from components.Knowledge_graph import Knowledge_graph
+from components.Query import Query
 from components.Language import Language
 import requests
 import json
@@ -99,10 +101,15 @@ class Question:
         return entities
     
     def process_dbpedia_uri(self, uri:str):
+        if self.is_uri_not_in_en(uri):
+            ask_sameAs_sparql = f"SELECT DISTINCT ?uri WHERE {{ ?uri owl:sameAs <{uri}> .}}"
+            query = Query(ask_sameAs_sparql, Knowledge_graph.DBpedia)
+            uri = query.get_en_uri()
         uri = uri.replace("http://dbpedia.org/resource/", "dbr_")
-        uri = uri.replace("http://fr.dbpedia.org/resource/", "dbr_")
-        uri = uri.replace("http://de.dbpedia.org/resource/", "dbr_")
         return uri
+
+    def is_uri_not_in_en(self, uri):
+        return 'fr' in uri or 'de' in uri
 
 
     

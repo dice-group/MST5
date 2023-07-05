@@ -93,6 +93,11 @@ class Test_Question(unittest.TestCase):
         entities = self.question.process_dbpedia_ner_response(response)
         self.assertEqual(entities["Harry Potter"], "dbr_Harry_Potter")
 
+    def test_process_dbpedia_uri(self):
+        uri = "http://fr.dbpedia.org/resource/Harry_Potter"
+        en_uri = self.question.process_dbpedia_uri(uri)
+        self.assertEqual(en_uri, "dbr_Harry_Potter")
+
 
 
 
