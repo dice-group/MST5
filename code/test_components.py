@@ -99,7 +99,7 @@ class Test_Question(unittest.TestCase):
         self.assertEqual(en_uri, "dbr_Harry_Potter")
 
     def test_pad_question_string(self):
-        question_string: str = self.question.pad_to_64(length=64)
+        question_string: str = self.question.pad_to_length()
         self.assertTrue("<pad>" in question_string)
         self.assertTrue(len(question_string.split(" ")), 64)
 
@@ -113,9 +113,6 @@ class Test_Question(unittest.TestCase):
         question_string_with_lc = self.question.get_question_string_with_lingtuistic_context()
         self.assertEqual(len(question_string_with_lc.split(" ")), 256)
         self.assertTrue("ROOT" in question_string_with_lc)
-        print(question_string_with_lc)
-
-
 
 
 class Test_Query(unittest.TestCase):
