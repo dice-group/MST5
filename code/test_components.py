@@ -11,7 +11,7 @@ class Test_Language(unittest.TestCase):
 
     def test_get_supported_ner_for_en(self):
         ner = Language.get_supported_ner(Language.en)
-        self.assertEqual(ner, "spacy_ner")
+        self.assertEqual(ner, "flair_ner")
 
     def test_get_babelspace_ner_for_zh(self):
         ner = Language.get_supported_ner(Language.zh)
@@ -104,7 +104,6 @@ class Test_Query(unittest.TestCase):
         processed_sparql = query.delete_sparql_prefix(self.query.sparql)
         self.assertFalse("PREFIX" in processed_sparql)
         self.assertFalse("http://www.wikidata.org/entity/" in processed_sparql)
-
     
     def test_preprocess_sparql(self):
         preprocessed_query = self.query.preprocess()
@@ -122,6 +121,13 @@ class Test_Query(unittest.TestCase):
         wikidata_query = Query("SELECT DISTINCT ?o1 WHERE { <http://www.wikidata.org/entity/Q23337>  <http://www.wikidata.org/prop/direct/P421>  ?o1 .  }", Knowledge_graph.Wikidata)
         answer = wikidata_query.get_answer()
         self.assertTrue(answer["results"]["bindings"])
+
+    def test_get_sameAs_uri(self):
+        ask_sameAs_sparql = "SELECT DISTINCT ?uri WHERE { ?uri owl:sameAs <http://fr.dbpedia.org/resource/Donald_Trump> .}"
+        query = Query(ask_sameAs_sparql, Knowledge_graph.DBpedia)
+        en_uri = query.get_en_uri()
+        self.assertEqual("http://dbpedia.org/resource/Donald_Trump", en_uri)
+
 
 if __name__ == '__main__':
     unittest.main()
