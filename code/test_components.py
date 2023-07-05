@@ -58,7 +58,6 @@ class Test_Question(unittest.TestCase):
     def test_detect_entity_with_mag_el_for_dbpedia_de2(self):
         question = Question("Which German cities have more than 250000 inhabitants?", Language.de)
         response = question.send_entity_detection_request("babelscape_ner","mag_el")
-        print(response)
         self.assertTrue("ent_mentions" in response)
         self.assertTrue("http://de.dbpedia.org/resource" in response)
     
@@ -67,6 +66,11 @@ class Test_Question(unittest.TestCase):
         response = question.send_entity_detection_request("babelscape_ner","mag_el")
         self.assertTrue("ent_mentions" in response)
         self.assertTrue("http://fr.dbpedia.org/resource" in response)
+
+    def test_detect_entity_with_flair_and_mag_for_dbpedia(self):
+        question = Question("Who wrote Harry Potter?", Language.en)
+        response = question.send_entity_detection_request("flair_ner","mag_el")
+        self.assertTrue("ent_mentions" in response)
     
 
     def test_process_wikidata_ner_response(self):
