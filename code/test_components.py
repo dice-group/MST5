@@ -114,6 +114,10 @@ class Test_Question(unittest.TestCase):
         self.assertEqual(len(question_string_with_lc.split(" ")), 256)
         self.assertTrue("ROOT" in question_string_with_lc)
 
+    def test_pad_entity_knowledge(self):
+        question_string_with_entity_knowledge = self.question.add_entity_knowledge(entity_knowledge=["dbr_Donald_Trump"])
+        self.assertEqual(len(question_string_with_entity_knowledge.split()), 16)
+
 
 class Test_Query(unittest.TestCase):
     def setUp(self) -> None:
