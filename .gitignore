@@ -3,6 +3,7 @@ pre_train_lcqald/*
 pred_files/*
 lcquad_tokenizer/*
 fine-tuned_models/*
+pre-trained_models/*
 result_qald/*
 datasets/[^\d]
 datasets/no_en/*
