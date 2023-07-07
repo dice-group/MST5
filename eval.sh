@@ -1,13 +1,13 @@
 #!/bin/bash
 
-model="exp13-mt5xl-lcquad-lc-ek-pad-dbp"
+model="exp13-mt5xl-lcquad-lc-ptek-pad-dbp"
 pred_path=pred_files/${model}
 test_dataset="datasets/qald9plus/dbpedia/qald_9_plus_test_dbpedia-new.json"
 knowledge_graph="DBpedia"
 languages=("en" "de" "ru" "fr" "lt" "ba" "be" "uk" "zh" "ja" "es")
 
 include_linguistic_context=true
-include_entity_knowledge=true
+include_entity_knowledge=false
 
 if [ "$include_linguistic_context" = true ]; then
   linguistic_context="--linguistic_context"
