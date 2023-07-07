@@ -1,6 +1,6 @@
 #!/bin/bash
 
-run_name="exp13-mt5xl-lcquad-lc-ek-pad"
+run_name="exp13-mt5xl-lcquad-lc-ptek-pad-dbp"
 model_name="pre-trained_models/lcquad-lc-ek-pad-dbp"
 output_dir="fine-tuned_models/${run_name}"
 train_file="datasets/qald9plus/dbpedia/qald_9_plus-train_dbpedia.csv"
