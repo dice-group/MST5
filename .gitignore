@@ -16,3 +16,4 @@ datasets/*.csv
 .vscode/*
 datasets/lcquad/*.csv
 **/__pycache__/*
+pre-trained_models/*
