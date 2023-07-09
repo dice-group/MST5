@@ -98,7 +98,25 @@ class Test_Question(unittest.TestCase):
         en_uri = self.question.process_dbpedia_uri(uri)
         self.assertEqual(en_uri, "dbr_Harry_Potter")
 
+    def test_pad_question_string(self):
+        question_string: str = self.question.pad_to_length(self.question.question_string)
+        self.assertTrue("<pad>" in question_string)
+        self.assertTrue(len(question_string.split(" ")), 32)
 
+    def test_pad_pos(self):
+        pos_tags = "PRON AUX DET ADJ NOUN ADP NOUN ADP PROPN PROPN PROPN"
+        padded_pos_tags = self.question.pad_to_length(pos_tags, 32)
+        self.assertTrue("<pad>" in padded_pos_tags)
+        self.assertTrue(len(padded_pos_tags.split(" ")), 32)
+
+    def test_length_after_padding(self):
+        question_string_with_lc = self.question.get_question_string_with_lingtuistic_context()
+        self.assertEqual(len(question_string_with_lc.split(" ")), 128)
+        self.assertTrue("ROOT" in question_string_with_lc)
+
+    def test_pad_entity_knowledge(self):
+        question_string_with_entity_knowledge = self.question.add_entity_knowledge(entity_knowledge=["dbr_Donald_Trump"])
+        self.assertEqual(len(question_string_with_entity_knowledge.split()), 11)
 
 
 class Test_Query(unittest.TestCase):

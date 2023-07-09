@@ -336,9 +336,10 @@ class Test_Qald_entry(unittest.TestCase):
         self.assertEqual(self.qald_entry.query.sparql, self.sparql)
 
 
+
 class Test_Qald(unittest.TestCase):
     def setUp(self) -> None:
-        self.sample_qald = {
+        self.sample_qald_json = {
             "questions": [
                 {
                     "id": "99",
@@ -573,7 +574,7 @@ class Test_Qald(unittest.TestCase):
                 }
             ]
         }
-        self.qald = Qald(self.sample_qald, "Wikidata")
+        self.qald = Qald(self.sample_qald_json, "Wikidata")
         return super().setUp()
 
     def test_add_entry(self):
@@ -594,7 +595,7 @@ class Test_Qald(unittest.TestCase):
     def test_build_qald_list(self):
         empty_qald = Qald({}, "DBpedia")
         qald_list = empty_qald.build_qald_list(
-            self.sample_qald)
+            self.sample_qald_json)
 
         self.assertEqual(qald_list[0].id, "99")
         self.assertEqual(qald_list[1].id, "98")
@@ -622,6 +623,21 @@ class Test_Qald(unittest.TestCase):
         self.assertTrue("ROOT" in train_csv[1][0])
         self.assertTrue("wd_" in train_csv[1][1])
         self.assertFalse(":" in train_csv[1][1])
+
+    def test_get_question_string_with_linguistic_context_and_entity_knowledge(self):
+        entry: Qald_entry = self.qald.entries[0]
+        question: Question = entry.questions["en"]
+        question_string_with_lc_and_ek = self.qald.get_question_string(
+            entry, 
+            question,
+            include_linguistic_context=True,
+            include_entity_knowledge=True
+        )
+        self.assertTrue("<pad>" in question_string_with_lc_and_ek)
+        self.assertEqual(133, len(question_string_with_lc_and_ek.split()))
+        
+        
+        
 
     @unittest.skip
     def test_update_answers(self):

@@ -1,13 +1,13 @@
 #!/bin/bash
 
-model="exp8-lc"
+model="exp13-mt5xl-lcquad-lc-ek-pad-dbp-endefr"
 pred_path=pred_files/${model}
-test_dataset="datasets/qald9plus/wikidata/qald_9_plus_test_wikidata_new.json"
-knowledge_graph="Wikidata"
-languages=("en" "de" "ru" "fr" "lt" "ba" "be" "uk" "zh" "ja" "es")
+test_dataset="datasets/qald9plus/dbpedia/qald_9_plus_test_dbpedia-new.json"
+knowledge_graph="DBpedia"
+languages=("en" "de" "fr")
 
 include_linguistic_context=true
-include_entity_knowledge=false
+include_entity_knowledge=true
 
 if [ "$include_linguistic_context" = true ]; then
   linguistic_context="--linguistic_context"
