@@ -19,18 +19,30 @@ def main():
                         help="name of output file", required=True)
     parser.add_argument("-l", "--language", type=str,
                         help="required language of question", required=True)
-    parser.add_argument('--linguistic_context', action=argparse.BooleanOptionalAction,
+    parser.add_argument("--linguistic_context", action=argparse.BooleanOptionalAction,
                         help='With or without linguistic context in question string')
-    parser.add_argument('--entity_knowledge', action=argparse.BooleanOptionalAction,
+    parser.add_argument("--entity_knowledge", action=argparse.BooleanOptionalAction,
                         help='With or without entity knowledge in question string')
+    parser.add_argument("--question_padding_length", type=int, 
+                        help="length of question string and every linguistic context after padding. \
+                        If not provided, no padding will be added.",
+                        default=0)
+    parser.add_argument("--entity_padding_length", type=int,
+                        help="length of entity knowledge after padding. \
+                        If not provided, no padding will be added.",
+                        default=0)
 
     args = parser.parse_args()
 
     test_file = read_json(args.test)
     test_qald = Qald(test_file, args.knowledge_graph)
-    question_list = test_qald.get_id_question_list(args.language,
-                                                   args.linguistic_context,
-                                                   args.entity_knowledge)
+    question_list = test_qald.get_id_question_list(
+        args.language,
+        args.linguistic_context,
+        args.entity_knowledge,
+        args.question_padding_length,
+        args.entity_padding_length
+        )
     summarizer = Summarizer(args.model)
     pred_qald = Qald({}, args.knowledge_graph)
     for id, question_string in tqdm(question_list):

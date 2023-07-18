@@ -10,14 +10,25 @@ class Question:
         self.language = language
 
 
-    def get_question_string_with_lingtuistic_context(self):
+    def get_question_string_with_lingtuistic_context(self, padded_length):
         _, pos, dep, dep_depth = self.get_linguistic_context()
-        padded_length = 32
-        padded_question_string = self.pad_to_length(self.question_string, length=padded_length)
-        padded_pos_tags = self.pad_to_length(" ".join(pos), length=padded_length)
-        padded_dependency_relations = self.pad_to_length(" ".join(dep), length=padded_length)
-        padded_dependency_depth = self.pad_to_length(" ".join(map(str, dep_depth)), length=padded_length)
-        return f"{padded_question_string} {padded_pos_tags} {padded_dependency_relations} {padded_dependency_depth}"
+        question_string = self.question_string
+        pos_tags = " ".join(pos)
+        dependency_relations = " ".join(dep)
+        dependency_depth = " ".join(map(str, dep_depth))
+
+        if padded_length > 0:
+            question_string, pos_tags, dependency_relations, dependency_depth = self.add_padding_to_linguistic_context(padded_length, pos_tags, dependency_relations, dependency_depth)
+        
+        return f"{question_string} {pos_tags} {dependency_relations} {dependency_depth}"
+
+    def add_padding_to_linguistic_context(self, padded_length, pos_tags, dependency_relations, dependency_depth):
+        question_string = self.pad_to_length(self.question_string, length=padded_length)
+        pos_tags = self.pad_to_length(pos_tags, length=padded_length)
+        dependency_relations = self.pad_to_length(dependency_relations, length=padded_length)
+        dependency_depth = self.pad_to_length(dependency_depth, length=padded_length)
+        return question_string, pos_tags, dependency_relations, dependency_depth
+
     
     def get_linguistic_context(self):
         nlp = Language.get_spacy_nlp(self.language)
@@ -48,19 +59,20 @@ class Question:
             depth_list = self.get_dependency_relation_depth(child, depth_list, depth + 1)
         return depth_list
     
-    def pad_to_length(self, string: str=None, length:int=32):
+    def pad_to_length(self, string: str=None, length:int=0):
         tokens = string.split()
         padded_tokens = tokens[:length] + ["<pad>"] * max(0, length - len(tokens))
         padded_question = " ".join(padded_tokens)
         return padded_question
 
 
-    def add_entity_knowledge(self, question_string:str=None, entity_knowledge=[]):
+    def add_entity_knowledge(self, question_string:str=None, entity_knowledge=[], padded_length=0):
         if not question_string:
             question_string = self.question_string
-        padded_length = 5
-        padded_entity_knowledge = self.pad_to_length(" ".join(entity_knowledge), padded_length)
-        return f"{question_string} {padded_entity_knowledge}"
+        entity_knowledge = " ".join(entity_knowledge)
+        if padded_length > 0:
+            entity_knowledge = self.pad_to_length(entity_knowledge, padded_length)
+        return f"{question_string} {entity_knowledge}"
     
 
     def recognize_entities(self, ner, el):

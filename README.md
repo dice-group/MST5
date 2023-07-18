@@ -12,7 +12,9 @@ python3 code/generate_train_csv.py \
 -t lcquad1 \
 -l all \
 --linguistic_context \
---entity_knowledge 
+--entity_knowledge \
+--question_padding_length 32 \
+--entity_padding_length 5
 ```
 
 lcquad2:
@@ -23,7 +25,9 @@ python3 code/generate_train_csv.py \
 -t lcquad2 \
 -l all \
 --linguistic_context \
---entity_knowledge
+--entity_knowledge \
+--question_padding_length 32 \
+--entity_padding_length 5
 ```
 
 qald dbpedia:
@@ -35,7 +39,9 @@ python3 code/generate_train_csv.py \
 -kg DBpedia \
 -l all \
 --linguistic_context \
---entity_knowledge
+--entity_knowledge \
+--question_padding_length 32 \
+--entity_padding_length 5
 ```
 
 qald wikidata:
@@ -47,7 +53,9 @@ python3 code/generate_train_csv.py \
 -kg Wikidata \
 -l all \
 --linguistic_context \
---entity_knowledge
+--entity_knowledge \
+--question_padding_length 32 \
+--entity_padding_length 5
 ```
 
 ## Train on a csv dataset

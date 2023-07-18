@@ -28,11 +28,30 @@ class Qald(Dataset):
         self.entries.append(Qald_entry(id, question, sparql, self.knowledge_graph, answers))
 
 
-    def export_train_csv(self, output_file, languages, include_linguistic_context=False, include_entity_knowledge=False) -> None:
-        csv_dataset = self.to_train_csv(languages, include_linguistic_context, include_entity_knowledge)
+    def export_train_csv(
+            self, 
+            output_file, 
+            languages, 
+            include_linguistic_context=False, 
+            include_entity_knowledge=False,
+            question_padding_length=0,
+            entity_padding_length=0) -> None:
+        csv_dataset = self.to_train_csv(
+            languages, 
+            include_linguistic_context, 
+            include_entity_knowledge,
+            question_padding_length,
+            entity_padding_length
+            )
         export_csv(output_file, csv_dataset)
 
-    def to_train_csv(self, languages, include_linguistic_context, include_entity_knowledge):
+    def to_train_csv(
+            self, 
+            languages, 
+            include_linguistic_context, 
+            include_entity_knowledge,
+            question_padding_length,
+            entity_padding_length):
         csv_dataset = [["question", "query"]]
         entry: Qald_entry
         for entry in self.entries:
@@ -40,7 +59,14 @@ class Qald(Dataset):
             for language in languages:
                 if language in entry.questions:
                     question: Question = entry.questions[language]
-                    question_string = super().get_question_string(entry, question, include_linguistic_context, include_entity_knowledge)
+                    question_string = super().get_question_string(
+                        entry, 
+                        question, 
+                        include_linguistic_context, 
+                        include_entity_knowledge,
+                        pred=False,
+                        question_padding_length=question_padding_length,
+                        entity_padding_length=entity_padding_length)
                     csv_dataset.append([question_string, sparql])
         return csv_dataset
 
@@ -53,13 +79,27 @@ class Qald(Dataset):
         export_json(output, {"questions": qald_entries})
 
 
-    def get_id_question_list(self, language, include_linguistic_context: bool = False, include_entity_knowledge: bool = False) -> list:
+    def get_id_question_list(
+            self, 
+            language, 
+            include_linguistic_context: bool = False, 
+            include_entity_knowledge: bool = False,
+            question_padding_length = 0,
+            entity_padding_length = 0) -> list:
         questions_with_id = []
         entry: Qald_entry
         for entry in self.entries:
             if language in entry.questions:
                 question: Question = entry.questions[language]
-                question_string = super().get_question_string(entry, question, include_linguistic_context, include_entity_knowledge, True)
+                question_string = super().get_question_string(
+                    entry, 
+                    question, 
+                    include_linguistic_context, 
+                    include_entity_knowledge, 
+                    pred=True,
+                    question_padding_length=question_padding_length,
+                    entity_padding_length=entity_padding_length
+                    )
                 questions_with_id.append([entry.id, question_string])
         return questions_with_id
     

@@ -38,13 +38,28 @@ def main():
                         help='With or without linguistic context in question string')
     parser.add_argument('--entity_knowledge', action=argparse.BooleanOptionalAction,
                         help='With or without entity knowledge in question string')
+    parser.add_argument("--question_padding_length", type=int, 
+                        help="length of question string and every linguistic context after padding. \
+                        If not provided, no padding will be added.",
+                        default=0)
+    parser.add_argument("--entity_padding_length", type=int,
+                        help="length of entity knowledge after padding. \
+                        If not provided, no padding will be added.",
+                        default=0)
+    
     args = parser.parse_args()
 
     input_file = read_json(args.input)
     dataset_type = args.type
     if "lcquad" in dataset_type:
         dataset = get_lcquad_dataset(input_file, dataset_type)
-        dataset.export_train_csv(args.output, args.linguistic_context, args.entity_knowledge)
+        dataset.export_train_csv(
+            args.output, 
+            args.linguistic_context, 
+            args.entity_knowledge,
+            args.question_padding_length,
+            args.entity_padding_length
+            )
     if dataset_type == "qald":
         dataset = Qald(input_file, args.knowledge_graph)
         if args.languages[0]=="all":
@@ -57,7 +72,9 @@ def main():
         args.output, 
         languages,
         include_linguistic_context=args.linguistic_context,
-        include_entity_knowledge=args.entity_knowledge
+        include_entity_knowledge=args.entity_knowledge,
+        question_padding_length=args.question_padding_length,
+        entity_padding_length=args.entity_padding_length
     )
 
 

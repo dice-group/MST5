@@ -4,6 +4,8 @@ model="exp13-mt5xl-lcquad-lc-ek-pad-dbp-endefr"
 pred_path=pred_files/${model}
 test_dataset="datasets/qald9plus/dbpedia/qald_9_plus_test_dbpedia-new.json"
 knowledge_graph="DBpedia"
+question_padding_length=32
+entity_padding_length=5
 languages=("en" "de" "ru" "fr" "lt" "ba" "be" "uk" "zh" "ja" "es")
 
 include_linguistic_context=true
@@ -31,7 +33,9 @@ do
         -o ${pred_path}/${lang}.json \
         -l ${lang} \
         ${linguistic_context} \
-        ${entity_knowledge}
+        ${entity_knowledge} \
+        --question_padding_length ${question_padding_length} \
+        --entity_padding_length ${entity_padding_length}
 done
 
 echo "Start running GERBIL experiment"

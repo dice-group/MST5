@@ -611,14 +611,14 @@ class Test_Qald(unittest.TestCase):
         self.assertTrue("wd_" in id_question[1][1])
 
     def test_to_train_csv(self):
-        train_csv = self.qald.to_train_csv(["en", "de"], False, False)
+        train_csv = self.qald.to_train_csv(["en", "de"], False, False, 0, 0)
         self.assertEqual(train_csv[0], ["question", "query"])
         self.assertEqual(
             train_csv[1][0], "What is the time zone of Salt Lake City?")
         self.assertFalse(":" in train_csv[1][1])
 
     def test_to_train_csv_with_ling_and_entity(self):
-        train_csv = self.qald.to_train_csv(["en", "de"], True, True)
+        train_csv = self.qald.to_train_csv(["en", "de"], True, True, 0, 0)
         self.assertEqual(train_csv[0], ["question", "query"])
         self.assertTrue("ROOT" in train_csv[1][0])
         self.assertTrue("wd_" in train_csv[1][1])
@@ -631,7 +631,9 @@ class Test_Qald(unittest.TestCase):
             entry, 
             question,
             include_linguistic_context=True,
-            include_entity_knowledge=True
+            include_entity_knowledge=True,
+            question_padding_length=32,
+            entity_padding_length=5
         )
         self.assertTrue("<pad>" in question_string_with_lc_and_ek)
         self.assertEqual(133, len(question_string_with_lc_and_ek.split()))

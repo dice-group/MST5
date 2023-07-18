@@ -6,6 +6,7 @@ from components.Language import Language
 class LCquad1(Dataset):
     def __init__(self, lcquad1_file):
         self.entries: list[LCquad1_entry] = self.build_lcquad1_list(lcquad1_file)
+        self.knowledge_graph = Knowledge_graph.DBpedia
 
     def build_lcquad1_list(self, lcquad1_file):
         entries = []

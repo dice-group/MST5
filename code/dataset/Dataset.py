@@ -9,24 +9,56 @@ class Dataset:
         self.entries = entries
         self.knowledge_graph = knowledge_graph
 
-    def export_train_csv(self, output_file, include_linguistic_context=False, include_entity_knowledge=False):
-        csv_dataset = self.to_train_csv(include_linguistic_context, include_entity_knowledge)
+    def export_train_csv(
+            self, 
+            output_file, 
+            include_linguistic_context=False, 
+            include_entity_knowledge=False,
+            question_padding_length=0,
+            entity_padding_length=0):
+        print(question_padding_length)
+        csv_dataset = self.to_train_csv(
+            include_linguistic_context, 
+            include_entity_knowledge,
+            question_padding_length,
+            entity_padding_length
+            )
         export_csv(output_file, csv_dataset)
 
-    def to_train_csv(self, include_linguistic_context=False, include_entity_knowledge=False):
+    def to_train_csv(
+            self, 
+            include_linguistic_context=False, 
+            include_entity_knowledge=False,
+            question_padding_length=0,
+            entity_padding_length=0):
         csv = [['question', 'query']]
         entry: Entry
         for entry in self.entries:
             question = entry.question
-            question_string = self.get_question_string(entry, question, include_linguistic_context, include_entity_knowledge)
+            question_string = self.get_question_string(
+                entry, 
+                question, 
+                include_linguistic_context, 
+                include_entity_knowledge,
+                question_padding_length=question_padding_length,
+                entity_padding_length=entity_padding_length)
             sparql = entry.query.preprocess()
+            print(question_string)
             csv.append([question_string, sparql])
         return csv
 
-    def get_question_string(self, entry, question: Question, include_linguistic_context: bool, include_entity_knowledge: bool, pred=False):
+    def get_question_string(
+            self, 
+            entry, 
+            question: Question, 
+            include_linguistic_context: bool, 
+            include_entity_knowledge: bool, 
+            pred=False,
+            question_padding_length=0,
+            entity_padding_length=0):
         question_string = question.question_string
         if include_linguistic_context:
-            question_string = question.get_question_string_with_lingtuistic_context()
+            question_string = question.get_question_string_with_lingtuistic_context(question_padding_length)
         if include_entity_knowledge:
             if pred:
                 if self.is_kg_wikidata():
@@ -36,7 +68,7 @@ class Dataset:
             else:
                 entity_knowledge = entry.query.get_entity_knowledge()
 
-            question_string = question.add_entity_knowledge(question_string, entity_knowledge)
+            question_string = question.add_entity_knowledge(question_string, entity_knowledge, entity_padding_length)
         return question_string
 
     def is_kg_wikidata(self):
