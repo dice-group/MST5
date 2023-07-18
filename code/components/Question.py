@@ -58,7 +58,8 @@ class Question:
     def add_entity_knowledge(self, question_string:str=None, entity_knowledge=[]):
         if not question_string:
             question_string = self.question_string
-        padded_entity_knowledge = self.pad_to_length(" ".join(entity_knowledge), length=5)
+        padded_length = 5
+        padded_entity_knowledge = self.pad_to_length(" ".join(entity_knowledge), padded_length)
         return f"{question_string} {padded_entity_knowledge}"
     
 
