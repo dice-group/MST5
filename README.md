@@ -2,6 +2,12 @@
 
 Mengshi Ma's master's thesis
 
+## Prerequisite
+
+`pip install -r requirements.txt`
+
+<!-- install huggingface from source? -->
+
 ## Generate train data set
 
 lcquad1:
@@ -58,7 +64,18 @@ python3 code/generate_train_csv.py \
 
 ## Train on a csv dataset
 
-`train_ds.sh` or `train.sh`
+During training, wandb is used to track training process. 
+Please first setup wandb following this tutorial: https://docs.wandb.ai/guides/integrations/huggingface
+
+`train_ds.sh` is used to train with DeepSpeed.
+`train.sh` is used to train without DeepSpeed.
+
+
+- run_name: run name that is showed in wandb
+- model_name: name of the base model to be fine-tuned
+- output_dir: the output directory of the fine-tuned model, by default is "fine-tuned_models/${run_name}"
+- train_file: the path of dataset used in training
+
 
 ## Evaluation
 
