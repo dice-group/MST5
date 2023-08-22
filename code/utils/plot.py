@@ -16,7 +16,7 @@ def plot_macro_f1(languages: set, f1_scores: dict, x_distance, figsize):
 
     # Add some text for labels, title and custom x-axis tick labels, etc.
     ax.set_ylabel('F1 Score')
-    ax.set_title('F1 Scores by languages')
+    ax.set_title('Macro F1 Scores by languages')
     ax.set_xticks(x + width*(len(f1_scores)-1)/2, languages)
     ax.legend(loc='upper left', ncols=3)
     plt.show()
