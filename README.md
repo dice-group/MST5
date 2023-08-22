@@ -12,7 +12,6 @@ python3 code/generate_train_csv.py \
 -t lcquad1 \
 -l all \
 --linguistic_context \
---entity_knowledge \
 --question_padding_length 32 \
 --entity_padding_length 5
 ```
@@ -34,12 +33,11 @@ qald dbpedia:
 ```bash
 python3 code/generate_train_csv.py \
 -i datasets/qald9plus/dbpedia/qald_9_plus_train_dbpedia.json \
--o datasets/qald9plus/dbpedia/qald_9_plus-train_dbpedia.csv \
+-o datasets/qald9plus/dbpedia/qald_9_plus_train_dbpedia.csv \
 -t qald \
 -kg DBpedia \
 -l all \
 --linguistic_context \
---entity_knowledge \
 --question_padding_length 32 \
 --entity_padding_length 5
 ```
