@@ -109,6 +109,12 @@ class Test_Question(unittest.TestCase):
         self.assertTrue("<pad>" in padded_pos_tags)
         self.assertTrue(len(padded_pos_tags.split(" ")), 32)
 
+    def test_pad_to_length_should_not_cut(self) -> None:
+        num_of_tokens = len(self.question.question_string.split())
+        padded_question = self.question.pad_to_length(self.question.question_string)
+        num_of_tokens_after_pad = len(padded_question.split())
+        self.assertEqual(num_of_tokens + 1, num_of_tokens_after_pad)
+
     def test_length_after_padding(self):
         question_string_with_lc = self.question.get_question_string_with_lingtuistic_context(32)
         self.assertEqual(len(question_string_with_lc.split(" ")), 128)

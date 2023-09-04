@@ -17,8 +17,7 @@ class Question:
         dependency_relations = " ".join(dep)
         dependency_depth = " ".join(map(str, dep_depth))
 
-        if padded_length > 0:
-            question_string, pos_tags, dependency_relations, dependency_depth = self.add_padding_to_linguistic_context(padded_length, pos_tags, dependency_relations, dependency_depth)
+        question_string, pos_tags, dependency_relations, dependency_depth = self.add_padding_to_linguistic_context(padded_length, pos_tags, dependency_relations, dependency_depth)
         
         return f"{question_string} {pos_tags} {dependency_relations} {dependency_depth}"
 
@@ -61,6 +60,8 @@ class Question:
     
     def pad_to_length(self, string: str=None, length:int=0):
         tokens = string.split()
+        if len(tokens) > length:
+            return string + " <pad>"
         padded_tokens = tokens[:length] + ["<pad>"] * max(0, length - len(tokens))
         padded_question = " ".join(padded_tokens)
         return padded_question
@@ -70,8 +71,7 @@ class Question:
         if not question_string:
             question_string = self.question_string
         entity_knowledge = " ".join(entity_knowledge)
-        if padded_length > 0:
-            entity_knowledge = self.pad_to_length(entity_knowledge, padded_length)
+        entity_knowledge = self.pad_to_length(entity_knowledge, padded_length)
         return f"{question_string} {entity_knowledge}"
     
 
