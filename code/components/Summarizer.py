@@ -5,7 +5,7 @@ class Summarizer:
         self.summarizer = self.init_summarizer(model_path)
 
     def init_summarizer(self, model_path):
-        return pipeline("summarization", model=model_path, max_length=133, device=1)
+        return pipeline("summarization", model=model_path, max_length=133, device=0)
 
     def predict_sparql(self, question_string):
         return self.summarizer(question_string)[0]['summary_text']
