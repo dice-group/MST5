@@ -68,6 +68,7 @@ During training, wandb is used to track training process.
 Please first setup wandb following this tutorial: https://docs.wandb.ai/guides/integrations/huggingface
 
 `train_ds.sh` is used to train with DeepSpeed.
+
 `train.sh` is used to train without DeepSpeed.
 
 
