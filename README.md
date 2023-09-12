@@ -75,17 +75,17 @@ Following is a sample usage of the training scripts:
 
 #### Pretraining on LcQUAD2
 ```bash
-bash train_ds.sh "google/mt5-xl" fine-tuned_models/lcquad2-pretrain datasets/lcquad2/train.csv`
+bash train_ds.sh "google/mt5-xl" fine-tuned_models/lcquad2-pretrain datasets/lcquad2/train.csv
 ```
 #### Finetuning on QALD9Plus (Wikidata)
 ```bash
-`bash train_ds.sh fine-tuned_models/lcquad2-pretrain fine-tuned_models/qald9plus-finetune datasets/qald9plus/wikidata/qald_9_plus_train_wikidata.csv`
+bash train_ds.sh fine-tuned_models/lcquad2-pretrain fine-tuned_models/qald9plus-finetune datasets/qald9plus/wikidata/qald_9_plus_train_wikidata.csv
 ```
 
 ## Evaluation
 
 ```bash
-bash eval.sh`
+bash eval.sh
 ```
 If you only want to export GERBIL results to a csv file:
 ```bash
