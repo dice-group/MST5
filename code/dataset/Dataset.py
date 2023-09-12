@@ -16,7 +16,6 @@ class Dataset:
             include_entity_knowledge=False,
             question_padding_length=0,
             entity_padding_length=0):
-        print(question_padding_length)
         csv_dataset = self.to_train_csv(
             include_linguistic_context, 
             include_entity_knowledge,
@@ -43,7 +42,6 @@ class Dataset:
                 question_padding_length=question_padding_length,
                 entity_padding_length=entity_padding_length)
             sparql = entry.query.preprocess()
-            print(question_string)
             csv.append([question_string, sparql])
         return csv
 
