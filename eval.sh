@@ -1,16 +1,16 @@
 #!/bin/bash
 
-model="exp9-fine-tune"
+model="qald9plus-finetune"
 pred_path=pred_files/${model}
 test_dataset="datasets/qald9plus/wikidata/qald_9_plus_test_wikidata_new.json"
 knowledge_graph="Wikidata"
-question_padding_length=0
-entity_padding_length=0
+question_padding_length=32
+entity_padding_length=5
 languages=("en" "de" "ru" "fr" "lt" "ba" "be" "uk" "zh" "ja" "es")
 
 
 include_linguistic_context=true
-include_entity_knowledge=false
+include_entity_knowledge=true
 
 if [ "$include_linguistic_context" = true ]; then
   linguistic_context="--linguistic_context"

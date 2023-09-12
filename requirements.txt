@@ -11,3 +11,4 @@ wandb
 SPARQLWrapper
 deepspeed==0.9.3
 transformers==4.31.0
+lxml==4.9.3
