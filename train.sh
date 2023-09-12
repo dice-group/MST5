@@ -1,9 +1,19 @@
 #!/bin/bash
 
-run_name="mt5-base-qald9-dbpedia"
-model_name="google/mt5-base"
-output_dir="fine-tuned_models/${run_name}"
-train_file="datasets/qald9plus/dbpedia/qald_9_plus-train-dbpedia.csv"
+set -eu
+#model_name="google/mt5-xl"
+#output_dir="fine-tuned_models/${run_name}"
+#train_file="datasets/lcquad2/train.csv"
+
+if [ $# -ne 3 ]
+  then
+    echo "Please provide the relevant number of arguments!"
+    return -1
+fi
+
+model_name=$1
+output_dir=$2
+train_file=$3
 
 CUDA_VISIBLE_DEVICES=1 python train.py \
     --model_name_or_path "google/mt5-base" \
@@ -14,7 +24,5 @@ CUDA_VISIBLE_DEVICES=1 python train.py \
     --per_device_train_batch_size=8 \
     --overwrite_output_dir \
     --save_steps 10000 \
-    --save_total_limit 2 \
-    --report_to wandb \
-    --run_name ${run_name}
+    --save_total_limit 2
     

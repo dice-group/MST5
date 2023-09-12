@@ -1,9 +1,19 @@
 #!/bin/bash
 
-run_name="exp9-pretrain"
-model_name="google/mt5-xl"
-output_dir="fine-tuned_models/${run_name}"
-train_file="datasets/lcquad2/train.csv"
+set -eu
+#model_name="google/mt5-xl"
+#output_dir="fine-tuned_models/${run_name}"
+#train_file="datasets/lcquad2/train.csv"
+
+if [ $# -ne 3 ]
+  then
+    echo "Please provide the relevant number of arguments!"
+    return -1
+fi
+
+model_name=$1
+output_dir=$2
+train_file=$3
 
 deepspeed --include=localhost:0 --master_port 60000 code/train_new.py \
     --deepspeed deepspeed/ds_config_zero3.json \
@@ -16,8 +26,6 @@ deepspeed --include=localhost:0 --master_port 60000 code/train_new.py \
     --overwrite_output_dir \
     --save_steps 3000 \
     --save_total_limit 2 \
-    --report_to wandb \
-    --run_name ${run_name}\
     --tf32 1 \
     --fp16 0 \
     --gradient_checkpointing 1 \

@@ -66,17 +66,27 @@ python3 code/generate_train_csv.py \
 
 `train.sh` is used to train without DeepSpeed.
 
-
-- run_name: run name that is showed in wandb
+Please provide the following as arguments to the training script:
 - model_name: name of the base model to be fine-tuned
 - output_dir: the output directory of the fine-tuned model, by default is "fine-tuned_models/${run_name}"
 - train_file: the path of dataset used in training
 
+Following is a sample usage of the training scripts:
+
+#### Pretraining on LcQUAD2
+```bash
+bash train_ds.sh "google/mt5-xl" fine-tuned_models/lcquad2-pretrain datasets/lcquad2/train.csv`
+```
+#### Finetuning on QALD9Plus (Wikidata)
+```bash
+`bash train_ds.sh fine-tuned_models/lcquad2-pretrain fine-tuned_models/qald9plus-finetune datasets/qald9plus/wikidata/qald_9_plus_train_wikidata.csv`
+```
 
 ## Evaluation
 
-`eval.sh`
-
+```bash
+bash eval.sh`
+```
 If you only want to export GERBIL results to a csv file:
 ```bash
 python3 code/gerbil_eval.py --experiment_id [experiment_id] --pred_path [path_for_output]
