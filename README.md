@@ -1,6 +1,4 @@
-# Multilingual Knowledge-Based Question Answering
-
-Mengshi Ma's master's thesis
+# MST5 — Transformers-based Approach to SPARQL Generation from Multilingual Natural Language Question
 
 ## Prerequisite
 
@@ -63,9 +61,6 @@ python3 code/generate_train_csv.py \
 ```
 
 ## Train on a csv dataset
-
-During training, wandb is used to track training process. 
-Please first setup wandb following this tutorial: https://docs.wandb.ai/guides/integrations/huggingface
 
 `train_ds.sh` is used to train with DeepSpeed.
 
