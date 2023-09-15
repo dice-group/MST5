@@ -84,7 +84,7 @@ class Question:
         return list(entities.values())
 
     def send_entity_detection_request(self, ner, el):
-        url = 'http://nebula.cs.upb.de:6100/custom-pipeline'
+        url = 'http://neamt.cs.upb.de:6100/custom-pipeline'
         headers = {
             'Content-Type': 'application/x-www-form-urlencoded'
         }

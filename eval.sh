@@ -1,8 +1,9 @@
 #!/bin/bash
 
 model="qald9plus-finetune"
-pred_path=pred_files/${model}
-test_dataset="datasets/qald9plus/wikidata/qald_9_plus_test_wikidata_new.json"
+pred_path=pred_files_new/${model}
+# test_dataset="datasets/qald9plus/wikidata/qald_9_plus_test_wikidata_new.json"
+test_dataset="datasets/qald9plus/wikidata/qald_9_plus_test_wikidata_latest.json"
 knowledge_graph="Wikidata"
 question_padding_length=32
 entity_padding_length=5
