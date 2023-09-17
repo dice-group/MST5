@@ -102,7 +102,7 @@ class Question:
         entities = {}
         response: dict = self.convert_ner_response_to_dict(ner_response)
         detection: dict
-        for detection in response["ent_mentions"]:
+        for detection in response.get("ent_mentions",[]):
             try:
                 link_candidates = detection["link_candidates"]
                 entity_name, _, entity_id = link_candidates[0]
@@ -116,7 +116,7 @@ class Question:
         response: dict = self.convert_ner_response_to_dict(ner_response)
         detection: dict
         if "ent_mentions" in response:
-            for detection in response["ent_mentions"]:
+            for detection in response.get("ent_mentions",[]):
                 try:
                     uri = detection["link"]
                     uri = self.process_dbpedia_uri(uri)

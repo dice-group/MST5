@@ -7,9 +7,21 @@ from components.Query import Query
 
 
 class Qald(Dataset):
-    def __init__(self, qald_file: dict={}, knowledge_graph=None) -> None:
+    
+    
+    def __init__(self, arg2, knowledge_graph=None) -> None:
+        if isinstance(arg2, dict):
+            self.init1(arg2, knowledge_graph)
+        if isinstance(arg2, list):
+            self.init2(arg2, knowledge_graph)
+    
+    def init1(self, qald_file: dict={}, knowledge_graph=None) -> None:
         self.knowledge_graph = Knowledge_graph[knowledge_graph]
         self.entries = self.build_qald_list(qald_file)
+    
+    def init2(self, entries: list, knowledge_graph=None) -> None:
+        self.knowledge_graph = Knowledge_graph[knowledge_graph]
+        self.entries = entries
 
     def build_qald_list(self, qald_dataset: dict) -> list:
         qald_list = []
@@ -112,10 +124,24 @@ class Qald(Dataset):
 
 
 class Qald_entry(Entry):
+    
     def __init__(self, id, questions, sparql, knowledge_graph, answers=None) -> None:
+        if isinstance(sparql, str):
+            self.init1(id, questions, sparql, knowledge_graph, answers)
+        if isinstance(sparql, Query):
+            self.init2(id, questions, sparql, answers)
+            
+    
+    def init1(self, id, questions, sparql, knowledge_graph, answers=None) -> None:
         self.id = id
         self.questions: dict[str, Question] = self.build_questions(questions)
         self.query: Query = super().build_query(sparql, knowledge_graph)
+        self.answers = answers
+        
+    def init2(self, id, questions: dict[str, Question], query: Query, answers=[]) -> None:
+        self.id = id
+        self.questions = questions
+        self.query = query
         self.answers = answers
 
     def build_questions(self, questions: list[dict]) -> dict:
