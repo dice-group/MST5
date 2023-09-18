@@ -96,11 +96,13 @@ class Question:
         }
 
         response = requests.post(url, headers=headers, data=data)
-        return response.text
+        
+        return response.json()
     
-    def process_wikidata_ner_response(self, ner_response:str):
+    def process_wikidata_ner_response(self, ner_response:dict):
         entities = {}
-        response: dict = self.convert_ner_response_to_dict(ner_response)
+        # response: dict = self.convert_ner_response_to_dict(ner_response)
+        response: dict = ner_response
         detection: dict
         for detection in response.get("ent_mentions",[]):
             try:
@@ -111,9 +113,10 @@ class Question:
                 pass
         return entities
     
-    def process_dbpedia_ner_response(self, ner_response: str):
+    def process_dbpedia_ner_response(self, ner_response: dict):
         entities = {}
-        response: dict = self.convert_ner_response_to_dict(ner_response)
+        # response: dict = self.convert_ner_response_to_dict(ner_response)
+        response: dict = ner_response
         detection: dict
         if "ent_mentions" in response:
             for detection in response.get("ent_mentions",[]):
@@ -128,7 +131,13 @@ class Question:
     def convert_ner_response_to_dict(self, ner_response) -> dict:
         ner_response = ner_response.replace("false", '''"False"''')
         ner_response = ner_response.replace("true", '''"True"''')
-        return json.loads(ner_response)
+        try:
+            res = json.loads(ner_response)
+        except Exception as err:
+            print('Question:', self.question_string, '\tLanguage:', self.language)
+            print('Exception caused by ner_response:', ner_response)
+            raise
+        return res
     
     def process_dbpedia_uri(self, uri:str):
         if self.is_uri_not_in_en(uri):
