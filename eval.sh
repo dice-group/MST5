@@ -2,9 +2,9 @@
 set -eu
 model="qald9plus-finetune"
 # model="lcquad2-pretrain"
-# pred_path=pred_files_qald10_new/${model}
-# pred_path=pred_files_lcquad2qald_new/${model}
-pred_path=pred_files_mintaka2qald/${model}
+# pred_path=predictions/pred_files_qald10_new/${model}
+# pred_path=predictions/pred_files_lcquad2qald_new/${model}
+pred_path=predictions/pred_files_mintaka2qald/${model}
 # test_dataset="datasets/qald9plus/wikidata/qald_9_plus_test_wikidata_new.json"
 # test_dataset="datasets/qald9plus/wikidata/qald_9_plus_test_wikidata_latest.json"
 # test_dataset="datasets/qald10/qald_10_latest.json"

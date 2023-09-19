@@ -1,6 +1,6 @@
 .DS_Store
 pre_train_lcqald/*
-pred_files*/*
+predictions/
 lcquad_tokenizer/*
 fine-tuned_models/*
 pre-trained_models/*
