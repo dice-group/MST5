@@ -3,7 +3,7 @@ from utils.data_io import read_json
 from dataset.Qald import Qald
 from tqdm import tqdm
 from components.Summarizer import Summarizer
-
+import time
 
 def main():
     parser = argparse.ArgumentParser(
@@ -55,6 +55,7 @@ def main():
     print('Updating answers for %s' % args.language)
     for qald_entry in tqdm(pred_qald.entries):
             qald_entry.update_answer()
+            time.sleep(1)
     pred_qald.export_qald_json([args.language], args.output)
 
 
