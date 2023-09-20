@@ -51,7 +51,10 @@ def main():
                             args.language,
                             question_string,
                             pred_sparql)
-    pred_qald.update_answers()
+    # pred_qald.update_answers()
+    print('Updating answers for %s' % args.language)
+    for qald_entry in tqdm(pred_qald.entries):
+            qald_entry.update_answer()
     pred_qald.export_qald_json([args.language], args.output)
 
 

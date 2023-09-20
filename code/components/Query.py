@@ -61,6 +61,20 @@ SYMBOL_REPLACEMENT = [
     ['\|', ' sep_or '],
 ]
 
+QUERY_PREFIX = """
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX psn: <http://www.wikidata.org/prop/statement/value-normalized/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wds: <http://www.wikidata.org/entity/statement/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/> 
+PREFIX wdv: <http://www.wikidata.org/value/>
+"""
+
+ANSWER_LIMIT = 100
+
 class Query:
     def __init__(self, sparql: str, knowledge_graph: Knowledge_graph) -> None:
         self.sparql = self.postprocess_sparql(sparql)
@@ -115,14 +129,27 @@ class Query:
             return {"head": {"vars": []}, "results": {"bindings": []}}
 
     def ask_wikidata(self):
-        endpoint_url = "https://query.wikidata.org/sparql"
+        # endpoint_url = "https://query.wikidata.org/sparql"
+        endpoint_url = "https://skynet.coypu.org/wikidata/"
         try:
-            user_agent = "WDQS-example Python/%s.%s" % (sys.version_info[0], sys.version_info[1])
-            sparql = SPARQLWrapper(endpoint_url, agent=user_agent)
-            sparql.setQuery(self.sparql)
+            # user_agent = "WDQS-example Python/%s.%s" % (sys.version_info[0], sys.version_info[1])
+            # sparql = SPARQLWrapper(endpoint_url, agent=user_agent)
+            sparql = SPARQLWrapper(endpoint_url)
+            # sparql.setQuery(self.sparql)
+            sparql.setQuery(QUERY_PREFIX + '\n' + self.sparql)
             sparql.setReturnFormat(JSON)
-            return sparql.query().convert()
-        except:
+            sparql.setTimeout(900)
+            sparql_results = sparql.query().convert()
+            # check if the results are too big
+            if "results" in sparql_results and "bindings" in sparql_results["results"]:
+                bindings = sparql_results["results"]["bindings"]
+                if len(bindings) > ANSWER_LIMIT:
+                    raise Exception("SPARQL result surpasses the set answer limit: %d" % ANSWER_LIMIT)
+            # return extracted results           
+            return sparql_results
+        except Exception as e:
+            print('Exception occurred for \tSPARQL: %s' % (self.sparql))
+            print(str(e))
             return {"head": {"vars": []}, "results": {"bindings": []}}
         
         
