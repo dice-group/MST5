@@ -73,7 +73,7 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX wdv: <http://www.wikidata.org/value/>
 """
 
-ANSWER_LIMIT = 100
+ANSWER_LIMIT = 1000
 
 class Query:
     def __init__(self, sparql: str, knowledge_graph: Knowledge_graph) -> None:
@@ -138,7 +138,7 @@ class Query:
             # sparql.setQuery(self.sparql)
             sparql.setQuery(QUERY_PREFIX + '\n' + self.sparql)
             sparql.setReturnFormat(JSON)
-            sparql.setTimeout(900)
+            sparql.setTimeout(600)
             sparql_results = sparql.query().convert()
             # check if the results are too big
             if "results" in sparql_results and "bindings" in sparql_results["results"]:
