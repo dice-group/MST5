@@ -14,3 +14,4 @@ transformers==4.31.0
 lxml==4.9.3
 ipywidgets
 flask
+html5lib
