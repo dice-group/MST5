@@ -1,26 +1,18 @@
 #!/bin/bash
 set -eu
-model="qald9plus-finetune"
-# model="lcquad2-pretrain"
-pred_path=predictions/pred_files_qald10_20092023/${model}
-# pred_path=predictions/pred_files_lcquad2qald_new/${model}
-# pred_path=predictions/pred_files_mintaka2qald/${model}
-# test_dataset="datasets/qald9plus/wikidata/qald_9_plus_test_wikidata_new.json"
-# test_dataset="datasets/qald9plus/wikidata/qald_9_plus_test_wikidata_latest.json"
-test_dataset="datasets/qald10/qald_10.json"
-# test_dataset="datasets/qald_lcquad2/test_qald.json"
-# test_dataset="datasets/qald_mintaka/mintaka_test_qald.json"
-knowledge_graph="Wikidata"
-question_padding_length=32
-entity_padding_length=5
-# languages=("en" "de" "ru" "fr" "lt" "ba" "be" "uk" "zh" "ja" "es")
-languages=("en" "de" "ru" "zh")
-# languages=("de" "ru")
-# languages=("en")
-# languages=("en" "de" "es" "fr")
+model="dbpedia-fine-tune"
+
+pred_path=predictions/pred_files_dbpedia/${model}
+
+test_dataset="datasets/qald9plus/dbpedia/qald_9_plus_test_dbpedia-new.json"
+knowledge_graph="DBpedia"
+
+
+languages=("en" "de" "ru" "fr" "lt" "ba" "be" "uk" "zh" "ja" "es")
+
 
 include_linguistic_context=true
-include_entity_knowledge=true
+include_entity_knowledge=false
 
 if [ "$include_linguistic_context" = true ]; then
   linguistic_context="--linguistic_context"
@@ -44,9 +36,7 @@ do
         -o ${pred_path}/${lang}.json \
         -l ${lang} \
         ${linguistic_context} \
-        ${entity_knowledge} \
-        --question_padding_length ${question_padding_length} \
-        --entity_padding_length ${entity_padding_length}
+        # --question_padding_length ${question_padding_length}
 done
 
 echo "Start running GERBIL experiment"

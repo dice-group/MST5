@@ -1,9 +1,9 @@
 #!/bin/bash
 
 set -eu
-#model_name="google/mt5-xl"
-#output_dir="fine-tuned_models/${run_name}"
-#train_file="datasets/lcquad2/train.csv"
+# model_name="google/mt5-xl"
+# output_dir="fine-tuned_models/${run_name}"
+# train_file="datasets/lcquad2/train.csv"
 
 if [ $# -ne 3 ]
   then
@@ -21,7 +21,7 @@ deepspeed --include=localhost:0 --master_port 60000 code/train_new.py \
     --do_train \
     --train_file ${train_file} \
     --output_dir ${output_dir} \
-    --num_train_epochs 32 \
+    --num_train_epochs 15 \
     --per_device_train_batch_size=16 \
     --overwrite_output_dir \
     --save_steps 3000 \
