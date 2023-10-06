@@ -12,25 +12,17 @@ The QALD-9-Plus training datasets are used for fine-tuning after preprocessing i
 
 The QALD-9-Plus test dataset are used for evaluation and the results can be compared with other systems in KGQA-leaderboard. 
 
-## Update QALD-9-Plus
+Our version is based on the commit [5b116c9b53cac0cc3c3c64dd211a46311499e76d](https://github.com/KGQA/QALD_9_plus/commit/5b116c9b53cac0cc3c3c64dd211a46311499e76d) in QALD-9-Plus repository: 
 
-(For now, don't download the datasets from QALD-9-Plus Github repository, since we have a modified version with Chinese and Japanese translations of the questions. 
-A pull request is to be created for QALD-9-Plus Github repository so that the QALD-9-Plus also contains Chinese and Japanese translations.)
+[qald_9_plus_train_dbpedia](https://github.com/KGQA/QALD_9_plus/blob/5b116c9b53cac0cc3c3c64dd211a46311499e76d/data/qald_9_plus_train_dbpedia.json)
 
-In order to track the version of QALD-9-Plus datasets, you can download and update them using
+[qald_9_plus_test_dbpedia](https://github.com/KGQA/QALD_9_plus/blob/5b116c9b53cac0cc3c3c64dd211a46311499e76d/data/qald_9_plus_test_dbpedia.json)
 
-```
-wget -N -P datasets/qald9plus/dbpedia https://raw.githubusercontent.com/KGQA/QALD_9_plus/main/data/qald_9_plus_train_dbpedia.json
-```
-```
-wget -N -P datasets/qald9plus/dbpedia https://raw.githubusercontent.com/KGQA/QALD_9_plus/main/data/qald_9_plus_test_dbpedia.json 
-```
+[qald_9_plus_train_wikidata](https://github.com/KGQA/QALD_9_plus/blob/5b116c9b53cac0cc3c3c64dd211a46311499e76d/data/qald_9_plus_train_wikidata.json)
 
-```
-wget -N -P datasets/qald9plus/wikidata https://raw.githubusercontent.com/KGQA/QALD_9_plus/main/data/qald_9_plus_train_wikidata.json
-```
+[qald_9_plus_test_wikidata](https://github.com/KGQA/QALD_9_plus/blob/5b116c9b53cac0cc3c3c64dd211a46311499e76d/data/qald_9_plus_test_wikidata.json)
 
-```
-wget -N -P datasets/qald9plus/wikidata https://raw.githubusercontent.com/KGQA/QALD_9_plus/main/data/qald_9_plus_test_wikidata.json
-```
 
+We added Chinese and Japanese translations of questions to this dataset.
+Chinese translations were created by a native Chinese speaker.
+Japanese translations were created by Google translate and verified by a long time Japanese learner. 
