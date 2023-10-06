@@ -14,6 +14,9 @@ The QALD-9-Plus test dataset are used for evaluation and the results can be comp
 
 ## Update QALD-9-Plus
 
+(For now, don't download the datasets from QALD-9-Plus Github repository, since we have a modified version with Chinese and Japanese translations of the questions. 
+A pull request is to be created for QALD-9-Plus Github repository so that the QALD-9-Plus also contains Chinese and Japanese translations.)
+
 In order to track the version of QALD-9-Plus datasets, you can download and update them using
 
 ```
