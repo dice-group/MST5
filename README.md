@@ -2,9 +2,7 @@
 
 ## Prerequisite
 
-`pip install -r requirements.txt`
-
-<!-- install huggingface from source? -->
+Follow installation instructions in [notebooks/installation_instruction.ipynb](notebooks/installation_instruction.ipynb)
 
 ## Generate train data set
 

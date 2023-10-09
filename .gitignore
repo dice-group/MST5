@@ -9,9 +9,7 @@ sparql-tokenizer-trainedon_all/*
 .lock
 papers/*
 wandb/*
-datasets/lcquad1
-datasets/lcquad2
-datasets/qald10
+datasets/
 .vscode/*
 **/__pycache__/*
 pre-trained_models/*
