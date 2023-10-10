@@ -37,10 +37,12 @@ def main():
     args = parser.parse_args()
     
     # Initialize global tokenizer
-    Question.lm_tokenizer = T5Tokenizer.from_pretrained(args.model, legacy=False) 
-
+    Question.lm_tokenizer = T5Tokenizer.from_pretrained('google/mt5-xl', legacy=False) 
+    # QALD file is loaded to json here
     test_file = read_json(args.test)
+    # QALD file converted to object and preprocessed
     test_qald = Qald(test_file, args.knowledge_graph)
+    # Question string is extracted alongside its id. This is where features like linguistic context and entity knowledge are extracted
     question_list = test_qald.get_id_question_list(
         args.language,
         args.linguistic_context,
@@ -48,19 +50,23 @@ def main():
         args.question_padding_length,
         args.entity_padding_length
         )
+    # Loading model as transformer pipeline
     summarizer = Summarizer(args.model)
+    # Creating QALD dataset object for the predictions
     pred_qald = Qald({}, args.knowledge_graph)
+    # Iterating through each question to predict its SPARQL
     for id, question_string in tqdm(question_list):
         pred_sparql = summarizer.predict_sparql(question_string)
         pred_qald.add_entry(id,
                             args.language,
                             question_string,
                             pred_sparql)
-    # pred_qald.update_answers()
+    # Fetching results from SPARQL endpoint
     print('Updating answers for %s' % args.language)
     for qald_entry in tqdm(pred_qald.entries):
             qald_entry.update_answer()
             time.sleep(1)
+    # Exporting the predicted SPARQL and fetched answers in QALD format
     pred_qald.export_qald_json([args.language], args.output)
 
 
