@@ -3,7 +3,9 @@ from utils.data_io import read_json
 from dataset.Qald import Qald
 from tqdm import tqdm
 from components.Summarizer import Summarizer
+from components.Question import Question
 import time
+from transformers import T5Tokenizer
 
 def main():
     parser = argparse.ArgumentParser(
@@ -33,6 +35,9 @@ def main():
                         default=0)
 
     args = parser.parse_args()
+    
+    # Initialize global tokenizer
+    Question.lm_tokenizer = T5Tokenizer.from_pretrained(args.model, legacy=False) 
 
     test_file = read_json(args.test)
     test_qald = Qald(test_file, args.knowledge_graph)

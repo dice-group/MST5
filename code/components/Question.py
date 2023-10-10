@@ -5,17 +5,19 @@ import requests
 import json
 
 class Question:
+    lm_tokenizer = None
+     
     def __init__(self, question_string: str, language: Language) -> None:
-        self.question_string = question_string
+        self.question_string = question_string.strip()
         self.language = language
 
 
     def get_question_string_with_lingtuistic_context(self, padded_length):
         _, pos, dep, dep_depth = self.get_linguistic_context()
         question_string = self.question_string
-        pos_tags = " ".join(pos)
-        dependency_relations = " ".join(dep)
-        dependency_depth = " ".join(map(str, dep_depth))
+        pos_tags = " ".join(pos).strip()
+        dependency_relations = " ".join(dep).strip()
+        dependency_depth = " ".join(map(str, dep_depth)).strip()
 
         question_string, pos_tags, dependency_relations, dependency_depth = self.add_padding_to_linguistic_context(padded_length, pos_tags, dependency_relations, dependency_depth)
         
@@ -23,9 +25,9 @@ class Question:
 
     def add_padding_to_linguistic_context(self, padded_length, pos_tags, dependency_relations, dependency_depth):
         question_string = self.pad_to_length(self.question_string, length=padded_length)
-        pos_tags = self.pad_to_length(pos_tags, length=padded_length)
-        dependency_relations = self.pad_to_length(dependency_relations, length=padded_length)
-        dependency_depth = self.pad_to_length(dependency_depth, length=padded_length)
+        pos_tags = self.pad_to_length(pos_tags, length=padded_length, separator_token="<start-of-pos-tags>")
+        dependency_relations = self.pad_to_length(dependency_relations, length=padded_length, separator_token="<start-of-dependency-relation>")
+        dependency_depth = self.pad_to_length(dependency_depth, length=padded_length, separator_token="<start-of-dependency-tree-depth>")
         return question_string, pos_tags, dependency_relations, dependency_depth
 
     
@@ -58,20 +60,25 @@ class Question:
             depth_list = self.get_dependency_relation_depth(child, depth_list, depth + 1)
         return depth_list
     
-    def pad_to_length(self, string: str=None, length:int=0):
-        tokens = string.split()
+    def pad_to_length(self, string: str=None, length:int=0, separator_token=''):
+        
+        if separator_token:
+            string = separator_token + ' ' + string
+        
+        tokens = Question.lm_tokenizer.tokenize(string)
+        
         if len(tokens) > length:
-            return string + " <pad>"
-        padded_tokens = tokens[:length] + ["<pad>"] * max(0, length - len(tokens))
-        padded_question = " ".join(padded_tokens)
+            return string + " <pad> "
+        padded_tokens = ["<pad>"] * max(0, length - len(tokens))
+        padded_question =  string + " " + " ".join(padded_tokens) + " "
         return padded_question
 
 
     def add_entity_knowledge(self, question_string:str=None, entity_knowledge=[], padded_length=0):
         if not question_string:
             question_string = self.question_string
-        entity_knowledge = " ".join(entity_knowledge)
-        entity_knowledge = self.pad_to_length(entity_knowledge, padded_length)
+        entity_knowledge = " <pad> ".join(entity_knowledge).strip()
+        entity_knowledge = self.pad_to_length(entity_knowledge, padded_length, separator_token="<start-of-entity-info>")
         return f"{question_string} {entity_knowledge}"
     
 

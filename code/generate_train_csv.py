@@ -5,6 +5,8 @@ from dataset.LCquad2 import LCquad2
 from dataset.Qald import Qald
 from components.Knowledge_graph import Knowledge_graph
 from components.Language import Language
+from components.Question import Question
+from transformers import T5Tokenizer
 
 def get_lcquad_dataset(input_file, dataset_type):
     if dataset_type == "lcquad1":
@@ -18,8 +20,7 @@ def get_only_supported_languages(languages):
         if Language.has_member_key(language):
             supported_languages.append(language)
     return supported_languages
-
-
+    
 def main():
     parser = argparse.ArgumentParser(
         description="A program to convert qald 9 questions and queries to csv dataset")
@@ -48,6 +49,10 @@ def main():
                         default=0)
     
     args = parser.parse_args()
+    
+    # Initialize global tokenizer
+    Question.lm_tokenizer = T5Tokenizer.from_pretrained('google/mt5-xl', legacy=False)
+    Question.lm_tokenizer.add_tokens(["<start-of-pos-tags>", "<start-of-dependency-relation>", "<start-of-dependency-tree-depth>", "<start-of-entity-info>"])
 
     input_file = read_json(args.input)
     dataset_type = args.type

@@ -54,7 +54,8 @@ class Dataset:
             pred=False,
             question_padding_length=0,
             entity_padding_length=0):
-        question_string = question.question_string
+        # question_string = question.question_string
+        question_string = question.pad_to_length(question.question_string, length=question_padding_length)
         if include_linguistic_context:
             question_string = question.get_question_string_with_lingtuistic_context(question_padding_length)
         if include_entity_knowledge:
@@ -78,7 +79,8 @@ class Dataset:
     def get_wikidata_entities(self, entry, question):
         ner = Language.get_supported_ner(question.language)
         if self.no_supported_ner(ner):
-            entity_knowledge = entry.questions["en"].recognize_entities("babelscape_ner", "mgenre_el")
+            # entity_knowledge = entry.questions["en"].recognize_entities("babelscape_ner", "mgenre_el")
+            entity_knowledge = question.recognize_entities("spacy_ner", "mgenre_el")
         else:
             entity_knowledge = question.recognize_entities(ner, "mgenre_el")
         return entity_knowledge

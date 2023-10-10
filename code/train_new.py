@@ -18,6 +18,7 @@ from transformers import (
     Seq2SeqTrainingArguments,
     set_seed,
 )
+from transformers import T5Tokenizer
 from transformers.trainer_utils import get_last_checkpoint
 from transformers.utils import check_min_version
 from arguments.data_training_arguments import DataTrainingArguments
@@ -135,13 +136,20 @@ def main():
         revision=model_args.model_revision,
         use_auth_token=True if model_args.use_auth_token else None,
     )
-    tokenizer = AutoTokenizer.from_pretrained(
-        model_args.model_name_or_path,
-        cache_dir=model_args.cache_dir,
-        use_fast=model_args.use_fast_tokenizer,
-        revision=model_args.model_revision,
-        use_auth_token=True if model_args.use_auth_token else None,
-    )
+    
+    
+    # tokenizer = AutoTokenizer.from_pretrained(
+    #     model_args.model_name_or_path,
+    #     cache_dir=model_args.cache_dir,
+    #     use_fast=model_args.use_fast_tokenizer,
+    #     revision=model_args.model_revision,
+    #     use_auth_token=True if model_args.use_auth_token else None,
+    # )
+    
+    tokenizer = T5Tokenizer.from_pretrained(model_args.model_name_or_path, legacy=False)
+    
+    tokenizer.add_tokens(["<start-of-pos-tags>", "<start-of-dependency-relation>", "<start-of-dependency-tree-depth>", "<start-of-entity-info>"])
+    
     os.environ["TOKENIZERS_PARALLELISM"] = "false"
     model = AutoModelForSeq2SeqLM.from_pretrained(
         model_args.model_name_or_path,
@@ -155,8 +163,10 @@ def main():
     # We resize the embeddings only when necessary to avoid index errors. If you are creating a model from scratch
     # on a small vocab and want a smaller embedding size, remove this test.
     embedding_size = model.get_input_embeddings().weight.shape[0]
-    if len(tokenizer) > embedding_size:
-        model.resize_token_embeddings(len(tokenizer))
+    # if len(tokenizer) > embedding_size:
+    #     model.resize_token_embeddings(len(tokenizer))
+        
+    model.resize_token_embeddings(len(tokenizer))
 
     if model.config.decoder_start_token_id is None:
         raise ValueError(
