@@ -4,7 +4,7 @@ from dataset.Dataset import Dataset, Entry
 from components.Language import Language
 from components.Question import Question
 from components.Query import Query
-
+from tqdm import tqdm
 
 class Qald(Dataset):
     
@@ -100,7 +100,8 @@ class Qald(Dataset):
             entity_padding_length = 0) -> list:
         questions_with_id = []
         entry: Qald_entry
-        for entry in self.entries:
+        print(f'Generating question strings for {language}')
+        for entry in tqdm(self.entries):
             if language in entry.questions:
                 question: Question = entry.questions[language]
                 question_string = super().get_question_string(

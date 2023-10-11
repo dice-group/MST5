@@ -66,10 +66,10 @@ class Gerbil:
         self.pred_files[language] = pred_file
 
 
-    def submit_experiment(self):
+    def submit_experiment(self, lang='en'):
         self.upload_ref()
         self.upload_pred()
-        experiment_data = self.set_experiment_data()
+        experiment_data = self.set_experiment_data(lang)
         execute_url = execute_url_prefix + experiment_data
 
         try:
@@ -137,7 +137,7 @@ class Gerbil:
         )
 
 
-    def set_experiment_data(self):
+    def set_experiment_data(self, lang):
         ref_file_name = self.ref_file.split('/')[-1]
         answer_file_names = self.get_answer_file_names(ref_file_name)
         ref_dataset = [f'NIFDS_{self.ref_name}({ref_file_name})']
@@ -148,7 +148,7 @@ class Gerbil:
             'annotator': [],
             'dataset': ref_dataset,
             'answerFiles': answer_file_names,
-            'questionLanguage': 'en'
+            'questionLanguage': lang
         }
 
         experiment_data_encoded = urllib.parse.quote(

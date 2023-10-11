@@ -43,7 +43,14 @@ def main():
     gerbil.add_ref_file(args.ref_name, args.ref_file_path)
     for lang in languages:
         gerbil.add_pred_file(f"{args.exp_setting}-{lang}", f"{args.pred_path}/{lang}.json", lang)
-    gerbil.submit_experiment()
+    response = gerbil.submit_experiment()
+    # Write the experiment URI to a file
+    if response and response.text:
+        exp_id = response.text
+        exp_id = "https://gerbil-qa.aksw.org/gerbil/experiment?id=" + exp_id.strip()
+        with open(f"{args.pred_path}/exp_det", 'w') as exp_det:
+            exp_det.write(exp_id + '\n')
+    # Export results to a csv
     gerbil.export_results(f"{args.pred_path}/result.csv")
 
 if __name__ == "__main__":

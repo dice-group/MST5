@@ -38,9 +38,9 @@ def main():
     
     # Initialize global tokenizer
     Question.lm_tokenizer = T5Tokenizer.from_pretrained('google/mt5-xl', legacy=False) 
-    # QALD file is loaded to json here
+    # Test QALD file is loaded to json here
     test_file = read_json(args.test)
-    # QALD file converted to object and preprocessed
+    # Test QALD file converted to object and preprocessed
     test_qald = Qald(test_file, args.knowledge_graph)
     # Question string is extracted alongside its id. This is where features like linguistic context and entity knowledge are extracted
     question_list = test_qald.get_id_question_list(
