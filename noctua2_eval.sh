@@ -62,6 +62,7 @@ python code/pred_build_eval_qald.py \
       ${entity_knowledge} \
       --question_padding_length ${question_padding_length} \
       --entity_padding_length ${entity_padding_length} \
+      --gerbil_eval \
       2>&1
 
 

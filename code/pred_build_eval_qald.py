@@ -49,6 +49,7 @@ def main():
     # Test QALD file converted to object and preprocessed
     test_qald = Qald(test_file, args.knowledge_graph)
     # Loading model as transformer pipeline
+    # As per our experiments, it does not matter whether we use summarization or text2text-generation. We use text2text-generation because it does not complain regarding output length being higher than input.
     # generator = Summarizer(args.model)
     generator = Text_Generator(args.model)
     
@@ -118,7 +119,6 @@ def main():
         # Export the Gerbil result files
         for key in gerbil_dict:
             result_file_name = f"{pred_path}/result_{key}.csv"
-            result_file_name
             gerbil : Gerbil = gerbil_dict[key]
             # Export results to a csv
             gerbil.export_results(result_file_name)

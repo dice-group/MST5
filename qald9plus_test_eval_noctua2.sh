@@ -42,4 +42,13 @@ sbatch --job-name=eval_qald9plus-finetune_lcquad2-ft-base_ent noctua2_eval.sh fi
 sbatch --job-name=eval_qald9plus-finetune_lcquad2-ft-base_lc-ent noctua2_eval.sh fine-tuned_models qald9plus-finetune_lcquad2-ft-base_lc-ent datasets/qald9plus/wikidata/qald_9_plus_test_wikidata.json predictions_qald9plus_test en true true
 ######
 
+
+### QALD 9 Plus -Multilingual 
+
+sbatch --time=12:00:00 --begin=now+2hour --job-name=eval_qald9plus-finetune_lcquad2-ft-base_lc-ent noctua2_eval.sh fine-tuned_models qald9plus-finetune_lcquad2-ft-base_lc-ent datasets/qald9plus/wikidata/qald_9_plus_test_wikidata.json predictions_qald9plus_test_multilingual "en,de,ru,fr,lt,ba,be,uk,zh,ja,es" true true
+
+### QALD 10 - Multilingual
+
+sbatch --time=12:00:00 --begin=now+2hour --job-name=eval_qald9plus-finetune_lcquad2-ft-base_lc-ent noctua2_eval.sh fine-tuned_models qald9plus-finetune_lcquad2-ft-base_lc-ent datasets/qald10/qald_10.json predictions_qald10_multilingual "en,de,ru,zh" true true
+
 '
