@@ -78,11 +78,19 @@ class Dataset:
     
     def get_wikidata_entities(self, entry, question):
         ner = Language.get_supported_ner(question.language)
+        
+        ### Uncomment one of the following two blocks based on your requirement
+        
+        #### English-only entity disambiguation block start ###
+        # entity_knowledge = entry.questions["en"].recognize_entities("flair_ner", "mgenre_el") # Extract entities using only the English text.
+        #### English-only entity disambiguation block end ###
+        
+        #### Multilingual entity disambiguation block start ###
         if self.no_supported_ner(ner):
-            # entity_knowledge = entry.questions["en"].recognize_entities("babelscape_ner", "mgenre_el")
             entity_knowledge = question.recognize_entities("spacy_ner", "mgenre_el")
         else:
             entity_knowledge = question.recognize_entities(ner, "mgenre_el")
+        #### Multilingual entity disambiguation block end ###
         return entity_knowledge
     
     def no_supported_ner(self, ner):

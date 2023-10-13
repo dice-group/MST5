@@ -38,6 +38,8 @@ def main():
                         default=0)
     parser.add_argument("--gerbil_eval", action=argparse.BooleanOptionalAction,
                         help='To perform Gerbil evaluation or not.')
+    parser.add_argument("--use_gold_ents", action=argparse.BooleanOptionalAction,
+                        help='To use gold entities from the reference SPARQL or not.')
 
     args = parser.parse_args()
     
@@ -69,7 +71,8 @@ def main():
                 args.linguistic_context,
                 args.entity_knowledge,
                 args.question_padding_length,
-                args.entity_padding_length
+                args.entity_padding_length,
+                args.use_gold_ents
                 )
             # Creating QALD dataset object for the predictions
             pred_qald = Qald({}, args.knowledge_graph)

@@ -52,6 +52,7 @@ else
   entity_knowledge="--no-entity_knowledge"
 fi
 
+# Add --use_gold_ents to use gold entities
 python code/pred_build_eval_qald.py \
       --model "${MODEL_ROOT_DIR}/${MODEL_NAME}" \
       -t $TEST_FILE \
