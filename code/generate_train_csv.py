@@ -47,6 +47,9 @@ def main():
                         help="length of entity knowledge after padding. \
                         If not provided, no padding will be added.",
                         default=0)
+    parser.add_argument('--extend_with_noisy_entities', action=argparse.BooleanOptionalAction,
+                        help='To append the training data with samples extracted using NER/EL tools.\
+                            This is done in addition to the already gold entities extraction through reference SPARQLs.')
     
     args = parser.parse_args()
     
@@ -63,7 +66,8 @@ def main():
             args.linguistic_context, 
             args.entity_knowledge,
             args.question_padding_length,
-            args.entity_padding_length
+            args.entity_padding_length,
+            args.extend_with_noisy_entities
             )
     if dataset_type == "qald":
         dataset = Qald(input_file, args.knowledge_graph)
@@ -79,7 +83,8 @@ def main():
         include_linguistic_context=args.linguistic_context,
         include_entity_knowledge=args.entity_knowledge,
         question_padding_length=args.question_padding_length,
-        entity_padding_length=args.entity_padding_length
+        entity_padding_length=args.entity_padding_length,
+        extend_with_noisy_entities = args.extend_with_noisy_entities
     )
 
 

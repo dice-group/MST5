@@ -47,13 +47,15 @@ class Qald(Dataset):
             include_linguistic_context=False, 
             include_entity_knowledge=False,
             question_padding_length=0,
-            entity_padding_length=0) -> None:
+            entity_padding_length=0,
+            extend_with_noisy_entities=False) -> None:
         csv_dataset = self.to_train_csv(
             languages, 
             include_linguistic_context, 
             include_entity_knowledge,
             question_padding_length,
-            entity_padding_length
+            entity_padding_length,
+            extend_with_noisy_entities
             )
         export_csv(output_file, csv_dataset)
 
@@ -63,10 +65,12 @@ class Qald(Dataset):
             include_linguistic_context, 
             include_entity_knowledge,
             question_padding_length,
-            entity_padding_length):
+            entity_padding_length,
+            extend_with_noisy_entities=False):
         csv_dataset = [["question", "query"]]
         entry: Qald_entry
-        for entry in self.entries:
+        print("Preparing QALD CSV")
+        for entry in tqdm(self.entries):
             sparql = entry.query.preprocess()
             for language in languages:
                 if language in entry.questions:
@@ -80,6 +84,16 @@ class Qald(Dataset):
                         question_padding_length=question_padding_length,
                         entity_padding_length=entity_padding_length)
                     csv_dataset.append([question_string, sparql])
+                    if extend_with_noisy_entities:
+                        question_string = super().get_question_string(
+                            entry, 
+                            question, 
+                            include_linguistic_context, 
+                            include_entity_knowledge,
+                            pred=True,
+                            question_padding_length=question_padding_length,
+                            entity_padding_length=entity_padding_length)
+                        csv_dataset.append([question_string, sparql])
         return csv_dataset
 
 

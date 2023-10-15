@@ -3,7 +3,7 @@ from components.Language import Language
 from components.Query import Query
 from components.Question import Question
 from utils.data_io import export_csv
-
+from tqdm import tqdm
 class Dataset:
     def __init__(self, entries: list[Query], knowledge_graph=None):
         self.entries = entries
@@ -15,12 +15,14 @@ class Dataset:
             include_linguistic_context=False, 
             include_entity_knowledge=False,
             question_padding_length=0,
-            entity_padding_length=0):
+            entity_padding_length=0,
+            extend_with_noisy_entities=False):
         csv_dataset = self.to_train_csv(
             include_linguistic_context, 
             include_entity_knowledge,
             question_padding_length,
-            entity_padding_length
+            entity_padding_length,
+            extend_with_noisy_entities
             )
         export_csv(output_file, csv_dataset)
 
@@ -29,10 +31,12 @@ class Dataset:
             include_linguistic_context=False, 
             include_entity_knowledge=False,
             question_padding_length=0,
-            entity_padding_length=0):
+            entity_padding_length=0,
+            extend_with_noisy_entities=False):
         csv = [['question', 'query']]
         entry: Entry
-        for entry in self.entries:
+        print("Preparing training CSV")
+        for entry in tqdm(self.entries):
             question = entry.question
             question_string = self.get_question_string(
                 entry, 
@@ -43,6 +47,18 @@ class Dataset:
                 entity_padding_length=entity_padding_length)
             sparql = entry.query.preprocess()
             csv.append([question_string, sparql])
+            if extend_with_noisy_entities:
+                question_string = self.get_question_string(
+                    entry, 
+                    question, 
+                    include_linguistic_context, 
+                    include_entity_knowledge,
+                    question_padding_length=question_padding_length,
+                    entity_padding_length=entity_padding_length,
+                    pred=True)
+                csv.append([question_string, sparql])
+                
+                
         return csv
 
     def get_question_string(
