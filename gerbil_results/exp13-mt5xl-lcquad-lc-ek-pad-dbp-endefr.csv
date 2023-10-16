@@ -1,4 +1,0 @@
-Language,Micro F1,Micro Precision,Micro Recall,Macro F1,Macro Precision,Macro Recall,Macro F1 QALD
-de,0.0315,0.0205,0.0679,0.3555,0.3528,0.3732,0.5102
-en,0.0596,0.0412,0.1076,0.4313,0.4407,0.4487,0.5835
-fr,0.031,0.75,0.0158,0.2666,0.2667,0.2665,0.4197
