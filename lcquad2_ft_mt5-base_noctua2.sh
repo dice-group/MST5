@@ -1,9 +1,11 @@
 #!/bin/bash
 
-# Sample usage: bash lcquad_ft_mt5-base_noctua2.sh "lc-ent" 60000
-# Sample usage: bash lcquad_ft_mt5-base_noctua2.sh "simple" 60005
-# Sample usage: bash lcquad_ft_mt5-base_noctua2.sh "lc" 60010
-# Sample usage: bash lcquad_ft_mt5-base_noctua2.sh "ent" 60015
+# Sample usage: bash lcquad2_ft_mt5-base_noctua2.sh "lc-ent" 60000
+# Sample usage: bash lcquad2_ft_mt5-base_noctua2.sh "simple" 60005
+# Sample usage: bash lcquad2_ft_mt5-base_noctua2.sh "lc" 60010
+# Sample usage: bash lcquad2_ft_mt5-base_noctua2.sh "ent" 60015
+# Sample usage: bash lcquad2_ft_mt5-base_noctua2.sh "lc-ent-noisy" 60001
+
 
 TRAIN_POSTFIX=$1
 PORT=$2
@@ -17,4 +19,8 @@ SAVE_STEPS=1000
 
 echo Starting training for: $RUN_NAME
 
-sbatch --job-name=$RUN_NAME --time=35:00:00 noctua2_train.sh $PORT $MODEL_NAME $TRAIN_FILE $OUTPUT_DIR $RUN_NAME $TRAIN_EPOCHS $SAVE_STEPS
+# Queue the job now
+#sbatch --job-name=$RUN_NAME --time=60:00:00 noctua2_train.sh $PORT $MODEL_NAME $TRAIN_FILE $OUTPUT_DIR $RUN_NAME $TRAIN_EPOCHS $SAVE_STEPS
+
+# Queue the job later
+sbatch --begin=now+4hour --job-name=$RUN_NAME --time=60:00:00 noctua2_train.sh $PORT $MODEL_NAME $TRAIN_FILE $OUTPUT_DIR $RUN_NAME $TRAIN_EPOCHS $SAVE_STEPS
