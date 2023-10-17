@@ -18,6 +18,10 @@ from components.Knowledge_graph import Knowledge_graph
 from components.Language import Language
 from components.Query import Query
 
+from transformers import T5Tokenizer
+from components.Question import Question
+from components.Text_Generator import Text_Generator
+
 import argparse
 import logging
 import json
@@ -113,6 +117,10 @@ parser.add_argument("--port", type=int, default=8989, help="Port for the Flask a
 
 args = parser.parse_args()
 
+# Initialize global tokenizer
+Question.lm_tokenizer = T5Tokenizer.from_pretrained('google/mt5-xl', legacy=False)
+Question.lm_tokenizer.add_tokens(["<start-of-pos-tags>", "<start-of-dependency-relation>", "<start-of-dependency-tree-depth>", "<start-of-entity-info>"])
+
 # path to model
 model_path = args.model
 
@@ -134,7 +142,9 @@ port = args.port
 
 print('Input attributes are set, initializing model...')
 # Initialize the model
-sparql_model = Summarizer(model_path)
+# sparql_model = Summarizer(model_path)
+sparql_model = Text_Generator(model_path)
+
 print('Model initialized, starting server...')
 
 if __name__ == "__main__":
