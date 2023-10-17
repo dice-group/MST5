@@ -20,7 +20,7 @@ def export_csv(output_file, dataset):
 def export_json(output_file, dataset):
     check_and_makedir_if_not_exist(output_file)
     with open(output_file, 'w', encoding='utf-8') as f:
-        json.dump(dataset, f, ensure_ascii=False, indent=4, sort_keys=True)
+        json.dump(dataset, f, ensure_ascii=False, indent=4)
     print("json file is exported to ", output_file)
 
 

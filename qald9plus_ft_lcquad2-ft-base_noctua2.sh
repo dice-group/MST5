@@ -18,4 +18,8 @@ SAVE_STEPS=500
 
 echo Starting training for: $RUN_NAME
 
-sbatch --job-name=$RUN_NAME --time=15:00:00 noctua2_train.sh $PORT $MODEL_NAME $TRAIN_FILE $OUTPUT_DIR $RUN_NAME $TRAIN_EPOCHS $SAVE_STEPS
+# Queue the job now
+# sbatch --job-name=$RUN_NAME --time=40:00:00 noctua2_train.sh $PORT $MODEL_NAME $TRAIN_FILE $OUTPUT_DIR $RUN_NAME $TRAIN_EPOCHS $SAVE_STEPS
+
+# Queue the job later
+sbatch --begin=now+11hour --job-name=$RUN_NAME --time=40:00:00 noctua2_train.sh $PORT $MODEL_NAME $TRAIN_FILE $OUTPUT_DIR $RUN_NAME $TRAIN_EPOCHS $SAVE_STEPS

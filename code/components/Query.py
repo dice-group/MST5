@@ -111,7 +111,7 @@ class Query:
             if r[0] in sparql:
                 sparql = sparql.replace(r[0], r[1])
         if self.is_predicted:
-            self.sparql = QUERY_PREFIX + '\n' + self.sparql
+            sparql = QUERY_PREFIX + '\n' + sparql
         return sparql
     
     
@@ -132,14 +132,14 @@ class Query:
             return {"head": {"vars": []}, "results": {"bindings": []}}
 
     def ask_wikidata(self):
-        # endpoint_url = "https://query.wikidata.org/sparql"
+        #endpoint_url = "https://query.wikidata.org/sparql"
         endpoint_url = "https://skynet.coypu.org/wikidata/"
         try:
-            # user_agent = "WDQS-example Python/%s.%s" % (sys.version_info[0], sys.version_info[1])
-            # sparql = SPARQLWrapper(endpoint_url, agent=user_agent)
+            #user_agent = "WDQS-example Python/%s.%s" % (sys.version_info[0], sys.version_info[1])
+            #sparql = SPARQLWrapper(endpoint_url, agent=user_agent)
             sparql = SPARQLWrapper(endpoint_url)
             sparql.setQuery(self.sparql)
-            print('Executing:', self.sparql)
+            # print('Executing:', self.sparql)
             sparql.setReturnFormat(JSON)
             sparql.setTimeout(600)
             sparql_results = sparql.query().convert()
