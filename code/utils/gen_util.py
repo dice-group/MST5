@@ -2,11 +2,15 @@ from utils.data_io import read_json
 from dataset.Qald import Qald, Qald_entry
 from dataset.LCquad2 import LCquad2
 import json
+from tqdm import tqdm
 
 def update_qald_dataset(input_file_path: str, output_file_path: str, languages: list, kg):
     test_file = read_json(input_file_path)
-    test_qald = Qald(test_file, kg)
-    test_qald.update_answers()
+    test_qald = Qald(test_file, kg, False)
+    # test_qald.update_answers()
+    qald_entry: Qald_entry
+    for qald_entry in tqdm(test_qald.entries):
+        qald_entry.update_answer()
     test_qald.export_qald_json(languages, output_file_path)
     
 

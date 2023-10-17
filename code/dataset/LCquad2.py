@@ -6,7 +6,8 @@ from components.Language import Language
 
 
 class LCquad2(Dataset):
-    def __init__(self, lcquad2_file) -> None:
+    def __init__(self, lcquad2_file, is_predicted=False) -> None:
+        self.is_predicted = is_predicted
         self.entries = self.build_lcquad2_list(lcquad2_file)
         self.knowledge_graph = Knowledge_graph.Wikidata
 

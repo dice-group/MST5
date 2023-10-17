@@ -9,7 +9,8 @@ from tqdm import tqdm
 class Qald(Dataset):
     
     
-    def __init__(self, arg2, knowledge_graph=None) -> None:
+    def __init__(self, arg2, knowledge_graph=None, is_predicted=False) -> None:
+        self.is_predicted = is_predicted
         if isinstance(arg2, dict):
             self.init1(arg2, knowledge_graph)
         if isinstance(arg2, list):
@@ -28,7 +29,7 @@ class Qald(Dataset):
         if qald_dataset:
             dataset = qald_dataset["questions"]
             for entry in dataset:
-                qald_entry = Qald_entry(entry["id"], entry["question"], entry["query"]["sparql"], self.knowledge_graph, entry["answers"])
+                qald_entry = Qald_entry(entry["id"], entry["question"], entry["query"]["sparql"], self.knowledge_graph, entry["answers"], self.is_predicted)
                 qald_list.append(qald_entry)
         return qald_list
     
@@ -37,7 +38,7 @@ class Qald(Dataset):
             "language": language,
             "string": question_string
         }]
-        self.entries.append(Qald_entry(id, question, sparql, self.knowledge_graph, answers))
+        self.entries.append(Qald_entry(id, question, sparql, self.knowledge_graph, answers, self.is_predicted))
 
 
     def export_train_csv(
@@ -141,7 +142,8 @@ class Qald(Dataset):
 
 class Qald_entry(Entry):
     
-    def __init__(self, id, questions, sparql, knowledge_graph, answers=None) -> None:
+    def __init__(self, id, questions, sparql, knowledge_graph, answers=None, is_predicted=False) -> None:
+        self.is_predicted = is_predicted
         if isinstance(sparql, str):
             self.init1(id, questions, sparql, knowledge_graph, answers)
         if isinstance(sparql, Query):
@@ -151,7 +153,7 @@ class Qald_entry(Entry):
     def init1(self, id, questions, sparql, knowledge_graph, answers=None) -> None:
         self.id = id
         self.questions: dict[str, Question] = self.build_questions(questions)
-        self.query: Query = super().build_query(sparql, knowledge_graph)
+        self.query: Query = super().build_query(sparql, knowledge_graph, self.is_predicted)
         self.answers = answers
         
     def init2(self, id, questions: dict[str, Question], query: Query, answers=[]) -> None:

@@ -123,8 +123,8 @@ class Entry:
         self.question = question
         self.query = query
 
-    def build_query(self, sparql, knowledge_graph):
-        return Query(sparql, knowledge_graph)
+    def build_query(self, sparql, knowledge_graph, is_predicted=False):
+        return Query(sparql, knowledge_graph, is_predicted)
 
     def build_qald_format_entry(self, qid, question_lang_and_string, sparql, answers):
         qald_format_entry = {

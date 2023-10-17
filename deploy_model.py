@@ -77,7 +77,7 @@ def convert_question_to_sparql():
     question_str = req_data['query']
     processed_question_string = prep_input(question_str, lang, **model_attr_kwargs)
     pred_sparql = sparql_model.predict_sparql(processed_question_string)
-    query = Query(pred_sparql, model_attr_kwargs['kg'])
+    query = Query(pred_sparql, model_attr_kwargs['kg'], True)
     
     logging.info('Generated SPARQL: %s' % str(query.sparql))
     

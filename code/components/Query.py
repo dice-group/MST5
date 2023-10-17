@@ -76,7 +76,8 @@ PREFIX wdv: <http://www.wikidata.org/value/>
 ANSWER_LIMIT = 1000
 
 class Query:
-    def __init__(self, sparql: str, knowledge_graph: Knowledge_graph) -> None:
+    def __init__(self, sparql: str, knowledge_graph: Knowledge_graph, is_predicted=False) -> None:
+        self.is_predicted = is_predicted
         self.sparql = self.postprocess_sparql(sparql)
         self.knowledge_graph = knowledge_graph
 
@@ -109,6 +110,8 @@ class Query:
         for r in REPLACEMENT_BACK:
             if r[0] in sparql:
                 sparql = sparql.replace(r[0], r[1])
+        if self.is_predicted:
+            self.sparql = QUERY_PREFIX + '\n' + self.sparql
         return sparql
     
     
@@ -135,8 +138,8 @@ class Query:
             # user_agent = "WDQS-example Python/%s.%s" % (sys.version_info[0], sys.version_info[1])
             # sparql = SPARQLWrapper(endpoint_url, agent=user_agent)
             sparql = SPARQLWrapper(endpoint_url)
-            # sparql.setQuery(self.sparql)
-            sparql.setQuery(QUERY_PREFIX + '\n' + self.sparql)
+            sparql.setQuery(self.sparql)
+            print('Executing:', self.sparql)
             sparql.setReturnFormat(JSON)
             sparql.setTimeout(600)
             sparql_results = sparql.query().convert()

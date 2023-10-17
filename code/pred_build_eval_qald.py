@@ -75,7 +75,7 @@ def main():
                 args.use_gold_ents
                 )
             # Creating QALD dataset object for the predictions
-            pred_qald = Qald({}, args.knowledge_graph)
+            pred_qald = Qald({}, args.knowledge_graph, True)
             # Iterating through each question to predict its SPARQL
             print('Generating SPARQLs for %s' % language)
             for id, question_string in tqdm(question_list):
