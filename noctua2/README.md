@@ -11,7 +11,7 @@ module load vis/torchvision/0.13.1-foss-2022a-CUDA-11.7.0
 source mst5-venv/bin/activate
 ```
 
-Set the hugginface cache to parallel file-system:
+Set the hugginface cache to parallel file-system (e.g):
 ```bash
 export HF_DATASETS_CACHE="/scratch/hpc-prf-lola/nikit/.cache/huggingface"
 export HUGGINGFACE_HUB_CACHE="/scratch/hpc-prf-lola/nikit/.cache/huggingface"
