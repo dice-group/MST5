@@ -14,78 +14,89 @@ python3 code/generate_train_csv.py \
 -t lcquad1 \
 -l all \
 --linguistic_context \
---question_padding_length 32 \
---entity_padding_length 5
+--question_padding_length 128 \
+--entity_padding_length 64
 ```
 
 lcquad2:
 ```bash
 python3 code/generate_train_csv.py \
 -i datasets/lcquad2/train.json \
--o datasets/lcquad2/train.csv \
+-o datasets/lcquad2/train-lc-ent.csv \
 -t lcquad2 \
 -l all \
 --linguistic_context \
 --entity_knowledge \
---question_padding_length 32 \
---entity_padding_length 5
+--question_padding_length 128 \
+--entity_padding_length 64
 ```
 
 qald dbpedia:
 ```bash
 python3 code/generate_train_csv.py \
 -i datasets/qald9plus/dbpedia/qald_9_plus_train_dbpedia.json \
--o datasets/qald9plus/dbpedia/qald_9_plus_train_dbpedia.csv \
+-o datasets/qald9plus/dbpedia/qald_9_plus_train_dbpedia-lc-ent.csv \
 -t qald \
 -kg DBpedia \
 -l all \
 --linguistic_context \
---question_padding_length 32 \
---entity_padding_length 5
+--entity_knowledge \
+--question_padding_length 128 \
+--entity_padding_length 64
 ```
 
 qald wikidata:
 ```bash
 python3 code/generate_train_csv.py \
 -i datasets/qald9plus/wikidata/qald_9_plus_train_wikidata.json \
--o datasets/qald9plus/wikidata/qald_9_plus_train_wikidata.csv \
+-o datasets/qald9plus/wikidata/qald_9_plus_train_wikidata-lc-ent.csv \
 -t qald \
 -kg Wikidata \
 -l all \
 --linguistic_context \
 --entity_knowledge \
---question_padding_length 32 \
---entity_padding_length 5
+--question_padding_length 128 \
+--entity_padding_length 64
 ```
 
 ## Train on a csv dataset
 
-`train_ds.sh` is used to train with DeepSpeed.
+`train.sh` is used to train with DeepSpeed (by default it uses `deepspeed/ds_config_zero2.json`, if you face CUDA out-of-memory issue, try reducing batch-size and/or switching to `deepspeed/ds_config_zero3.json`)
 
-`train.sh` is used to train without DeepSpeed.
 
-Please provide the following as arguments to the training script:
-- model_name: name of the base model to be fine-tuned
-- output_dir: the output directory of the fine-tuned model, by default is "fine-tuned_models/${run_name}"
-- train_file: the path of dataset used in training
+Please provide arguments in the following order to the training script:
+1. PORT : Port to be used by deepspeed
+2. MODEL_NAME : Name of the model to fine-tune
+3. TRAIN_FILE : Path to the training file
+4. OUTPUT_DIR : Output directory to save the fine-tuned model (and checkpoints)
+5. RUN_NAME: Name of the run to be used for wandb
+6. TRAIN_EPOCHS : Number of epochs to train
+7. SAVE_STEPS: Interval in training steps to save the model checkpoints
 
-Following is a sample usage of the training scripts:
+Following are sample usages of the training scripts:
 
-#### Pretraining on LcQUAD2
+#### Fine-tuning on LcQUAD2
 ```bash
-bash train_ds.sh "google/mt5-xl" fine-tuned_models/lcquad2-pretrain datasets/lcquad2/train.csv
+bash train_ds.sh 60000 "google/mt5-xl" datasets/lcquad2/train-lc-ent.csv fine-tuned_models/lcquad2-finetune_mt5-base_lc-ent lcquad2-finetune_mt5-base_lc-ent 15 1000
 ```
-#### Finetuning on QALD9Plus (Wikidata)
+#### Fine-tuning the previous model further on QALD9Plus (Wikidata)
 ```bash
-bash train_ds.sh fine-tuned_models/lcquad2-pretrain fine-tuned_models/qald9plus-finetune datasets/qald9plus/wikidata/qald_9_plus_train_wikidata.csv
+bash train_ds.sh 60010 fine-tuned_models/lcquad2-finetune_mt5-base_lc-ent datasets/qald9plus/wikidata/qald_9_plus_train_wikidata-lc-ent.csv fine-tuned_models/qald9plus-finetune_lcquad2-ft-base_lc-ent qald9plus-finetune_lcquad2-ft-base_lc-ent 32 1000
 ```
 
 ## Evaluation
 
+Please provide arguments in the following order to the evaluation script:
+1. MODEL_ROOT_DIR : Directory where fine-tuned models are stored: fine-tuned_models
+2. MODEL_NAME : Name of the model: qald9plus-finetune_mt5-base_lc-ent
+3. TEST_FILE : Path to the qald test file
+4. OUTPUT_DIR : Root directory where a new directory with model_name will be created to store predictions and results
+5. LANGS : Comma separated values e.g: en,de,es
+6. LC : linguistic context : true/false
+7. EK : entity knowledge : true/false
+
+Sample usage:
+
 ```bash
-bash eval.sh
-```
-If you only want to export GERBIL results to a csv file:
-```bash
-python3 code/gerbil_eval.py --experiment_id [experiment_id] --pred_path [path_for_output]
+bash eval.sh fine-tuned_models qald9plus-finetune_lcquad2-ft-base_lc-ent datasets/qald9plus/wikidata/qald_9_plus_test_wikidata.json predictions_qald9plus_test "en,de,ru,zh" true true
 ```
