@@ -12,3 +12,7 @@ wget https://raw.githubusercontent.com/AskNowQA/LC-QuAD2.0/master/dataset/test.j
 # Download qald10 
 # We use the custom dataset now:
 # wget https://raw.githubusercontent.com/KGQA/QALD_10/main/data/qald_10/qald_10.json -P datasets/qald10/
+wget https://raw.githubusercontent.com/KGQA/QALD-10/main/data/qald_9_plus/qald_9_plus_train_wikidata.json -P datasets/qald10/
+echo Updating qald10 train with es, zh and ja translations.
+python3 code/gen_qald10_train.py
+echo Datasets ready for use.
