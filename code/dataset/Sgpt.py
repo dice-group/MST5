@@ -58,7 +58,7 @@ class Sgpt_entry(Entry):
             "language": "en",
                         "string": "example question"
         }
-        answer = query.get_answer()
+        answer = query.get_answer()['answer']
         sparql = self.get_sparql_with_prefixes(source)
 
         return super().build_qald_format_entry(id, question_lang_and_string, sparql, answer)

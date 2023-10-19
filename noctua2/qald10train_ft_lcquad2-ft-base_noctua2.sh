@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Sample usage: bash qald10train_ft_lcquad2-ft-base_noctua2.sh "lc-ent" 60020
-# Sample usage: bash qald10train_ft_lcquad2-ft-base_noctua2.sh "lc-ent-noisy" 60025
+# Sample usage: bash noctua2/qald10train_ft_lcquad2-ft-base_noctua2.sh "lc-ent" 60020
+# Sample usage: bash noctua2/qald10train_ft_lcquad2-ft-base_noctua2.sh "lc-ent-noisy" 60025
 
 TRAIN_POSTFIX=$1
 PORT=$2

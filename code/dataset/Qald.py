@@ -144,6 +144,7 @@ class Qald_entry(Entry):
     
     def __init__(self, id, questions, sparql, knowledge_graph, answers=None, is_predicted=False) -> None:
         self.is_predicted = is_predicted
+        self.query_exec_info = {}
         if isinstance(sparql, str):
             self.init1(id, questions, sparql, knowledge_graph, answers)
         if isinstance(sparql, Query):
@@ -195,4 +196,6 @@ class Qald_entry(Entry):
     
 
     def update_answer(self):
-        self.answers = self.query.get_answer()
+        self.query_exec_info = self.query.get_answer()
+        self.query_exec_info['id'] = self.id
+        self.answers = self.query_exec_info['answer']

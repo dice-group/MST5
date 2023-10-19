@@ -117,10 +117,10 @@ class Query:
     
     def get_answer(self):
         if self.knowledge_graph == Knowledge_graph.DBpedia:
-            answer = self.ask_dbpedia()
+            query_exec_info = self.ask_dbpedia()
         elif self.knowledge_graph == Knowledge_graph.Wikidata:
-            answer = self.ask_wikidata()
-        return answer
+            query_exec_info = self.ask_wikidata()
+        return query_exec_info
     
     def ask_dbpedia(self) -> dict[str, any]:
         try:
@@ -132,6 +132,11 @@ class Query:
             return {"head": {"vars": []}, "results": {"bindings": []}}
 
     def ask_wikidata(self):
+        query_exec_info = {
+            'empty_endpoint_result': False,
+            'sparql_exception': False,
+            'answer': None
+        }
         #endpoint_url = "https://query.wikidata.org/sparql"
         endpoint_url = "https://skynet.coypu.org/wikidata/"
         try:
@@ -148,12 +153,19 @@ class Query:
                 bindings = sparql_results["results"]["bindings"]
                 if len(bindings) > ANSWER_LIMIT:
                     raise Exception("SPARQL result surpasses the set answer limit: %d" % ANSWER_LIMIT)
-            # return extracted results           
-            return sparql_results
+                elif len(bindings) == 0:
+                    query_exec_info['empty_endpoint_result'] = True
+            else:
+                query_exec_info['empty_endpoint_result'] = True
+            # return extracted results
+            query_exec_info['answer'] = sparql_results          
+            return query_exec_info
         except Exception as e:
             print('Exception occurred for \tSPARQL: %s' % (self.sparql))
             print(str(e))
-            return {"head": {"vars": []}, "results": {"bindings": []}}
+            query_exec_info['sparql_exception'] = True
+            query_exec_info['answer'] = {"head": {"vars": []}, "results": {"bindings": []}}  
+            return query_exec_info
         
         
     def get_entity_knowledge(self) -> list:

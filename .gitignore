@@ -16,3 +16,4 @@ pre-trained_models/*
 *.ipynb_checkpoints/
 mst5.out
 mst5-venv/
+archive/

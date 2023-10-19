@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Sample usage: bash best_ft_t5-base_noctua2.sh
+# Sample usage: bash noctua2/best_ft_t5-base_noctua2.sh
 
 TRAIN_POSTFIX="lc-ent"
 PORT=60040

@@ -89,6 +89,29 @@ def main():
             for qald_entry in tqdm(pred_qald.entries):
                 qald_entry.update_answer()
                 time.sleep(1)
+            
+            exp_det_file = f"{pred_path}/exp_det_{language}"
+            # Extract the SPARQL execution details and write to the file
+            empty_count = 0
+            empty_ids = []
+            exception_count = 0
+            exception_ids = []
+            for qald_entry in pred_qald.entries:
+                query_exec_info = qald_entry.query_exec_info
+                if query_exec_info:
+                    if query_exec_info['empty_endpoint_result']:
+                        empty_ids.append(query_exec_info['id'])
+                        empty_count+= 1
+                    elif query_exec_info['sparql_exception']:
+                        exception_ids.append(query_exec_info['id'])
+                        exception_count+= 1
+
+            with open(exp_det_file, 'w') as exp_det:
+                 exp_det.write(f'Number of empty answers from endpoint:{empty_count}' + '\n')
+                 exp_det.write(f'Questions with empty answers from endpoint:{empty_ids}' + '\n')
+                 exp_det.write(f'Number of SPARQLs causing exceptions:{exception_count}' + '\n')
+                 exp_det.write(f'Questions with SPARQL exceptions:{exception_ids}' + '\n')
+                 
             # Output file
             output_file = f"{pred_path}/{language}.json"
             # Exporting the predicted SPARQL and fetched answers in QALD format
@@ -108,13 +131,13 @@ def main():
             gerbil.add_pred_file(f"{model_name}-{language}", output_file, language)
             response = gerbil.submit_experiment(language)
             print(response)
-            exp_uri_file = f"{pred_path}/exp_uri_{language}"
+            # exp_uri_file = f"{pred_path}/exp_uri_{language}"
             # Write the experiment URI to a file
             if response and response.text:
                 print('Gerbil response %s' % response.text)
                 exp_id = response.text
                 exp_id = "https://gerbil-qa.aksw.org/gerbil/experiment?id=" + exp_id.strip()
-                with open(exp_uri_file, 'w') as exp_det:
+                with open(exp_det_file, 'a') as exp_det:
                     exp_det.write(exp_id + '\n')
             # Save gerbil object for export later
             gerbil_dict[language] = gerbil
