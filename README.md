@@ -77,11 +77,11 @@ Following are sample usages of the training scripts:
 
 #### Fine-tuning on LcQUAD2
 ```bash
-bash train_ds.sh 60000 "google/mt5-xl" datasets/lcquad2/train-lc-ent.csv fine-tuned_models/lcquad2-finetune_mt5-base_lc-ent lcquad2-finetune_mt5-base_lc-ent 15 1000
+bash train.sh 60000 "google/mt5-xl" datasets/lcquad2/train-lc-ent.csv fine-tuned_models/lcquad2-finetune_mt5-base_lc-ent lcquad2-finetune_mt5-base_lc-ent 15 1000
 ```
 #### Fine-tuning the previous model further on QALD9Plus (Wikidata)
 ```bash
-bash train_ds.sh 60010 fine-tuned_models/lcquad2-finetune_mt5-base_lc-ent datasets/qald9plus/wikidata/qald_9_plus_train_wikidata-lc-ent.csv fine-tuned_models/qald9plus-finetune_lcquad2-ft-base_lc-ent qald9plus-finetune_lcquad2-ft-base_lc-ent 32 1000
+bash train.sh 60010 fine-tuned_models/lcquad2-finetune_mt5-base_lc-ent datasets/qald9plus/wikidata/qald_9_plus_train_wikidata-lc-ent.csv fine-tuned_models/qald9plus-finetune_lcquad2-ft-base_lc-ent qald9plus-finetune_lcquad2-ft-base_lc-ent 32 1000
 ```
 
 ## Evaluation
