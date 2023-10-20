@@ -1,11 +1,11 @@
 import json
 
-qald9plus_train_path = "../datasets/qald9plus/wikidata/qald_9_plus_train_wikidata.json"
-qald9plus_test_path = "../datasets/qald9plus/wikidata/qald_9_plus_test_wikidata.json"
+qald9plus_train_path = "datasets/qald9plus/wikidata/qald_9_plus_train_wikidata.json"
+qald9plus_test_path = "datasets/qald9plus/wikidata/qald_9_plus_test_wikidata.json"
 
-qald10_train_path = "../datasets/qald10/qald_9_plus_train_wikidata.json"
+qald10_train_path = "datasets/qald10/qald_9_plus_train_wikidata.json"
 
-output_file = "../datasets/qald10/qald10_train.json"
+output_file = "datasets/qald10/qald10_train.json"
 
 # Load both qald 9 plus test and train
 with open(qald9plus_train_path) as train_file, open(qald9plus_test_path) as test_file:
