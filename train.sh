@@ -28,7 +28,7 @@ deepspeed --include=localhost:0 --master_port $PORT code/train_new.py \
     --train_file $TRAIN_FILE \
     --output_dir $OUTPUT_DIR \
     --num_train_epochs $TRAIN_EPOCHS \
-    --per_device_train_batch_size=16 \
+    --per_device_train_batch_size=64 \
     --overwrite_output_dir \
     --save_steps $SAVE_STEPS \
     --save_total_limit 1 \

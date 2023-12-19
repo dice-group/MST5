@@ -48,7 +48,7 @@ class DataTrainingArguments:
         metadata={"help": "The number of processes to use for the preprocessing."},
     )
     max_source_length: Optional[int] = field(
-        default=1024,
+        default=576, # modified for mst5 (lc-ent), look here for more details: notebooks/tokenization_util.ipynb
         metadata={
             "help": (
                 "The maximum total input sequence length after tokenization. Sequences longer "
@@ -57,7 +57,7 @@ class DataTrainingArguments:
         },
     )
     max_target_length: Optional[int] = field(
-        default=128,
+        default=256, # modified for mst5 (lc-ent), look here for more details: notebooks/tokenization_util.ipynb
         metadata={
             "help": (
                 "The maximum total sequence length for target text after tokenization. Sequences longer "

@@ -14,6 +14,7 @@ python3 code/generate_train_csv.py \
 -t lcquad1 \
 -l all \
 --linguistic_context \
+--entity_knowledge \
 --question_padding_length 128 \
 --entity_padding_length 64
 ```
