@@ -1,13 +1,25 @@
 '''
 Example usage: 
 
-python deploy_model.py --model fine-tuned_models/qald9plus-finetune \
+# Wikidata
+python deploy_model.py --model fine-tuned_models/qald9plus-finetune_lcquad2-ft-base_lc-ent \
     --knowledge_graph Wikidata \
     --linguistic_context \
     --entity_knowledge \
-    --question_padding_length 32 \
-    --entity_padding_length 5 \
-    --port 8181
+    --question_padding_length 128 \
+    --entity_padding_length 64 \
+    --port 8181 \
+    --log_file logs/server-mst5-wiki.log
+    
+# DBpedia
+python deploy_model.py --model fine-tuned_models/qald9plus-finetune_lcquad1-ft-base_lc-ent \
+    --knowledge_graph DBpedia \
+    --linguistic_context \
+    --entity_knowledge \
+    --question_padding_length 128 \
+    --entity_padding_length 64 \
+    --port 8185 \
+    --log_file logs/server-mst5-dbp.log
 '''
 import sys
 sys.path.append('./code/')
@@ -33,10 +45,37 @@ from flask import Flask
 # Variable to store the input attributes unique to the model
 model_attr_kwargs = {}
 sparql_model = None
-port = 8989
+
+# Confguring model
+parser = argparse.ArgumentParser(
+    description="A program to use model to predict query and build qald dataset")
+
+parser.add_argument("--model", type=str,
+                    help="model path", required=True)
+parser.add_argument("--knowledge_graph", type=str,
+                    help="type of knowledge_graph", required=True)
+parser.add_argument("--linguistic_context", action=argparse.BooleanOptionalAction,
+                    help='With or without linguistic context in question string')
+parser.add_argument("--entity_knowledge", action=argparse.BooleanOptionalAction,
+                    help='With or without entity knowledge in question string')
+parser.add_argument("--question_padding_length", type=int, 
+                    help="length of question string and every linguistic context after padding. \
+                    If not provided, no padding will be added.",
+                    default=0)
+parser.add_argument("--entity_padding_length", type=int,
+                    help="length of entity knowledge after padding. \
+                    If not provided, no padding will be added.",
+                    default=0)
+parser.add_argument("--log_file", type=str,
+                    help="server log file.", required=False,
+                    default='logs/server.log')
+
+parser.add_argument("--port", type=int, default=8989, help="Port for the Flask app")
+
+args = parser.parse_args()
 
 # configuring logging
-log_filename = 'logs/server.log'
+log_filename = args.log_file
 os.makedirs(os.path.dirname(log_filename), exist_ok=True)
 logging.basicConfig(filename=log_filename, level=logging.DEBUG,
                     format=f'%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s', filemode='w')
@@ -90,32 +129,6 @@ def convert_question_to_sparql():
 @app.route('/check-service', methods=['GET'])
 def check_service():
     return 'Service is online.'
-
-
-# Confguring model
-parser = argparse.ArgumentParser(
-    description="A program to use model to predict query and build qald dataset")
-
-parser.add_argument("--model", type=str,
-                    help="model path", required=True)
-parser.add_argument("--knowledge_graph", type=str,
-                    help="type of knowledge_graph", required=True)
-parser.add_argument("--linguistic_context", action=argparse.BooleanOptionalAction,
-                    help='With or without linguistic context in question string')
-parser.add_argument("--entity_knowledge", action=argparse.BooleanOptionalAction,
-                    help='With or without entity knowledge in question string')
-parser.add_argument("--question_padding_length", type=int, 
-                    help="length of question string and every linguistic context after padding. \
-                    If not provided, no padding will be added.",
-                    default=0)
-parser.add_argument("--entity_padding_length", type=int,
-                    help="length of entity knowledge after padding. \
-                    If not provided, no padding will be added.",
-                    default=0)
-
-parser.add_argument("--port", type=int, default=8989, help="Port for the Flask app")
-
-args = parser.parse_args()
 
 # Initialize global tokenizer
 Question.lm_tokenizer = T5Tokenizer.from_pretrained('google/mt5-xl', legacy=False)

@@ -61,16 +61,26 @@ SYMBOL_REPLACEMENT = [
     ['\|', ' sep_or '],
 ]
 
-QUERY_PREFIX = """
+QUERY_PREFIX_WIKIDATA = """
 PREFIX p: <http://www.wikidata.org/prop/>
 PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
 PREFIX ps: <http://www.wikidata.org/prop/statement/>
 PREFIX psn: <http://www.wikidata.org/prop/statement/value-normalized/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX wd: <http://www.wikidata.org/entity/>
 PREFIX wds: <http://www.wikidata.org/entity/statement/>
 PREFIX wdt: <http://www.wikidata.org/prop/direct/> 
 PREFIX wdv: <http://www.wikidata.org/value/>
+"""
+
+QUERY_PREFIX_DBPEDIA = """
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbp: <http://dbpedia.org/property/>
+PREFIX yago: <http://dbpedia.org/class/yago/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 """
 
 ANSWER_LIMIT = 1000
@@ -78,8 +88,8 @@ ANSWER_LIMIT = 1000
 class Query:
     def __init__(self, sparql: str, knowledge_graph: Knowledge_graph, is_predicted=False) -> None:
         self.is_predicted = is_predicted
-        self.sparql = self.postprocess_sparql(sparql)
         self.knowledge_graph = knowledge_graph
+        self.sparql = self.postprocess_sparql(sparql)
 
     def preprocess(self):
         return self.replace_prefix_abbr(
@@ -106,12 +116,17 @@ class Query:
         return sparql_query.split(keyword, 1)[1]
 
 
-    def postprocess_sparql(self, sparql):
+    def postprocess_sparql(self, sparql: str):
         for r in REPLACEMENT_BACK:
             if r[0] in sparql:
                 sparql = sparql.replace(r[0], r[1])
         if self.is_predicted:
-            sparql = QUERY_PREFIX + '\n' + sparql
+            query_prefix = ''
+            if self.knowledge_graph == Knowledge_graph.DBpedia:
+                query_prefix = QUERY_PREFIX_DBPEDIA
+            elif self.knowledge_graph == Knowledge_graph.Wikidata:
+                query_prefix = QUERY_PREFIX_WIKIDATA
+            sparql = query_prefix + '\n' + sparql
         return sparql
     
     
