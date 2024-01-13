@@ -4,6 +4,8 @@ from components.Query import Query
 from components.Question import Question
 from utils.data_io import export_csv
 from tqdm import tqdm
+from sklearn.model_selection import train_test_split
+
 class Dataset:
     def __init__(self, entries: list[Query], knowledge_graph=None):
         self.entries = entries
@@ -16,18 +18,34 @@ class Dataset:
             include_entity_knowledge=False,
             question_padding_length=0,
             entity_padding_length=0,
-            extend_with_noisy_entities=False):
-        csv_dataset = self.to_train_csv(
-            include_linguistic_context, 
-            include_entity_knowledge,
-            question_padding_length,
-            entity_padding_length,
-            extend_with_noisy_entities
-            )
-        export_csv(output_file, csv_dataset)
+            extend_with_noisy_entities=False,
+            train_split_percent=100):
+        
+
+        # If train_split_percent is less than 100, then split the entries
+        splits = []
+        if train_split_percent < 100 :
+            # split the files
+            train, eval = train_test_split(self.entries, train_size= float(train_split_percent) / 100, random_state=42)
+            splits.append((output_file + '_train_'+ str(train_split_percent) +'pct.csv', train, extend_with_noisy_entities))
+            splits.append((output_file + '_dev_'+ str(100 - int(train_split_percent)) +'pct.csv', eval, True))
+        else:
+            splits.append((output_file + '_full.csv', self.entries, extend_with_noisy_entities))
+        
+        for split in splits:
+            csv_dataset = self.to_train_csv(
+                split[1],
+                include_linguistic_context, 
+                include_entity_knowledge,
+                question_padding_length,
+                entity_padding_length,
+                split[2]
+                )
+            export_csv(split[0], csv_dataset)
 
     def to_train_csv(
-            self, 
+            self,
+            entries, 
             include_linguistic_context=False, 
             include_entity_knowledge=False,
             question_padding_length=0,
@@ -35,8 +53,8 @@ class Dataset:
             extend_with_noisy_entities=False):
         csv = [['question', 'query']]
         entry: Entry
-        print("Preparing training CSV")
-        for entry in tqdm(self.entries):
+        print("Preparing LCQUAD CSV")
+        for entry in tqdm(entries):
             question = entry.question
             question_string = self.get_question_string(
                 entry, 

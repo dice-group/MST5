@@ -5,6 +5,7 @@ import sys
 import datasets
 import numpy as np
 from datasets import load_dataset
+from transformers import EarlyStoppingCallback
 
 
 import transformers
@@ -298,17 +299,18 @@ def main():
         labels = [label.strip() for label in labels]
         return preds, labels
 
-    def compute_metrics(eval_preds):
-        preds, refs = eval_preds
-        if isinstance(preds, tuple):
-            preds = preds[0]
-        decoded_preds = tokenizer.batch_decode(preds, skip_special_tokens=True)
-        ref = np.where(ref != -100, ref, tokenizer.pad_token_id)
-        decoded_refs = tokenizer.batch_decode(refs, skip_special_tokens=True)
+    ## Commenting the function below to rely only on loss value
+    # def compute_metrics(eval_preds):
+    #     preds, refs = eval_preds
+    #     if isinstance(preds, tuple):
+    #         preds = preds[0]
+    #     decoded_preds = tokenizer.batch_decode(preds, skip_special_tokens=True)
+    #     ref = np.where(ref != -100, ref, tokenizer.pad_token_id)
+    #     decoded_refs = tokenizer.batch_decode(refs, skip_special_tokens=True)
 
-        # Some simple post-processing
-        decoded_preds, decoded_refs = postprocess_text(
-            decoded_preds, decoded_refs)
+    #     # Some simple post-processing
+    #     decoded_preds, decoded_refs = postprocess_text(
+    #         decoded_preds, decoded_refs)
 
         # GERBIL
         # pred_sparqls = []
@@ -335,7 +337,8 @@ def main():
     training_args.generation_num_beams = (
         data_args.num_beams if data_args.num_beams is not None else training_args.generation_num_beams
     )
-
+    # Taking care of early stopping
+    early_stopping_callback = EarlyStoppingCallback(early_stopping_patience=6)
     # Initialize our Trainer
     trainer = Seq2SeqTrainer(
         model=model,
@@ -344,7 +347,8 @@ def main():
         eval_dataset=eval_dataset if training_args.do_eval else None,
         tokenizer=tokenizer,
         data_collator=data_collator,
-        compute_metrics=compute_metrics
+        callbacks=[early_stopping_callback]
+        # compute_metrics=compute_metrics if compute_metrics else None
     )
 
     # Training

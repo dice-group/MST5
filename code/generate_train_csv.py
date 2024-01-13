@@ -23,12 +23,12 @@ def get_only_supported_languages(languages):
     
 def main():
     parser = argparse.ArgumentParser(
-        description="A program to convert qald 9 questions and queries to csv dataset")
+        description="A program to convert lcquad and qald 9 based datasets to text-to-sparql csv dataset.")
 
     parser.add_argument("-i", "--input", type=str,
                         help="name of input file", required=True)
     parser.add_argument("-o", "--output", type=str,
-                        help="name of output file", required=True)
+                        help="output file prefix", required=True)
     parser.add_argument("-t", "--type", type=str,
                         help="type of input file", required=True)
     parser.add_argument("-kg", "--knowledge_graph", type=str,
@@ -50,6 +50,9 @@ def main():
     parser.add_argument('--extend_with_noisy_entities', action=argparse.BooleanOptionalAction,
                         help='To append the training data with samples extracted using NER/EL tools.\
                             This is done in addition to the already gold entities extraction through reference SPARQLs.')
+    parser.add_argument("--train_split_percent", type=int,
+                        help="percentage of training data to use for the train split. The rest will be used for val split.",
+                        default=100, required=False)
     
     args = parser.parse_args()
     
@@ -67,7 +70,8 @@ def main():
             args.entity_knowledge,
             args.question_padding_length,
             args.entity_padding_length,
-            args.extend_with_noisy_entities
+            args.extend_with_noisy_entities,
+            args.train_split_percent
             )
     if dataset_type == "qald":
         dataset = Qald(input_file, args.knowledge_graph)
@@ -84,7 +88,8 @@ def main():
         include_entity_knowledge=args.entity_knowledge,
         question_padding_length=args.question_padding_length,
         entity_padding_length=args.entity_padding_length,
-        extend_with_noisy_entities = args.extend_with_noisy_entities
+        extend_with_noisy_entities = args.extend_with_noisy_entities,
+        train_split_percent = args.train_split_percent
     )
 
 

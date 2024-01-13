@@ -4,61 +4,67 @@
 
 Follow installation instructions in [notebooks/installation_instruction.ipynb](notebooks/installation_instruction.ipynb)
 
-## Generate train data set
+## Generate train & dev data set
 
 lcquad1:
 ```bash
 python3 code/generate_train_csv.py \
 -i datasets/lcquad1/train-data.json \
--o datasets/lcquad1/train-data.csv \
+-o datasets/lcquad1/train-data \
 -t lcquad1 \
 -l all \
 --linguistic_context \
 --entity_knowledge \
 --question_padding_length 128 \
---entity_padding_length 64
+--entity_padding_length 64 \
+--train_split_percent 90
 ```
 
 lcquad2:
 ```bash
 python3 code/generate_train_csv.py \
 -i datasets/lcquad2/train.json \
--o datasets/lcquad2/train-lc-ent.csv \
+-o datasets/lcquad2/train-lc-ent \
 -t lcquad2 \
 -l all \
 --linguistic_context \
 --entity_knowledge \
 --question_padding_length 128 \
---entity_padding_length 64
+--entity_padding_length 64 \
+--train_split_percent 90
 ```
 
 qald dbpedia:
 ```bash
 python3 code/generate_train_csv.py \
 -i datasets/qald9plus/dbpedia/qald_9_plus_train_dbpedia.json \
--o datasets/qald9plus/dbpedia/qald_9_plus_train_dbpedia-lc-ent.csv \
+-o datasets/qald9plus/dbpedia/qald_9_plus_train_dbpedia-lc-ent \
 -t qald \
 -kg DBpedia \
 -l all \
 --linguistic_context \
 --entity_knowledge \
 --question_padding_length 128 \
---entity_padding_length 64
+--entity_padding_length 64 \
+--train_split_percent 90
 ```
 
 qald wikidata:
 ```bash
 python3 code/generate_train_csv.py \
 -i datasets/qald9plus/wikidata/qald_9_plus_train_wikidata.json \
--o datasets/qald9plus/wikidata/qald_9_plus_train_wikidata-lc-ent.csv \
+-o datasets/qald9plus/wikidata/qald_9_plus_train_wikidata-lc-ent \
 -t qald \
 -kg Wikidata \
 -l all \
 --linguistic_context \
 --entity_knowledge \
 --question_padding_length 128 \
---entity_padding_length 64
+--entity_padding_length 64 \
+--train_split_percent 90
 ```
+
+Note: The dev dataset is made noisy by default and is meant only for evaluating the loss. For evaluating the QA system, please look here [Evaluation](#Evaluation)
 
 ## Train on a csv dataset
 
@@ -76,13 +82,22 @@ Please provide arguments in the following order to the training script:
 
 Following are sample usages of the training scripts:
 
+#### Fine-tuning on LcQUAD1
+```bash
+bash train.sh 60020 "google/mt5-xl" datasets/lcquad1/train-data_train_90pct.csv datasets/lcquad1/train-data_dev_10pct.csv fine-tuned_models/lcquad1-finetune_mt5-base_lc-ent lcquad1-finetune_mt5-base_lc-ent 32
+```
+#### Fine-tuning the previous model further on QALD9Plus (DBpedia)
+```bash
+bash train.sh 60030 fine-tuned_models/lcquad1-finetune_mt5-base_lc-ent datasets/qald9plus/dbpedia/qald_9_plus_train_dbpedia-lc-ent_train_90pct.csv datasets/qald9plus/dbpedia/qald_9_plus_train_dbpedia-lc-ent_dev_10pct.csv fine-tuned_models/qald9plus-finetune_lcquad1-ft-base_lc-ent qald9plus-finetune_lcquad1-ft-base_lc-ent 32
+```
+
 #### Fine-tuning on LcQUAD2
 ```bash
-bash train.sh 60000 "google/mt5-xl" datasets/lcquad2/train-lc-ent.csv fine-tuned_models/lcquad2-finetune_mt5-base_lc-ent lcquad2-finetune_mt5-base_lc-ent 15 1000
+bash train.sh 60000 "google/mt5-xl" datasets/lcquad2/train-lc-ent_train_90pct.csv datasets/lcquad2/train-lc-ent_dev_10pct.csv fine-tuned_models/lcquad2-finetune_mt5-base_lc-ent lcquad2-finetune_mt5-base_lc-ent 32
 ```
 #### Fine-tuning the previous model further on QALD9Plus (Wikidata)
 ```bash
-bash train.sh 60010 fine-tuned_models/lcquad2-finetune_mt5-base_lc-ent datasets/qald9plus/wikidata/qald_9_plus_train_wikidata-lc-ent.csv fine-tuned_models/qald9plus-finetune_lcquad2-ft-base_lc-ent qald9plus-finetune_lcquad2-ft-base_lc-ent 32 1000
+bash train.sh 60010 fine-tuned_models/lcquad2-finetune_mt5-base_lc-ent datasets/qald9plus/wikidata/qald_9_plus_train_wikidata-lc-ent_train_90pct.csv datasets/qald9plus/wikidata/qald_9_plus_train_wikidata-lc-ent_dev_10pct.csv fine-tuned_models/qald9plus-finetune_lcquad2-ft-base_lc-ent qald9plus-finetune_lcquad2-ft-base_lc-ent 32
 ```
 
 ## Evaluation

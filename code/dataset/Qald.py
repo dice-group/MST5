@@ -5,6 +5,7 @@ from components.Language import Language
 from components.Question import Question
 from components.Query import Query
 from tqdm import tqdm
+from sklearn.model_selection import train_test_split
 
 class Qald(Dataset):
     
@@ -49,19 +50,33 @@ class Qald(Dataset):
             include_entity_knowledge=False,
             question_padding_length=0,
             entity_padding_length=0,
-            extend_with_noisy_entities=False) -> None:
-        csv_dataset = self.to_train_csv(
-            languages, 
-            include_linguistic_context, 
-            include_entity_knowledge,
-            question_padding_length,
-            entity_padding_length,
-            extend_with_noisy_entities
-            )
-        export_csv(output_file, csv_dataset)
+            extend_with_noisy_entities=False,
+            train_split_percent=100) -> None:
+        # If train_split_percent is less than 100, then split the entries
+        splits = []
+        if train_split_percent < 100 :
+            # split the files
+            train, eval = train_test_split(self.entries, train_size= float(train_split_percent) / 100, random_state=42)
+            splits.append((output_file + '_train_'+ str(train_split_percent) + 'pct.csv', train, extend_with_noisy_entities))
+            splits.append((output_file + '_dev_'+ str(100 - int(train_split_percent)) +'pct.csv', eval, True))
+        else:
+            splits.append((output_file + '_full.csv', self.entries))
+        
+        for split in splits:
+            csv_dataset = self.to_train_csv(
+                split[1],
+                languages,
+                include_linguistic_context, 
+                include_entity_knowledge,
+                question_padding_length,
+                entity_padding_length,
+                split[2]
+                )
+            export_csv(split[0], csv_dataset)
 
     def to_train_csv(
-            self, 
+            self,
+            entries, 
             languages, 
             include_linguistic_context, 
             include_entity_knowledge,
@@ -71,7 +86,7 @@ class Qald(Dataset):
         csv_dataset = [["question", "query"]]
         entry: Qald_entry
         print("Preparing QALD CSV")
-        for entry in tqdm(self.entries):
+        for entry in tqdm(entries):
             sparql = entry.query.preprocess()
             for language in languages:
                 if language in entry.questions:

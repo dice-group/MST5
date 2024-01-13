@@ -30,14 +30,14 @@ class DataTrainingArguments:
         default=None,
         metadata={
             "help": (
-                "An optional input evaluation data file to evaluate the metrics (rouge) on (a jsonlines or csv file)."
+                "An optional input evaluation data file to evaluate the metrics (custom implementation of \"compute_metrics\") on (a jsonlines or csv file)."
             )
         },
     )
     test_file: Optional[str] = field(
         default=None,
         metadata={
-            "help": "An optional input test data file to evaluate the metrics (rouge) on (a jsonlines or csv file)."
+            "help": "An optional input test data file to evaluate the metrics (custom implementation of \"compute_metrics\") on (a jsonlines or csv file)."
         },
     )
     overwrite_cache: bool = field(

@@ -16,3 +16,4 @@ ipywidgets
 flask
 html5lib
 ipykernel
+scikit-learn
