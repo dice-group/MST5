@@ -4,7 +4,7 @@
 
 python3 code/generate_train_csv.py \
 -i datasets/lcquad2/train.json \
--o datasets/lcquad2/train-simple.csv \
+-o datasets/lcquad2/train-simple \
 -t lcquad2 \
 --question_padding_length 128 \
 --train_split_percent 90
@@ -12,7 +12,7 @@ python3 code/generate_train_csv.py \
 
 python3 code/generate_train_csv.py \
 -i datasets/qald9plus/wikidata/qald_9_plus_train_wikidata.json \
--o datasets/qald9plus/wikidata/qald_9_plus_train_wikidata-simple.csv \
+-o datasets/qald9plus/wikidata/qald_9_plus_train_wikidata-simple \
 -t qald \
 -kg Wikidata \
 -l all \
@@ -25,7 +25,7 @@ python3 code/generate_train_csv.py \
 
 python3 code/generate_train_csv.py \
 -i datasets/lcquad2/train.json \
--o datasets/lcquad2/train-lc-ent.csv \
+-o datasets/lcquad2/train-lc-ent \
 -t lcquad2 \
 --linguistic_context \
 --question_padding_length 128 \
@@ -34,7 +34,7 @@ python3 code/generate_train_csv.py \
 
 python3 code/generate_train_csv.py \
 -i datasets/qald9plus/wikidata/qald_9_plus_train_wikidata.json \
--o datasets/qald9plus/wikidata/qald_9_plus_train_wikidata-lc.csv \
+-o datasets/qald9plus/wikidata/qald_9_plus_train_wikidata-lc \
 -t qald \
 -kg Wikidata \
 -l all \
@@ -47,7 +47,7 @@ python3 code/generate_train_csv.py \
 
 python3 code/generate_train_csv.py \
 -i datasets/lcquad2/train.json \
--o datasets/lcquad2/train-ent.csv \
+-o datasets/lcquad2/train-ent \
 -t lcquad2 \
 --entity_knowledge \
 --question_padding_length 128 \
@@ -57,7 +57,7 @@ python3 code/generate_train_csv.py \
 
 python3 code/generate_train_csv.py \
 -i datasets/qald9plus/wikidata/qald_9_plus_train_wikidata.json \
--o datasets/qald9plus/wikidata/qald_9_plus_train_wikidata-ent.csv \
+-o datasets/qald9plus/wikidata/qald_9_plus_train_wikidata-ent \
 -t qald \
 -kg Wikidata \
 -l all \
@@ -71,7 +71,7 @@ python3 code/generate_train_csv.py \
 
 python3 code/generate_train_csv.py \
 -i datasets/lcquad2/train.json \
--o datasets/lcquad2/train-lc-ent.csv \
+-o datasets/lcquad2/train-lc-ent \
 -t lcquad2 \
 --linguistic_context \
 --entity_knowledge \
@@ -82,7 +82,7 @@ python3 code/generate_train_csv.py \
 
 python3 code/generate_train_csv.py \
 -i datasets/qald9plus/wikidata/qald_9_plus_train_wikidata.json \
--o datasets/qald9plus/wikidata/qald_9_plus_train_wikidata-lc-ent.csv \
+-o datasets/qald9plus/wikidata/qald_9_plus_train_wikidata-lc-ent \
 -t qald \
 -kg Wikidata \
 -l all \
@@ -97,7 +97,7 @@ python3 code/generate_train_csv.py \
 
 # python3 code/generate_train_csv.py \
 # -i datasets/lcquad2/train.json \
-# -o datasets/lcquad2/train-lc-ent-noisy.csv \
+# -o datasets/lcquad2/train-lc-ent-noisy \
 # -t lcquad2 \
 # --linguistic_context \
 # --entity_knowledge \
@@ -109,7 +109,7 @@ python3 code/generate_train_csv.py \
 
 # python3 code/generate_train_csv.py \
 # -i datasets/qald9plus/wikidata/qald_9_plus_train_wikidata.json \
-# -o datasets/qald9plus/wikidata/qald_9_plus_train_wikidata-lc-ent-noisy.csv \
+# -o datasets/qald9plus/wikidata/qald_9_plus_train_wikidata-lc-ent-noisy \
 # -t qald \
 # -kg Wikidata \
 # -l all \
@@ -125,7 +125,7 @@ python3 code/generate_train_csv.py \
 
 # python3 code/generate_train_csv.py \
 # -i datasets/qald10/qald10_train.json \
-# -o datasets/qald10/qald10_train-lc-ent-noisy.csv \
+# -o datasets/qald10/qald10_train-lc-ent-noisy \
 # -t qald \
 # -kg Wikidata \
 # -l all \
@@ -139,7 +139,7 @@ python3 code/generate_train_csv.py \
 
 # python3 code/generate_train_csv.py \
 # -i datasets/qald10/qald10_train.json \
-# -o datasets/qald10/qald10_train-lc-ent.csv \
+# -o datasets/qald10/qald10_train-lc-ent \
 # -t qald \
 # -kg Wikidata \
 # -l all \
