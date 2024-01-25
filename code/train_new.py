@@ -243,7 +243,8 @@ def main():
 
         model_inputs["labels"] = labels["input_ids"]
         return model_inputs
-
+    # Training callbacks list initialization
+    train_callbacks = []
     # preprocess train dataset
     if training_args.do_train:
         if "train" not in raw_datasets:
@@ -265,6 +266,11 @@ def main():
 
     # preprocess validation dataset
     if training_args.do_eval:
+        # Taking care of early stopping
+        early_stopping_callback = EarlyStoppingCallback(early_stopping_patience=6)
+        # Comment the line below to deactivate early stopping
+        train_callbacks.append(early_stopping_callback)
+        
         max_target_length = data_args.val_max_target_length
         if "validation" not in raw_datasets:
             raise ValueError("--do_eval requires a validation dataset")
@@ -337,8 +343,7 @@ def main():
     training_args.generation_num_beams = (
         data_args.num_beams if data_args.num_beams is not None else training_args.generation_num_beams
     )
-    # Taking care of early stopping
-    early_stopping_callback = EarlyStoppingCallback(early_stopping_patience=6)
+    
     # Initialize our Trainer
     trainer = Seq2SeqTrainer(
         model=model,
@@ -347,7 +352,7 @@ def main():
         eval_dataset=eval_dataset if training_args.do_eval else None,
         tokenizer=tokenizer,
         data_collator=data_collator,
-        # callbacks=[early_stopping_callback]
+        callbacks=train_callbacks
         # compute_metrics=compute_metrics if compute_metrics else None
     )
 

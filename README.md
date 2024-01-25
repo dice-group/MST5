@@ -77,29 +77,31 @@ Please provide arguments in the following order to the training script:
 1. PORT : Port to be used by deepspeed
 2. MODEL_NAME : Name of the model to fine-tune
 3. TRAIN_FILE : Path to the training file
-4. OUTPUT_DIR : Output directory to save the fine-tuned model (and checkpoints)
-5. RUN_NAME: Name of the run to be used for wandb
-6. TRAIN_EPOCHS : Number of epochs to train
-7. SAVE_STEPS: Interval in training steps to save the model checkpoints
+4. EVAL_FILE : Path to the eval file (provide "false" to disable eval logic)
+5. OUTPUT_DIR : Output directory to save the fine-tuned model (and checkpoints)
+6. RUN_NAME: Name of the run to be used for wandb
+7. TRAIN_EPOCHS : Number of epochs to train
+8. BATCH_SIZE : Batch size per device
+9. SAVE_STEPS: Interval in training steps to save the model checkpoints
 
 Following are sample usages of the training scripts:
 
 #### Fine-tuning on LcQUAD1
 ```bash
-bash train.sh 60020 "google/mt5-xl" datasets/lcquad1/train-data_train_90pct.csv datasets/lcquad1/train-data_dev_10pct.csv fine-tuned_models/lcquad1-finetune_mt5-base_lc-ent lcquad1-finetune_mt5-base_lc-ent 32
+bash train.sh 60020 "google/mt5-xl" datasets/lcquad1/train-data_train_90pct.csv datasets/lcquad1/train-data_dev_10pct.csv fine-tuned_models/lcquad1-finetune_mt5-base_lc-ent lcquad1-finetune_mt5-base_lc-ent 32 32 1000
 ```
 #### Fine-tuning the previous model further on QALD9Plus (DBpedia)
 ```bash
-bash train.sh 60030 fine-tuned_models/lcquad1-finetune_mt5-base_lc-ent datasets/qald9plus/dbpedia/qald_9_plus_train_dbpedia-lc-ent_train_90pct.csv datasets/qald9plus/dbpedia/qald_9_plus_train_dbpedia-lc-ent_dev_10pct.csv fine-tuned_models/qald9plus-finetune_lcquad1-ft-base_lc-ent qald9plus-finetune_lcquad1-ft-base_lc-ent 32
+bash train.sh 60030 fine-tuned_models/lcquad1-finetune_mt5-base_lc-ent datasets/qald9plus/dbpedia/qald_9_plus_train_dbpedia-lc-ent_train_90pct.csv datasets/qald9plus/dbpedia/qald_9_plus_train_dbpedia-lc-ent_dev_10pct.csv fine-tuned_models/qald9plus-finetune_lcquad1-ft-base_lc-ent qald9plus-finetune_lcquad1-ft-base_lc-ent 32 32 1000
 ```
 
 #### Fine-tuning on LcQUAD2
 ```bash
-bash train.sh 60000 "google/mt5-xl" datasets/lcquad2/train-lc-ent_train_90pct.csv datasets/lcquad2/train-lc-ent_dev_10pct.csv fine-tuned_models/lcquad2-finetune_mt5-base_lc-ent lcquad2-finetune_mt5-base_lc-ent 32
+bash train.sh 60000 "google/mt5-xl" datasets/lcquad2/train-lc-ent_train_90pct.csv datasets/lcquad2/train-lc-ent_dev_10pct.csv fine-tuned_models/lcquad2-finetune_mt5-base_lc-ent lcquad2-finetune_mt5-base_lc-ent 15 32 1000
 ```
 #### Fine-tuning the previous model further on QALD9Plus (Wikidata)
 ```bash
-bash train.sh 60010 fine-tuned_models/lcquad2-finetune_mt5-base_lc-ent datasets/qald9plus/wikidata/qald_9_plus_train_wikidata-lc-ent_train_90pct.csv datasets/qald9plus/wikidata/qald_9_plus_train_wikidata-lc-ent_dev_10pct.csv fine-tuned_models/qald9plus-finetune_lcquad2-ft-base_lc-ent qald9plus-finetune_lcquad2-ft-base_lc-ent 32
+bash train.sh 60010 fine-tuned_models/lcquad2-finetune_mt5-base_lc-ent datasets/qald9plus/wikidata/qald_9_plus_train_wikidata-lc-ent_train_90pct.csv datasets/qald9plus/wikidata/qald_9_plus_train_wikidata-lc-ent_dev_10pct.csv fine-tuned_models/qald9plus-finetune_lcquad2-ft-base_lc-ent qald9plus-finetune_lcquad2-ft-base_lc-ent 32 32 1000
 ```
 
 ## Evaluation
