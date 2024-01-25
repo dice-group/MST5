@@ -347,7 +347,7 @@ def main():
         eval_dataset=eval_dataset if training_args.do_eval else None,
         tokenizer=tokenizer,
         data_collator=data_collator,
-        callbacks=[early_stopping_callback]
+        # callbacks=[early_stopping_callback]
         # compute_metrics=compute_metrics if compute_metrics else None
     )
 

@@ -137,7 +137,7 @@ class Query:
             query_exec_info = self.ask_wikidata()
         return query_exec_info
     
-    def ask_dbpedia(self) -> dict[str, any]:
+    def ask_dbpedia_old(self) -> dict[str, any]:
         try:
             sparql = SPARQLWrapper("http://dbpedia.org/sparql/")
             sparql.setReturnFormat(JSON)
@@ -145,15 +145,14 @@ class Query:
             return sparql.query().convert()
         except SPARQLWrapperException as exception:
             return {"head": {"vars": []}, "results": {"bindings": []}}
-
-    def ask_wikidata(self):
+        
+    def ask_kg(self, endpoint_url):
         query_exec_info = {
             'empty_endpoint_result': False,
             'sparql_exception': False,
             'answer': None
         }
-        #endpoint_url = "https://query.wikidata.org/sparql"
-        endpoint_url = "https://skynet.coypu.org/wikidata/"
+
         try:
             #user_agent = "WDQS-example Python/%s.%s" % (sys.version_info[0], sys.version_info[1])
             #sparql = SPARQLWrapper(endpoint_url, agent=user_agent)
@@ -181,6 +180,15 @@ class Query:
             query_exec_info['sparql_exception'] = True
             query_exec_info['answer'] = {"head": {"vars": []}, "results": {"bindings": []}}  
             return query_exec_info
+
+    def ask_dbpedia(self):
+        endpoint_url = "http://dbpedia.org/sparql/"
+        return self.ask_kg(endpoint_url)
+    
+    def ask_wikidata(self):
+        #endpoint_url = "https://query.wikidata.org/sparql"
+        endpoint_url = "https://skynet.coypu.org/wikidata/"
+        return self.ask_kg(endpoint_url)
         
         
     def get_entity_knowledge(self) -> list:
@@ -192,5 +200,5 @@ class Query:
         return entities
     
     def get_en_uri(self):
-        response = self.ask_dbpedia()
+        response = self.ask_dbpedia_old()
         return response["results"]["bindings"][0]["uri"]["value"]

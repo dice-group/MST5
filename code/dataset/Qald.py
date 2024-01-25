@@ -60,7 +60,7 @@ class Qald(Dataset):
             splits.append((output_file + '_train_'+ str(train_split_percent) + 'pct.csv', train, extend_with_noisy_entities))
             splits.append((output_file + '_dev_'+ str(100 - int(train_split_percent)) +'pct.csv', eval, True))
         else:
-            splits.append((output_file + '_full.csv', self.entries))
+            splits.append((output_file + '_full.csv', self.entries, extend_with_noisy_entities))
         
         for split in splits:
             csv_dataset = self.to_train_csv(

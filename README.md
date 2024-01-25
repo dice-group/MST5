@@ -70,6 +70,8 @@ Note: The dev dataset is made noisy by default and is meant only for evaluating 
 
 `train.sh` is used to train with DeepSpeed (by default it uses `deepspeed/ds_config_zero2.json`, if you face CUDA out-of-memory issue, try reducing batch-size and/or switching to `deepspeed/ds_config_zero3.json`)
 
+**Note**: THe gradient accumulation is set to 4, which means that for each step the model sees 4x provided batch size.
+
 
 Please provide arguments in the following order to the training script:
 1. PORT : Port to be used by deepspeed

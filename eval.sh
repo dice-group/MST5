@@ -17,6 +17,7 @@ LC=$6
 EK=$7
 
 
+#knowledge_graph="DBpedia"
 knowledge_graph="Wikidata"
 question_padding_length=128
 entity_padding_length=64

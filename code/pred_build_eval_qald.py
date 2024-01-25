@@ -58,6 +58,7 @@ def main():
     languages = args.languages.split(",")
     # Output path
     pred_path = args.output_path
+    os.makedirs(pred_path, exist_ok=True)
     
     # Gerbil experiments
     gerbil_dict = dict()
