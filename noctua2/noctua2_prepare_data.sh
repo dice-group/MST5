@@ -12,7 +12,8 @@
 
 # Sample usage: sbatch noctua2/noctua2_prepare_data.sh
 
-module load vis/torchvision/0.13.1-foss-2022a-CUDA-11.7.0
+module load system/CUDA/12.1.0
+module load lang/Python/3.11.5-GCCcore-13.2.0
 
 source mst5-venv/bin/activate
 

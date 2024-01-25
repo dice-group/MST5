@@ -30,4 +30,4 @@ echo Starting training for: $RUN_NAME
 DELAY=""
 
 # Queue the job later
-sbatch --begin=now$DELAY --job-name=$RUN_NAME --time=40:00:00 noctua2_train.sh $PORT $MODEL_NAME $TRAIN_FILE $EVAL_FILE $OUTPUT_DIR $RUN_NAME $TRAIN_EPOCHS $BATCH_SIZE $SAVE_STEPS
+sbatch --begin=now$DELAY --job-name=$RUN_NAME --time=40:00:00 noctua2/noctua2_train.sh $PORT $MODEL_NAME $TRAIN_FILE $EVAL_FILE $OUTPUT_DIR $RUN_NAME $TRAIN_EPOCHS $BATCH_SIZE $SAVE_STEPS

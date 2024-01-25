@@ -36,7 +36,7 @@ else
     echo "Evaluation file is provided. Evaluation based training logic is active."
     EXTRA_PARAMS+="--load_best_model_at_end "
     EXTRA_PARAMS+="--do_eval "
-    EXTRA_PARAMS+="--evaluation_strategy \"steps\" "
+    EXTRA_PARAMS+="--evaluation_strategy steps "
     EXTRA_PARAMS+="--eval_steps 50 "
     EXTRA_PARAMS+="--eval_delay 0 "
     EXTRA_PARAMS+="--validation_file ${EVAL_FILE} "
@@ -44,7 +44,7 @@ fi
 
 
 # change the --include argument value to state the GPU device to use.
-deepspeed --include=localhost:0,1 --master_port $PORT code/train_new.py \
+deepspeed --include=localhost:0 --master_port $PORT code/train_new.py \
     --deepspeed deepspeed/ds_config_zero2.json \
     --model_name_or_path $MODEL_NAME \
     --do_train \

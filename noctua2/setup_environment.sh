@@ -8,7 +8,8 @@
 # Sample usage: sbatch noctua2/setup_environment.sh .
 set -eu
 
-module load vis/torchvision/0.13.1-foss-2022a-CUDA-11.7.0
+module load system/CUDA/11.8.0
+module load lang/Python/3.10.4-GCCcore-11.3.0
 
 # Check if the first argument is set, if not assign the current directory path
 MST5_WS=$(pwd)
@@ -24,7 +25,9 @@ python -m venv ./mst5-venv
 
 source mst5-venv/bin/activate
 
-pip3 install --upgrade pip
+#pip3 install --upgrade pip
+
+pip install torch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 --index-url https://download.pytorch.org/whl/cu121
 
 pip3 install -r requirements.txt
 

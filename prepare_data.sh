@@ -148,3 +148,5 @@ python3 code/generate_train_csv.py \
 # --question_padding_length 128 \
 # --entity_padding_length 64 \
 # --train_split_percent 90
+
+echo "Finished preparing data."

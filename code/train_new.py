@@ -267,7 +267,7 @@ def main():
     # preprocess validation dataset
     if training_args.do_eval:
         # Taking care of early stopping
-        early_stopping_callback = EarlyStoppingCallback(early_stopping_patience=6)
+        early_stopping_callback = EarlyStoppingCallback(early_stopping_patience=10)
         # Comment the line below to deactivate early stopping
         train_callbacks.append(early_stopping_callback)
         
