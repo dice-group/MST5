@@ -25,7 +25,7 @@ python3 code/generate_train_csv.py \
 
 python3 code/generate_train_csv.py \
 -i datasets/lcquad2/train.json \
--o datasets/lcquad2/train-lc-ent \
+-o datasets/lcquad2/train-lc \
 -t lcquad2 \
 --linguistic_context \
 --question_padding_length 128 \

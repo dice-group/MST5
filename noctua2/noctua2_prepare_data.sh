@@ -12,8 +12,8 @@
 
 # Sample usage: sbatch noctua2/noctua2_prepare_data.sh
 
-module load system/CUDA/12.1.0
-module load lang/Python/3.11.5-GCCcore-13.2.0
+module load system/CUDA/11.8.0
+module load lang/Python/3.10.4-GCCcore-11.3.0
 
 source mst5-venv/bin/activate
 

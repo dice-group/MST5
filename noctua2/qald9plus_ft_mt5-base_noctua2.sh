@@ -1,9 +1,10 @@
 #!/bin/bash
 
-# Sample usage: bash noctua2/qald9plus_ft_mt5-base_noctua2.sh "lc-ent" 60020
-# Sample usage: bash noctua2/qald9plus_ft_mt5-base_noctua2.sh "simple" 60025
-# Sample usage: bash noctua2/qald9plus_ft_mt5-base_noctua2.sh "lc" 60030
-# Sample usage: bash noctua2/qald9plus_ft_mt5-base_noctua2.sh "ent" 60035
+# Sample usage: 
+# bash noctua2/qald9plus_ft_mt5-base_noctua2.sh "lc-ent" 60020
+# bash noctua2/qald9plus_ft_mt5-base_noctua2.sh "simple" 60025
+# bash noctua2/qald9plus_ft_mt5-base_noctua2.sh "lc" 60030
+# bash noctua2/qald9plus_ft_mt5-base_noctua2.sh "ent" 60035
 
 TRAIN_POSTFIX=$1
 PORT=$2
@@ -20,7 +21,7 @@ OUTPUT_DIR="fine-tuned_models/${RUN_NAME}"
 ## High train epochs for eval based training (early stopping is active)
 TRAIN_EPOCHS=300
 SAVE_STEPS=1000
-BATCH_SIZE=16
+BATCH_SIZE=12
 
 echo Starting training for: $RUN_NAME
 ## Start the job later
