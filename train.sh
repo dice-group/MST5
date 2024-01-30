@@ -42,6 +42,13 @@ else
     EXTRA_PARAMS+="--validation_file ${EVAL_FILE} "
 fi
 
+if [ $# -lt 10 ]; then
+    echo "No extra custom checkpoint value provided. Training will start normally."
+else
+    echo "Custom checkpoint provided. Training will resume from checkpoint."
+    EXTRA_PARAMS+="--resume_from_checkpoint ${10} "
+fi
+
 
 # change the --include argument value to state the GPU device to use.
 deepspeed --include=localhost:0 --master_port $PORT code/train_new.py \
@@ -64,5 +71,5 @@ deepspeed --include=localhost:0 --master_port $PORT code/train_new.py \
     --fp16 0 \
     $EXTRA_PARAMS \
     --gradient_checkpointing 1 \
-    --gradient_accumulation_steps 4 \
+    --gradient_accumulation_steps 4
     
