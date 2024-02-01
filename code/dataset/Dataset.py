@@ -5,6 +5,24 @@ from components.Question import Question
 from utils.data_io import export_csv
 from tqdm import tqdm
 from sklearn.model_selection import train_test_split
+import requests
+
+NEAMT_ENDPOINT = "http://neamt.cs.upb.de:6100"
+
+def get_translated_string(question_string: str, source_lang: str, target_lang: str) -> str:
+    components = "nllb_mt"
+    payload = {
+        'query': question_string,
+        'components': components,
+        'lang': source_lang,
+        'target_lang': target_lang
+    }
+
+    headers = {
+        'Content-Type': 'application/x-www-form-urlencoded'
+    }
+    response = requests.request("POST", NEAMT_ENDPOINT + "/custom-pipeline", headers=headers, data=payload, timeout=600)
+    return response.text
 
 class Dataset:
     def __init__(self, entries: list[Query], knowledge_graph=None):
@@ -87,8 +105,14 @@ class Dataset:
             include_entity_knowledge: bool, 
             pred=False,
             question_padding_length=0,
-            entity_padding_length=0):
-        # question_string = question.question_string
+            entity_padding_length=0,
+            translate_target_lang=None):
+        # Checking for Machine translation requirement
+        if translate_target_lang:
+            # Change the question to translated question
+            question.question_string = get_translated_string(question.question_string, question.language.value, translate_target_lang).strip()
+            # Change the language to target language
+            question.language = Language[translate_target_lang]
         question_string = question.pad_to_length(question.question_string, length=question_padding_length)
         if include_linguistic_context:
             question_string = question.get_question_string_with_lingtuistic_context(question_padding_length)

@@ -40,6 +40,9 @@ def main():
                         help='To perform Gerbil evaluation or not.')
     parser.add_argument("--use_gold_ents", action=argparse.BooleanOptionalAction,
                         help='To use gold entities from the reference SPARQL or not.')
+    parser.add_argument("--translate_target_lang", type=str, 
+                        help="Target language to translate the input question to. (Translation is enabled only if this value is provided)",
+                        default=None, required=False)
 
     args = parser.parse_args()
     
@@ -73,8 +76,10 @@ def main():
                 args.entity_knowledge,
                 args.question_padding_length,
                 args.entity_padding_length,
-                args.use_gold_ents
+                args.use_gold_ents,
+                args.translate_target_lang
                 )
+            
             # Creating QALD dataset object for the predictions
             pred_qald = Qald({}, args.knowledge_graph, True)
             # Iterating through each question to predict its SPARQL
@@ -142,6 +147,10 @@ def main():
                     exp_det.write(exp_id + '\n')
             # Save gerbil object for export later
             gerbil_dict[language] = gerbil
+    except Exception as e:
+            print('Exception occurred for language: %s' % (language))
+            print(str(e))
+            print('Continuing with the next language.')
     finally:
         # Export the Gerbil result files
         for key in gerbil_dict:

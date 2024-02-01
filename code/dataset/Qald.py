@@ -128,7 +128,8 @@ class Qald(Dataset):
             include_entity_knowledge: bool = False,
             question_padding_length = 0,
             entity_padding_length = 0,
-            use_gold_ents = False) -> list:
+            use_gold_ents = False,
+            translate_target_lang = None) -> list:
         questions_with_id = []
         entry: Qald_entry
         print(f'Generating question strings for {language}')
@@ -142,7 +143,8 @@ class Qald(Dataset):
                     include_entity_knowledge, 
                     pred=(not use_gold_ents),
                     question_padding_length=question_padding_length,
-                    entity_padding_length=entity_padding_length
+                    entity_padding_length=entity_padding_length,
+                    translate_target_lang=translate_target_lang
                     )
                 questions_with_id.append([entry.id, question_string])
         return questions_with_id

@@ -37,6 +37,7 @@ else
 fi
 
 # Add --use_gold_ents to use gold entities
+# Add --translate_target_lang en to translate all questions to en
 python code/pred_build_eval_qald.py \
       --model "${MODEL_ROOT_DIR}/${MODEL_NAME}" \
       -t $TEST_FILE \
