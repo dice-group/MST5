@@ -98,7 +98,7 @@ def prep_input(input_str, lang, linguistic_context, entity_knowledge, question_p
     question_string = question.question_string
     if linguistic_context:
         question_string = question.get_question_string_with_lingtuistic_context(question_padding_length)
-    if entity_padding_length:
+    if entity_knowledge and entity_padding_length:
         if kg==Knowledge_graph.Wikidata:
             entity_knowledge = get_wikidata_entities(question)
         elif kg==Knowledge_graph.DBpedia:
