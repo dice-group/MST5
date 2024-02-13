@@ -61,16 +61,15 @@ class Question:
         return depth_list
     
     def pad_to_length(self, string: str=None, length:int=0, separator_token=''):
-        
         if separator_token:
             string = separator_token + ' ' + string
-        
-        tokens = Question.lm_tokenizer.tokenize(string)
-        
-        if len(tokens) > length:
-            return string + " <pad> "
-        padded_tokens = ["<pad>"] * max(0, length - len(tokens))
-        padded_question =  string + " " + " ".join(padded_tokens) + " "
+        padded_question = string
+        if length > 0:
+            tokens = Question.lm_tokenizer.tokenize(string)
+            if len(tokens) > length:
+                return string + " <pad> "
+            padded_tokens = ["<pad>"] * max(0, length - len(tokens))
+            padded_question =  string + " " + " ".join(padded_tokens) + " "
         return padded_question
 
 

@@ -9,6 +9,7 @@ import time
 from transformers import T5Tokenizer
 import os
 from components.Gerbil import Gerbil
+import traceback
 
 def main():
     parser = argparse.ArgumentParser(
@@ -148,9 +149,8 @@ def main():
             # Save gerbil object for export later
             gerbil_dict[language] = gerbil
     except Exception as e:
-            print('Exception occurred for language: %s' % (language))
-            print(str(e))
-            print('Continuing with the next language.')
+        print('Exception occurred for language: %s' % (language))
+        traceback.print_exc() 
     finally:
         # Export the Gerbil result files
         for key in gerbil_dict:

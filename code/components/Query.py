@@ -154,6 +154,8 @@ class Query:
         }
 
         try:
+            if not (self.sparql or self.sparql.strip()):
+                raise Exception("SPARQL string is empty.")
             #user_agent = "WDQS-example Python/%s.%s" % (sys.version_info[0], sys.version_info[1])
             #sparql = SPARQLWrapper(endpoint_url, agent=user_agent)
             sparql = SPARQLWrapper(endpoint_url)
