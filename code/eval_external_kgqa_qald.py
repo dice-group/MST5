@@ -6,7 +6,9 @@ import time
 import os
 from components.Gerbil import Gerbil
 import requests
-import traceback 
+import traceback
+
+# Sample Usage: python code/eval_external_kgqa_qald.py --systems deeppavlov2023 --test datasets/qald10/qald_10.json --knowledge_graph Wikidata --languages en,ru --gerbil_eval --output_path predictions_external_qald10_test
 
 # Host for https://github.com/WSE-research/qa-systems-wrapper
 QASW_HOST = "http://141.57.8.18:40199/"
