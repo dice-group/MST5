@@ -120,3 +120,21 @@ Sample usage:
 ```bash
 bash eval.sh fine-tuned_models qald9plus-finetune_lcquad2-ft-base_lc-ent datasets/qald9plus/wikidata/qald_9_plus_test_wikidata.json predictions_qald9plus_test "en,de,ru,zh" true true
 ```
+
+
+## Model Deployment
+
+To deploy the model as a RESTful service, [deploy_model.py](deploy_model.py) can be used:
+
+```bash
+python deploy_model.py --model fine-tuned_models/qald9plus-finetune_lcquad2-ft-base_lc-ent \
+    --knowledge_graph Wikidata \
+    --linguistic_context \
+    --entity_knowledge \
+    --question_padding_length 128 \
+    --entity_padding_length 64 \
+    --port 8181 \
+    --log_file logs/server-mst5-wiki.log
+```
+
+**Note**: For GPU-based hardware acceleration, set the relevant device in [Text_Generator.py](code/components/Text_Generator.py). To enable CPU-only mode, set the `device` value `-1`.
