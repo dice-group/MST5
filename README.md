@@ -1,4 +1,4 @@
-# MST5 — Transformers-based Approach to Multilingual Knowledge Graph Question Answering
+# MST5 — A Transformers-Based Approach to Multilingual Question Answering over Knowledge Graphs
 
 ## Prerequisite
 
