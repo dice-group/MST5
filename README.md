@@ -1,4 +1,4 @@
-# MST5 — Transformers-based Approach to SPARQL Generation from Multilingual Natural Language Question
+# MST5 — Transformers-based Approach to Multilingual Knowledge Graph Question Answering
 
 ## Prerequisite
 
