@@ -7,6 +7,7 @@ import os
 from components.Gerbil import Gerbil
 import requests
 import traceback
+from components.Knowledge_graph import Knowledge_graph
 
 # Sample Usage: python code/eval_external_kgqa_qald.py --systems deeppavlov2023 --test datasets/qald10/qald_10.json --knowledge_graph Wikidata --languages en,ru --gerbil_eval --output_path predictions_external_qald10_test
 
@@ -14,9 +15,12 @@ import traceback
 QASW_HOST = "http://141.57.8.18:40199/"
 
 SYSTEM_DICT = {
-    'qanswer': {'label': 'QAnswer', 'langs': ['en', 'ru', 'de', 'fr'], 'api_postfix': 'qanswer/answer', 'sparql_key': 'SPARQL'},
-    'deeppavlov2023': {'label': 'DeepPavlov 2023', 'langs': ['en', 'ru'], 'api_postfix': 'deeppavlov2023/answer_raw', 'sparql_key': 'sparql_query'},
-    'platypus': {'label': 'Platypus', 'langs': ['en', 'fr'], 'api_postfix': 'platypus/answer_raw', 'sparql_key': 'platypus:sparql'}
+    'qanswer': {'label': 'QAnswer', 'langs': ['en', 'ru', 'de', 'fr'], 'api_postfix': 'qanswer/answer', 'sparql_key': 'SPARQL', 'host': QASW_HOST, 'kg': Knowledge_graph.Wikidata},
+    'deeppavlov2023': {'label': 'DeepPavlov 2023', 'langs': ['en', 'ru'], 'api_postfix': 'deeppavlov2023/answer_raw', 'sparql_key': 'sparql_query', 'host': QASW_HOST, 'kg': Knowledge_graph.Wikidata},
+    'platypus': {'label': 'Platypus', 'langs': ['en', 'fr'], 'api_postfix': 'platypus/answer_raw', 'sparql_key': 'platypus:sparql', 'host': QASW_HOST, 'kg': Knowledge_graph.Wikidata},
+    'tebaqa': {'label': 'TeBaQA', 'langs': ['en'], 'api_postfix': 'tebaqa/answer', 'sparql_key': 'sparql', 'host': QASW_HOST, 'kg': Knowledge_graph.DBpedia},
+    'ganswer': {'label': 'gAnswer', 'langs': ['en'], 'api_postfix': 'gAnswer/query_candidates', 'sparql_key': 'queries', 'host': QASW_HOST, 'kg': Knowledge_graph.DBpedia},
+    'qanary': {'label': 'qanary', 'langs': ['en'], 'api_postfix': 'qanary/query_candidates', 'sparql_key': 'queries', 'host': QASW_HOST, 'kg': Knowledge_graph.Wikidata}
 }
 
 def find_keys_nested(obj, key, collected_values=None):
@@ -27,7 +31,10 @@ def find_keys_nested(obj, key, collected_values=None):
     if isinstance(obj, dict):
         for k, v in obj.items():
             if k == key:
-                collected_values.append(v)
+                if isinstance(v, list):
+                    collected_values.extend(v)
+                else:
+                    collected_values.append(v)
             if isinstance(v, (dict, list)):
                 find_keys_nested(v, key, collected_values)
     elif isinstance(obj, list):
@@ -47,7 +54,8 @@ def extract_sparql(question, lang, system_id):
     headers = {
         'Content-Type': 'application/x-www-form-urlencoded'
     }
-    response = requests.request("GET", QASW_HOST + system_info['api_postfix'], headers=headers, params=payload, timeout=600)
+    host = system_info['host']
+    response = requests.request("GET", host + system_info['api_postfix'], headers=headers, params=payload, timeout=600)
     # print('Response received:', response)
     sparql_list = None
     if response.status_code == 200:
@@ -117,9 +125,9 @@ def main():
                 system_info = SYSTEM_DICT[system_id]
                 sys_supported_langs = system_info['langs']
                 target_lang = args.translate_target_lang
-                # Check if system supports the language or target translation language
+                # Check if system supports the language or target translation language or system does not support the mentioned knowledge graph
                 effective_lang = target_lang if target_lang else language
-                if effective_lang not in sys_supported_langs:
+                if effective_lang not in sys_supported_langs or system_info['kg'] != Knowledge_graph[args.knowledge_graph]:
                     continue
                 # Creating QALD dataset object for the predictions
                 pred_qald = Qald({}, args.knowledge_graph, True)

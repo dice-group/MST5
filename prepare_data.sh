@@ -79,12 +79,36 @@ python3 code/generate_train_csv.py \
 --entity_padding_length 64 \
 --train_split_percent 90
 
+## DBpedia based LCQUAD1
+# python3 code/generate_train_csv.py \
+# -i datasets/lcquad1/train-data.json \
+# -o datasets/lcquad1/train-lc-ent \
+# -t lcquad1 \
+# --linguistic_context \
+# --entity_knowledge \
+# --question_padding_length 128 \
+# --entity_padding_length 64 \
+# --train_split_percent 90
+
 
 python3 code/generate_train_csv.py \
 -i datasets/qald9plus/wikidata/qald_9_plus_train_wikidata.json \
 -o datasets/qald9plus/wikidata/qald_9_plus_train_wikidata-lc-ent \
 -t qald \
 -kg Wikidata \
+-l all \
+--linguistic_context \
+--entity_knowledge \
+--question_padding_length 128 \
+--entity_padding_length 64 \
+--train_split_percent 90
+
+## DBpedia based QALD9-Plus
+python3 code/generate_train_csv.py \
+-i datasets/qald9plus/dbpedia/qald_9_plus_train_dbpedia.json \
+-o datasets/qald9plus/dbpedia/qald_9_plus_train_dbpedia-lc-ent \
+-t qald \
+-kg DBpedia \
 -l all \
 --linguistic_context \
 --entity_knowledge \
