@@ -1,7 +1,7 @@
 accelerate==0.23.0
-datasets >= 1.8.0
-sentencepiece != 0.1.92
-protobuf==3.20.*
+datasets==2.16.1
+sentencepiece==0.1.99
+protobuf==3.20.3
 rouge-score==0.1.2
 nltk==3.8.1
 py7zr==0.20.6
@@ -10,11 +10,11 @@ evaluate==0.4.1
 wandb
 SPARQLWrapper==2.0.0
 deepspeed==0.9.3
-transformers>=4.32.1
+transformers==4.37.1
 lxml==4.9.3
-ipywidgets
-flask
-html5lib
-ipykernel
+ipywidgets==8.1.1
+flask==3.0.1
+html5lib==1.1
+ipykernel==6.29.0
 scikit-learn==1.4.0
 spacy==3.7.2
