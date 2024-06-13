@@ -15,10 +15,13 @@ LANGS=$5
 LC=$6
 # entity knowledge : true/false
 EK=$7
+# Perform Gerbil evaluation: true/false
+GE=$8
+# Knowledge Graph: DBpedia / Wikidata
+KNOWLEDGE_GRAPH=$9
 
-
-#knowledge_graph="DBpedia"
-knowledge_graph="Wikidata"
+#KNOWLEDGE_GRAPH="DBpedia"
+#KNOWLEDGE_GRAPH="Wikidata"
 question_padding_length=128
 entity_padding_length=64
 
@@ -36,19 +39,28 @@ else
   entity_knowledge="--no-entity_knowledge"
 fi
 
+EXTRA_PARAMS=""
+
+if [ "$GE" = "false" ]; then
+    echo "No Gerbil evaluation will be performed."
+else
+    echo "Gerbil evaluation will be performed."
+    EXTRA_PARAMS+="--gerbil_eval "
+fi
+
 # Add --use_gold_ents to use gold entities
 # Add --translate_target_lang en to translate all questions to en
 python code/pred_build_eval_qald.py \
       --model "${MODEL_ROOT_DIR}/${MODEL_NAME}" \
       -t $TEST_FILE \
-      --knowledge_graph ${knowledge_graph} \
+      --knowledge_graph ${KNOWLEDGE_GRAPH} \
       -o "${OUTPUT_DIR}/${MODEL_NAME}" \
       -l $LANGS \
       ${linguistic_context} \
       ${entity_knowledge} \
       --question_padding_length ${question_padding_length} \
       --entity_padding_length ${entity_padding_length} \
-      --gerbil_eval \
+      $EXTRA_PARAMS \
       2>&1
 
 

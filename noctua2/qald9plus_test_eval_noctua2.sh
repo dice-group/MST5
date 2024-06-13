@@ -6,6 +6,8 @@ TEST_NAME=q9p_test
 TEST_FILE=datasets/qald9plus/wikidata/qald_9_plus_test_wikidata.json
 OUTPUT_ROOT=predictions_qald9plus_test
 LANGS="en"
+GERBIL_EVAL=true
+KNOWLEDGE_GRAPH=Wikidata
 
 ### lcquad2-finetune_mt5-base ###
 MODEL_NAMES=("lcquad2-finetune_mt5-base" "qald9plus-finetune_mt5-base" "qald9plus-finetune_lcquad2-ft-base")
@@ -14,10 +16,10 @@ MODEL_NAMES=("lcquad2-finetune_mt5-base" "qald9plus-finetune_mt5-base" "qald9plu
 for MODEL in "${MODEL_NAMES[@]}"
 do
     echo "### Eval ${MODEL} ###"
-    echo sbatch --job-name="eval_${MODEL}_simple" $EVAL_SCRIPT $FT_ROOT ${MODEL}_simple $TEST_FILE $OUTPUT_ROOT $LANGS false false
-    echo sbatch --job-name="eval_${MODEL}_lc"  $EVAL_SCRIPT $FT_ROOT ${MODEL}_lc $TEST_FILE $OUTPUT_ROOT $LANGS true false
-    echo sbatch --job-name="eval_${MODEL}_ent"  $EVAL_SCRIPT $FT_ROOT ${MODEL}_ent $TEST_FILE $OUTPUT_ROOT $LANGS false true
-    echo sbatch --job-name="eval_${MODEL}_lc-ent"  $EVAL_SCRIPT $FT_ROOT ${MODEL}_lc-ent $TEST_FILE $OUTPUT_ROOT $LANGS true true
+    echo sbatch --job-name="eval_${MODEL}_simple" $EVAL_SCRIPT $FT_ROOT ${MODEL}_simple $TEST_FILE $OUTPUT_ROOT $LANGS false false $GERBIL_EVAL $KNOWLEDGE_GRAPH
+    echo sbatch --job-name="eval_${MODEL}_lc"  $EVAL_SCRIPT $FT_ROOT ${MODEL}_lc $TEST_FILE $OUTPUT_ROOT $LANGS true false $GERBIL_EVAL $KNOWLEDGE_GRAPH
+    echo sbatch --job-name="eval_${MODEL}_ent"  $EVAL_SCRIPT $FT_ROOT ${MODEL}_ent $TEST_FILE $OUTPUT_ROOT $LANGS false true $GERBIL_EVAL $KNOWLEDGE_GRAPH
+    echo sbatch --job-name="eval_${MODEL}_lc-ent"  $EVAL_SCRIPT $FT_ROOT ${MODEL}_lc-ent $TEST_FILE $OUTPUT_ROOT $LANGS true true $GERBIL_EVAL $KNOWLEDGE_GRAPH
     echo "######"
 done
 
@@ -25,30 +27,30 @@ done
 ## Expected Output:
 
 ### Eval lcquad2-finetune_mt5-base ###
-sbatch --job-name=eval_lcquad2-finetune_mt5-base_simple noctua2/noctua2_eval.sh fine-tuned_models lcquad2-finetune_mt5-base_simple datasets/qald9plus/wikidata/qald_9_plus_test_wikidata.json predictions_qald9plus_test en false false
-sbatch --job-name=eval_lcquad2-finetune_mt5-base_lc noctua2/noctua2_eval.sh fine-tuned_models lcquad2-finetune_mt5-base_lc datasets/qald9plus/wikidata/qald_9_plus_test_wikidata.json predictions_qald9plus_test en true false
-sbatch --job-name=eval_lcquad2-finetune_mt5-base_ent noctua2/noctua2_eval.sh fine-tuned_models lcquad2-finetune_mt5-base_ent datasets/qald9plus/wikidata/qald_9_plus_test_wikidata.json predictions_qald9plus_test en false true
-sbatch --job-name=eval_lcquad2-finetune_mt5-base_lc-ent noctua2/noctua2_eval.sh fine-tuned_models lcquad2-finetune_mt5-base_lc-ent datasets/qald9plus/wikidata/qald_9_plus_test_wikidata.json predictions_qald9plus_test en true true
+sbatch --job-name=eval_lcquad2-finetune_mt5-base_simple noctua2/noctua2_eval.sh fine-tuned_models lcquad2-finetune_mt5-base_simple datasets/qald9plus/wikidata/qald_9_plus_test_wikidata.json predictions_qald9plus_test en false false true Wikidata
+sbatch --job-name=eval_lcquad2-finetune_mt5-base_lc noctua2/noctua2_eval.sh fine-tuned_models lcquad2-finetune_mt5-base_lc datasets/qald9plus/wikidata/qald_9_plus_test_wikidata.json predictions_qald9plus_test en true false true Wikidata
+sbatch --job-name=eval_lcquad2-finetune_mt5-base_ent noctua2/noctua2_eval.sh fine-tuned_models lcquad2-finetune_mt5-base_ent datasets/qald9plus/wikidata/qald_9_plus_test_wikidata.json predictions_qald9plus_test en false true true Wikidata
+sbatch --job-name=eval_lcquad2-finetune_mt5-base_lc-ent noctua2/noctua2_eval.sh fine-tuned_models lcquad2-finetune_mt5-base_lc-ent datasets/qald9plus/wikidata/qald_9_plus_test_wikidata.json predictions_qald9plus_test en true true true Wikidata
 ######
 ### Eval qald9plus-finetune_mt5-base ###
-sbatch --job-name=eval_qald9plus-finetune_mt5-base_simple noctua2/noctua2_eval.sh fine-tuned_models qald9plus-finetune_mt5-base_simple datasets/qald9plus/wikidata/qald_9_plus_test_wikidata.json predictions_qald9plus_test en false false
-sbatch --job-name=eval_qald9plus-finetune_mt5-base_lc noctua2/noctua2_eval.sh fine-tuned_models qald9plus-finetune_mt5-base_lc datasets/qald9plus/wikidata/qald_9_plus_test_wikidata.json predictions_qald9plus_test en true false
-sbatch --job-name=eval_qald9plus-finetune_mt5-base_ent noctua2/noctua2_eval.sh fine-tuned_models qald9plus-finetune_mt5-base_ent datasets/qald9plus/wikidata/qald_9_plus_test_wikidata.json predictions_qald9plus_test en false true
-sbatch --job-name=eval_qald9plus-finetune_mt5-base_lc-ent noctua2/noctua2_eval.sh fine-tuned_models qald9plus-finetune_mt5-base_lc-ent datasets/qald9plus/wikidata/qald_9_plus_test_wikidata.json predictions_qald9plus_test en true true
+sbatch --job-name=eval_qald9plus-finetune_mt5-base_simple noctua2/noctua2_eval.sh fine-tuned_models qald9plus-finetune_mt5-base_simple datasets/qald9plus/wikidata/qald_9_plus_test_wikidata.json predictions_qald9plus_test en false false true Wikidata
+sbatch --job-name=eval_qald9plus-finetune_mt5-base_lc noctua2/noctua2_eval.sh fine-tuned_models qald9plus-finetune_mt5-base_lc datasets/qald9plus/wikidata/qald_9_plus_test_wikidata.json predictions_qald9plus_test en true false true Wikidata
+sbatch --job-name=eval_qald9plus-finetune_mt5-base_ent noctua2/noctua2_eval.sh fine-tuned_models qald9plus-finetune_mt5-base_ent datasets/qald9plus/wikidata/qald_9_plus_test_wikidata.json predictions_qald9plus_test en false true true Wikidata
+sbatch --job-name=eval_qald9plus-finetune_mt5-base_lc-ent noctua2/noctua2_eval.sh fine-tuned_models qald9plus-finetune_mt5-base_lc-ent datasets/qald9plus/wikidata/qald_9_plus_test_wikidata.json predictions_qald9plus_test en true true true Wikidata
 ######
 ### Eval qald9plus-finetune_lcquad2-ft-base ###
-sbatch --job-name=eval_qald9plus-finetune_lcquad2-ft-base_simple noctua2/noctua2_eval.sh fine-tuned_models qald9plus-finetune_lcquad2-ft-base_simple datasets/qald9plus/wikidata/qald_9_plus_test_wikidata.json predictions_qald9plus_test en false false
-sbatch --job-name=eval_qald9plus-finetune_lcquad2-ft-base_lc noctua2/noctua2_eval.sh fine-tuned_models qald9plus-finetune_lcquad2-ft-base_lc datasets/qald9plus/wikidata/qald_9_plus_test_wikidata.json predictions_qald9plus_test en true false
-sbatch --job-name=eval_qald9plus-finetune_lcquad2-ft-base_ent noctua2/noctua2_eval.sh fine-tuned_models qald9plus-finetune_lcquad2-ft-base_ent datasets/qald9plus/wikidata/qald_9_plus_test_wikidata.json predictions_qald9plus_test en false true
-sbatch --job-name=eval_qald9plus-finetune_lcquad2-ft-base_lc-ent noctua2/noctua2_eval.sh fine-tuned_models qald9plus-finetune_lcquad2-ft-base_lc-ent datasets/qald9plus/wikidata/qald_9_plus_test_wikidata.json predictions_qald9plus_test en true true
+sbatch --job-name=eval_qald9plus-finetune_lcquad2-ft-base_simple noctua2/noctua2_eval.sh fine-tuned_models qald9plus-finetune_lcquad2-ft-base_simple datasets/qald9plus/wikidata/qald_9_plus_test_wikidata.json predictions_qald9plus_test en false false true Wikidata
+sbatch --job-name=eval_qald9plus-finetune_lcquad2-ft-base_lc noctua2/noctua2_eval.sh fine-tuned_models qald9plus-finetune_lcquad2-ft-base_lc datasets/qald9plus/wikidata/qald_9_plus_test_wikidata.json predictions_qald9plus_test en true false true Wikidata
+sbatch --job-name=eval_qald9plus-finetune_lcquad2-ft-base_ent noctua2/noctua2_eval.sh fine-tuned_models qald9plus-finetune_lcquad2-ft-base_ent datasets/qald9plus/wikidata/qald_9_plus_test_wikidata.json predictions_qald9plus_test en false true true Wikidata
+sbatch --job-name=eval_qald9plus-finetune_lcquad2-ft-base_lc-ent noctua2/noctua2_eval.sh fine-tuned_models qald9plus-finetune_lcquad2-ft-base_lc-ent datasets/qald9plus/wikidata/qald_9_plus_test_wikidata.json predictions_qald9plus_test en true true true Wikidata
 ######
 
 ### QALD 9 Plus -Multilingual 
 
-sbatch --time=12:00:00 --begin=now+2hour --job-name=eval_qald9plus-finetune_lcquad2-ft-base_lc-ent noctua2/noctua2_eval.sh fine-tuned_models qald9plus-finetune_lcquad2-ft-base_lc-ent datasets/qald9plus/wikidata/qald_9_plus_test_wikidata.json predictions_qald9plus_test_multilingual "en,de,ru,fr,lt,ba,be,uk,zh,ja,es" true true
+sbatch --time=12:00:00 --begin=now+2hour --job-name=eval_qald9plus-finetune_lcquad2-ft-base_lc-ent noctua2/noctua2_eval.sh fine-tuned_models qald9plus-finetune_lcquad2-ft-base_lc-ent datasets/qald9plus/wikidata/qald_9_plus_test_wikidata.json predictions_qald9plus_test_multilingual "en,de,ru,fr,lt,ba,be,uk,zh,ja,es" true true true Wikidata
 
 ### QALD 10 - Multilingual
 
-sbatch --time=15:00:00 --begin=now+2hour --job-name=eval_qald9plus-finetune_lcquad2-ft-base_lc-ent noctua2/noctua2_eval.sh fine-tuned_models qald9plus-finetune_lcquad2-ft-base_lc-ent datasets/qald10/qald_10.json predictions_qald10_multilingual "en,de,ru,zh,ja" true true
+sbatch --time=15:00:00 --begin=now+2hour --job-name=eval_qald9plus-finetune_lcquad2-ft-base_lc-ent noctua2/noctua2_eval.sh fine-tuned_models qald9plus-finetune_lcquad2-ft-base_lc-ent datasets/qald10/qald_10.json predictions_qald10_multilingual "en,de,ru,zh,ja" true true true Wikidata
 
 '

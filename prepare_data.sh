@@ -104,17 +104,17 @@ python3 code/generate_train_csv.py \
 --train_split_percent 90
 
 ## DBpedia based QALD9-Plus
-python3 code/generate_train_csv.py \
--i datasets/qald9plus/dbpedia/qald_9_plus_train_dbpedia.json \
--o datasets/qald9plus/dbpedia/qald_9_plus_train_dbpedia-lc-ent \
--t qald \
--kg DBpedia \
--l all \
---linguistic_context \
---entity_knowledge \
---question_padding_length 128 \
---entity_padding_length 64 \
---train_split_percent 90
+# python3 code/generate_train_csv.py \
+# -i datasets/qald9plus/dbpedia/qald_9_plus_train_dbpedia.json \
+# -o datasets/qald9plus/dbpedia/qald_9_plus_train_dbpedia-lc-ent \
+# -t qald \
+# -kg DBpedia \
+# -l all \
+# --linguistic_context \
+# --entity_knowledge \
+# --question_padding_length 128 \
+# --entity_padding_length 64 \
+# --train_split_percent 90
 
 
 ### To generate noisy training data (only lc-ent) ###

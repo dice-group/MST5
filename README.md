@@ -114,11 +114,13 @@ Please provide arguments in the following order to the evaluation script:
 5. LANGS : Comma separated values e.g: en,de,es
 6. LC : linguistic context : true/false
 7. EK : entity knowledge : true/false
+8. GE: Gerbil Evaluation : true/false
+9. KNOWLEDGE_GRAPH: Knowledge Graph : DBpedia/Wikidata
 
 Sample usage:
 
 ```bash
-bash eval.sh fine-tuned_models qald9plus-finetune_lcquad2-ft-base_lc-ent datasets/qald9plus/wikidata/qald_9_plus_test_wikidata.json predictions_qald9plus_test "en,de,ru,zh" true true
+bash eval.sh fine-tuned_models qald9plus-finetune_lcquad2-ft-base_lc-ent datasets/qald9plus/wikidata/qald_9_plus_test_wikidata.json predictions_qald9plus_test "en,de,ru,zh" true true true Wikidata
 ```
 
 
