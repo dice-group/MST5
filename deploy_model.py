@@ -92,14 +92,18 @@ def get_dbpedia_entities(question: Question):
         return question.recognize_entities("babelscape_ner" ,"mag_el")
 
 # Function to prepare input
-def prep_input(input_str, lang, linguistic_context, entity_knowledge, question_padding_length, entity_padding_length, kg):
+def prep_input(input_str, lang, entities, linguistic_context, entity_knowledge, question_padding_length, entity_padding_length, kg):
     lang = Language(lang)
     question = Question(input_str, lang)
     question_string = question.question_string
     if linguistic_context:
         question_string = question.get_question_string_with_lingtuistic_context(question_padding_length)
     if entity_padding_length:
-        if kg==Knowledge_graph.Wikidata:
+        if entities is not None:
+            entities = [e.replace('http://www.wikidata.org/entity/', 'wd_') for e in entities]
+            entities = [e.replace('http://dbpedia.org/resource/', 'dbr_') for e in entities]
+            entity_knowledge = entities
+        elif kg==Knowledge_graph.Wikidata:
             entity_knowledge = get_wikidata_entities(question)
         elif kg==Knowledge_graph.DBpedia:
             entity_knowledge = get_dbpedia_entities(question)
@@ -118,7 +122,7 @@ def convert_question_to_sparql():
     
     lang = req_data['lang']
     question_str = req_data['query']
-    processed_question_string = prep_input(question_str, lang, **model_attr_kwargs)
+    processed_question_string = prep_input(question_str, lang, req_data.getlist('entities') if 'entities' in req_data else None, **model_attr_kwargs)
     pred_sparql = sparql_model.predict_sparql(processed_question_string)
     query = Query(pred_sparql, model_attr_kwargs['kg'], True)
     
