@@ -122,7 +122,22 @@ Sample usage:
 ```bash
 bash eval.sh fine-tuned_models qald9plus-finetune_lcquad2-ft-base_lc-ent datasets/qald9plus/wikidata/qald_9_plus_test_wikidata.json predictions_qald9plus_test "en,de,ru,zh" true true true Wikidata
 ```
+## Fine-tuned Models
 
+You can download the following fine-tuned models that can be used out-of-the-box with the deployment script:
+
+- Wikidata-based model trained on LcQUAD2.0 and Qald-9-Plus (train & test):
+```bash
+ wget -r -nH --cut-dirs=3 --no-parent --reject="index.html*" https://files.dice-research.org/projects/MST5/fine-tuned-models/qald9plus-finetune_lcquad2-ft-base_lc-ent_testeval/
+```
+- Wikidata-based model trained on LcQUAD2.0 and Qald-9-Plus (train):
+```bash
+ wget -r -nH --cut-dirs=3 --no-parent --reject="index.html*" https://files.dice-research.org/projects/MST5/fine-tuned-models/qald9plus-finetune_lcquad2-ft-base_lc-ent/
+```
+- DBpedia-based model trained on LcQUAD1.0 and Qald-9-Plus (train):
+```bash
+ wget -r -nH --cut-dirs=3 --no-parent --reject="index.html*" https://files.dice-research.org/projects/MST5/fine-tuned-models/qald9plus-finetune_lcquad1-ft-base_lc-ent/
+```
 
 ## Model Deployment
 
@@ -140,3 +155,17 @@ python deploy_model.py --model fine-tuned_models/qald9plus-finetune_lcquad2-ft-b
 ```
 
 **Note**: For GPU-based hardware acceleration, set the relevant device in [Text_Generator.py](code/components/Text_Generator.py). To enable CPU-only mode, set the `device` value `-1`.
+
+## Citation
+If you use this code or data in your research, please cite our work:
+```bibtex
+@misc{srivastava2024mst5,
+      title={MST5 -- Multilingual Question Answering over Knowledge Graphs}, 
+      author={Nikit Srivastava and Mengshi Ma and Daniel Vollmers and Hamada Zahera and Diego Moussallem and Axel-Cyrille Ngonga Ngomo},
+      year={2024},
+      eprint={2407.06041},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2407.06041}, 
+}
+```
