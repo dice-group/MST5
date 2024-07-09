@@ -126,15 +126,15 @@ bash eval.sh fine-tuned_models qald9plus-finetune_lcquad2-ft-base_lc-ent dataset
 
 You can download the following fine-tuned models that can be used out-of-the-box with the deployment script:
 
-- Wikidata-based model trained on LcQUAD2.0 and Qald-9-Plus (train & test):
+- Wikidata-based model trained on [LC-QuAD2.0](https://github.com/AskNowQA/LC-QuAD2.0) and [Qald_9_Plus](https://github.com/KGQA/QALD_9_plus) (train & test):
 ```bash
  wget -r -nH --cut-dirs=3 --no-parent --reject="index.html*" https://files.dice-research.org/projects/MST5/fine-tuned-models/qald9plus-finetune_lcquad2-ft-base_lc-ent_testeval/
 ```
-- Wikidata-based model trained on LcQUAD2.0 and Qald-9-Plus (train):
+- Wikidata-based model trained on [LC-QuAD2.0](https://github.com/AskNowQA/LC-QuAD2.0) and [Qald_9_Plus](https://github.com/KGQA/QALD_9_plus) (train):
 ```bash
  wget -r -nH --cut-dirs=3 --no-parent --reject="index.html*" https://files.dice-research.org/projects/MST5/fine-tuned-models/qald9plus-finetune_lcquad2-ft-base_lc-ent/
 ```
-- DBpedia-based model trained on LcQUAD1.0 and Qald-9-Plus (train):
+- DBpedia-based model trained on [LC-QuAD1.0](https://github.com/AskNowQA/LC-QuAD) and [Qald_9_Plus](https://github.com/KGQA/QALD_9_plus) (train):
 ```bash
  wget -r -nH --cut-dirs=3 --no-parent --reject="index.html*" https://files.dice-research.org/projects/MST5/fine-tuned-models/qald9plus-finetune_lcquad1-ft-base_lc-ent/
 ```
