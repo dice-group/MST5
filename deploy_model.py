@@ -130,12 +130,13 @@ def convert_question_to_sparql():
 def check_service():
     return 'Service is online.'
 
-# Initialize global tokenizer
-Question.lm_tokenizer = T5Tokenizer.from_pretrained('google/mt5-xl', legacy=False)
-Question.lm_tokenizer.add_tokens(["<start-of-pos-tags>", "<start-of-dependency-relation>", "<start-of-dependency-tree-depth>", "<start-of-entity-info>"])
-
 # path to model
 model_path = args.model
+
+# Initialize global tokenizer
+# Question.lm_tokenizer = T5Tokenizer.from_pretrained('google/mt5-xl', legacy=False)
+# Question.lm_tokenizer.add_tokens(["<start-of-pos-tags>", "<start-of-dependency-relation>", "<start-of-dependency-tree-depth>", "<start-of-entity-info>"])
+Question.lm_tokenizer = T5Tokenizer.from_pretrained(model_path, legacy=False)
 
 # Set global model attributes
 # KG to use
