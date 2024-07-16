@@ -2,7 +2,7 @@
 Example usage: 
 
 # Wikidata
-python deploy_model.py --model fine-tuned_models/qald9plus-finetune_lcquad2-ft-base_lc-ent \
+python deploy_model.py --model fine-tuned-models/qald9plus-finetune_lcquad2-ft-base_lc-ent \
     --knowledge_graph Wikidata \
     --linguistic_context \
     --entity_knowledge \
@@ -12,7 +12,7 @@ python deploy_model.py --model fine-tuned_models/qald9plus-finetune_lcquad2-ft-b
     --log_file logs/server-mst5-wiki.log
     
 # DBpedia
-python deploy_model.py --model fine-tuned_models/qald9plus-finetune_lcquad1-ft-base_lc-ent \
+python deploy_model.py --model fine-tuned-models/qald9plus-finetune_lcquad1-ft-base_lc-ent \
     --knowledge_graph DBpedia \
     --linguistic_context \
     --entity_knowledge \

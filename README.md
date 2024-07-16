@@ -1,5 +1,7 @@
 # MST5 — Transformers-based Approach to SPARQL Generation from Multilingual Natural Language Question
 
+Paper: https://arxiv.org/pdf/2407.06041
+
 ## Prerequisite
 
 Follow installation instructions in [notebooks/installation_instruction.ipynb](notebooks/installation_instruction.ipynb)
