@@ -22,7 +22,11 @@ python deploy_model.py --model fine-tuned-models/qald9plus-finetune_lcquad1-ft-b
     --log_file logs/server-mst5-dbp.log
 '''
 import sys
-sys.path.append('./code/')
+import os
+# sys.path.append('./code/')
+script_dir = os.path.dirname(os.path.abspath(__file__))
+code_path = os.path.join(script_dir, 'code')
+sys.path.append(code_path)
 
 from components.Summarizer import Summarizer
 from components.Question import Question
@@ -37,7 +41,6 @@ from components.Text_Generator import Text_Generator
 import argparse
 import logging
 import json
-import os
 # importing the flask Module
 from flask import request
 from flask import Flask
