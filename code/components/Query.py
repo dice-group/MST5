@@ -85,6 +85,13 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
 ANSWER_LIMIT = 1000
 
+## Dbpedia Endpoint
+DBP_SPARQL_ENDPOINT = "http://dbpedia.org/sparql/"
+#DBP_ENDPOINT = "http://dbpedia.org/sparql/"
+## Wikidata Endpoint
+#WD_ENDPOINT =  "https://query.wikidata.org/sparql"
+WD_SPARQL_ENDPOINT = "https://skynet.coypu.org/wikidata/"
+
 class Query:
     def __init__(self, sparql: str, knowledge_graph: Knowledge_graph, is_predicted=False) -> None:
         self.is_predicted = is_predicted
@@ -139,7 +146,7 @@ class Query:
     
     def ask_dbpedia_old(self) -> dict[str, any]:
         try:
-            sparql = SPARQLWrapper("http://dbpedia.org/sparql/")
+            sparql = SPARQLWrapper(DBP_SPARQL_ENDPOINT)
             sparql.setReturnFormat(JSON)
             sparql.setQuery(self.sparql)
             return sparql.query().convert()
@@ -184,12 +191,11 @@ class Query:
             return query_exec_info
 
     def ask_dbpedia(self):
-        endpoint_url = "http://dbpedia.org/sparql/"
+        endpoint_url = DBP_SPARQL_ENDPOINT
         return self.ask_kg(endpoint_url)
     
     def ask_wikidata(self):
-        #endpoint_url = "https://query.wikidata.org/sparql"
-        endpoint_url = "https://skynet.coypu.org/wikidata/"
+        endpoint_url = WD_SPARQL_ENDPOINT
         return self.ask_kg(endpoint_url)
         
         
