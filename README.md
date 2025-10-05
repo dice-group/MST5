@@ -1,5 +1,6 @@
 # MST5 — Transformers-based Approach to SPARQL Generation from Multilingual Natural Language Question
 
+**Update (1 September 2025)**: MST5 has been accepted at [Wikidata Workshop 2025](https://wikidataworkshop.github.io/2025/), publication details to follow soon. <br><br>
 Paper: https://arxiv.org/pdf/2407.06041
 
 ## Prerequisite
